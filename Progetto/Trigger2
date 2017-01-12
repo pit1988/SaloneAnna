@@ -8,7 +8,7 @@ BEGIN
 
 	SELECT count(*) INTO presente 
 	FROM Prodotti
-	WHERE quantita>1;
+	WHERE quantita>1
 
 	IF(!presente) THEN 
 		INSERT INTO Eccezioni(Id_Eccezione) VALUES ('2');

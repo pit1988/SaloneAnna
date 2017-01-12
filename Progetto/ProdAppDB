@@ -8,14 +8,7 @@ Utilizzo DOUBLE,
 FOREIGN KEY(CodProdotto) REFERENCES Prodotti(CodProdotto)
 			ON UPDATE CASCADE,
 		
-FOREIGN KEY(CodAppuntamento) REFERENCES AppuntamentiClienti(CodAppuntamento)
+FOREIGN KEY(CodAppuntamento) REFERENCES Appuntamenti(CodAppuntamento)
 			ON UPDATE CASCADE
 
 )Engine=InnoDB;
-
-INSERT INTO ProdApp(CodAppuntamento, CodProdotto, Utilizzo) VALUES
-('1', '4', '10'),
-('2', '4', '10'),
-('3', '5', '10'),
-('2', '4', '20'),
-('4', '8', '10');
