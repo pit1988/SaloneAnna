@@ -1,0 +1,18 @@
+DROP TRIGGER IF EXISTS InserimentoProdotto;
+delimiter $$
+CREATE TRIGGER InserimentoProfo BEFORE INSERT ON Prodotti
+FOR EACH ROW
+BEGIN	
+	DECLARE presente INT;
+
+
+	SELECT count(*) INTO presente 
+	FROM Prodotti
+	WHERE quantita>1
+
+	IF(!presente) THEN 
+		INSERT INTO Eccezioni(Id_Eccezione) VALUES ('2');
+	END IF;
+	
+END $$
+delimiter ;

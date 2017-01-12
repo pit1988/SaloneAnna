@@ -1,0 +1,141 @@
+<?php
+  include("dbconnect.php");
+  $conn = dbconnect();
+?>
+
+
+<h2>Nuovo Appuntamento Clienti</h2>
+
+<form method=post action="conferma_inserimento.php">
+
+<b>Cliente:</b>
+<i>Nome:</i><input type=text size=40 name=nome><b>Cognome:</b><input type=text size=40 name=cognome>
+<br>
+<b>Sconto:</b>
+<input type=text size=40 name=sconto>
+<br>
+<b>Tipo Appuntamento:	</b>
+<select name="TipoAppuntamento[]" size=4 multiple>
+	<option value="1">Shampoo
+	<option value="2">Taglio
+	<option value="3">Piega e Phon
+	<option value="4">Piega e Casco
+	<option value="5">Ondulazione
+	<option value="6">Colore
+	<option value="7">Riflessante
+	<option value="8">Decolorazione
+	<option value="9">Meches
+	<option value="10">Trattamenti
+	<option value="11">Manicure/Pedicure
+</select>
+<b>Data:</b>
+<i>Giorno: </i> <input type=text size=40 name=gg> <i>Mese: </i><input type=text size=40 name=mm>
+<br>
+<b>Ora:</b>
+<i>Ore: </i> <input type=text size=40 name=hh> <i>Minuti: </i><input type=text size=40 name=min>
+<br>
+<input type=text size=40 name=ora>
+<b>Costo:</b>
+<input type=text size=40 name=costo>
+<input type=submit name=submit value="Conferma">
+</form>
+
+
+
+
+<?php
+//cerco di estrarre piu' clienti con lo stesso nome.
+$queryc =("select * from Clienti c where c.Nome = $nome and c.Cognome = $cognome");
+$result = mysql_query(queryc);
+$number_cols = mysql_num_fields($result);
+echo "Ci sono piu' persone con lo stesso nome per questo appuntamento seleziona quale:";
+//intestazione tabella
+echo "<table border = 1>\n";
+echo "<tr align=center>\n";
+for ($i=0; $i<$number_cols; $i++)
+  {
+    echo "<th>" . mysql_field_name ($result, $i). "</th>\n";
+  }
+echo "</tr>\n";
+//corpo tabella
+while ($row = mysql_fetch_row($result))
+{
+  echo "<tr align=left>\n";
+  for ($i=0; $i<$number_cols; $i++)
+  {
+    echo "<td>";
+    if(!isset($row[$i]))
+      {echo "NULL";}
+    else
+      {
+      if($i==0)
+	{
+	echo "<input type="radio" name="queryc" value="id">";
+	}
+	echo $row[$i];
+      }
+    echo "</td>\n";
+  }
+  echo "</td>\n";
+}
+
+echo "</table>";
+
+?>
+
+<form action="<? echo $PHP_SELF?>" method="get">
+  <input type="text" name="queryc" size="50"><br>
+  <input type="submit">
+</form>
+
+  
+
+
+
+
+  if ($subit == "Conferma")
+  {
+	$yyyy = date('Y');
+	$query = "INSERT INTO Appuntamenti (Costo, DataOra) values
+	      ('$costo', '$yyyy-$mm-$gg $hh:$min:00' );
+		INSERT INTO AppuntamentiClienti (CodCliente, Sconto, TipoAppuntamento) values
+		(
+  ;
+  mysql_query($query) or 
+      die (mysql_error());
+?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<b>Inserimento avvenuto con successo</b>
+
+
+<form action=NuovoCliente.php target="_blank">
+  <input type="submit"value="vuoi inserirne un altro?">
+
+</form>
+
+<?php
+}
+else
+{
+    include("NuovoCliente.php");
+}
+?>
+
+
+
+<input type=submit name=submit value="Conferma">
+<input type=reset name=reset value="Cancella">
+
+</form>

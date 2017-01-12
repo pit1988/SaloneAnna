@@ -1,0 +1,17 @@
+DROP TRIGGER IF EXISTS ControlloAppuntamentiSpeciali;
+delimiter $$
+CREATE TRIGGER controlloAppuntamentiSpeciali BEFORE INSERT ON Appuntamenti
+
+FOR EACH ROW
+BEGIN	
+	DECLARE AppSpeciali INT;
+
+	SELECT count(*) INTO AppSpeciali FROM AppuntamentiSpeciali a JOIN Appuntamenti b
+	WHERE b.DataOra<NEW.DataOra AND NEW.DataOra<(ADDTIME(b.DataOra,a.Durata));
+		
+	IF(AppSpeciali) THEN 
+		INSERT INTO Eccezioni(Id_Eccezione) VALUES ('1');
+	END IF;
+END$$
+delimiter ;
+

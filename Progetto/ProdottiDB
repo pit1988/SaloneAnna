@@ -1,0 +1,34 @@
+DROP TABLE IF EXISTS Prodotti;
+
+CREATE TABLE Prodotti(
+CodProdotto INT PRIMARY KEY, 
+Nome VARCHAR(20) NOT NULL,
+Marca ENUM('Wella', 'SP', 'Sebastian') NOT NULL,
+Tipo ENUM(	'Koleston Perfect',
+		'Inspire by KP',
+
+		'Smoothen',
+		'Hydrate',
+		'Repair',
+		'Volumize',
+		'Color Save',
+		'Shine Define',
+		'Clear Scalp',
+		'Balance',
+		'Expert Kit',
+		'Styling',
+		'Sun',
+		'Men',
+
+		'Flow',
+		'Form',
+		'Flaunt',
+		'Foundation',
+		'In Salon Service'
+		) NOT NULL,
+Quantita INT NOT NULL,
+PVendita DOUBLE,
+PRivendita DOUBLE
+)Engine=InnoDB;
+
+

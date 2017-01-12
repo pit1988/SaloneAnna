@@ -1,0 +1,13 @@
+DROP TABLE IF EXISTS AppuntamentiSpeciali;
+
+CREATE TABLE AppuntamentiSpeciali (
+CodAppuntamento INT PRIMARY AUTO_INCREMENT,
+Durata TIME,
+NomeAppuntamento VARCHAR(15),
+Luogo VARCHAR(20),
+LimitePersone INT,
+
+
+FOREIGN KEY(CodAppuntamento) references Appuntamenti(CodAppuntamento)
+				on delete cascade
+)Engine=InnoDB;

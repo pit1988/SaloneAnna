@@ -1,0 +1,21 @@
+DROP TABLE IF EXISTS ProdApp;
+
+CREATE TABLE ProdApp(
+CodAppuntamento INT,
+CodProdotto INT,
+Utilizzo DOUBLE,
+
+FOREIGN KEY(CodProdotto) REFERENCES Prodotti(CodProdotto)
+			ON UPDATE CASCADE,
+		
+FOREIGN KEY(CodAppuntamento) REFERENCES AppuntamentiClienti(CodAppuntamento)
+			ON UPDATE CASCADE
+
+)Engine=InnoDB;
+
+INSERT INTO ProdApp(CodAppuntamento, CodProdotto, Utilizzo) VALUES
+('1', '4', '10'),
+('2', '4', '10'),
+('3', '5', '10'),
+('2', '4', '20'),
+('4', '8', '10');

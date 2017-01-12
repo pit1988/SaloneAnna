@@ -1,0 +1,9 @@
+CREATE PROCEDURE storico (IN Codice INT, OUT Storia View ) RETURNS
+BEGIN
+
+CREATE VIEW History (CodCliente, Appuntamento, Prodotto, Quantita) AS
+SELECT a.CodCliente, c.DataOra, p.CodProdotto, p.Quantita 
+FROM ProdApp p NATURAL JOIN AppuntamentiClienti a NATURAL JOIN Appuntamenti c
+WHERE a.CodCliente='3';
+
+RETURN
