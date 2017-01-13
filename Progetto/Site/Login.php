@@ -24,7 +24,13 @@ header('location:Root.php');
 } 
 
 else {
-  print("Login invalido.");
+  echo<<<END
+Login invalido.
+<FORM METHOD="LINK" ACTION="Accesso.php">
+<INPUT TYPE="submit" VALUE="Ritorna alla pagina di Login">
+</FORM>
+
+END;
   exit;
 }
 ?>

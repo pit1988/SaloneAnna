@@ -29,6 +29,8 @@ exit;
 else
 {
 echo "Benvenuto ".$_SESSION['username'];
+echo"<form method=get action=\"ModificaProdotto.php\">";
+
 
 include ("dbconnect.php");
 $conn=dbconnect();
@@ -51,22 +53,19 @@ echo "</tr>\n";
 
 //intestazione tabella
 
-
-echo"<form method=get action=\"ConfermaModificaProd.php\">";
 //corpo tabella
 while ($row = mysql_fetch_row($result))
 {
 
 
 echo "<tr align=left>\n";
-   for ($i=0; $i<$number_cols; $i++)
+  for ($i=0; $i<$number_cols; $i++)
   {
 	echo "<td align=center>";
     if(!isset($row[$i])) echo " ";
-	else if($i==0)echo "<input type=submit name=prod value=".$row[0]." >";
-    else if($i==4) echo "<input type=\"text\" name=\"quantita_".$row[0]."\" value=".$row[$i].">";
-    else echo $row[$i]; 
-	
+	if($i==0)echo "<input type=submit name=codprod value=".$row[$i].">";
+      else
+      {echo $row[$i];} 
 
  
     echo "</td>\n";

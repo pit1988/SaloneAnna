@@ -1,8 +1,0 @@
-DROP TABLE IF EXISTS Appuntamenti;
-
-CREATE TABLE Appuntamenti(
-CodAppuntamento INT PRIMARY KEY AUTO_INCREMENT,
-DataOra DATETIME NOT NULL, 
-Costo DOUBLE
-
-)Engine=InnoDB;

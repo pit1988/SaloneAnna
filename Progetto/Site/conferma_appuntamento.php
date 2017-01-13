@@ -32,7 +32,7 @@ while ($row = mysql_fetch_row($result))
     echo "</td>\n";
   }
   echo "</td>\n";
-{
+}
 
 echo "</table>";
 
@@ -43,19 +43,8 @@ include("NuovoAppuntamento.php");
 include("dbconnect.php");
   $conn = dbconnect();
 	$submit=$_POST["submit"];
-	
-	//verifico se ho passato codcliente
-	if(isset($_POST["CodCliente"])) $CodCliente=$_POST["CodCliente"];
-	else{
 	$nome=$_POST["nome"];
 	$cognome=$_POST["cognome"];
-	//Estraiamo codice cliente
-	$CodClienteA=mysql_query("SELECT RitCod('$nome', '$cognome')")
-		or die("Query fallita " . mysql_error($conn));
-	$CodCliente = mysql_fetch_row($CodClienteA);
-	};
-	
-	
 	$sconto=$_POST["sconto"];
 	$costo=$_POST["costo"];
 	
@@ -69,20 +58,28 @@ include("dbconnect.php");
 	$yyyy = date('Y');
 	$hh=$_POST["hh"];
 	$min=$_POST["min"];
-	$app=$yyyy."-".$mm."-".$gg."&nbsp".$hh.":".$min.":00";
+	$app=$yyyy."-".$mm."-".$gg." ".$hh.":".$min.":00";
 
 
 
+
+//Estraiamo codice cliente
+	$CodClienteA=mysql_query("SELECT RitCod('$nome', '$cognome')")
+		or die("Query fallita " . mysql_error($conn));
+	$CodCliente = mysql_fetch_row($CodClienteA);
 
 	
 
   if (isset($submit))
-  {		$query = "CALL ModificaAppuntamentoCliente('$CodCliente[0]', '$app', '$sconto', '$costo', '$TipoAppuntamento') ;";
+  {		$query = "INSERT INTO Appuntamenti (Costo, DataOra) values
+	      	($costo, '$app' );
+		INSERT INTO AppuntamentiClienti (CodCliente, Sconto, TipoAppuntamento) values
+		(.$CodCliente[0].,$sconto,'$TipoAppuntamento',);";
 		
- 		$ok = mysql_query($query) or 
+ 		$ok = mysql_query("CALL InserimentoAppuntamentoCliente('$CodCliente[0]', '$app', '$sconto', '$costo', '$TipoAppuntamento');") or 
       			die ("Query Inserimento Fallita " . mysql_error());
 	
-	echo "<b>Appuntamento inserito correttamente il $gg del $mm alle $hh:$min</b><br>";
+	echo "<b>Appuntamento di $nome inserito correttamente il $gg del $mm alle $hh:$min</b><br>";
 	
 	};
 

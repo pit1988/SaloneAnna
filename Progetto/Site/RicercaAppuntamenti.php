@@ -35,15 +35,14 @@
 	<td>
 
 <?php
- echo"
-	<i>Data:</i> <input type=date name=date /><br>
+echo 	"
+	<i>Giorno:</i><input type=text size=40 name=gg value=".date('d')."><br>
+	<i>Mese: </i><input type=text size=40 name=mm value=".date('m')."><br>
+	<i>Anno: </i><input type=text size=40 name=yy value=".date('Y')."><br>
 	<i>Ad un ora precisa?</i><br>	
-	<i>Ore: </i><input type=text name=hh>
+	<i>Ore: </i><input type=text size=40 name=hh>
 	";
 ?>
-
-
-
 
 
 </td>

@@ -30,8 +30,11 @@ else
 {
 echo "Benvenuto ".$_SESSION['username'];
 
-
 }
 
-
 ?>
+</td>
+<img valign= "center" align= "center" src="parrucchiera.jpg" >
+</tr>
+
+

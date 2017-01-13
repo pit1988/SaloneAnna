@@ -7,7 +7,7 @@ $submit=$_POST["submit"];
 $nome=$_POST["nome"];
 $cognome=$_POST["cognome"];
 
-
+if(isset($_POST["submit"])){
 $CodClienteA=mysql_query("SELECT RitCod('$nome', '$cognome')")
 		or die("Query fallita " . mysql_error($conn));
 $CodCliente = mysql_fetch_row($CodClienteA);
@@ -53,7 +53,7 @@ while ($row = mysql_fetch_row($result))
 }
 
 echo "</table>";
-
+}
 ?>
 
 	</td>

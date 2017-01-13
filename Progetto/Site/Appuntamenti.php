@@ -48,6 +48,11 @@ echo "<table>
   		<input type=\"submit\"value=\"Ricerca Appuntamenti\">
 		</form>
 	</tr>
+	<tr>
+	<form action=\"GestioneAppuntamenti.php\">
+  		<input type=\"submit\"value=\"Gestione Appuntamenti\">
+		</form>
+	</tr>
 	";
 
 

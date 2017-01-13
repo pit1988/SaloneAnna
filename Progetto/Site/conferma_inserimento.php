@@ -32,17 +32,13 @@ else
 echo "Benvenuto ".$_SESSION['username'];
 
 
-
-
-
   include("dbconnect.php");
   $conn = dbconnect();
 	$submit=$_POST["submit"];
 	$name=$_POST["name"];
 	$surname=$_POST["surname"];
 	$tel=$_POST["tel"];
-
-
+	
 	$mail=$_POST["mail"];
 	$dominio=$_POST["dominio"];
 	$mail=$mail."@".$dominio;
@@ -67,15 +63,9 @@ echo "Benvenuto ".$_SESSION['username'];
 	echo"<b>Inserimento avvenuto con successo</b><br>";
 	echo"<i>Vuoi inserire un appuntamento per $name $surname?</i>";
 
-	//Estraiamo codice cliente da passare
-		$CodClienteA=mysql_query("SELECT RitCod('$name', '$surname')")
-			or die("Query fallita " . mysql_error($conn));
-		$CodCliente = mysql_fetch_row($CodClienteA);
-
-
 	echo"
-	<form method=get action=\"NuovoAppuntamento.php\">
-	  <input type=submit name=CodCliente value=".$CodCliente[0].">
+	<form action=\"./NuovoAppuntamento.php\" target=\"_blank\">
+	  <input type=\"submit\"value=\"Si\">
 	</form>";
 
 	}
