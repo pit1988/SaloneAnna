@@ -10,17 +10,17 @@ $query = "
 			FROM Appuntamenti a NATURAL JOIN AppuntamentiClienti ap NATURAL JOIN storico s NATURAL JOIN Prodotti p
 			WHERE s.Codappuntamento=".$CodApp."
 			ORDER BY s.CodAppuntamento; ";
-$result = mysql_query($query);
+$result = mysqli_query($conn, $query);
 
 
-$number_cols = mysql_num_fields($result);
+$number_cols = mysqli_num_fields($result);
 
 echo "<b><h2>Gestione Prodotti</h2></b>";
 echo "<table border = 1>\n";
 echo "<tr align=center>\n";
 for($i=0; $i<$number_cols; $i++)
   {
-	echo "<th>" . mysql_field_name ($result, $i). "</th>\n";
+	echo "<th>" . mysqli_field_seek ($result, $i). "</th>\n";
   }
 echo "</tr>\n";
 
@@ -29,7 +29,7 @@ echo "</tr>\n";
 
 echo"<form method=get action=\"ConfermaModificaProd.php\">";
 //corpo tabella
-while ($row = mysql_fetch_row($result))
+while ($row = mysqli_fetch_row($result))
 {
 
 
@@ -49,9 +49,6 @@ echo "<tr align=left>\n";
   echo "</tr>\n";
 }
 
-echo "</table>
-</td>
-</form>
-
-	</td>";
+echo "</form></table>";
+mysqli_close($conn);
 ?>

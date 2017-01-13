@@ -64,9 +64,9 @@ include("dbconnect.php");
 
 
 //Estraiamo codice cliente
-	$CodClienteA=mysql_query("SELECT RitCod('$nome', '$cognome')")
-		or die("Query fallita " . mysql_error($conn));
-	$CodCliente = mysql_fetch_row($CodClienteA);
+	$CodClienteA=mysqli_query($conn, "SELECT RitCod('$nome', '$cognome')")
+		or die("Query fallita " . mysqli_error($conn));
+	$CodCliente = mysqli_fetch_row($CodClienteA);
 
 	
 
@@ -76,12 +76,13 @@ include("dbconnect.php");
 		INSERT INTO AppuntamentiClienti (CodCliente, Sconto, TipoAppuntamento) values
 		(.$CodCliente[0].,$sconto,'$TipoAppuntamento',);";
 		
- 		$ok = mysql_query("CALL InserimentoAppuntamentoCliente('$CodCliente[0]', '$app', '$sconto', '$costo', '$TipoAppuntamento');") or 
-      			die ("Query Inserimento Fallita " . mysql_error());
+ 		$ok = mysqli_query($conn, "CALL InserimentoAppuntamentoCliente('$CodCliente[0]', '$app', '$sconto', '$costo', '$TipoAppuntamento');") or 
+      			die ("Query Inserimento Fallita " . mysqli_error());
 	
 	echo "<b>Appuntamento di $nome inserito correttamente il $gg del $mm alle $hh:$min</b><br>";
 	
 	};
+	mysqli_close($conn);
 
 ?>
 

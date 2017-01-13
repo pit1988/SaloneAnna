@@ -16,8 +16,8 @@
 
 
 <?php
-include ("dbconnect.php");
-$conn = dbconnect();
+	include ("dbconnect.php");
+	$conn = dbconnect();
 
 	$submit=$_POST["submit"];
 	$nome=$_POST["nome"];
@@ -32,11 +32,12 @@ $conn = dbconnect();
 	$data=isset($_POST["data"])?$_POST["data"]:"";
 	$cliente=isset($_POST["cli"])?$_POST["cli"]:"";
 
-	
-	if( !$data && !$cliente ){
+
+	if( !$data && !$cliente ) {
 		echo "<b>Devi selezionare almeno una delle due ricerche!</b><br>";
 		header('Location: RicercaAppuntamenti.php'); 
 	};
+
 	$query="
 	SELECT c.Nome, c.Cognome, a.DataOra
 	FROM Clienti c NATURAL JOIN AppuntamentiClienti	ac NATURAL JOIN Appuntamenti a";
@@ -53,42 +54,43 @@ $conn = dbconnect();
 	};
 
 	$query= $query . $where;
-		
-$result = mysql_query($query);
+			
+	$result = $conn->query($query);
 
+	$number_cols = mysqli_num_fields($result);
 
-$number_cols = mysql_num_fields($result);
+	echo "<b>Storico:</b>";
+	echo "<table border = 1>\n";
+	echo "<tr align=center>\n";
 
-echo "<b>Storico:</b>";
-echo "<table border = 1>\n";
-echo "<tr align=center>\n";
-for($i=0; $i<$number_cols; $i++)
-  {
-    echo "<th>" . mysql_field_name ($result, $i). "</th>\n";
-  }
-echo "</tr>\n";
+	for($i=0; $i<$number_cols; $i++)
+		{
+			// echo "<th>" . mysql_field_name ($result, $i). "</th>\n";
+			echo "<th>" . mysqli_field_seek ($result, $i). "</th>\n";
+		}
+	echo "</tr>\n";
 
-//intestazione tabella
+	//intestazione tabella
 
-//corpo tabella
-while ($row = mysql_fetch_row($result))
-{
-  echo "<tr align=left>\n";
+	//corpo tabella
+	while ($row = mysqli_fetch_row($result))
+	{
+		echo "<tr align=left>\n";
 
-  for ($i=0; $i<$number_cols; $i++)
-  {
-    echo "<td>";
-    if(!isset($row[$i]))
-      {echo "NULL";}
-    else
-      {echo $row[$i];}
-    echo "</td>\n";
-  }
-  echo "</td>\n";
-}
+		for ($i=0; $i<$number_cols; $i++) {
+			echo "<td>";
+			if(!isset($row[$i]))
+			  {echo "NULL";}
+			else
+			  {echo $row[$i];}
+			echo "</td>\n";
+		}
+	echo "</td>\n";
+	}
 
-echo "</table>";
+	echo "</table>";
 
+	mysqli_close($conn);
 ?>
 
 	</td>

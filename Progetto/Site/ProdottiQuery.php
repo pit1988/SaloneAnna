@@ -3,15 +3,15 @@
 <!-- Site navigation menu -->
 <table>
 	<tr>
-	<td>
-<ul class="navbar">
-  <li><a href="Root.php">Home page</a>
-  <li><a href="Clienti.php">Clienti</a>
-  <li><a href="Prodotti.php">Prodotti</a>
-  <li><a href="Appuntamenti.php">Appuntamenti</a>
-</ul>
-	</td>
-	<td>
+  	<td>
+      <ul class="navbar">
+        <li><a href="Root.php">Home page</a></li>
+        <li><a href="Clienti.php">Clienti</a></li>
+        <li><a href="Prodotti.php">Prodotti</a></li>
+        <li><a href="Appuntamenti.php">Appuntamenti</a></li>
+      </ul>
+  	</td>
+  	<td>
 
 <?php
 
@@ -39,24 +39,24 @@ $query = "
     	SELECT CodProdotto, Nome, Marca, Tipo, Quantita
 	FROM Prodotti
 	WHERE quantita<6 AND quantita!=0;";
-$result = mysql_query($query);
+$result = mysqli_query($conn, $query);
 
 
-$number_cols = mysql_num_fields($result);
+$number_cols = mysqli_num_fields($result);
 
 echo "<b>I prodotti in esaurimento sono:</b>";
 echo "<table border = 1>\n";
 echo "<tr align=center>\n";
 for($i=0; $i<$number_cols; $i++)
   {
-    echo "<th>" . mysql_field_name ($result, $i). "</th>\n";
+    echo "<th>" . mysqli_field_seek ($result, $i). "</th>\n";
   }
 echo "</tr>\n";
 
 //intestazione tabella
 
 //corpo tabella
-while ($row = mysql_fetch_row($result))
+while ($row = mysqli_fetch_row($result))
 {
   echo "<tr align=left>\n";
 
@@ -73,7 +73,12 @@ while ($row = mysql_fetch_row($result))
 }
 
 echo "</table>";
+mysqli_close($conn);
 }
 ?>
 
-	</td>
+      </td>
+    </tr>
+  </table>
+</body>
+

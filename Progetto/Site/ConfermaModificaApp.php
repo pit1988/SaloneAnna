@@ -32,8 +32,8 @@ $CodApp=$_GET["codapp"];
 	
 	if(isset($_GET["delapp"])){
 		 	$query = "DELETE FROM Appuntamenti WHERE CodAppuntamento='$CodApp';";
- 			$ok = mysql_query($query) or 
-      			die ("Query Inserimento Fallita " . mysql_error());
+ 			$ok = mysqli_query($conn, $query) or 
+      			die ("Query Inserimento Fallita " . mysqli_error());
 	
 	echo "Appuntamento #$CodApp cancellato correttamente. Torna a <a href=Appuntamenti.php>Appuntamenti</a> <br><br>";
 	
@@ -44,8 +44,8 @@ $CodApp=$_GET["codapp"];
 	 if (isset($submit)){
 		 		$query = "CALL ModificaAppuntamentoCliente('$CodApp', '$datetime', '$sconto', '$costo', '$TipoAppuntamento');";
 		
- 		$ok = mysql_query($query) or 
-      			die ("Query Inserimento Fallita " . mysql_error());
+ 		$ok = mysqli_query($conn, $query) or 
+      			die ("Query Inserimento Fallita " . mysqi_error());
 	
 	echo "Appuntamento modificato correttamente $datetime. Torna a <a href=Appuntamenti.php>Appuntamenti</a> <br><br>";
 	
@@ -54,13 +54,13 @@ $CodApp=$_GET["codapp"];
 	//Aggiungo Prodotti All'Appuntamento
 	if (isset($addprod)){
 			$queryadd = "INSERT INTO ProdApp ( CodAppuntamento, CodProdotto, Utilizzo) VALUES ('$CodApp', '$Prodotto', '$quantita');";
-			$ok = mysql_query($queryadd) or 
-      			die ("Query Inserimento Fallita " . mysql_error());
+			$ok = mysqli_query($conn,$queryadd) or 
+      			die ("Query Inserimento Fallita " . mysqli_error());
 	
-	echo "<br> Il prodotto è stato inserito correttaemente. Torna a <a href=Appuntamenti.php>Appuntamenti</a> <br>";
-		};	
+		echo "<br> Il prodotto è stato inserito correttamente. Torna a <a href=Appuntamenti.php>Appuntamenti</a> <br>";
+	};	
 	
-
+mysqli_close($conn);
 	
 
 

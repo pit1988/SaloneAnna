@@ -7,15 +7,15 @@
 <!-- Site navigation menu -->
 <table>
 	<tr>
-	<td>
-<ul class="navbar">
-  <li><a href="Root.php">Home page</a>
-  <li><a href="Clienti.php">Clienti</a>
-  <li><a href="Prodotti.php">Prodotti</a>
-  <li><a href="Appuntamenti.php">Appuntamenti</a>
-</ul>
-	</td>
-	<td>
+		<td>
+			<ul class="navbar">
+			  <li><a href="Root.php">Home page</a></li>
+			  <li><a href="Clienti.php">Clienti</a></li>
+			  <li><a href="Prodotti.php">Prodotti</a></li>
+			  <li><a href="Appuntamenti.php">Appuntamenti</a></li>
+			</ul>
+		</td>
+		<td>
 
 <?php
 
@@ -23,19 +23,13 @@ session_start();
 
 session_regenerate_id(TRUE);
 
-
-
-
 // Controllo accesso
-if (!isset($_SESSION['username'] ) )
-{
-header('location:Accesso.php');
-exit;
-}
-else
-{
-echo "Benvenuto ".$_SESSION['username']." sei in Prodotti <br>";
-echo "<table>
+if (!isset($_SESSION['username'])) {
+				header('location:Accesso.php');
+				exit;
+} else {
+				echo "Benvenuto " . $_SESSION['username'] . " sei in Prodotti <br>";
+				echo "<table>
 	<tr>
 		<form action=\"ProdottiQuery.php\">
   		<input type=\"submit\"value=\"Prodotti in esaurimento\">
@@ -52,11 +46,10 @@ echo "<table>
 		</form>
 	</tr>
 	";
-
-
 }
-
-
 ?>
 
-</td>
+			</td>
+		</tr>
+	</table>
+</body>

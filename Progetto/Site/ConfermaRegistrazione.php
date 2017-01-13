@@ -22,8 +22,8 @@ $conn = dbconnect();
 		else{
 		
 	    		$query = "INSERT INTO Login (user, password) values ('$username', '$password')";
-	  		mysql_query($query) or 
-	      		die (mysql_error());
+	  		mysqli_query($conn, $query) or 
+	      		die (mysqli_error());
 			
 			$_SESSION['username'] = $username;
 			$_SESSION['password'] = $password;
@@ -37,5 +37,5 @@ $conn = dbconnect();
 	{
 	    include("Registrazione.php");
 	}
-
+	mysqli_close($conn);
 ?>
