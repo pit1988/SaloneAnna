@@ -6,40 +6,36 @@
 
 /* Funzione per iniziare la pagina. In input il titolo */
 
-$title="Salone Anna:";
-$title_meta="GGarden: giardinaggio e cura del verde a Padova";
-$descr="Pagina principale dell'azienda GGarden: a Padova offre una gamma completa di prodotti per il giardinaggio, piante ed attrezzi";
-$keywords="GGarden, negozio, piante, fiori, giardinaggio, attrezzi, vendita, padova, descrizione, ";
-
 // inserire variabili per keywords e descrizione, titolo
 function page_start($title, $title_meta, $descr, $keywords) {
-  echo<<<END
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  $to_print='
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
     <head>
         <title>$title</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-        <meta name="title" content="$title_meta" />
-        <meta name="description" content=$descr />
-        <meta name="keywords" content=$keywords />
-        <meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini" />
-        <meta name="language" content="italian it" />
-        <meta name="viewport" content="width=device-width" />
-        <meta http-equiv="Content-Script-Type" content="application/javascript" />
-        <link rel="stylesheet" href="css/home_min.css" type="text/css" media="screen and (min-width: 650px)" />
-        <link rel="stylesheet" type="text/css" href="css/print_min.css" media="print" />
-        <link rel="stylesheet" type="text/css" href="css/small-devices_min.css" media="screen and (max-width: 650px)" />
-        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer_min.css"/><![endif]-->
-        <link rel="icon" href="img/logo2.png" type="image/png" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+        <meta name="title" content="$title_meta"></meta>
+        <meta name="description" content=$descr></meta>
+        <meta name="keywords" content=$keywords></meta>
+        <meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini"></meta>
+        <meta name="language" content="italian it"></meta>
+        <meta name="viewport" content="width=device-width"></meta>
+        <meta http-equiv="Content-Script-Type" content="application/javascript"></meta>
+        <link rel="stylesheet" href="css/home_min.css" type="text/css" media="screen and (min-width: 650px)"></link>
+        <link rel="stylesheet" type="text/css" href="css/print_min.css" media="print"></link>
+        <link rel="stylesheet" type="text/css" href="css/small-devices_min.css" media="screen and (max-width: 650px)"></link>
+        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer_min.css"></link><![endif]-->
+        <link rel="icon" href="img/logo2.png" type="image/png"></link>
         <script type="text/javascript" src="script/script_min.js"></script>
     </head>
-
     <body>
         <p class="nascosto">
             <a title="salta header" href="#contenitore-menu" tabindex="1" accesskey="a">Salta l&apos;intestazione</a>
         </p>
-END;
+';
+  // echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+  echo $to_print;
 }
 
 /* Funzione per terminare una pagina */
@@ -114,8 +110,8 @@ function insert_header($rifnav, $num) {
           </form>
       </div>
 END;
-    contenitore_menu($num);
-  echo "\n</div>\n";
+  contenitore_menu($num);
+  echo "</div>";
 }
 
 /* funzione per inserire il menu
@@ -123,21 +119,30 @@ num serve ad evidenziare l'elemento del menu in cui si è
 
 */
 function contenitore_menu($num) {
-  echo<<<END
+  $to_print='
     <div id="contenitore-menu">
       <p class="nascosto">
           <a href="#content" title="salta al contenuto principale">Salta menu navigazione</a>
       </p>
+      numero= $num
       <ul class="menu">
 
-          <li><a href="index.php" id="home" (($num == 0)? class="vnav" : class="nav") xml:lang="en" accesskey="h" tabindex="10">Home </a></li>
-          <li><a href="Clienti.php" id="real" (($num == 1)? class="vnav" : class="nav") accesskey="c" tabindex="11">Clienti</a></li>
-          <li><a href="Prodotti.php" id="vend" (($num == 2)? class="vnav" : class="nav") accesskey="p" tabindex="12">Prodotti </a></li>
-          <li><a href="Appuntamenti.php" id="cont" (($num == 3)? class="vnav" : class="nav") accesskey="a" tabindex="13">Appuntamenti</a></li>
+          <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
+          <li><a href="Clienti.php" id="real" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Clienti</a></li>
+          <li><a href="Prodotti.php" id="vend" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="p" tabindex="12">Prodotti </a></li>
+          <li><a href="Appuntamenti.php" id="cont" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="a" tabindex="13">Appuntamenti</a></li>
       </ul>
     </div>
-END;
+';
+echo $to_print;
 };
+
+function select_class_menu($num1, $num2){
+  if(num1 == $num2)
+    return "vnav";
+  else
+    return "nav";
+}
 
 /*funzione per inserire l'inizio del content*/
 function content_begin() {

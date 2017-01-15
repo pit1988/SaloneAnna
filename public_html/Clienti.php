@@ -24,7 +24,7 @@ else
 
 	page_start($title, $title_meta, $descr, $keywords);
 	$rif='Ti trovi in: <a href="index.html" xml:lang="en">Home</a> / <strong>Clienti</strong>';
-	insert_header($rif, 0);
+	insert_header($rif, 1);
 	content_begin();
 echo "<table>
 	<tr>
