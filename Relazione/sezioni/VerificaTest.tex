@@ -1,0 +1,46 @@
+\section{Verifica e Test}{
+	Al fine di riuscire a garantire una corretta visualizzazione del sito ed una sua fruizione da parte di un numero di browser quanto più ampio possibile, è stata verificata la validità di tutte le pagine, indipendentemente dal tipo statico o dinamico; si è infine visualizzato il sito su browser meno recenti.
+	\subsection{Ambiente di lavoro}{
+		Dall'inizio dello sviluppo abbiamo utilizzato il servizio di hosting GitHub per ospitare il nostro progetto e lavorare in contemporanea, potendo eventualmente far regredire il prodotto in caso di modifiche errate. Questo ci ha permesso di poter lavorare anche da remoto avendo sempre la versione più aggiornata a disposizione.\\
+		Il repository può essere trovato al seguente link: \url{https://github.com/Cenze94/GGarden}.
+	}
+	\subsection{Dispositivi utilizzati}{
+		Oltre a testare il sito sui computer del laboratorio, per verificarne la compatibilità su un gran numero di dispositivi ci siamo affidati ai servizi offerti da \href{https://www.browserstack.com/screenshots}{BrowserStack}, \href{https://developer.microsoft.com/en-us/microsoft-edge/tools/screenshots/}{Microsoft Browser screenshots} e per i dispositivi mobili \url{http://mobiletest.me/}, correggendo di volta in volta gli errori trovati.  Di seguito l'elenco dei browser e dispositivi testati:
+		\begin{itemize}\itemsep1pt
+			\item Ubuntu 12.04.5 LTS: Chrome 53.0.2785.116, Opera 39.0.2556.71, Firefox 4.90;
+			\item Windows 10: Edge 13, IE 11, Firefox 32 e 45, Chrome 37, 38 e 50;
+			\item Windows 8.1: IE11, FIrefox 16, 45, Chrome 22, 50, Opera 12, 12.16;
+			\item Windows 8: IE10, FIrefox 16, 45, Chrome 22, 50, Opera 12.16;
+			\item Windows 7: IE8, 9, 10, 11, Firefox 3.6, 26, 45, Chrome 14 e 50, Opera 11.6 e 12.16
+			\item Windows XP: IE 7, Firefox 3.6 e 45, Chrome 14 e 49, Opera 12.16;
+			\item Mac OS X El Capitan: Safari 9.1;
+			\item Mac Os X 10.11.6 :Safari versione 10.
+			\item Dispositivi mobili: Apple Iphone 5 e 6Plus, Google Nexus 6, 9, Nokia Lumia 920, Samsung Galaxy Y, Google Nexus 7, Apple Ipad Mini.
+		\end{itemize}
+		L'unico problema incontrato riguarda la trasparenza del logo in IE6, che però non pregiudica l'usabilità del sito. Ci riteniamo quindi soddisfatti del lavoro svolto.
+	}
+	\subsection{Verifica del codice prodotto}{
+		Per la verifica del codice HTML e CSS prodotto ci siamo affidati ai validatori messi a disposizione dal W3C.\\
+		\\
+		Tutto il codice XHTML prodotto è stato validato correttamente alla versione XHTML 1.0 Strict, senza errori nè warning.\\
+		\\
+		Abbiamo utilizzato anche \href{https://validator.w3.org/mobile-alpha/}{W3C Mobile checker} e \href{https://www.google.com/webmasters/tools/mobile-friendly/}{Google Mobile-Friendly Test} per verificare se il sito fosse mobile-friendly: l'esito è stato positivo.
+		Il codice CSS è stato validato in versione 2, 2.1 e 3; CSS 3 ha validato correttamente i fogli di stile prodotti, senza errori, nè warning; CSS 2 e CSS 2.1 riportavano errori determinati da alcune istruzioni non pienamente compatibili, che però non ostacolano la visualizzazione o l'accessibilità del sito. Abbiamo fatto in modo di avere un sito fruibile ed utilizzabile anche in assenza di fogli di stile.\\
+		\\
+		Il codice Javascript è stato analizzato tramite \url{http://jshint.com/}, superando il controllo.\\
+		\\
+		Per essere certi d'aver prodotto un sito web accessibile a tutte le tipologie d'utente, sono stati usati i seguenti validatori, che effettuano un controllo run-time del sito:
+		\begin{itemize}\itemsep1pt
+			\item \href{https://www.totalvalidator.com/}{Total Validator};
+			\item \href{http://achecker.ca/checker/index.php}{Achecker};
+			\item \href{http://wave.webaim.org/}{wave.webaim.org};
+		\end{itemize}
+		Tutte le pagine del sito sono risultate valide.\\
+		Siamo riusciti ad ottenere la certificazione WCAG 2.0 AAA, la più alta possibile. Al momento della validazione sono stati prodotti dei warnings, ma solo nella parte riguardante il contenuto. Abbiamo fatto validare le pagine anche per la Sezione 508 e la Legge Stanca, con esito positivo.
+		I file XML e XSD sono stati validati con \textit{xmllint}, un programma per Ubuntu che da riga di comando valida un file XML rispetto ad uno schema XSD e fornisce tutti i problemi trovati. L'esito della validazione non ha segnalato errori.
+	}
+	\input{\docs ElencoModifiche.tex}
+	
+	\subsection{Conclusioni}
+		Il sito, in seguito alle validazioni, si è dimostrato accessibile e compatibile con un ampio numero di browser e dispositivi; malgrado le email generate dal sito siano tutt'ora segnate come span, ci riteniamo suddisfatti del lavoro svolto, vista la difficoltà a costruire un messaggio e-mail valido.
+}
