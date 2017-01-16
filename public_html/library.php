@@ -9,24 +9,24 @@
 // inserire variabili per keywords e descrizione, titolo
 function page_start($title, $title_meta, $descr, $keywords) {
   $to_print='
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
     <head>
-        <title>$title</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
-        <meta name="title" content="$title_meta"></meta>
-        <meta name="description" content=$descr></meta>
-        <meta name="keywords" content=$keywords></meta>
-        <meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini"></meta>
-        <meta name="language" content="italian it"></meta>
-        <meta name="viewport" content="width=device-width"></meta>
-        <meta http-equiv="Content-Script-Type" content="application/javascript"></meta>
-        <link rel="stylesheet" href="css/home_min.css" type="text/css" media="screen and (min-width: 650px)"></link>
-        <link rel="stylesheet" type="text/css" href="css/print_min.css" media="print"></link>
-        <link rel="stylesheet" type="text/css" href="css/small-devices_min.css" media="screen and (max-width: 650px)"></link>
-        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer_min.css"></link><![endif]-->
-        <link rel="icon" href="img/logo2.png" type="image/png"></link>
+        <title>'.$title.'</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"\/>
+        <meta name="title" content="'.$title_meta.'"\/>
+        <meta name="description" content="'.$descr.'"\/>
+        <meta name="keywords" content="'.$keywords.'"\/>
+        <meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini"\/>
+        <meta name="language" content="italian it"\/>
+        <meta name="viewport" content="width=device-width"\/>
+        <meta http-equiv="Content-Script-Type" content="application/javascript"\/>
+        <link rel="stylesheet" href="css/home_min.css" type="text/css" media="screen and (min-width: 650px)"\/>
+        <link rel="stylesheet" type="text/css" href="css/print_min.css" media="print"\/>
+        <link rel="stylesheet" type="text/css" href="css/small-devices_min.css" media="screen and (max-width: 650px)"\/>
+        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer_min.css"\/><![endif]-->
+        <link rel="icon" href="img/logo2.png" type="image/png"\/>
         <script type="text/javascript" src="script/script_min.js"></script>
     </head>
     <body>
@@ -34,14 +34,13 @@ function page_start($title, $title_meta, $descr, $keywords) {
             <a title="salta header" href="#contenitore-menu" tabindex="1" accesskey="a">Salta l&apos;intestazione</a>
         </p>
 ';
-  // echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
-  echo $to_print;
+  echo  $to_print;
 }
 
 /* Funzione per terminare una pagina */
 
 function page_end() {
-  echo<<<END
+  $to_print='
         <div id="footer" class="footer">
             <ul class="nascosto">
                 <li><a href="#header" title="vai-a-inizio-pagina" tabindex="100" accesskey="i">Torna all&apos;inizio pagina</a></li>
@@ -82,7 +81,7 @@ function page_end() {
             <div class="footer-right">
                 <p class="footer-company-info" title="motto">
                     <span class="testo-footer">Gg Garden a servizio</span>
-                    <span class="testo-footer">L'erba del tuo vicino &egrave; sempre pi&ugrave; verde. Sii come il tuo vicino,
+                    <span class="testo-footer">L\'erba del tuo vicino &egrave; sempre pi&ugrave; verde. Sii come il tuo vicino,
                         chiama G Garden Group</span>
                 </p>
             </div>
@@ -90,7 +89,8 @@ function page_end() {
         <p id="finePagina"></p>
     </body>
 </html>
-END;
+';
+  echo $to_print;
 };
 
 /*funzione per inserire l'header*/
@@ -124,7 +124,6 @@ function contenitore_menu($num) {
       <p class="nascosto">
           <a href="#content" title="salta al contenuto principale">Salta menu navigazione</a>
       </p>
-      numero= $num
       <ul class="menu">
 
           <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>

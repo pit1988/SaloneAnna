@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <?php
 require 'library.php';
 
@@ -15,7 +14,7 @@ else
 	$title="Salone Anna: tariffe, orari, indirizzo";
 	$title_meta="Salone Anna, parrucchiere a Vicenza";
 	$descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
-	$keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
+	$keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 
 	page_start($title, $title_meta, $descr, $keywords);
 	$rif="Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
