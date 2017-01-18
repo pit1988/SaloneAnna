@@ -1,0 +1,212 @@
+\documentclass[12pt,a4paper,titlepage]{article}
+%va sempre messo article per "program documentation"
+\usepackage[italian]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=1cm,right=1cm]{geometry}
+\usepackage{soulutf8,color}
+\usepackage{graphicx}
+
+\usepackage{emptypage}                     
+% pagine vuote senza testatina e piede di pagina
+
+%\usepackage{hyperref}                     
+% collegamenti ipertestuali
+
+\usepackage{fancyhdr}
+% pacchetto per intestazione e pie pagina
+
+\pagestyle{fancy}
+
+
+% \\ indica interruzione di riga
+
+% compilate 2 volte per documenti con indice
+
+% {\em qui testo in corsivo}
+% {\bfseries qui testo in grossetto}
+
+%LISTE NUMERATE
+%\begin{enumerate}
+%\item primo
+%\item secondo
+%\item terzo
+%\end{enumerate}
+
+%LISTE PUNTATE
+%\begin{itemize}
+%\item primo
+%\item secondo
+%\item \dots
+%\end{itemize}
+
+%TABELLA
+%\begin{tabular}{|c|c|c|}
+%indica una tabella con 3 colonne e pos. testo centrale. La barra verticale ( | ) indica che vi e' una linea divisoria verticale tra le celle.
+%\hline	linea separatrice orizzontale
+%testo1& testo2& testo3\\
+% & segna la fine del testo nella cella , \\ indica il fine della riga 
+
+%GRAFICI
+%\begin{figure}
+%\includegraphics{filegrafico}
+%comando per includere le immagini (controllare i formati)
+%\caption{didascalia}
+%\label{nome}
+%\end{figure}
+
+
+%----------------------------------------------------------- INIZIO TEMPLATE TITOLO
+
+\usepackage{xcolor} % Importa i colori per la prima pagina
+\usepackage{fix-cm} % Permette l'incremento del font oltre misura
+
+
+\newcommand{\HRule}[1]{\hfill \rule{0.2\linewidth}{#1}} % Horizontal rule at the bottom of the page, adjust width here
+
+\definecolor{grey}{rgb}{0.9,0.9,0.9} % Colore del box del titolo
+
+\begin{document}
+	
+	\thispagestyle{empty} % Toglie il numero della pagina nella prima pagina
+	
+	%----------------------------------------------------------------------------------------
+	%	TITLE SECTION
+	%----------------------------------------------------------------------------------------
+	
+	\colorbox{grey}{
+		\parbox[t]{1.0\linewidth}{
+			\centering \fontsize{50pt}{80pt}\selectfont % Il primo è la grandezza del font, il secondo lo spazio lasciato
+			\vspace*{0.7cm} % Spazio dall'inizio del box al titolo
+			
+			\raggedleft
+			\includegraphics[width=0.7\linewidth]{../public_html/img/logo.png}
+			
+			\hfill Relazione Salone Anna \\
+			
+			\vspace*{0.7cm} % Spazio dalla fine del testo alla fine del box
+		}
+	}
+	
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Spazio dalla fine del box alle altre informazioni
+	
+	%----------------------------------------------------------------------------------------
+	%	Informazioni sul documento
+	%----------------------------------------------------------------------------------------
+	
+	{\centering \large 
+		\hfill \textbf{Nome Progetto} Salone Anna \\
+		\hfill \textbf{Redazione} 	Pietro Gabelli \\
+		\hfill 						Sebastiano Marchesini \\
+		\hfill						Andrea Grendene \\
+		\hfill \textbf{Destinato} 	Ombretta Gaggi \\ 
+		
+		\HRule{1pt}
+		
+		\textbf{Sommario} \\
+		Relazione progetto Salone Anna destinato a Tecnologie Web.
+		
+	} % Linea orizzontale di estetica
+	
+	
+	%----------------------------------------------------------------------------------------
+	
+	\clearpage % Parta bianca finale della pagina
+	
+%----------------------------------------------------------- FINE TEMPLATE TITOLO
+
+\lhead{\includegraphics[width=0.2\linewidth]{../public_html/img/logo.png}}
+\chead{}
+\lfoot{Relazione Progetto}
+\cfoot{}
+\rfoot{\thepage}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.2pt}
+
+
+\tableofcontents
+%crea indice automaticamente
+\thispagestyle{empty}
+
+\newpage
+
+
+\rhead{Introduzione}
+\section{Introduzione}
+	\subsection{Descrizione generale}
+	Il progetto SaloneAnna è strutturato su una base di dati mysql per la gestione di un negozio di parrucchieri. Fulcro del programma risiede nell'amministrazione dei clienti, salvati nel database e collegati agli appuntamenti gestiti dall'amministratore.\\
+	Il contesto su cui si appoggia la scelta di questo programma riguarda un salone di piccole dimensioni, si parla di un prodotto accessibile da tutte le dipendenti e titolari per tenere aggiornato il negozio con la massima dell'efficienza.\\
+	Sempre da parte dell'amministratore del salone e chi ha l'accesso al sito ha la possibilità di gestire un magazzino, cancellando, inserendo o modificando ogni singolo prodotto per avere un inventario in evoluzione e ben gestibile. Un utente non registrato invece potrà visualizzare le informazioni generiche del negozio, sfogliare una galleria dinamica delle realizzazioni e contattare tramite form il negozio.\\
+	\subsection{Caratteristiche degli utenti}{
+		Gli utenti del sito saranno persone in ricerca di nuovo negozio nella zona, in grado di utilizzare strumenti per la navigazione web o alle prime armi. \\
+		Il sito è rivolto ad un pubblico generico, all'interno del quale possiamo individuare le seguenti categorie:
+		\begin{description}\itemsep1pt
+			\item[Categoria di utenti:] privati;
+			\begin{description}\itemsep1pt
+				\item[Funzionalità:] Informarsi sulla locazione, il numero da contattare. Consultare realizzazioni e contattare il negozio lasciando il proprio indirizzo mail.
+				\item[Termini generali:] Non eccessivamente distante dal punto vendita, in un raggio di circa 70 Km.
+			\end{description}
+			\item[Categoria di utenti:] amministratori
+			\begin{description}\itemsep1pt
+				\item[Funzionalità:] area riservata da cui aggiungere, rimuovere o aggiornare prodotti. Inserire nuovi clienti e conseguentemente gestire appuntamenti. 
+			\end{description}
+		\end{description}
+	\subsection{Vincoli generali}{
+		\begin{itemize}\itemsep1pt
+			\item Il sito dev'essere accessibile da parte di categorie d'utenti diversificate ed utilizzando dispositivi diversi compresi smartphones e tablet;
+			\item Il sito deve presentare possibilità di stampa flessibile a seconda della pagina richiesta;
+			\item Il sito dev'essere visitabile tramite i seguenti browser: 
+			\begin{itemize}
+				\item Firefox 3.6;
+				\item Internet Explorer dalla versione 7 alla versione 11; Edge 13;
+				\item Chrome 14;
+				\item Opera 12.16;
+				\item Safari 9.
+			\end{itemize}
+			\item Separazione tra struttura, presentazione, comportamento;
+			\item Conformità agli standard W3C per XHTML, CSS, JS;
+			\item Sito comprensibile da screen-reader.
+		\end{itemize}
+	}
+	\subsection{Requisiti}{
+		Di seguito sono presentati i requisiti emersi dall'analisi iniziale e quelli che si sono aggiunti nel corso dello svolgimento del progetto. Ciascuno è identificato da un numero progressivo per semplificarne l'individuazione successiva.\\
+		\newcounter{magicrownumbers}
+		\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|p{\dimexpr 0.15\linewidth-2\tabcolsep}|p{\dimexpr 0.8\linewidth-2\tabcolsep}|}
+				\hline
+				\textbf{ID Req.} & \textbf{Descrizione}\\
+				\hline
+				\centering \rownumber	&	Il sito dev'essere visualizzabile sui browser elencati all'interno di "Vincoli generali"\\
+				\hline
+				\centering \rownumber	&	Il sito dev'essere accessibile indipendentemente dalla grandezza dello schermo del dispositivo\\
+				\hline
+				\centering \rownumber	&	Il sito dev'essere fruibile anche senza richiedere un foglio di stile\\
+				\hline
+				\centering \rownumber	&	Le figure significative dovranno essere comprensive di un attributo alt per favorire l'accesso ad utenti non vedenti\\
+				\hline
+				\centering \rownumber	&	Ad i tag quali <input> e <textarea> devono essere associati tabindex e accesskey\\
+				\hline
+				\centering \rownumber	&	Le gradazioni di colori non devono risultare sgradevoli o di intralcio a persone affette da daltonismo\\
+				\hline
+				\centering \rownumber	&	Il layout deve risultare fluido nel ridimensionamento del carattere tramite i tasti Ctrl + e Ctrl -\\
+				\hline
+				\centering \rownumber	&	Il sito deve essere validato per la parte di XHTML2.0, CSS3 e secondo gli standard WAI\\
+				\hline
+			\end{tabular}
+			\label{tab:requisiti}
+			\caption{Elenco dei requisiti}
+		\end{table}
+	}
+}
+
+\newpage
+
+
+
+\end{document}
