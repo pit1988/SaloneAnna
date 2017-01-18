@@ -1,0 +1,13 @@
+- Accesso.php: solo form html, da INCLUDE NELL'HTML
+- dbconnect.php: connessione al DB, file da CONSERVARE e MODIFICARE
+- Login.php: sessione e check login, file da CONSERVARE e MODIFICARE
+	Alcuni comandi PHP sulle sessioni che non si trovano in Login.php:
+		unset($_SESSION['variabile']); = elimina la variabile dall'array contenuto nella sessione
+		$_SESSION = array(); o session.unset(); = come sopra ma elimina tutte le variabili
+		Check sessione (ci sono vari modi suggeriti da provare), il ramo if gestisce il caso vero:
+			if(isset($_SESSION))
+			if(!empty($_SESSION))
+			$has_session = session_id() !== ''; (per versione vecchia di PHP)
+			$has_session = session_status() == PHP_SESSION_ACTIVE; (come sopra ma per versioni PHP più recenti)
+		session_destroy(); = Cancellazione sessione (meglio precederlo con l'eliminazione di tutte le variabili contenute con i comandi mostrati sopra)
+...
