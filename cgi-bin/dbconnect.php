@@ -9,6 +9,5 @@ function dbconnect()
 		if($conn -> connect_errno)
 			echo "Connessione fallita(".$conn -> connect_errno."): ".$conn -> connect_error;
 		return $conn;
-		//exit(); //da eliminare
 	};
 ?>

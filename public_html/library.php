@@ -199,34 +199,13 @@ function table_end() {
   echo "</table>";
 };
 
-
-
-/***************************************/
-/* CONNESSIONE AL DATABASE             */
-/***************************************/
-
-/* Si connette e seleziona il database */
-
-function dbconnect()
-  {
-    $host = "localhost";
-    $user = "pgabelli";
-    $pass = "bi9UJ9ohCoochei7";
-    $db = "pgabelli";
-    $conn=new mysqli($host, $user, $pass, $db);
-    if($conn -> connect_errno)
-      echo "Connessione fallita(".$conn -> connect_errno."): ".$conn -> connect_error;
-    return $conn;
-    //exit();
-  };
-
-
+//NOTA CENZE: per la connessione al database ho già copiato il file originario in cgi-bin, quindi non mi serve la funzione qua (anche perché non ha senso mantenerla in public_html, fa confusione e basta). Probabilmente in quel file inserirò anche altre funzioni se serviranno
 
 /***************************************/
 /* FUNZIONI PER AUTENTICAZIONE         */
 /***************************************/
 
-function new_user($login, $password) {
+function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzioni resteranno inutilizzate, anche perché ad esempio se faccio il check del login controllo direttamente lo usarname e la password, quindi il controllo della singola password non dovrebbe servire. Confermerò quando avrò terminato di implementare le sessioni
 
   /* si connette e seleziona il database da usare */
   $dbname="login-ES";
