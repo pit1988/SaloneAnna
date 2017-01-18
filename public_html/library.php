@@ -23,11 +23,11 @@ function page_start($title, $title_meta, $descr, $keywords) {
         <meta name="viewport" content="width=device-width"\/>
         <meta http-equiv="Content-Script-Type" content="application/javascript"\/>
         <link rel="stylesheet" href="css/home_min.css" type="text/css" media="screen and (min-width: 650px)"\/>
-        <link rel="stylesheet" type="text/css" href="css/print_min.css" media="print"\/>
-        <link rel="stylesheet" type="text/css" href="css/small-devices_min.css" media="screen and (max-width: 650px)"\/>
-        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer_min.css"\/><![endif]-->
+        <link rel="stylesheet" type="text/css" href="css/print.css" media="print"\/>
+        <link rel="stylesheet" type="text/css" href="css/small-devices.css" media="screen and (max-width: 650px)"\/>
+        <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer.css"\/><![endif]-->
         <link rel="icon" href="img/logo2.png" type="image/png"\/>
-        <script type="text/javascript" src="script/script_min.js"></script>
+        <script type="text/javascript" src="script/script.js"></script>
     </head>
     <body>
         <p class="nascosto">
@@ -199,34 +199,13 @@ function table_end() {
   echo "</table>";
 };
 
-
-
-/***************************************/
-/* CONNESSIONE AL DATABASE             */
-/***************************************/
-
-/* Si connette e seleziona il database */
-
-function dbconnect()
-  {
-    $host = "localhost";
-    $user = "pgabelli";
-    $pass = "bi9UJ9ohCoochei7";
-    $db = "pgabelli";
-    $conn=new mysqli($host, $user, $pass, $db);
-    if($conn -> connect_errno)
-      echo "Connessione fallita(".$conn -> connect_errno."): ".$conn -> connect_error;
-    return $conn;
-    //exit();
-  };
-
-
+//NOTA CENZE: per la connessione al database ho già copiato il file originario in cgi-bin, quindi non mi serve la funzione qua (anche perché non ha senso mantenerla in public_html, fa confusione e basta). Probabilmente in quel file inserirò anche altre funzioni se serviranno
 
 /***************************************/
 /* FUNZIONI PER AUTENTICAZIONE         */
 /***************************************/
 
-function new_user($login, $password) {
+function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzioni resteranno inutilizzate, anche perché ad esempio se faccio il check del login controllo direttamente lo usarname e la password, quindi il controllo della singola password non dovrebbe servire. Confermerò quando avrò terminato di implementare le sessioni
 
   /* si connette e seleziona il database da usare */
   $dbname="login-ES";
