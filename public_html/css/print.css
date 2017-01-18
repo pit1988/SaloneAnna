@@ -1,0 +1,291 @@
+html, body{
+    padding:0px;
+    margin:0px;
+    font-family: "Times New Roman", Helevetica, serif;
+    font-size:12px;
+    color: black;
+    background: transparent;
+}
+
+
+#headheader{
+    position: static;
+    float: none;
+}
+
+#logo{
+  display:inline;
+}
+
+#contenitore-login{
+    display:none;
+}
+
+
+/*Logo*/
+h1{
+    position: static;
+    float: none;
+    text-align:center;
+    background-image:url(../img/logo.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    content:url(../img/logo.png);
+    
+}
+
+
+
+/* BreadCrumbs Part*/
+#breadcrumbs{
+    width: 100%;
+    background-color:#b0fcb0;
+    clear: both;
+    
+}
+
+#rifnav {
+    text-align:center;
+    font-style: oblique;
+    width: 100%;
+    color: black;
+    margin-top: 20px;
+}
+
+#ricerca{
+    display: none;
+}
+
+#conferma{
+    display: none;
+}
+
+.nascosto{
+    display: none;
+}
+
+
+
+/*Menu*/
+#contenitore-menu {
+    display:none;
+}
+
+
+/*Contenuto-Body-Centro*/
+
+#content{
+    background-color:#b0fcb0;
+    margin:0 auto;
+    padding: 1em;
+    width:auto;
+    color: black;
+    clear: both;
+}
+
+.body_contattaci{
+    display:none;
+}
+
+.informazioni{
+    display:block;
+}
+
+
+/* Realizzazioni */
+
+#gallery{
+    width: 100%;
+}
+
+#titolo{
+    font-size: 0.8cm;
+}
+
+#content img{
+    border:0;
+}
+
+#content div #container{
+    width:auto;
+}
+
+#content div #header img{
+    float:left;
+}
+
+#content div #header h2{
+    float:left;
+    margin:24px 0 0 0;
+    font-size:100%;
+}
+
+#content div #zoom{
+    text-align:center;
+    margin:0 0 5px 0;
+    padding: 5px;
+    border:1px solid;
+}
+
+#content div #zoom h3{
+    margin:0;
+    font-size:100%;
+    text-align:center;
+}
+
+#content div #zoom img{
+    width:auto;
+    height:13cm;
+}
+
+#content div #minipics{
+    float: left;
+    width: 100%;
+}
+
+#content div #minipics ul{
+    margin: 0;
+    list-style: none;
+    
+}
+
+#content div #minipics li{
+    height: auto;
+    display: inline;
+    float: left;
+    list-style: none;
+    margin: 1em 2em 1em 2em;
+}
+
+/* Vendita */
+
+.maintitle{
+    display:none;
+}
+
+.cnome{
+    font-size:2em;     	
+}
+
+#piante{
+    font-size: 1em;
+}
+
+#attrezzi{
+    font-size: 1em;
+}
+
+.prodotto{
+    page-break-inside: avoid;
+    page-break-after: always;
+}
+
+.dati .info{
+    width:100%;
+    float: left;
+}
+
+.img img{
+    width: 150px;
+    height: 150px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+/*Parte per la form di contattaci*/
+
+.info {
+    display: block;
+    margin: 0 0 0.5em 0;
+    font-size: 1em;
+    text-align: center;
+}
+
+#divMappa {
+    width: 100%;
+    height: 20em;
+    content:url(../img/mappa.png);
+}
+
+.print {
+    display: none;
+}
+
+.errorSuggestion{
+    display: none;
+    
+}
+
+
+
+/* Footer */
+
+
+.footer{
+    width: 100%;
+    text-align: left;
+    font: bold 8px sans-serif;
+}
+
+.footer h3{
+    margin: 0;
+    content:url(../img/logo_mini.png);
+    width: 100px;
+    height: auto;
+}
+
+
+.footer .footer-left .footer-menu a{
+    display:none;
+}
+
+.footer .footer-nome-azienda{
+    font-size: 10px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer .footer-center{
+    float:left;
+}
+
+.footer .footer-center i{
+    font-size: 10px;
+    text-align: center;
+}
+
+.footer .footer-center i.fa-mail{
+    font-size: 10px;
+}
+
+.footer .footer-center p{
+    display: inline-block;
+    vertical-align: middle;
+    margin:0;
+}
+
+.footer .footer-center p span{
+    display:block;
+    font-weight: normal;
+    line-height:2;
+}
+
+
+.footer .footer-right{
+    float:right;
+}
+
+.footer .footer-nome-azienda{
+    line-height: 20px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.footer .footer-company-info span{
+    display: block;
+    font-weight: bold;
+}

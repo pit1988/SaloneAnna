@@ -1,0 +1,69 @@
+\section{Descrizione Generale}{
+	\subsection{Il sito}{
+		Il sito desidera essere una vetrina di prodotti per il giardinaggio con la possibilità di visualizzare le principali caratteristiche e le opzioni di ognuno, oltre alle realizzazioni eseguite dal service.
+		A supporto dell'utente si desidera rendere disponibili una mappa per raggiungere l'azienda, orari, e-mail e numero di telefono aziendali.
+		E' possibile inoltre contattare l'azienda tramite form che invia una mail automaticamente.
+	}
+	\subsection{Caratteristiche degli utenti}{
+		Gli utenti del sito saranno persone interessate al giardinaggio ed al fai-da-te, in grado di utilizzare strumenti per la navigazione web. \\
+		Il sito è rivolto ad un pubblico generico, all'interno del quale possiamo individuare le seguenti categorie:
+		\begin{description}\itemsep1pt
+			\item[Categoria di utenti:] privati e piccole aziende
+			\begin{description}\itemsep1pt
+				\item[Funzionalità:] Informarsi sugli attrezzi per il giardinaggio prima di procedere all'acquisto presso la sede dell'azienda. Contattare tramite form dedicata l'azienda.
+				\item[Termini generali:] Non eccessivamente distante dal punto vendita, in un raggio di circa 70 Km.
+			\end{description}
+			\item[Categoria di utenti:] amministratori
+			\begin{description}\itemsep1pt
+				\item[Funzionalità:] area riservata da cui aggiungere, rimuovere o aggiornare prodotti disponibili;
+			\end{description}
+		\end{description}
+	}
+	\subsection{Vincoli generali}{
+		\begin{itemize}\itemsep1pt
+			\item Il sito dev'essere accessibile da parte di categorie d'utenti diversificate ed utilizzando dispositivi diversi compresi smartphones e tablet;
+			\item Il sito dev'essere visitabile tramite i seguenti browser: 
+				\begin{itemize}
+					\item Firefox 3.6;
+					\item Internet Explorer dalla versione 7 alla versione 11; Edge 13;
+					\item Chrome 14;
+					\item Opera 12.16;
+					\item Safari 9.
+				\end{itemize}
+			\item Separazione tra struttura, presentazione, comportamento;
+			\item Conformità agli standard W3C per XHTML, CSS, JS;
+			\item Sito comprensibile da screen-reader.
+		\end{itemize}
+	}
+	\subsection{Requisiti}{
+		Di seguito sono presentati i requisiti emersi dall'analisi iniziale e quelli che si sono aggiunti nel corso dello svolgimento del progetto. Ciascuno è identificato da un numero progressivo per semplificarne l'individuazione successiva.\\
+		\newcounter{magicrownumbers}
+		\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
+		\begin{table}[h]
+			\centering
+			\begin{tabular}{|p{\dimexpr 0.15\linewidth-2\tabcolsep}|p{\dimexpr 0.8\linewidth-2\tabcolsep}|}
+				\hline
+			 	\textbf{ID Req.} & \textbf{Descrizione}\\
+				\hline
+				\centering \rownumber	&	Il sito dev'essere visualizzabile sui browser elencati all'interno di "Vincoli generali"\\
+				\hline
+				\centering \rownumber	&	Il sito dev'essere accessibile indipendentemente dalla grandezza dello schermo del dispositivo\\
+				\hline
+				\centering \rownumber	&	Il sito dev'essere fruibile anche senza richiedere un foglio di stile\\
+				\hline
+				\centering \rownumber	&	Le figure significative dovranno essere comprensive di un attributo alt per favorire l'accesso ad utenti non vedenti\\
+				\hline
+				\centering \rownumber	&	Ad i tag quali <input> e <textarea> devono essere associati tabindex e accesskey\\
+				\hline
+				\centering \rownumber	&	Le gradazioni di colori non devono risultare sgradevoli o di intralcio a persone affette da daltonismo\\
+				\hline
+				\centering \rownumber	&	Il layout deve risultare fluido nel ridimensionamento del carattere tramite i tasti Ctrl + e Ctrl -\\
+				\hline
+				\centering \rownumber	&	Il sito deve essere validato per la parte di XHTML2.0, CSS3 e secondo gli standard WAI\\
+				\hline
+			\end{tabular}
+			\label{tab:requisiti}
+			\caption{Elenco dei requisiti}
+		\end{table}
+	}
+}
