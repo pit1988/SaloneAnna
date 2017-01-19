@@ -18,6 +18,7 @@ function login($username, $password) { //TODO: verificare se lo spostamento dell
 					session_regenerate_id(TRUE); //cambia l'ID della sessione, è una tecnica di sicurezza da inserire dopo la creazione dell'ID
 					$_SESSION['username'] = $username; //salvo i dati
 					$_SESSION['password'] = $password;
+					$_SESSION['LAST_ACTIVITY'] = time(); //salvo l'ultima attività
 					header('location:Root.php'); //carica la pagina Root.php, inoltre se ci sono errori di header questo comando li aggira
 			}
 	
