@@ -1,6 +1,4 @@
 <?php
-require 'pageManagement.php';
-
 login($_REQUEST['username'], $_REQUEST['password']);
 header('location:../index.php'); //da controllare che indirizzi correttamente la pagina
 
