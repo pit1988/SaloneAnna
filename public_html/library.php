@@ -205,6 +205,25 @@ function table_end() {
 /* FUNZIONI PER AUTENTICAZIONE         */
 /***************************************/
 
+function checkSessionLifetime() { //TODO: da verificare se e come funziona
+	if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+    // l'ultima richiesta era di almeno 30 minuti fa
+    	session_unset(); //questa funzione elimina le variabili contenute nella sessione
+		session_destroy(); //questa funzione elimina la sessione
+		return false;
+	}
+	$_SESSION['LAST_ACTIVITY'] = time(); // aggiorna il timestamp dell'attività
+	return true;
+}
+
+function checkLog() {
+	if(isset($_SESSION) && checkSessionLifetime()) { //la prima funzione controlla se è stata creata una sessione, se ci sono errori ho qualche altra variante da poter provare, la seconda invece fa il controllo del tempo di vita della sessione, non ho usato altri metodi più semplici per vari motivi che spiego a voce
+		return true;
+	} else {
+		return false;
+	}
+}
+
 function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzioni resteranno inutilizzate, anche perché ad esempio se faccio il check del login controllo direttamente lo usarname e la password, quindi il controllo della singola password non dovrebbe servire. Confermerò quando avrò terminato di implementare le sessioni
 
   /* si connette e seleziona il database da usare */
