@@ -89,7 +89,12 @@ function insert_header($rifnav, $num, $is_admin) {
     echo<<<END
 <div id="header">
 <div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>
-<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>
+END;
+if($is_admin == false)
+    echo '<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
+else
+    echo '<div><a href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
+echo<<<END
 <div id="breadcrumbs">
 <span id="rifnav" >Ti trovi in: <strong xml:lang="en">Home</strong></span>
 <form class="headersearch" action="cgi-bin/search.cgi" method="post">
@@ -242,7 +247,7 @@ function get_pwd($login) {
 function authenticate() {
     session_start();
     // session_regenerate_id(TRUE);
-    $login=$_SESSION['logged'];
+    $login=$_SESSION['username'];
     if (! $login) {
         return FALSE;
     } else {
