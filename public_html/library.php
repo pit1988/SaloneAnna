@@ -93,11 +93,13 @@ function page_end() {
   echo $to_print;
 };
 
+
 /*funzione per inserire l'header*/
-function insert_header($rifnav, $num) {
+function insert_header($rifnav, $num, $is_admin) {
   echo<<<END
     <div id="header">
-      <h1><span id="logo" xml:lang="en" class="nascosto">GGarden</span></h1>
+      <div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>
+      <div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>
       <div id="breadcrumbs">
           <span id="rifnav" >Ti trovi in: <strong xml:lang="en">Home</strong></span>
           <form class="headersearch" action="cgi-bin/search.cgi" method="post">
@@ -110,15 +112,40 @@ function insert_header($rifnav, $num) {
           </form>
       </div>
 END;
-  contenitore_menu($num);
+  if($is_admin == true)
+    contenitore_menu_admin($num);
+  else
+    contenitore_menu($num);
   echo "</div>";
 }
 
 /* funzione per inserire il menu
 num serve ad evidenziare l'elemento del menu in cui si è
-
 */
 function contenitore_menu($num) {
+  $to_print='
+    <div id="contenitore-menu">
+      <p class="nascosto">
+          <a href="#content" title="salta al contenuto principale">Salta menu navigazione</a>
+      </p>
+      <ul class="menu">
+
+          <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
+          <li><a href="foto.php" id="real" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Foto</a></li>
+          <li><a href="chi_siamo.php" id="real" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Chi Siamo</a></li>
+          <li><a href="Prodotti.php" id="vend" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="p" tabindex="12">Prodotti </a></li>
+          <li><a href="contattaci.php" id="cont" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="a" tabindex="13">Contattaci</a></li>
+      </ul>
+    </div>
+';
+echo $to_print;
+};
+
+/* funzione per inserire il menu
+num serve ad evidenziare l'elemento del menu in cui si è
+
+*/
+function contenitore_menu_admin($num) {
   $to_print='
     <div id="contenitore-menu">
       <p class="nascosto">
@@ -133,8 +160,6 @@ function contenitore_menu($num) {
       </ul>
     </div>
 ';
-echo $to_print;
-};
 
 function select_class_menu($num1, $num2){
   if(num1 == $num2)
