@@ -159,7 +159,9 @@ function contenitore_menu_admin($num) {
           <li><a href="Appuntamenti.php" id="cont" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="a" tabindex="13">Appuntamenti</a></li>
       </ul>
     </div>
-';
+  ';
+echo $to_print;
+};
 
 function select_class_menu($num1, $num2){
   if(num1 == $num2)
@@ -272,7 +274,7 @@ function get_pwd($login) {
     $conn = dbConnect();
     $query= "SELECT * FROM Login WHERE username='$login'";
     $result=mysqli_query($conn, $query)
-      or die("Query fallita" . mysql_error($conn));
+      or die("Query fallita" . mysqli_error($conn));
     $output=mysqli_fetch_assoc($result);
     if ($output)
       return $output['password'];
