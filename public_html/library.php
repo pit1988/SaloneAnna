@@ -206,6 +206,7 @@ function table_end() {
 function checkSessionLifetime() { //TODO: da verificare se e come funziona
     if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
         // l'ultima richiesta era di almeno 30 minuti fa
+		//le prossime due istruzioni sono da aggiornare appena viene trovata una versione definitiva di logout
         session_unset(); //questa funzione elimina le variabili contenute nella sessione
         session_destroy(); //questa funzione elimina la sessione
         return false;

@@ -7,7 +7,7 @@ function login($username, $password) { //TODO: verificare se lo spostamento dell
 	$conn = dbconnect();
 	$username = addslashes($_POST["username"]); //come dice il nome aggiunge gli slash di escape alla stringa per i caratteri ', " e \
 	$password = addslashes($_POST["password"]);
-	$query = "SELECT * FROM Login WHERE user='$username' AND password='$password'";
+	$query = "SELECT * FROM Account WHERE user='$username' AND password='$password'";
 	$result = $conn->query($query);
 
 	if ($result->num_rows > 0) //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
@@ -19,7 +19,7 @@ function login($username, $password) { //TODO: verificare se lo spostamento dell
 					$_SESSION['username'] = $username; //salvo i dati
 					$_SESSION['password'] = $password;
 					$_SESSION['LAST_ACTIVITY'] = time(); //salvo l'ultima attività
-					header('location:Root.php'); //carica la pagina Root.php, inoltre se ci sono errori di header questo comando li aggira
+					header('location:../index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
 			}
 	
 	else
