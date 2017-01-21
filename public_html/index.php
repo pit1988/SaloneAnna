@@ -1,7 +1,7 @@
 <?php
 require 'library.php';
 
-/* se l'utente non si è gia` autenticato, va alla pagina da cui fare il login*/
+/* se l'utente non si è gia` autenticato, mostra nel menù le pagine accessibili al pubblico*/
 session_start();
 
 session_regenerate_id(TRUE);

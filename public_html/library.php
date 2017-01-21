@@ -235,9 +235,9 @@ function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzio
 }
 function get_pwd($login) {
     $conn = dbConnect();
-    $query= "SELECT * FROM Login WHERE username='$login'";
+    $query= "SELECT * FROM Account WHERE username='$login'";
     $result=mysqli_query($conn, $query)
-        or die("Query fallita" . mysqli_error($conn));
+        or die("Query fallita " . mysqli_error($conn));
     $output=mysqli_fetch_assoc($result);
     if ($output)
         return $output['password'];

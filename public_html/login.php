@@ -12,27 +12,31 @@ elseif(isset($_POST['username']) && isset($_POST['password'])){
 session_start();
 // cambiare sessioni secondo le slide
 session_regenerate_id(TRUE);*/
+
+
     //variabili per criptare in md5 = $password=md5(( $_POST[pass]));
     /*		$username = addslashes($_POST["username"]);
 $password = addslashes($_POST["password"]);*/
     $username = $_POST["username"];
     $password = $_POST["password"];
     if(isset($username) and $password == get_pwd($username)){
-        $result=mysqli_query($conn, "select * from Clienti Natural Join Login l where l.username='$username'");
+        $result=mysqli_query($conn, "select * from Clienti Natural Join Account l where l.username='$username'");
         $rg=mysqli_fetch_assoc($result);
         $nome=$rg['Nome'];
         $id=$rg['CodCliente'];
-        if ($result->num_rows > 0)
-        {
+        if ($result->num_rows > 0){
             //se è loggato creo la sessione
             $_SESSION['username'] = $username;
             $_SESSION['password'] = $password;
             header('location:index.php');
         }
-        else
-        {
+        else{
             $err="Nome utente o password errata";
         }
+    }
+    else
+    {
+        $err="Nome utente o password errata";
     }
     mysqli_close($conn);
 };
