@@ -18,7 +18,7 @@ else
 	$descr="";
 	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 	
-	page_start($title, $title_meta, $descr, $keywords);
+	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.html" xml:lang="en">Home</a> / <strong>Clienti</strong>';
 	insert_header($rif, 1, true);
 	content_begin();

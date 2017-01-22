@@ -31,7 +31,7 @@
           <input type=submit name=\"submit\" value=\"Conferma\"><br>";
           
           
-          include ("dbconnect.php");
+          include ("utils/dbconnect.php");
           $conn=dbconnect();
           
           $query = "

@@ -1,9 +1,9 @@
 \documentclass[12pt,a4paper,titlepage]{article}
 %va sempre messo article per "program documentation"
-\usepackage[italian]{babel}
-\usepackage[T1]{fontenc}
+%\usepackage[italian]{babel}
+%\usepackage[T1]{fontenc}
 \usepackage[latin1]{inputenc}
-\usepackage{titlesec}
+%\usepackage{titlesec}
 \usepackage{hyperref}
 \usepackage[a4paper,top=2cm,bottom=2cm,left=1cm,right=1cm]{geometry}
 \usepackage{soulutf8,color}
@@ -57,6 +57,7 @@
 %\label{nome}
 %\end{figure}
 
+\newcommand{\docs}{./sezioni/}
 
 %----------------------------------------------------------- INIZIO TEMPLATE TITOLO
 
@@ -132,80 +133,9 @@
 %crea indice automaticamente
 \thispagestyle{empty}
 
-\newpage
 
 
-\rhead{Introduzione}
-\section{Introduzione}
-	\subsection{Descrizione generale}
-	Il progetto SaloneAnna è strutturato su una base di dati mysql per la gestione di un negozio di parrucchieri. Fulcro del programma risiede nell'amministrazione dei clienti, salvati nel database e collegati agli appuntamenti gestiti dall'amministratore.\\
-	Il contesto su cui si appoggia la scelta di questo programma riguarda un salone di piccole dimensioni, si parla di un prodotto accessibile da tutte le dipendenti e titolari per tenere aggiornato il negozio con la massima dell'efficienza.\\
-	Sempre da parte dell'amministratore del salone e chi ha l'accesso al sito ha la possibilità di gestire un magazzino, cancellando, inserendo o modificando ogni singolo prodotto per avere un inventario in evoluzione e ben gestibile. Un utente non registrato invece potrà visualizzare le informazioni generiche del negozio, sfogliare una galleria dinamica delle realizzazioni e contattare tramite form il negozio.\\
-	\subsection{Caratteristiche degli utenti}{
-		Gli utenti del sito saranno persone in ricerca di nuovo negozio nella zona, in grado di utilizzare strumenti per la navigazione web o alle prime armi. \\
-		Il sito è rivolto ad un pubblico generico, all'interno del quale possiamo individuare le seguenti categorie:
-		\begin{description}\itemsep1pt
-			\item[Categoria di utenti:] privati;
-			\begin{description}\itemsep1pt
-				\item[Funzionalità:] Informarsi sulla locazione, il numero da contattare. Consultare realizzazioni e contattare il negozio lasciando il proprio indirizzo mail.
-				\item[Termini generali:] Non eccessivamente distante dal punto vendita, in un raggio di circa 70 Km.
-			\end{description}
-			\item[Categoria di utenti:] amministratori
-			\begin{description}\itemsep1pt
-				\item[Funzionalità:] area riservata da cui aggiungere, rimuovere o aggiornare prodotti. Inserire nuovi clienti e conseguentemente gestire appuntamenti. 
-			\end{description}
-		\end{description}
-	\subsection{Vincoli generali}{
-		\begin{itemize}\itemsep1pt
-			\item Il sito dev'essere accessibile da parte di categorie d'utenti diversificate ed utilizzando dispositivi diversi compresi smartphones e tablet;
-			\item Il sito deve presentare possibilità di stampa flessibile a seconda della pagina richiesta;
-			\item Il sito dev'essere visitabile tramite i seguenti browser: 
-			\begin{itemize}
-				\item Firefox 3.6;
-				\item Internet Explorer dalla versione 7 alla versione 11; Edge 13;
-				\item Chrome 14;
-				\item Opera 12.16;
-				\item Safari 9.
-			\end{itemize}
-			\item Separazione tra struttura, presentazione, comportamento;
-			\item Conformità agli standard W3C per XHTML, CSS, JS;
-			\item Sito comprensibile da screen-reader.
-		\end{itemize}
-	}
-	\subsection{Requisiti}{
-		Di seguito sono presentati i requisiti emersi dall'analisi iniziale e quelli che si sono aggiunti nel corso dello svolgimento del progetto. Ciascuno è identificato da un numero progressivo per semplificarne l'individuazione successiva.\\
-		\newcounter{magicrownumbers}
-		\newcommand\rownumber{\stepcounter{magicrownumbers}\arabic{magicrownumbers}}
-		\begin{table}[h]
-			\centering
-			\begin{tabular}{|p{\dimexpr 0.15\linewidth-2\tabcolsep}|p{\dimexpr 0.8\linewidth-2\tabcolsep}|}
-				\hline
-				\textbf{ID Req.} & \textbf{Descrizione}\\
-				\hline
-				\centering \rownumber	&	Il sito dev'essere visualizzabile sui browser elencati all'interno di "Vincoli generali"\\
-				\hline
-				\centering \rownumber	&	Il sito dev'essere accessibile indipendentemente dalla grandezza dello schermo del dispositivo\\
-				\hline
-				\centering \rownumber	&	Il sito dev'essere fruibile anche senza richiedere un foglio di stile\\
-				\hline
-				\centering \rownumber	&	Le figure significative dovranno essere comprensive di un attributo alt per favorire l'accesso ad utenti non vedenti\\
-				\hline
-				\centering \rownumber	&	Ad i tag quali <input> e <textarea> devono essere associati tabindex e accesskey\\
-				\hline
-				\centering \rownumber	&	Le gradazioni di colori non devono risultare sgradevoli o di intralcio a persone affette da daltonismo\\
-				\hline
-				\centering \rownumber	&	Il layout deve risultare fluido nel ridimensionamento del carattere tramite i tasti Ctrl + e Ctrl -\\
-				\hline
-				\centering \rownumber	&	Il sito deve essere validato per la parte di XHTML2.0, CSS3 e secondo gli standard WAI\\
-				\hline
-			\end{tabular}
-			\label{tab:requisiti}
-			\caption{Elenco dei requisiti}
-		\end{table}
-	}
-}
 
-\newpage
 
 
 

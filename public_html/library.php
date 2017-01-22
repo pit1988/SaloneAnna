@@ -6,8 +6,8 @@
 
 /* Funzione per iniziare la pagina. In input il titolo */
 // inserire variabili per keywords e descrizione, titolo
-function page_start($title, $title_meta, $descr, $keywords) {
-    $to_print='
+function page_start($title, $title_meta, $descr, $keywords, $fun) {
+    $str1='
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
@@ -28,11 +28,17 @@ function page_start($title, $title_meta, $descr, $keywords) {
 <link rel="icon" href="img/logo2.png" type="image/png"\/>
 <script type="text/javascript" src="script/script.js"></script>
 </head>
+';
+$str2='<body>';
+if($fun!='')
+    $str2='<body onload="'. $fun . '">';
+$str3='
 <body>
 <p class="nascosto">
 <a title="salta header" href="#contenitore-menu" tabindex="1" accesskey="a">Salta l&apos;intestazione</a>
 </p>
 ';
+$to_print=$str1.$str2.$str3;
     echo  $to_print;
 }
 /* Funzione per terminare una pagina */
@@ -86,15 +92,15 @@ chiama G Garden Group</span>
 };
 /*funzione per inserire l'header*/
 function insert_header($pth, $num, $is_admin) {
-$to_print='
+$str1='
 <div id="header">
 <div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>';
-$up_string='';
+$str2='';
 if($is_admin == false)
-    $up_string= '<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
+    $str2= '<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
 else
-    $up_string= '<div><a href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
-$to_print=$to_print.$up_string.'
+    $str2= '<div><a href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
+$str3='
 <div id="breadcrumbs">
 <span id="rifnav" >Ti trovi in: '.$pth.'</span>
 <form class="headersearch" action="cgi-bin/search.cgi" method="post">
@@ -106,13 +112,14 @@ $to_print=$to_print.$up_string.'
 </fieldset>
 </form>
 </div>';
-echo $to_print;
-    if($is_admin == true)
-        contenitore_menu_admin($num);
-    else
-        contenitore_menu($num);
-    echo "</div>";
+echo $str1.$str2.$str3;
+if($is_admin == true)
+    contenitore_menu_admin($num);
+else
+    contenitore_menu($num);
+echo "</div>";
 }
+
 /* funzione per inserire il menu; num serve ad evidenziare l'elemento del menu in cui si è */
 function contenitore_menu($num) {
     $to_print='
@@ -131,6 +138,7 @@ function contenitore_menu($num) {
 ';
     echo $to_print;
 };
+
 /* funzione per inserire il menu per l'amministratore; num serve ad evidenziare l'elemento del menu in cui si è */
 function contenitore_menu_admin($num) {
     $to_print='
@@ -150,6 +158,7 @@ function contenitore_menu_admin($num) {
 ';
     echo $to_print;
 };
+
 /*funzione per inserire l'inizio del content*/
 function content_begin() {
     echo<<<END
@@ -158,15 +167,18 @@ function content_begin() {
     <a title="saltare-contenuto-testuale" href="#footer" tabindex="30" accesskey="b">Salta il contenuto testuale</a>
 </p>
 END;
-}
+};
+
 //funzione per inserire la fine del content
 function content_end() {
     echo "</div>";
-}
+};
+
 /* funzione per il sottotitolo */
 function subtitle($str) {
     echo "<h3>$str</h3>";
 };
+
 /* Funzione che ritorna un link, associato ad una URL. */
 function hyperlink($str, $url) {
     return "<a href=\"$url\">$str</a>";
@@ -185,6 +197,7 @@ function table_start($row) {
         echo "<th>$field</th>";
     echo "</tr>";
 };
+
 /* funzione per stampare un array, come riga di tabella html */
 function table_row($row) {
     echo "<tr>";
@@ -194,11 +207,13 @@ function table_row($row) {
         else
         echo "<td>---</td>\n";
         echo "</tr>";
-}
+};
+
 /* funzione per chiudere una tabella html */
 function table_end() {
     echo "</table>";
 };
+
 //NOTA CENZE: per la connessione al database ho già copiato il file originario in cgi-bin, quindi non mi serve la funzione qua (anche perché non ha senso mantenerla in public_html, fa confusione e basta). Probabilmente in quel file inserirò anche altre funzioni se serviranno
 
 /***************************************/
@@ -215,14 +230,16 @@ function checkSessionLifetime() { //TODO: da verificare se e come funziona
     }
     $_SESSION['LAST_ACTIVITY'] = time(); // aggiorna il timestamp dell'attività
     return true;
-}
+};
+
 function checkLog() {
     if(isset($_SESSION) && checkSessionLifetime()) { //la prima funzione controlla se è stata creata una sessione, se ci sono errori ho qualche altra variante da poter provare, la seconda invece fa il controllo del tempo di vita della sessione, non ho usato altri metodi più semplici per vari motivi che spiego a voce
         return true;
     } else {
         return false;
     }
-}
+};
+
 function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzioni resteranno inutilizzate, anche perché ad esempio se faccio il check del login controllo direttamente lo usarname e la password, quindi il controllo della singola password non dovrebbe servire. Confermerò quando avrò terminato di implementare le sessioni
     /* si connette e seleziona il database da usare */
     $dbname="login-ES";
@@ -234,7 +251,8 @@ function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzio
     /* echo "<B>Query</B>: $query <BR />"; */
     mysqli_query($conn, $query)
         or die("Query fallita" . mysqli_error($conn));
-}
+};
+
 function get_pwd($login) {
     $conn = dbConnect();
     $query= "SELECT * FROM Account WHERE username='$login'";
@@ -245,7 +263,8 @@ function get_pwd($login) {
         return $output['password'];
     else 
         return FALSE;
-}
+};
+
 /* inizia la sessione e verifica che l'utente sia autenticato */
 function authenticate() {
     session_start();
@@ -256,6 +275,7 @@ function authenticate() {
     } else {
         return $login;
     }
-}
+};
+
 ?>
 

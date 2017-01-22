@@ -4,7 +4,8 @@
     $descr="Pagina con le modalità di contatto di GGarden. Ci puoi trovare a Padova, via Trieste, 63";
     $keywords="GGarden, telefono, email, mail, indirizzo, dove trovarci, dove siamo, Padova, sede, via Trieste, e-mail, mappa";
     require 'library.php';
-    page_start($title, $title_meta, $descr, $keywords);
+    $onload="caricamentoContattaci(); replaceMap();";
+    page_start($title, $title_meta, $descr, $keywords, $onload);
     $rif='<a href="index.html" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
     insert_header($rif, 5, false);
     content_begin();
