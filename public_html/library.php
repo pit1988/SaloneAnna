@@ -85,18 +85,18 @@ chiama G Garden Group</span>
     echo $to_print;
 };
 /*funzione per inserire l'header*/
-function insert_header($rifnav, $num, $is_admin) {
-    echo<<<END
+function insert_header($pth, $num, $is_admin) {
+$to_print='
 <div id="header">
-<div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>
-END;
+<div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>';
+$up_string='';
 if($is_admin == false)
-    echo '<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
+    $up_string= '<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
 else
-    echo '<div><a href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
-echo<<<END
+    $up_string= '<div><a href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
+$to_print=$to_print.$up_string.'
 <div id="breadcrumbs">
-<span id="rifnav" >Ti trovi in: <strong xml:lang="en">Home</strong></span>
+<span id="rifnav" >Ti trovi in: '.$pth.'</span>
 <form class="headersearch" action="cgi-bin/search.cgi" method="post">
 <fieldset>
 <legend class="nascosto">Cerca un prodotto o un servizio</legend>
@@ -105,8 +105,8 @@ echo<<<END
 <input type="submit" name="conferma" id="conferma" class="ricerca" value="Cerca" accesskey="d" tabindex="3"/>
 </fieldset>
 </form>
-</div>
-END;
+</div>';
+echo $to_print;
     if($is_admin == true)
         contenitore_menu_admin($num);
     else
@@ -140,9 +140,11 @@ function contenitore_menu_admin($num) {
 </p>
 <ul class="menu">
 <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
-<li><a href="Clienti.php" id="real" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Clienti</a></li>
-<li><a href="Prodotti.php" id="vend" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="p" tabindex="12">Prodotti </a></li>
-<li><a href="Appuntamenti.php" id="cont" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="a" tabindex="13">Appuntamenti</a></li>
+<!-- <li><a href="foto.php" id="real" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Foto</a></li> -->
+<li><a href="upload_foto.php" id="real" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Inserisci Foto</a></li>
+<li><a href="Clienti.php" id="real" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Clienti</a></li>
+<li><a href="Prodotti.php" id="vend" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="p" tabindex="12">Prodotti </a></li>
+<li><a href="Appuntamenti.php" id="cont" class='.(($num == 5) ? ("vnav"):("nav")).' accesskey="a" tabindex="13">Appuntamenti</a></li>
 </ul>
 </div>
 ';
@@ -153,7 +155,7 @@ function content_begin() {
     echo<<<END
 <div id="content">
 <p class="nascosto">
-<a title="saltare galleria immagini" href="#footer" tabindex="30" accesskey="b">Salta la galleria immagini</a>
+    <a title="saltare-contenuto-testuale" href="#footer" tabindex="30" accesskey="b">Salta il contenuto testuale</a>
 </p>
 END;
 }
@@ -256,3 +258,4 @@ function authenticate() {
     }
 }
 ?>
+

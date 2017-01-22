@@ -7,7 +7,7 @@ session_regenerate_id(TRUE);
 // Controllo accesso
 if (!isset($_SESSION['username'] ) )
 {
-	header('location:login.php');
+	header('location:index.php');
 	exit;
 }
 else
@@ -19,7 +19,7 @@ else
 	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 	
 	page_start($title, $title_meta, $descr, $keywords);
-	$rif='Ti trovi in: <a href="index.html" xml:lang="en">Home</a> / <strong>Clienti</strong>';
+	$rif='<a href="index.html" xml:lang="en">Home</a> / <strong>Clienti</strong>';
 	insert_header($rif, 1, true);
 	content_begin();
 	echo "<table>

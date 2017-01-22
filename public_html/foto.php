@@ -10,7 +10,7 @@ $title_meta="Foto Salone Anna, parrucchiere a Vicenza";
 $descr="Fotografie di clienti del Salone Anna";
 $keywords="Foto, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 page_start($title, $title_meta, $descr, $keywords);
-$rif='Ti trovi in: <a href="index.html" xml:lang="en">Home</a> / <strong>Foto</strong>';
+$rif='<a href="index.html" xml:lang="en">Home</a> / <strong>Foto</strong>';
 $is_admin=false;
 $name="visitatore";
 
@@ -20,7 +20,7 @@ if (isset($_SESSION['username'] ) ) {
     $name = $_SESSION['username'];
 }
 
-insert_header($rif, 0, $is_admin);
+insert_header($rif, 2, $is_admin);
 content_begin();
 
 
@@ -28,7 +28,7 @@ content_begin();
 	$conn=dbconnect();
 	$qry="SELECT * FROM Images";
 	$result=mysqli_query($conn, $qry);
-	echo "<h1>Image Gallery</h1>";
+	echo "<h2>Image Gallery</h2>";
 	echo "<dl id=\"foto\">";
 
 	while($row=mysqli_fetch_array($result)) {
