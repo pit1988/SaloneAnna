@@ -51,12 +51,6 @@ function page_end() {
 </ul>
 <div class="footer-left">
 <h3 id="logo_mini"><span>Ggarden</span></h3>
-<p class="footer-menu, testo-footer">
-<a href="index.html" hreflang="it" xml:lang="en" tabindex="100">Home</a> | 
-<a href="realizzazioni.html" hreflang="it" tabindex="101">Clienti</a> | 
-<a href="cgi-bin/checkLog.cgi" hreflang="it" tabindex="102">Prodotti</a> | 
-<a href="contattaci.html" hreflang="it" tabindex="103">Appuntamenti</a>
-</p>
 <p class="footer-nome-azienda">Salone Anna &copy; 2017</p>
 </div>
 <div class="footer-center">
@@ -64,8 +58,8 @@ function page_end() {
 <address class="testo-footer">Via Ludovico Ariosto, 36075 Montecchio Maggiore VI, Italy</address>
 </div>
 <div>
-<p class="testo-footer"><a href="tel:+39 0444 697939">+39 0444 697939</a></p>
-</div>0444 697939
+    <p class="testo-footer">tell: <a href="tel:+39 0444 697939">+39 0444 697939</a></p>
+</div>
 <div>
 <p xml:lang="en">E-Mail <a href="mailto:salone_anna@gmail.com" accesskey="e" tabindex="104">salone_anna@gmail.com</a></p>
 </div>
@@ -78,9 +72,8 @@ function page_end() {
 </div>
 <div class="footer-right">
 <p class="footer-company-info" title="motto">
-<span class="testo-footer">Gg Garden a servizio</span>
-<span class="testo-footer">L\'erba del tuo vicino &egrave; sempre pi&ugrave; verde. Sii come il tuo vicino,
-chiama G Garden Group</span>
+<span class="testo-footer">Salone Anna</span>
+<span class="testo-footer">Lascia una firma professionale e di stile sul tuo capello. Salone Anna &egrave; al tuo servizio</span>
 </p>
 </div>
 </div>
@@ -97,9 +90,9 @@ $str1='
 <div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>';
 $str2='';
 if($is_admin == false)
-    $str2= '<div><a href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
+    $str2= '<div><a id="login" href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
 else
-    $str2= '<div><a href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
+    $str2= '<div><a id="logout" href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
 $str3='
 <div id="breadcrumbs">
 <span id="rifnav" >Ti trovi in: '.$pth.'</span>
