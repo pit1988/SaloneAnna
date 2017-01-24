@@ -51,8 +51,8 @@ html, body{
     padding:0px;
     margin:0px;
     font-family: Verdana, Helevetica, sans-serif;
-    color: white;
-    background-color:#c9fdc9;
+    color: black;
+    background-color:#fcfcb0;
 }
 
 
@@ -73,10 +73,15 @@ html, body{
 }
 
 /*Login*/
-#login {
-    color: black;
-    font-size: 12px;
-    display: none;
+
+#logout, #login{
+    margin: 5px;
+    float: left;
+    text-decoration: none;
+    padding: 1.5px 15px 1.5px 15px;
+    color: white;
+    border: solid 1px #a30025;
+    background: #b40029;
     
 }
 
@@ -101,10 +106,11 @@ legend{
     margin: 1em;
     padding: 5px 10px 10px 0px;
     clear: both;
+    text-align: center;
 }
 
 
-#button_admin, #accedi{
+#accedi{
     color: white;
     
     border: solid 1px #a30025;
@@ -130,7 +136,7 @@ legend{
 }
 
 #inputUsername, #inputPassword{
-    width:90%;
+    width:30%;
 }
 
 #updateOk{
@@ -180,7 +186,7 @@ fieldset{
 }
 
 #breadcrumbs{
-    background-color:#b0fcb0;
+    border: 1px dotted #fbc997;
     clear: both;
     width: auto;
 }
@@ -230,7 +236,7 @@ fieldset{
     padding: 0;
     width: 101%;
     overflow: hidden;
-    background-color: #c9fdc9;
+    background-color: #fcfcb0;
 }
 
 li {
@@ -497,8 +503,8 @@ form small {
     text-align: center;
     color: white;
     font-size: 30px;
-    border: solid 1px #005541;
-    background: #005541;
+    border: solid 1px #585346;
+    background: #585346;
     margin-bottom: 1em;
 }
 
@@ -724,10 +730,6 @@ span.inputR {
 
 .footer .footer-left{
     width: 99%;
-}
-
-.footer .footer-menu{
-    font-size: 0.8em;
 }
 
 #logo_mini{

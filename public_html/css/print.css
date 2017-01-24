@@ -53,11 +53,7 @@ h1{
     margin-top: 20px;
 }
 
-#ricerca{
-    display: none;
-}
-
-#conferma{
+#login, #ricerca, #logout, #accedi, #conferma{
     display: none;
 }
 
@@ -236,11 +232,6 @@ h1{
     content:url(../img/logo_mini.png);
     width: 100px;
     height: auto;
-}
-
-
-.footer .footer-left .footer-menu a{
-    display:none;
 }
 
 .footer .footer-nome-azienda{
