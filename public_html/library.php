@@ -21,7 +21,7 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 <meta name="language" content="italian it"\/>
 <meta name="viewport" content="width=device-width"\/>
 <meta http-equiv="Content-Script-Type" content="application/javascript"\/>
-<link rel="stylesheet" href="css/home_min.css" type="text/css" media="screen and (min-width: 650px)"\/>
+<link rel="stylesheet" href="css/home.css" type="text/css" media="screen and (min-width: 650px)"\/>
 <link rel="stylesheet" type="text/css" href="css/print.css" media="print"\/>
 <link rel="stylesheet" type="text/css" href="css/small-devices.css" media="screen and (max-width: 650px)"\/>
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer.css"\/><![endif]-->
@@ -130,9 +130,9 @@ function contenitore_menu($num) {
 <ul class="menu">
 <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
 <li><a href="foto.php" id="foto" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="f" tabindex="11">Foto</a></li>
-<li><a href="chi_siamo.php" id="chsia" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Chi Siamo</a></li>
-<li><a href="Prodotti.php" id="prod" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="p" tabindex="12">Prodotti </a></li>
-<li><a href="contattaci.php" id="cont" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="m" tabindex="13">Contattaci</a></li>
+<li><a href="chi_siamo.php" id="chsia" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Chi Siamo</a></li>
+<li><a href="Prodotti.php" id="prod" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="p" tabindex="12">Prodotti </a></li>
+<li><a href="contattaci.php" id="cont" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="m" tabindex="13">Contattaci</a></li>
 </ul>
 </div>
 ';
