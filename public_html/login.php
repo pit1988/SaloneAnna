@@ -49,13 +49,15 @@ $rif="Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
 $is_admin=false;
 insert_header($rif, 0, $is_admin);
 echo<<<END
-<form name="login" action="login.php" method="POST">
+<div id="content">
+<form id="contenitore-login" name="login" action="login.php" method="POST">
 <p><i>Username</i></p>
-<p><input type="text" name="username" value=""></p>
+<p><input id="inputUsername" type="text" name="username" value="" tabindex="100" accesskey="u"></p>
 <p><i>Password</i></p>
-<p><input type="password" name="password" value=""></p>
-<p><input type="submit" value="Login..."></p>
+<p><input id="inputPassword" type="password" name="password" value="" tabindex="101" accesskey="p"></p>
+<p><input id="accedi" type="submit" value="Login..." tabindex="102" accesskey="s"></p>
 </form>
+</div>
 END;
 if(isset($err))
     echo"<BR><b>Errore: $err</b>";
