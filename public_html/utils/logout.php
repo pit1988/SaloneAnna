@@ -2,7 +2,7 @@
 // così funziona
 require_once '../library.php';
 
-$login=authenticate();
+$login=authenticate(); //per sicurezza controllo che ci sia una sessione attiva, questa condizione dovrebbe essere sempre vera quando viene eseguito questo codice
 
 if($login!=false){
 	/* distrugge la sessione */
