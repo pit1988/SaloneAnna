@@ -89,7 +89,7 @@ VALUES
 	('9', 'Precise Shine 75 ml', 'SP','Men', '96', '10', '12.5'),
 	('10', 'Penetraitt Condition', 'Sebastian', 'In Salon Service', '2', '10', '12.5');
 
-CREATE TABLE ProdApp( --questa entità serve per tenere traccia dei prodotti usati durante un determinato appuntamento
+CREATE TABLE ProdApp(
 	CodAppuntamento INT,
 	CodProdotto INT,
 	Utilizzo DOUBLE,
@@ -107,12 +107,10 @@ INSERT INTO Eccezioni(Id_Eccezione, Descrizione) VALUES
 ('1', 'Errore 1: Errore di Inserimento, e presente un appuntamento speciale'),
 ('2', 'Errore 2: Errore di Inserimento, il prodotto che si vuole inserire e gia inserito');
 
-CREATE TABLE Account( 
-	--CodCliente INT PRIMARY KEY, --lascio sotto commento queste righe in caso si voglia tornare indietro
+CREATE TABLE Account(
 	CodAccount SMALLINT PRIMARY KEY AUTO_INCREMENT,
 	username VARCHAR(20), 
-	password VARCHAR(32),
-	--FOREIGN KEY (CodCliente) REFERENCES Clienti(CodCliente) ON UPDATE CASCADE ON DELETE CASCADE
+	password VARCHAR(32)
 )Engine=InnoDB;
 
 INSERT INTO Account VALUES (1, "admin", "admin");
@@ -134,6 +132,7 @@ CREATE TABLE Images (
 SET FOREIGN_KEY_CHECKS=1;   
 
 /******************/
+/*
 
 DROP PROCEDURE IF EXISTS AggiornamentoProdotti;
 DELIMITER $$
@@ -145,8 +144,9 @@ UPDATE Prodotti
 SET Quantita=aQuantita, PVendita=aPVendita, PRivendita=aPRivendita
 WHERE CodProd=aCodProd$$
 DELIMITER ;
-
+*/
 /*1. La procedura aggiorna i campi di un prodotto, con le modifiche a essa passata.*/
+/*
 DROP PROCEDURE IF EXISTS AggiornamentoProdotti;
 DELIMITER $$
 CREATE PROCEDURE `AggiornamentoProdotti`(IN `aCodProd` INT, IN `aQuantita` INT, IN `aPVendita` DOUBLE, IN `aPRivendita` DOUBLE)
@@ -154,8 +154,9 @@ UPDATE Prodotti
 SET Quantita=aQuantita, PVendita=aPVendita, PRivendita=aPRivendita
 WHERE CodProd=aCodProd$$
 DELIMITER ;
-
+*/
 /*2. La procedura inserisce un nuovo appuntamento cliente*/
+/*
 DROP PROCEDURE IF EXISTS InserimentoAppuntamentoCliente;
 DELIMITER $
 CREATE PROCEDURE InserimentoAppuntamentoCliente (
@@ -174,8 +175,9 @@ INSERT INTO AppuntamentiClienti(CodAppuntamento, CodCliente, Sconto, TipoAppunta
 (CodiceApp, aCodCliente, aSconto, aTipo);
 END $
 DELIMITER ;
-
+*/
 /*2. La procedura inserisce un nuovo appuntamento cliente*/
+/*
 DROP PROCEDURE IF EXISTS InserimentoAppuntamentoCliente;
 DELIMITER $
 CREATE PROCEDURE InserimentoAppuntamentoCliente (IN aCodCliente INT, IN aDataOra DATETIME, IN aSconto DOUBLE, IN aCosto DOUBLE, IN aTipo ENUM ('shampoo', 'taglio', 'piega e phon', 'piega e casco', 'ondulazione', 'colore', 'riflessante', 'decolorazione', 'meches', 'trattamenti', 'manicure/pedicure'))
@@ -185,16 +187,18 @@ SELECT CodAppuntamento FROM Appuntamenti WHERE DataOra=aDataOra AND Costo=aCosto
 INSERT INTO AppuntamentiClienti(CodAppuntamento, CodCliente, Sconto, TipoAppuntamento) VALUES
 (CodiceApp, aCodCliente, aSconto, aTipo);
 DELIMITER ;
-
+*/
 /*3. Dato un prodotto (codice prodotto) la procedura lo elimina, cioè azzera la sua quantità*/
+/*
 DELIMITER $
 CREATE PROCEDURE EliminaProdotto (IN aCodProdotto INT)
 BEGIN
 UPDATE Prodotti SET Quantita=0 WHERE CodProdotto=aCodProdotto;
 END $
 DELIMITER ;
-
+*/
 /*4. La procedura inserisce un nuovo appuntamento di tipo speciale*/
+/*
 DELIMITER $
 CREATE PROCEDURE InserimentoAppuntamentoSpeciale (
 	IN aDataOra DATETIME,
@@ -212,8 +216,9 @@ INSERT INTO AppuntamentiSpeciali(CodAppuntamento, Durata, NomeApp, Luogo, Limite
 (CodiceApp, aDurata, aNomeApp, aLuogo, aLimPersone);
 END $
 DELIMITER ;
-
+*/
 /*5. La procedura inserisce un nuovo Cliente nella tabella cliente.*/
+/*
 DELIMITER $
 CREATE PROCEDURE InserimentoNewCliente (
 	IN aNome VARCHAR(10),
@@ -226,3 +231,4 @@ INSERT INTO Clienti(Nome, Cognome, Telefono, Email, Compleanno) VALUES
 (aNome, aCognome, aTelefono, aEmail, aCompleanno);
 END $
 DELIMITER ;
+*/
