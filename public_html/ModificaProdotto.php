@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
     $err = "Problemi di connessione";
 } else {
     require 'library.php';
-    include("utils/dbconnect.php");
+    include("utils/DBlibrary.php");
     
     $title = "Gestione Prodotti: Salone Anna";
     $title_meta = "Gestione Prodotti: Salone Anna";

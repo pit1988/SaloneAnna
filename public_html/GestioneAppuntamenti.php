@@ -29,7 +29,7 @@
   echo"<form method=post action=\"ConfermaModificaAppuntamenti.php\">
   <input type=submit name=\"submit\" value=\"Conferma\"><br>";
 
-  include ("dbconnect.php");
+  include ("DBlibrary.php");
   $conn=dbconnect();
 
   $query = "SELECT c.Nome, c.Cognome, c.CodCliente, a.DataOra, a.CodAppuntamento, a.Costo, ac.TipoAppuntamento FROM Appuntamenti a NATURAL JOIN AppuntamentiClienti ac NATURAL JOIN Clienti c WHERE DATE(a.DataOra)>CURDATE()";

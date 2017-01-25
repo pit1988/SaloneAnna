@@ -22,7 +22,7 @@ else
   $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Compleanni nel mese</strong>';
   insert_header($rif, 2, true);
 
-  include("dbconnect.php");
+  include("DBlibrary.php");
   $conn = dbconnect();
   
   $query  = "SELECT c.CodCliente, c.Nome, c.Cognome, c.DataNascita FROM Clienti c WHERE DataNascita BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY))";

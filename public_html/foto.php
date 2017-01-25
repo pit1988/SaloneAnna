@@ -1,6 +1,6 @@
 <?php
 require 'library.php';
-include 'utils/dbconnect.php';
+include 'utils/DBlibrary.php';
 /* se l'utente non si è gia` autenticato, va alla pagina da cui fare il login*/
 session_start();
 session_regenerate_id(TRUE);
