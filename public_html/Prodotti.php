@@ -1,55 +1,31 @@
-
-<body background="sfondo.jpg">
-<p align="right" valign="top">/Home/Prodotti</p>
-
-
-
-<!-- Site navigation menu -->
-<table>
-	<tr>
-		<td>
-			<ul class="navbar">
-			  <li><a href="index.php">Home page</a></li>
-			  <li><a href="Clienti.php">Clienti</a></li>
-			  <li><a href="Prodotti.php">Prodotti</a></li>
-			  <li><a href="Appuntamenti.php">Appuntamenti</a></li>
-			</ul>
-		</td>
-		<td>
-
 <?php
+  session_start();
+  session_regenerate_id(TRUE);
 
-session_start();
+  // Controllo accesso
+  if (!isset($_SESSION['username'] ) )
+  {
+    header('location:index.php');
+    exit;
+  }
+  else
+  {
+    require 'library.php';
+    $title="Clienti: Salone Anna";
+    $title_meta="Clienti: Salone Anna";
+    $descr="";
+    $keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    
+    page_start($title, $title_meta, $descr, $keywords,'');
+    $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prodotti</strong>';
+    insert_header($rif, 4, true);
+    content_begin();
 
-session_regenerate_id(TRUE);
+    hyperlink("Prodotti in esaurimento", "ProdottiQuery.php");
+    hyperlink("Maggior numero di prodotti Usati", "ProdottiMax.php");
+    hyperlink("Gestione Prodotti", "GestioneProdotti.php");
 
-// Controllo accesso
-if (!isset($_SESSION['username'])) {
-				header('location:Accesso.php');
-				exit;
-} else {
-				echo "Benvenuto " . $_SESSION['username'] . " sei in Prodotti <br>";
-				echo "<table>
-	<tr>
-		<form action=\"ProdottiQuery.php\">
-  		<input type=\"submit\"value=\"Prodotti in esaurimento\">
-		</form>
-	</tr>
-	<tr>
-	<form action=\"ProdottiMax.php\">
-  		<input type=\"submit\"value=\"Maggior numero Prodotti Usati\">
-		</form>
-	</tr>
-	<tr>
-	<form action=\"GestioneProdotti.php\">
-  		<input type=\"submit\"value=\"Gestione Prodotti\">
-		</form>
-	</tr>
-	";
+	content_end();
+  page_end();
 }
 ?>
-
-			</td>
-		</tr>
-	</table>
-</body>

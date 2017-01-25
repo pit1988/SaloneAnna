@@ -174,7 +174,7 @@ function subtitle($str) {
 
 /* Funzione che ritorna un link, associato ad una URL. */
 function hyperlink($str, $url) {
-    return "<a href=\"$url\">$str</a>";
+    echo "<p><a href=\"$url\">$str</a></p>";
 };
 
 /***************************************/

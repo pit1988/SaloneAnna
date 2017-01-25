@@ -76,6 +76,19 @@ CREATE TABLE Prodotti(
 	PRivendita DOUBLE
 )Engine=InnoDB; /*TODO: inserire prodotti*/
 
+INSERT INTO `Prodotti`(`CodProdotto`, `Nome`, `Marca`, `Tipo`, `Quantita`, `PVendita`, `PRivendita`) 
+VALUES 
+	('1', 'Smoothen Mask 200 ml', 'SP','Smoothen', '2', '10', '12.5'),
+	('2', 'Smoothen Mask 400 ml', 'SP','Smoothen', '24', '10', '12.5'),
+	('3', 'Smoothen Infusion 5', 'SP','Smoothen', '7', '10', '12.5'),
+	('4', 'Hydrate Mask 200 ml', 'SP','Hydrate', '12', '10', '12.5'),
+	('5', 'Hydrate Emulsion 50', 'SP','Hydrate', '14', '10', '12.5'),
+	('6', 'Repair Infusion 5 ml', 'SP','Repair', '24', '10', '12.5'),
+	('7', 'Volumize Infusion 5', 'SP','Volumize', '33', '10', '12.5'),
+	('8', 'After Sun Fluid 125', 'SP','Sun', '79', '10', '12.5'),
+	('9', 'Precise Shine 75 ml', 'SP','Men', '96', '10', '12.5'),
+	('10', 'Penetraitt Condition', 'Sebastian', 'In Salon Service', '2', '10', '12.5');
+
 CREATE TABLE ProdApp( /*Secondo me a fini pratici quest'entità non ha senso, cioè si fa prima a togliere i prodotti a mano, o a creare una form e uno script PHP apposta per togliere i prodotti dal magazzino.*/
 	CodAppuntamento INT,
 	CodProdotto INT,
@@ -97,7 +110,7 @@ INSERT INTO Eccezioni(Id_Eccezione, Descrizione) VALUES
 CREATE TABLE Account( 
 	CodCliente INT PRIMARY KEY,
 	username VARCHAR(20), 
-	password VARCHAR(16),
+	password VARCHAR(32),
 	FOREIGN KEY (CodCliente) REFERENCES Clienti(CodCliente) ON UPDATE CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
 
