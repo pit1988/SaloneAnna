@@ -16,21 +16,22 @@ if (!isset($_SESSION['username'])) {
     $submit  = $_POST["submit"];
     $nome    = $_POST["first_name"];
     $cognome = $_POST["last_name"];
+    echo $nome. " ".$cognome;
     //modificare pulendo i dati in ingresso
     if (isset($_POST["submit"])) {
         $conn = dbconnect();
         $qry  = "SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome'";
         
         $CodClienteA = mysqli_query($conn, $qry);
-        $num_rows    = mysqli_num_rows($CodClienteA);
+
+        $num_rows = mysqli_num_rows($CodClienteA);
         if (!$num_rows)
             $err .= "<p>Non è presente il cliente richiesto</p>";
         else {
             // vedere se fare lo stesso lavoro per gli altri clienti omonimi
             $CodCliente = mysqli_fetch_row($CodClienteA);
-            $query      = "SELECT s.Codappuntamento, s.DataOra, s.CodProdotto, s.Utilizzo, p.Nome
-      FROM storico s NATURAL JOIN Prodotti p
-      WHERE CodCliente = '$CodCliente[0]'";
+            
+            $query = "SELECT s.Codappuntamento, s.DataOra, pa.CodProdotto, pa.Utilizzo, p.Nome FROM Appuntamenti s JOIN ProdApp pa ON s.Codappuntamento=pa.Codappuntamento JOIN Prodotti p ON pa.CodProdotto=p.CodProdotto WHERE CodCliente = '$CodCliente[0]'";
             
             $result = mysqli_query($conn, $query);
             
@@ -112,7 +113,7 @@ $descr      = "";
 $keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
+$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Storico Prodotti</strong>';
 insert_header($rif, 2, true);
 content_begin();
 echo $form;
