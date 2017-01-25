@@ -232,4 +232,5 @@ INSERT INTO Clienti(Nome, Cognome, Telefono, Email, Compleanno) VALUES
 (aNome, aCognome, aTelefono, aEmail, aCompleanno);
 END $
 DELIMITER ;
+CREATE VIEW storico AS SELECT a.CodAppuntamento, a.DataOra, pa.CodProdotto, pa.Utilizzo FROM Appuntamenti a NATURAL JOIN ProdApp pa
 */
