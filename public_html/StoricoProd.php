@@ -81,7 +81,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     $tb .= "</td>\n";
                 }
-                $tf       = "</tbody></table>";
+                $tf = "</tbody></table>";
                 $to_print = $th . $tb . $tf;
             }
         }
