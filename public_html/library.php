@@ -207,6 +207,20 @@ function table_end() {
     echo "</table>";
 };
 
+/*funzione per la genrazione di form*/
+    function form_start($type, $dest){
+      echo"<form method='$type' action='$dest' border='0'>";
+      echo"<fieldset style='border:none'>";
+    };
+    
+   //funzione per la chiusura d'una form 
+    function form_end(){
+      echo"<input type='submit' name='submit' value='Procedi'>";
+      echo"<input type='reset' value='Cancella'>";
+      echo"</fieldset>";
+      echo"</form>";
+    };
+
 //NOTA CENZE: per la connessione al database ho già copiato il file originario in cgi-bin, quindi non mi serve la funzione qua (anche perché non ha senso mantenerla in public_html, fa confusione e basta). Probabilmente in quel file inserirò anche altre funzioni se serviranno
 
 /***************************************/
