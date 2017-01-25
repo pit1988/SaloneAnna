@@ -23,20 +23,8 @@ else
 	insert_header($rif, 2, true);
 	content_begin();
 		hyperlink("Compleanni Questo Mese", "QueryCompleanno.php");
-		hyperlink("Inserisci un nuovo cliente","NuovoCliente.php\");
-		hyperlink("","");
-		hyperlink("","");
-
-
-		<tr>
-			<form method=post action=\"StoricoProd.php\">
-			<td><input type=submit name=submit value=\"Storico Prodotti\"></td>
-			<td>Nome:<input type=text name=nome></td>
-			<td>Cognome:<input type=text name=cognome></td>
-			</from>
-		</tr>
-		</table>
-		";
+		hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
+		hyperlink("Storico Prodotti","StoricoProd.php");
 	content_end();
 	page_end();
 }
