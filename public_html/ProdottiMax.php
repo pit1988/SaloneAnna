@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Prodotti Max</strong>';
-    insert_header($rif, 4, true);
+    insert_header($rif, 3, true);
     content_begin();
     
     include("dbconnect.php");

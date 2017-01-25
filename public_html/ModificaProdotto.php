@@ -1,94 +1,86 @@
-<body background="sfondo.jpg">
-	<p align="right" valign="top">/Home/Appuntamenti/ModificaProdotto</p>
-	<!-- Site navigation menu -->
-	<table>
-		<tr>
-			<td>
-				<ul class="navbar">
-					<li><a href="index.php">Home page</a></li>
-					<li><a href="Clienti.php">Clienti</a></li>
-					<li><a href="Prodotti.php">Prodotti</a></li>
-					<li><a href="Appuntamenti.php">Appuntamenti</a></li>
-				</ul>
-			</td>
-			<td>
-				<table>
-					<tr>
-						<th>
-							<h2>Nuovo Appuntamento Clienti</h2>
-						</th>
-					<tr>
-						<form method=post action="conferma_appuntamento.php">
-						<td>
-						<b>Cliente:</b>
-						<i>Nome:</i><input type=text size=40 name=nome>
-						</td>
-						<td>
-							<i>Cognome:</i><input type=text size=40 name=cognome>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b>Sconto:</b><input type=text size=40 name=sconto>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b>Tipo appuntamento:</b>
-							<select name="TipoAppuntamento">
-								<option value="shampoo">Shampoo</option>
-								<option value="taglio">Taglio</option>
-								<option value="piega e phon">Piega e Phon</option>
-								<option value="piega e casco">Piega e Casco</option>
-								<option value="ondulazione">Ondulazione</option>
-								<option value="colore">Colore</option>
-								<option value="riflessante">Riflessante</option>
-								<option value="decolorazione">Decolorazione</option>
-								<option value="meches">Meches</option>
-								<option value="trattamenti">Trattamenti</option>
-								<option value="manicure/pedicure">Manicure/Pedicure</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b>Data:</b>
-							<i>Giorno:</i><input type=text size=40 name=gg>
-						</td>
-						<td>
-							<i>Mese: </i><input type=text size=40 name=mm>
-						</td>
-					</tr>
-					<tr>		
-						<td>
-							<b>Orario:</b>
-							<i>Ore: </i><input type=text size=40 name=hh>
-						</td>
-						<td>
-							<i>Minuti: </i><input type=text size=40 name=min>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<b>Costo:</b><input type=text size=40 name=costo>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<input type=submit name=submit value="Conferma">
-						</td>
-						<td>
-							<input type=reset name=reset value="Cancella">
-						</td>
-					</tr>
-					</form>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</body>
-
 <?php
-$submit = $_GET["codprod"];
+session_start();
+session_regenerate_id(TRUE);
+
+// Controllo accesso
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} elseif (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
+    $err = "Problemi di connessione";
+} else {
+    require 'library.php';
+    include("utils/dbconnect.php");
+    
+    $title = "Gestione Prodotti: Salone Anna";
+    $title_meta = "Gestione Prodotti: Salone Anna";
+    $descr = "";
+    $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
+    insert_header($rif, 3, true);
+    content_begin();
+    
+    $conn = dbconnect();
+    
+    $cod = $_POST["codprod"];
+    $query = "SELECT p.Nome, p.Marca, p.Tipo, p.Quantita, p.PVendita, p.PRivendita FROM Prodotti p WHERE p.CodProdotto= '$cod'";
+    
+    $result = mysqli_query($conn, $query);
+    // nessun risultato
+    $num_rows = mysqli_num_rows($result);
+    if (!$num_rows)
+        echo "<p>Non è presente il prodotto richiesto</p>";
+    else {
+        $row = mysqli_fetch_row($result);
+        $to_print = '<form method="POST" action="esito_modifica.php">
+    		<ul>
+                    <li>
+                        <p>
+                            <label for="nome">Nome</label>
+                            <input type="text" name="nome" id="nome" tabindex="100" value="' . $row[0] . '" />
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="marca">Marca</label>
+                            <input type="text" name="marca" id="marca" tabindex="101" value="' . $row[1] . '" />
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="tipo">Tipo</label>
+                            <input type="text" name="tipo" id="tipo" tabindex="102" value="' . $row[2] . '" />
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="quanita">Quanità</label>
+                            <input type="text" name="quanita" id="quanita" tabindex="103" value="' . $row[3] . '" />
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="pvendita">Prezzo alla vendita</label>
+                            <input type="text" name="pvendita" id="pvendita" tabindex="104" value="' . $row[4] . '" />
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="privendita">Prezzo di rivendita</label>
+                            <input type="text" name="privendita" id="privendita" tabindex="105" value=' . $row[5] . ' />
+                        </p>
+                    </li>
+                </ul>
+                <input type="submit" name="submit" value="Procedi">
+        		<input type="reset" value="Cancella">
+            </form>
+    	';
+        echo $to_print;
+    }
+    content_end();
+    page_end();
+}
+mysqli_close($conn);
 ?>

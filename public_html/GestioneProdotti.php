@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Gestione Prodotti</strong>';
-    insert_header($rif, 4, true);
+    insert_header($rif, 3, true);
     content_begin();
 
     include("dbconnect.php");
@@ -30,7 +30,7 @@ if (!isset($_SESSION['username'])) {
     if (!$num_rows)
         echo "<p>Non ci sono entry nella tabella Prodotti</p>";
     else {
-        form_start("GET", "ModificaProdotto.php");
+        form_start("POST", "ModificaProdotto.php");
         //echo "<form action=\"ModificaProdotto.php\">";
         $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
             <caption>Prodotti modificabili</caption>
