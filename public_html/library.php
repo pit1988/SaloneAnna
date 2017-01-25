@@ -90,7 +90,7 @@ $str1='
 <div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>';
 $str2='';
 if($is_admin == false)
-    $str2= '<div><a id="login" href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
+    $str2= '<div><a id="login" href="utils/login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
 else
     $str2= '<div><a id="logout" href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
 $str3='
@@ -228,14 +228,13 @@ function table_end() {
 /***************************************/
 
 function checkSessionLifetime() { //TODO: da verificare se e come funziona
-    if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+    if (isset($_SESSION['creazione']) && (time() - $_SESSION['creazione'] > 3600)) {
         // l'ultima richiesta era di almeno 30 minuti fa
 		//le prossime due istruzioni sono da aggiornare appena viene trovata una versione definitiva di logout
         session_unset(); //questa funzione elimina le variabili contenute nella sessione
         session_destroy(); //questa funzione elimina la sessione
         return false;
     }
-    $_SESSION['LAST_ACTIVITY'] = time(); // aggiorna il timestamp dell'attività
     return true;
 };
 
