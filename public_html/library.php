@@ -207,7 +207,7 @@ function table_end() {
     echo "</table>";
 };
 
-/*funzione per la genrazione di form*/
+/*funzione per la generazione di form*/
     function form_start($type, $dest){
       echo"<form method='$type' action='$dest' border='0'>";
       echo"<fieldset style='border:none'>";
@@ -229,11 +229,14 @@ function table_end() {
 
 function checkSessionLifetime() { //TODO: da verificare se e come funziona
     if (isset($_SESSION['creazione']) && (time() - $_SESSION['creazione'] > 3600)) {
-        // l'ultima richiesta era di almeno 30 minuti fa
-		//le prossime due istruzioni sono da aggiornare appena viene trovata una versione definitiva di logout
-        session_unset(); //questa funzione elimina le variabili contenute nella sessione
-        session_destroy(); //questa funzione elimina la sessione
-        return false;
+        //la sessione è stata creata almeno un'ora fa
+		$sname=session_name();
+		session_unset(); //questa funzione elimina le variabili contenute nella sessione
+		session_destroy();
+		if (isset($_COOKIE['username'])) {
+	  		setcookie($sname,'', time()-3600,'/');
+		}
+    	return false;
     }
     return true;
 };
