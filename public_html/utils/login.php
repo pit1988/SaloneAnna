@@ -1,26 +1,32 @@
 <?php
-$username=$_REQUEST['username'];
-$password=$_REQUEST['password'];
-include("dbconnect.php");
-$conn = dbconnect();
-$username = addslashes($_POST["username"]); //come dice il nome aggiunge gli slash di escape alla stringa per i caratteri ', " e \
-$password = addslashes($_POST["password"]);
-$query = "SELECT * FROM Account WHERE user='$username' AND password='$password'";
-$result = $conn->query($query);
+require_once "../library.php";
+include "dbconnect.php";
+$username = $_REQUEST['username'];
+$password = $_REQUEST['password'];
 
-if ($result->num_rows > 0) { //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
-	//se è loggato creo la sessione
-	session_start(); //inizia la sessione
-	session_regenerate_id(TRUE); //cambia l'ID della sessione, è una tecnica di sicurezza da inserire dopo la creazione dell'ID
-	$_SESSION['username'] = $username; //salvo i dati
-	$_SESSION['password'] = $password;
-	$_SESSION['LAST_ACTIVITY'] = time(); //salvo l'ultima attività
-	header('location:../index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
+if(!isset($username) || !isset($password)){ //credo basti l'or qui, cioè se uno dei due o entrambi non sono stati istanziati allora ci sono problemi
+    $err="Problemi di connessione";
 }
 else {
-	$err="Nome utente o password errata";
+	$password = md5($password);
+	$conn = dbconnect();
+	$query = "SELECT * FROM Account WHERE user='$username' AND password='$password'";
+	$result = $conn->query($query);
+	
+	if ($result->num_rows > 0) { //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
+		//se è loggato creo la sessione
+		session_start(); //inizia la sessione
+		session_regenerate_id(TRUE); //cambia l'ID della sessione, è una tecnica di sicurezza da inserire dopo la creazione dell'ID
+		$_SESSION['username'] = $username; //salvo i dati
+		$_SESSION['password'] = $password;
+		$_SESSION['creazione'] = time(); //salvo l'ultima attività
+		header('location:../index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
+	}
+	else {
+		$err="Nome utente o password errata";
+	}
+	mysqli_close($conn); //chiude la connessione con il db
 }
-mysqli_close($conn); //chiude la connessione con il db
 
 $title="Salone Anna: tariffe, orari, indirizzo";
 $title_meta="Salone Anna, parrucchiere a Vicenza";
