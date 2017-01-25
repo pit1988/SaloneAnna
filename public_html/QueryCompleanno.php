@@ -40,21 +40,21 @@ else
               <caption>Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
               <thead>
                   <tr>
-                      <th scope="col">Codice Appuntamento</th>
-                      <th scope="col">Data e Ora</th>
-                      <th scope="col">Codice Prodotto</th>
+                      <th scope="col">Codice Cliente</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Cognome</th>
                       <th scope="col">Utilizzo</th>
-                      <th scope="col">Nome Prodotto</th>
+                      <th scope="col">Data di Nascita</th>
                   </tr>
               </thead>
 
               <tfoot>
                   <tr>
-                      <th scope="col">Codice Appuntamento</th>
-                      <th scope="col">Data e Ora</th>
-                      <th scope="col">Codice Prodotto</th>
+                      <th scope="col">Codice Cliente</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Cognome</th>
                       <th scope="col">Utilizzo</th>
-                      <th scope="col">Nome Prodotto</th>
+                      <th scope="col">Data di Nascita</th>
               </tfoot>
 
               <tbody>
