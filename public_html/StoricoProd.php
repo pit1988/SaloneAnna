@@ -1,58 +1,125 @@
 <?php
-include ("dbconnect.php");
-include ("Clienti.php");
-$conn=dbconnect();
+session_start();
+session_regenerate_id(TRUE);
+require 'library.php';
+include("utils/dbconnect.php");
 
-$submit=$_POST["submit"];
-$nome=$_POST["nome"];
-$cognome=$_POST["cognome"];
+$to_print = "";
+$err      = "";
+// Controllo accesso
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} elseif (!isset($_POST['first_name']) XOR !isset($_POST['last_name'])) {
+    $err = "<p>Problemi di connessione</p>";
+} elseif (isset($_POST['first_name']) && isset($_POST['last_name'])) {
+    $submit  = $_POST["submit"];
+    $nome    = $_POST["first_name"];
+    $cognome = $_POST["last_name"];
+    //modificare pulendo i dati in ingresso
+    if (isset($_POST["submit"])) {
+        $conn = dbconnect();
+        $qry  = "SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome'";
+        
+        $CodClienteA = mysqli_query($conn, $qry);
+        $num_rows    = mysqli_num_rows($CodClienteA);
+        if (!$num_rows)
+            $err .= "<p>Non è presente il cliente richiesto</p>";
+        else {
+            // vedere se fare lo stesso lavoro per gli altri clienti omonimi
+            $CodCliente = mysqli_fetch_row($CodClienteA);
+            $query      = "SELECT s.Codappuntamento, s.DataOra, s.CodProdotto, s.Utilizzo, p.Nome
+      FROM storico s NATURAL JOIN Prodotti p
+      WHERE CodCliente = '$CodCliente[0]'";
+            
+            $result = mysqli_query($conn, $query);
+            
+            $num_rows = mysqli_num_rows($result);
+            if (!$num_rows)
+                $err .= "<p>Non sono presenti prodotti per il cliente selezionato</p>";
+            else {
+                $number_cols = mysqli_num_fields($result);
+                
+                echo "<b>Storico:</b>";
+                
+                $th = '<table class="storicoApp" summary="Storico Appuntamenti cliente">
+              <caption>Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
+              <thead>
+                  <tr>
+                      <th scope="col">Codice Appuntamento</th>
+                      <th scope="col">Data e Ora</th>
+                      <th scope="col">Codice Prodotto</th>
+                      <th scope="col">Utilizzo</th>
+                      <th scope="col">Nome Prodotto</th>
+                  </tr>
+              </thead>
 
-if(isset($_POST["submit"])){
-$CodClienteA=mysqli_query($conn, "SELECT RitCod('$nome', '$cognome')")
-		or die("Query fallita " . mysqli_error($conn));
-$CodCliente = mysqli_fetch_row($CodClienteA);
+              <tfoot>
+                  <tr>
+                      <th scope="col">Codice Appuntamento</th>
+                      <th scope="col">Data e Ora</th>
+                      <th scope="col">Codice Prodotto</th>
+                      <th scope="col">Utilizzo</th>
+                      <th scope="col">Nome Prodotto</th>
+              </tfoot>
 
-
-
-$query = "
-    	SELECT s.Codappuntamento, s.DataOra, s.CodProdotto, s.Utilizzo, p.Nome
-FROM storico s NATURAL JOIN Prodotti p
-WHERE CodCliente = ".$CodCliente[0].";";
-
-$result = mysqli_query($conn, $query);
-
-
-$number_cols = mysqli_num_fields($result);
-
-echo "<b>Storico:</b>";
-echo "<table border = 1>\n";
-echo "<tr align=center>\n";
-for($i=0; $i<$number_cols; $i++)
-  {
-    echo "<th>" . mysqli_field_seek ($result, $i). "</th>\n";
-  }
-echo "</tr>\n";
-
-//intestazione tabella
-
-//corpo tabella
-while ($row = mysqli_fetch_row($result))
-{
-  echo "<tr align=left>\n";
-
-  for ($i=0; $i<$number_cols; $i++)
-  {
-    echo "<td>";
-    if(!isset($row[$i]))
-      {echo "NULL";}
-    else
-      {echo $row[$i];}
-    echo "</td>\n";
-  }
-  echo "</td>\n";
+              <tbody>
+              ';
+                //corpo tabella
+                $tb = "";
+                while ($row = mysqli_fetch_row($result)) {
+                    $tb .= "<tr>\n";
+                    
+                    for ($i = 0; $i < $number_cols; $i++) {
+                        $tb .= "<td>";
+                        if (!isset($row[$i])) {
+                            $tb .= "NULL";
+                        } else {
+                            $tb .= $row[$i];
+                        }
+                        $tb .= "</td>\n";
+                    }
+                    $tb .= "</td>\n";
+                }
+                $tf       = "</tbody></table>";
+                $to_print = $th . $tb . $tf;
+            }
+        }
+        
+    }
 }
+$form = '
+  <form method=post action="StoricoProd.php">
+  <ul>
+    <li>
+        <p>
+            <label for="first_name">Nome</label>
+            <input type="text" name="first_name" id="first_name" tabindex="100"/>
+        
+            <label for="last_name">Cognome</label>
+            <input type="text" name="last_name" id="last_name" tabindex="101" />
+        </p>
+    </li>
+    <li><p><input type=submit name=submit value="Storico Prodotti"/></p></li>
+    </ul>
+  </form>
+  ';
 
-echo "</table>";
+
+$title      = "Storico prodotti: Salone Anna";
+$title_meta = "Storico prodotti: Salone Anna";
+$descr      = "";
+$keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+
+page_start($title, $title_meta, $descr, $keywords, '');
+$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
+insert_header($rif, 2, true);
+content_begin();
+echo $form;
+echo $err;
+echo $to_print;
+
+content_end();
+page_end();
 mysqli_close($conn);
-}
 ?>

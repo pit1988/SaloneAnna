@@ -80,7 +80,7 @@ if (!isset($_SESSION['username'])) {
             $tb .= "</tr>\n";
         }
         
-        $tf       = "</tbody></table>";
+        $tf = "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
     }
