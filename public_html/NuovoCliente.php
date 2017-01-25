@@ -12,6 +12,16 @@ if (!isset($_SESSION['username'] ) )
 }
 else
 {
+/*	if(!isset($_POST['submit']) || !isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST['email']) || !isset($_POST['phone']) || !isset($_POST['data'])){
+		$err= "Uno dei parametri non è stato inserito correttamente";
+
+		  $nome = $_POST['nome'];
+  $cognome= $_POST['cognome'];
+  $email = $_POST['email'];
+  $telefono = $_POST['telefono'];
+  $data=*/
+
+	}
 	require 'library.php';
 	$title="Clienti: Salone Anna";
 	$title_meta="Clienti: Salone Anna";
