@@ -113,7 +113,8 @@ CREATE TABLE Account(
 	password VARCHAR(32)
 )Engine=InnoDB;
 
-INSERT INTO Account VALUES (1, "admin", "admin");
+INSERT INTO Account(CodAccount, username, password) VALUES
+(1, "admin", "21232f297a57a5a743894a0e4a801fc3");
 
 CREATE TABLE Messaggi (
 	CodMessaggi INT PRIMARY KEY AUTO_INCREMENT,
