@@ -5,7 +5,7 @@ require 'library.php';
 include("utils/dbconnect.php");
 
 $to_print = "";
-$err      = "";
+$err = "";
 // Controllo accesso
 if (!isset($_SESSION['username'])) {
     header('location:index.php');
@@ -13,10 +13,9 @@ if (!isset($_SESSION['username'])) {
 } elseif (!isset($_POST['first_name']) XOR !isset($_POST['last_name'])) {
     $err = "<p>Problemi di connessione</p>";
 } elseif (isset($_POST['first_name']) && isset($_POST['last_name'])) {
-    $submit  = $_POST["submit"];
-    $nome    = $_POST["first_name"];
+    $submit = $_POST["submit"];
+    $nome = $_POST["first_name"];
     $cognome = $_POST["last_name"];
-    echo $nome. " ".$cognome;
     //modificare pulendo i dati in ingresso
     if (isset($_POST["submit"])) {
         $conn = dbconnect();
@@ -90,6 +89,7 @@ if (!isset($_SESSION['username'])) {
     }
 }
 $form = '
+<p>Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
   <form method=post action="StoricoProd.php">
   <ul>
     <li>

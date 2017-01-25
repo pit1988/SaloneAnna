@@ -1,84 +1,98 @@
-<body background="sfondo.jpg">
-<p align="right" valign="top">/Home/Compleanno</p>
-<!-- Site navigation menu -->
-<table>
-	<tr>
-	<td>
-    <ul class="navbar">
-      <li><a href="index.php">Home page</a></li>
-      <li><a href="Clienti.php">Clienti</a></li>
-      <li><a href="Prodotti.php">Prodotti</a></li>
-      <li><a href="Appuntamenti.php">Appuntamenti</a></li>
-    </ul>
-	</td>
-	<td>
 
 <?php
 
 session_start();
-
 session_regenerate_id(TRUE);
 
 // Controllo accesso
-
-if (!isset($_SESSION['username']))
+if (!isset($_SESSION['username'] ) )
 {
-  header('location:Accesso.php');
+  header('location:index.php');
   exit;
 }
 else
 {
-  echo "Benvenuto " . $_SESSION['username'];
+  require 'library.php';
+  $title="Compleanni: Salone Anna";
+  $title_meta="Compleanni: Salone Anna";
+  $descr="";
+  $keywords="Compleanni, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
   
-  
+  page_start($title, $title_meta, $descr, $keywords,'');
+  $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Compleanni nel mese</strong>';
+  insert_header($rif, 2, true);
+
   include("dbconnect.php");
   $conn = dbconnect();
   
-  $query  = "
-SELECT c.CodCliente, c.Nome, c.Cognome, c.Compleanno FROM Clienti c WHERE Compleanno BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY));";
+  $query  = "SELECT c.CodCliente, c.Nome, c.Cognome, c.DataNascita FROM Clienti c WHERE DataNascita BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY))";
   $result = mysqli_query($conn, $query);
   
-  
+ $num_rows = mysqli_num_rows($result);
+  if (!$num_rows)
+      $err = "<p>Non ci sono compleanni previsti per i prossimi 31 giorni</p>";
+  else {
   $number_cols = mysqli_num_fields($result);
   
   echo "<b>I compleanni questo mese sono:</b>";
-  echo "<table border = 1>\n";
-  echo "<tr align=center>\n";
-  for ($i = 0; $i < $number_cols; $i++)
-  {
-          echo "<th>" . mysqli_field_seek($result, $i) . "</th>\n";
-  }
-  echo "</tr>\n";
-  
-  //intestazione tabella
+
+   $th = '<table class="storicoApp" summary="Storico Appuntamenti cliente">
+              <caption>Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
+              <thead>
+                  <tr>
+                      <th scope="col">Codice Appuntamento</th>
+                      <th scope="col">Data e Ora</th>
+                      <th scope="col">Codice Prodotto</th>
+                      <th scope="col">Utilizzo</th>
+                      <th scope="col">Nome Prodotto</th>
+                  </tr>
+              </thead>
+
+              <tfoot>
+                  <tr>
+                      <th scope="col">Codice Appuntamento</th>
+                      <th scope="col">Data e Ora</th>
+                      <th scope="col">Codice Prodotto</th>
+                      <th scope="col">Utilizzo</th>
+                      <th scope="col">Nome Prodotto</th>
+              </tfoot>
+
+              <tbody>
+              ';
+                //corpo tabella
+                $tb = "";
+
+  $tb="";
   
   //corpo tabella
   while ($row = mysqli_fetch_row($result))
   {
-          echo "<tr align=left>\n";
+          $tb.= "<tr align=left>\n";
           
           for ($i = 0; $i < $number_cols; $i++)
           {
-                  echo "<td>";
+                  $tb.=  "<td>";
                   if (!isset($row[$i]))
                   {
-                          echo "NULL";
+                          $tb.=  "NULL";
                   }
                   else
                   {
-                          echo $row[$i];
+                          $tb.=  $row[$i];
                   }
-                  echo "</td>\n";
+                  $tb.=  "</td>\n";
           }
-          echo "</td>\n";
+          $tb.=  "</td>\n";
   }
   
-  echo "</table>";
+  $tf = "</tbody></table>";
+  $to_print = $th . $tb . $tf;
+}
+  if(isset($err))
+    echo $err;
+  content_end();
+  page_end();
   mysqli_close($conn);
 }
-?>
 
-    	</td>
-    </tr>
-  </table>
-</body>
+?>
