@@ -1,16 +1,13 @@
 <?php
 require_once "../library.php";
 include "dbconnect.php";
-$username = $_REQUEST['username'];
-$password = $_REQUEST['password'];
 
-if(!isset($username) || !isset($password)){ //credo basti l'or qui, cioè se uno dei due o entrambi non sono stati istanziati allora ci sono problemi
-    $err="Problemi di connessione";
-}
-else {
-	$password = md5($password);
+if(isset($REQUEST['username']) && isset($_REQUEST['password'])){
+	$username = $_REQUEST['username'];
+	$password = $_REQUEST['password'];
+    $password = md5($password);
 	$conn = dbconnect();
-	$query = "SELECT * FROM Account WHERE user='$username' AND password='$password'";
+	$query = "SELECT * FROM Account WHERE username='$username' AND password='$password'";
 	$result = $conn->query($query);
 	
 	if ($result->num_rows > 0) { //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
@@ -26,6 +23,9 @@ else {
 		$err="Nome utente o password errata";
 	}
 	mysqli_close($conn); //chiude la connessione con il db
+}
+elseif((!isset($REQUEST['username']) && isset($REQUEST['password'])) || (isset($_REQUEST['password']) && !isset($_REQUEST['password']))) {
+	$err="Problemi di connessione";
 }
 
 $title="Salone Anna: tariffe, orari, indirizzo";
