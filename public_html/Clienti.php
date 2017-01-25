@@ -20,20 +20,14 @@ else
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
-	insert_header($rif, 1, true);
+	insert_header($rif, 2, true);
 	content_begin();
-	echo "<table>
-		<tr>
-			<form action=\"QueryCompleanno.php\">
-	  		<input type=\"submit\"value=\"Compleanni Questo Mese\">
-			</form>
-			<br>
-		</tr>
-		<tr>
-			<form action=\"NuovoCliente.php\">
-	  		<input type=\"submit\"value=\"Nuovo Cliente\">
-			</form>
-		</tr>
+		hyperlink("Compleanni Questo Mese", "QueryCompleanno.php");
+		hyperlink("Inserisci un nuovo cliente","NuovoCliente.php\");
+		hyperlink("","");
+		hyperlink("","");
+
+
 		<tr>
 			<form method=post action=\"StoricoProd.php\">
 			<td><input type=submit name=submit value=\"Storico Prodotti\"></td>

@@ -85,7 +85,10 @@ if (!isset($_SESSION['username'])) {
         $tf= "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
-        form_end();
+        echo"<input type='submit' name='submit' value='Procedi'>";
+        echo"<input type='reset' value='Cancella'>";
+        // echo"</fieldset>";
+        echo"</form>";
     }
     content_end();
     page_end();
