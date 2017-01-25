@@ -10,7 +10,7 @@ $title_meta="Foto Salone Anna, parrucchiere a Vicenza";
 $descr="Fotografie di clienti del Salone Anna";
 $keywords="Foto, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif='<a href="index.html" xml:lang="en">Home</a> / <strong>Foto</strong>';
+$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Foto</strong>';
 $is_admin=false;
 $name="visitatore";
 

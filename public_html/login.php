@@ -18,7 +18,8 @@ session_regenerate_id(TRUE);*/
     /*		$username = addslashes($_POST["username"]);
 $password = addslashes($_POST["password"]);*/
     $username = $_POST["username"];
-    $password = $_POST["password"];
+    // $password = $_POST["password"];
+    $password = md5(( $_POST["password"]));
     if(isset($username) and $password == get_pwd($username)){
         $result=mysqli_query($conn, "select * from Clienti Natural Join Account l where l.username='$username'");
         $rg=mysqli_fetch_assoc($result);

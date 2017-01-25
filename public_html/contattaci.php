@@ -6,7 +6,7 @@
     require 'library.php';
     $onload="caricamentoContattaci(); replaceMap();";
     page_start($title, $title_meta, $descr, $keywords, $onload);
-    $rif='<a href="index.html" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
+    $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
     insert_header($rif, 5, false);
     content_begin();
 ?>
@@ -17,7 +17,7 @@
         </div>
         <div class="body_contattaci">
             <noscript><p>Compila tutti i campi dati; inserisci un indirizzo <span xml:lang="en">e-mail</span> valido</p></noscript>
-            <form action="cgi-bin/email.cgi" onsubmit="return validazioneFormContattaci();" method="post">
+            <form action="" onsubmit="return validazioneFormContattaci();" method="post">
                 <ul>
                     <li>
                         <p>
