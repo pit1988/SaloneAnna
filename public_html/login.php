@@ -1,46 +1,33 @@
 <?php
-require_once 'library.php';
-include 'utils/dbconnect.php';
-if(!isset($_POST['username']) xor !isset($_POST['password'])){
-    $err="Problemi di connessione";
+require_once "library.php";
+include "utils/dbconnect.php";
+
+if(isset($REQUEST['username']) && isset($_REQUEST['password'])){
+	$err="Arrivato dopo il check";
+	$username = $_REQUEST['username'];
+	$password = $_REQUEST['password'];
+    $password = md5($password);
+	$conn = dbconnect();
+	$query = "SELECT * FROM Account WHERE username='$username' AND password='$password'";
+	$result = $conn->query($query);
+	
+	if ($result->num_rows > 0) { //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
+		session_start(); //inizia la sessione
+		session_regenerate_id(TRUE); //cambia l'ID della sessione, è una tecnica di sicurezza da inserire dopo la creazione dell'ID
+		$_SESSION['username'] = $username; //salvo i dati
+		$_SESSION['password'] = $password;
+		$_SESSION['creazione'] = time(); //salvo l'ultima attività
+		header('location:../index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
+	}
+	else {
+		$err="Nome utente o password errata";
+	}
+	mysqli_close($conn); //chiude la connessione con il db
 }
-elseif(isset($_POST['username']) && isset($_POST['password'])){
-    $conn = dbconnect();
-    session_start();
-    session_regenerate_id(TRUE);
-    /*		//start session
-session_start();
-// cambiare sessioni secondo le slide
-session_regenerate_id(TRUE);*/
+elseif((!isset($REQUEST['username']) && isset($REQUEST['password'])) || (isset($_REQUEST['password']) && !isset($_REQUEST['password']))) {
+	$err="Problemi di connessione";
+}
 
-
-    //variabili per criptare in md5 = $password=md5(( $_POST[pass]));
-    /*		$username = addslashes($_POST["username"]);
-$password = addslashes($_POST["password"]);*/
-    $username = $_POST["username"];
-    // $password = $_POST["password"];
-    $password = md5(( $_POST["password"]));
-    if(isset($username) and $password == get_pwd($username)){
-        $result=mysqli_query($conn, "select * from Clienti Natural Join Account l where l.username='$username'");
-        $rg=mysqli_fetch_assoc($result);
-        $nome=$rg['Nome'];
-        $id=$rg['CodCliente'];
-        if ($result->num_rows > 0){
-            //se è loggato creo la sessione
-            $_SESSION['username'] = $username;
-            $_SESSION['password'] = $password;
-            header('location:index.php');
-        }
-        else{
-            $err="Nome utente o password errata";
-        }
-    }
-    else
-    {
-        $err="Nome utente o password errata";
-    }
-    mysqli_close($conn);
-};
 $title="Salone Anna: tariffe, orari, indirizzo";
 $title_meta="Salone Anna, parrucchiere a Vicenza";
 $descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
@@ -63,4 +50,4 @@ END;
 if(isset($err))
     echo"<BR><b>Errore: $err</b>";
 page_end();
-?> 
+?>

@@ -90,7 +90,7 @@ $str1='
 <div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>';
 $str2='';
 if($is_admin == false)
-    $str2= '<div><a id="login" href="loginCenze.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
+    $str2= '<div><a id="login" href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
 else
     $str2= '<div><a id="logout" href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
 $str3='
