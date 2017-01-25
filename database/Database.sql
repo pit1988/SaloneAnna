@@ -70,13 +70,13 @@ CREATE TABLE Prodotti(
 	CodProdotto INT PRIMARY KEY, 
 	Nome VARCHAR(20) NOT NULL,
 	Marca VARCHAR(30) NOT NULL,
-	Tipo VARCHAR(30) NOT NULL, /*io metterei marca e tipo come due semplici varchar per due motivi: il primo è che così facilita l'inserimento di un nuovo tipo o di una nuova marca (per questo toglierei l'enum), il secondo è che dubito che un tipo possa essere associato a molti prodotti, o che separare la marca porti dei vantaggi rilevanti ai fini del sito (quindi eviterei di creare un'entità a sé)*/
+	Tipo VARCHAR(30) NOT NULL,
 	Quantita INT NOT NULL,
-	PVendita DOUBLE,
+	Prezzo DOUBLE,
 	PRivendita DOUBLE
-)Engine=InnoDB; /*TODO: inserire prodotti*/
+)Engine=InnoDB;
 
-INSERT INTO `Prodotti`(`CodProdotto`, `Nome`, `Marca`, `Tipo`, `Quantita`, `PVendita`, `PRivendita`) 
+INSERT INTO `Prodotti`(`CodProdotto`, `Nome`, `Marca`, `Tipo`, `Quantita`, `Prezzo`, `PRivendita`) 
 VALUES 
 	('1', 'Smoothen Mask 200 ml', 'SP','Smoothen', '2', '10', '12.5'),
 	('2', 'Smoothen Mask 400 ml', 'SP','Smoothen', '24', '10', '12.5'),
@@ -89,7 +89,7 @@ VALUES
 	('9', 'Precise Shine 75 ml', 'SP','Men', '96', '10', '12.5'),
 	('10', 'Penetraitt Condition', 'Sebastian', 'In Salon Service', '2', '10', '12.5');
 
-CREATE TABLE ProdApp( /*Secondo me a fini pratici quest'entità non ha senso, cioè si fa prima a togliere i prodotti a mano, o a creare una form e uno script PHP apposta per togliere i prodotti dal magazzino.*/
+CREATE TABLE ProdApp( --questa entità serve per tenere traccia dei prodotti usati durante un determinato appuntamento
 	CodAppuntamento INT,
 	CodProdotto INT,
 	Utilizzo DOUBLE,
@@ -98,7 +98,7 @@ CREATE TABLE ProdApp( /*Secondo me a fini pratici quest'entità non ha senso, ci
 	CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
 
-CREATE TABLE Eccezioni( /*teniamo o eliminiamo?*/
+CREATE TABLE Eccezioni(
 	Id_Eccezione INT PRIMARY KEY,
 	Descrizione VARCHAR(100)
 )Engine=InnoDB;
@@ -108,12 +108,12 @@ INSERT INTO Eccezioni(Id_Eccezione, Descrizione) VALUES
 ('2', 'Errore 2: Errore di Inserimento, il prodotto che si vuole inserire e gia inserito');
 
 CREATE TABLE Account( 
-	CodCliente INT PRIMARY KEY,
+	--CodCliente INT PRIMARY KEY, --lascio sotto commento queste righe in caso si voglia tornare indietro
+	CodAccount SMALLINT PRIMARY KEY AUTO_INCREMENT,
 	username VARCHAR(20), 
 	password VARCHAR(32),
-	FOREIGN KEY (CodCliente) REFERENCES Clienti(CodCliente) ON UPDATE CASCADE ON DELETE CASCADE
+	--FOREIGN KEY (CodCliente) REFERENCES Clienti(CodCliente) ON UPDATE CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
-
 
 INSERT INTO Account VALUES (1, "admin", "admin");
 
