@@ -1,69 +1,67 @@
-<body background="sfondo.jpg">
-<p align="right" valign="top">/Home/Clienti/NuovoCliente</p>
-<!-- Site navigation menu -->
-<table>
-	<tr>
-		<td>
-			<ul class="navbar">
-			  <li><a href="index.php">Home page</a></li>
-			  <li><a href="Clienti.php">Clienti</a></li>
-			  <li><a href="Prodotti.php">Prodotti</a></li>
-			  <li><a href="Appuntamenti.php">Appuntamenti</a></li>
-			</ul>
-		</td>
-	</tr>
-	<tr>
-	<td>
+
 <?php
 
 session_start();
-
 session_regenerate_id(TRUE);
 
 // Controllo accesso
-
-if (!isset($_SESSION['username']))
-		{
-				header('location:Accesso.php');
-				exit;
-		}
+if (!isset($_SESSION['username'] ) )
+{
+	header('location:index.php');
+	exit;
+}
 else
-		{
-				echo "Benvenuto " . $_SESSION['username'];
-				
-				echo "<h2>Nuovo Cliente</h2>
-<form method=post action=\"conferma_inserimento.php\">
+{
+	require 'library.php';
+	$title="Clienti: Salone Anna";
+	$title_meta="Clienti: Salone Anna";
+	$descr="";
+	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	
+	page_start($title, $title_meta, $descr, $keywords,'');
+	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
+	insert_header($rif, 2, true);
+	content_begin();
+				echo '<h2>Nuovo Cliente</h2>
 
-<table>
-<tr>
-	<td><i>Nome:</i></td><td><input type=text size=40 name=name></td>
-	<td><i>Cognome:</i><input type=text size=40 name=surname></td>
-</tr>
-
-<tr>
-	<td><i>Telefono:</i></td><td><input type=text size=40 name=tel></td><td></td>
-</tr>
-
-<tr>
-	<td><i>Mail:</i></td><td><input type=text size=40 name=mail><i>@</i></td><td><input type=text size=40 name=dominio></td>
-</tr>
-
-<tr>
-<td><i>Compleanno:</td>
-</tr>
-<tr>
-<td> Giorno: </i></td><td><input type=text size=40 name=gg <i></td><td> Mese: </i><input type=text size=40 name=mm> </td>
-</tr>
-
-<tr>
-	<td><input type=submit name=\"submit\" value=\"conferma\"></td>
-	<td><input type=reset name=\"reset\" value=\"cancella\"></td>
-</tr>
-
-</form>";
+<form action="NuovoCliente.php" onsubmit="return true;" method="post">
+                <ul>
+                    <li>
+                        <p>
+                            <label for="first_name">Nome</label>
+                            <input type="text" name="first_name" id="first_name" tabindex="100"/>
+                        </p>
+                        <p>
+                            <label for="last_name">Cognome</label>
+                            <input type="text" name="last_name" id="last_name" tabindex="101" />
+                        </p>
+                    </li>
+                    <li xml:lang="en">
+                        <p>
+                            <label for="email">E-Mail</label>
+                            <input type="text" name="email" id="email" tabindex="102" />
+                        </p>
+                    </li>
+                    <li>
+                        <label for="phone">Telefono</label>
+                         <input type="text" name="phone" id="phone" tabindex="103" />
+                    </li>
+                    <li>
+                        <label for="data">Data di nascita</label>
+                        <input type="text" name="data" id="data" tabindex="104"
+                    <li xml:lang="en">
+                        <input class="btn btn-submit" type="submit" value="Invia" tabindex="105"/>
+                        <input type="reset" value="cancella"
+                        <span id="errors"></span>
+                    </li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                </ul>
+            </form>
+';
+		content_end();
+    page_end();
 		}
 ?>
-			</td>
-		</tr>
-	</table>
-</body>
+			
