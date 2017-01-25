@@ -1,6 +1,4 @@
 <?php
-include "dbconnect.php";
-
 function dbconnect() {
 	$host = "localhost";
 	$user = "pgabelli";
@@ -12,8 +10,16 @@ function dbconnect() {
 	return $conn;
 };
 
-function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
-	$query = '';
+class Messaggio { //classe che rappresenta un messaggio
 	
+}
+
+function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
+	$conn = dbconnect();
+	$query = '';
+	$result = $conn->query($query);
+	if(!result) {$err = "Errore nella query: ".$conn->error.".";} //intanto segnalo così il caso, è da eliminare se l'errore viene gestito in locale
+	else {return $result;}
+	$conn->close();
 }
 ?>
