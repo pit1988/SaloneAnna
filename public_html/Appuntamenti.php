@@ -1,62 +1,33 @@
-<body background="sfondo.jpg">
-<p align="right" valign="top">/Home/Appuntamenti</p>
-<!-- Site navigation menu -->
-<table>
-	<tr>
-	<td>
-<ul class="navbar">
-  <li><a href="index.php">Home page</a>
-  <li><a href="Clienti.php">Clienti</a>
-  <li><a href="Prodotti.php">Prodotti</a>
-  <li><a href="Appuntamenti.php">Appuntamenti</a>
-</ul>
-	</td>
-	<td>
-
 
 <?php
 
 session_start();
-
 session_regenerate_id(TRUE);
-
-
-
 
 // Controllo accesso
 if (!isset($_SESSION['username'] ) )
 {
-header('location:Accesso.php');
-exit;
+	header('location:index.php');
+	exit;
 }
 else
 {
-echo "Benvenuto ".$_SESSION['username']." sei in Appuntamenti <br>";
-echo "<table>
-	<tr>
-		<form action=\"NuovoAppuntamento.php\">
-  		<input type=\"submit\"value=\"Nuovo Appuntamento\">
-		</form>
-	<tr>
-	<tr>
-	<form action=\"Toptype.php\">
-  		<input type=\"submit\"value=\"Tipo Appuntamento Frequente\">
-		</form>
-	</tr>
-	<tr>
-	<form action=\"RicercaAppuntamenti.php\">
-  		<input type=\"submit\"value=\"Ricerca Appuntamenti\">
-		</form>
-	</tr>
-	<tr>
-	<form action=\"GestioneAppuntamenti.php\">
-  		<input type=\"submit\"value=\"Gestione Appuntamenti\">
-		</form>
-	</tr>
-	";
-
-
+	require 'library.php';
+	$title="Clienti: Salone Anna";
+	$title_meta="Clienti: Salone Anna";
+	$descr="";
+	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	
+	page_start($title, $title_meta, $descr, $keywords,'');
+	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
+	insert_header($rif, 2, true);
+	content_begin();
+		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
+		hyperlink("Tipo Appuntamento Frequente", "Toptype.php");
+		hyperlink("Ricerca Appuntamenti", "RicercaAppuntamenti.php");
+		hyperlink("Gestione Appuntamenti", "GestioneAppuntamenti.php");
+	content_end();
+	page_end();
 }
-
 
 ?>
