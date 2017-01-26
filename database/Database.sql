@@ -58,12 +58,12 @@ CREATE TABLE Appuntamenti (
 )Engine=InnoDB;
 
 INSERT INTO Appuntamenti (CodAppuntamento, CodCliente, DataOra, CodTipoAppuntamento) VALUES
-('1', '1', '2012-06-13 10:30:00', '2'),
-('2', '2', '2012-06-13 14:00:00', '5'),
-('3', '2', '2012-06-14 10:30:00', '6'),
-('4', '3', '2012-06-15 14:00:00', '6'),
-('5', '4', '2012-06-15 10:30:00', '9'),
-('6', '3', '2012-06-18 14:00:00', '2');
+('1', '1', '2017-02-13 10:30:00', '2'),
+('2', '2', '2017-02-13 14:00:00', '5'),
+('3', '2', '2017-02-14 10:30:00', '6'),
+('4', '3', '2017-02-15 14:00:00', '6'),
+('5', '4', '2017-02-15 10:30:00', '9'),
+('6', '3', '2017-02-18 14:00:00', '2');
 
 
 CREATE TABLE Prodotti(
@@ -125,11 +125,23 @@ CREATE TABLE Messaggi (
 	FOREIGN KEY (CodCliente) REFERENCES Clienti(CodCliente) ON UPDATE CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
 
+INSERT INTO Messaggi(CodMessaggi, CodCliente, Contenuto, DataOra, ToRead) VALUES
+(1, 1, "Ciao! Hai un buco per il 13 febbraio? Possibilmente al mattino? Perché ho bisogno di una spuntatina veloce", "2017-02-07 15:13:34", false),
+(2, 2, "È possibile per la settimana prossima prendere un appuntamento? Ho bisogno del solito, senza colore", "2017-02-07 21:03:15", false),
+(3, 4, "Riesci a fissarmi un appuntamento per il 15 mattina? Che così passo prima o dopo aver fatto la spesa", "2017-02-09 22:19:45", false),
+(4, 2, "Ho cambiato idea, riesci a farmi anche il colore? Va bene anche se mi dai un altro appuntamento, scusa per il disturbo", "2017-02-11 11:35:19", false),
+(5, 4, "Mi spiace ma ho avuto un contrattempo, domani non riesco a venire. Ti dico appena trovo un momento libero per fissare un appuntamento", "2017-02-14 20:11:28", true);
+
 CREATE TABLE Images (
 	Img_title INT PRIMARY KEY AUTO_INCREMENT,
 	Img_desc VARCHAR(200),
 	Img_filename VARCHAR(160)
 )Engine=InnoDB;
+
+INSERT INTO Images (Img_title, Img_desc, Img_filename) VALUES
+(1, 'd', "AnyScale_MG_5358-Pano.jpg"),
+(2, '', "tumblr_ok6b4sc6Ds1rtauwdo1_500.jpg"),
+(3, 'nmfkjdsfdff', "ericabello2_orig.jpg");
 
 SET FOREIGN_KEY_CHECKS=1;   
 
