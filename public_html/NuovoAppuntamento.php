@@ -5,30 +5,27 @@ session_start();
 session_regenerate_id(TRUE);
 
 // Controllo accesso
-if (!isset($_SESSION['username'] ) )
-{
-	header('location:index.php');
-	exit;
-}
-else
-{
-	require 'library.php';
-	require 'utils/DBlibrary.php';
-	
-	$title="Nuovo appuntamento: Salone Anna";
-	$title_meta="Nuovo appuntamento: Salone Anna";
-	$descr="";
-	$keywords="Nuovo, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
-	
-	page_start($title, $title_meta, $descr, $keywords,'');
-	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
-	insert_header($rif, 4, true);
-	content_begin();
-	//aggiungere tabindex
-	echo '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} else {
+    require 'library.php';
+    require 'utils/DBlibrary.php';
+    
+    $title = "Nuovo appuntamento: Salone Anna";
+    $title_meta = "Nuovo appuntamento: Salone Anna";
+    $descr = "";
+    $keywords = "Nuovo, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
+    insert_header($rif, 4, true);
+    content_begin();
+    //aggiungere tabindex; modificare input type radio in modo da lasciare 
+    $str1= '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
-                        <p>
+                        <p> 
                             <label for="TipoAppuntamento">Tipo appuntamento:</label>
                             <input type="radio" name="TipoAppuntamento" value="shampoo" />Shampoo
 							<input type="radio" name="TipoAppuntamento" value="taglio" />Taglio
@@ -40,6 +37,10 @@ else
 							<input type="radio" name="TipoAppuntamento" value="decolorazione" />Decolorazione
 							<input type="radio" name="TipoAppuntamento" value="meches" />Meches
 							<input type="radio" name="TipoAppuntamento" value="trattamenti" />Trattamenti
+';
+
+	$str2="";
+$str3='
                         </p>
                     </li>
                     <li>
@@ -83,6 +84,7 @@ else
                 </ul>
             </form>
 ';
+	echo $str1.$str2.$str3;
     content_end();
     page_end();
 }
