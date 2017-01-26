@@ -11,10 +11,10 @@
   else
   {
     require 'library.php';
-    $title="Clienti: Salone Anna";
-    $title_meta="Clienti: Salone Anna";
+    $title="Prodotti: Salone Anna";
+    $title_meta="Prodotti: Salone Anna";
     $descr="";
-    $keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $keywords="Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords,'');
     $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prodotti</strong>';

@@ -13,13 +13,13 @@ if (!isset($_SESSION['username'] ) )
 else
 {
 	require 'library.php';
-	$title="Clienti: Salone Anna";
-	$title_meta="Clienti: Salone Anna";
+	$title="Appuntamenti: Salone Anna";
+	$title_meta="Appuntamenti: Salone Anna";
 	$descr="";
-	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	$keywords="Appuntamenti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
-	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
+	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Appuntamenti</strong>';
 	insert_header($rif, 4, true);
 	content_begin();
 		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
