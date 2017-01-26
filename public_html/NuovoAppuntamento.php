@@ -13,6 +13,8 @@ if (!isset($_SESSION['username'] ) )
 else
 {
 	require 'library.php';
+	require 'utils/DBlibrary.php';
+	
 	$title="Nuovo appuntamento: Salone Anna";
 	$title_meta="Nuovo appuntamento: Salone Anna";
 	$descr="";
@@ -23,12 +25,11 @@ else
 	insert_header($rif, 4, true);
 	content_begin();
 	//aggiungere tabindex
-	echo '<h2>Nuovo Cliente</h2>
-            <form action="NuovoCliente.php" onsubmit="return true;" method="post">
+	echo '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
                         <p>
-                            <label for="TipoAppuntamento">Nome</label>
+                            <label for="TipoAppuntamento">Tipo appuntamento:</label>
                             <input type="radio" name="TipoAppuntamento" value="shampoo" />Shampoo
 							<input type="radio" name="TipoAppuntamento" value="taglio" />Taglio
 							<input type="radio" name="TipoAppuntamento" value="piega e phon" />Piega e Phon
@@ -40,12 +41,24 @@ else
 							<input type="radio" name="TipoAppuntamento" value="meches" />Meches
 							<input type="radio" name="TipoAppuntamento" value="trattamenti" />Trattamenti
                         </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="first_name">Nome</label>
+                            <input type="text" name="first_name" id="first_name" tabindex="100"/>
+                        </p>
+                        <p>
+                            <label for="last_name">Cognome</label>
+                            <input type="text" name="last_name" id="last_name" tabindex="101" />
+                        </p>
+                    </li>
+                    <li>
                         <p>
                             <label for="data">Data</label>
                         <input type="text" name="data" id="data" tabindex="104"
                         </p>
                     </li>
-                    <li xml:lang="en">
+                    <li>
                         <p>
                             <label for="orario">Orario</label>
                             <input type="text" name="orario" id="orario" tabindex="102" />
