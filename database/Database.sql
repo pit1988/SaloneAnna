@@ -143,7 +143,11 @@ INSERT INTO Images (Img_title, Img_desc, Img_filename) VALUES
 (2, '', "tumblr_ok6b4sc6Ds1rtauwdo1_500.jpg"),
 (3, 'nmfkjdsfdff', "ericabello2_orig.jpg");
 
-SET FOREIGN_KEY_CHECKS=1;   
+SET FOREIGN_KEY_CHECKS=1;  
+
+CREATE VIEW Contatori(Parziali, Tipo)
+AS SELECT COUNT(*), CodTipoAppuntamento
+FROM Appuntamenti GROUP BY CodTipoAppuntamento
 
 /******************/
 /*
