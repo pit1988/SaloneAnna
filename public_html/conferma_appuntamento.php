@@ -1,91 +1,95 @@
 <?php
-/*
+include 'DBlibrary.php';
+include 'library.php';
+if (isset($_POST['submit'])) {
+    if (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
+        $err = "Almeno uno dei parametri non è stato inserito correttamente";
+    } else {
+        $sub     = $_POST['submit'];
+        $tipo    = $_POST['TipoAppuntamento'];
+        $nome    = $_POST['first_name'];
+        $cognome = $_POST['last_name'];
+        $date    = $_POST['data'];
+        $time    = $_POST['orario'];
+/*        $costo   = $_POST['costo'];
+        $sconto  = $_POST['sconto'];*/
+        
+        if (strlen($tipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($date) == 0 OR strlen($time) == 0) //OR strlen($costo) == 0 OR strlen($sconto) == 0)
+            $err = "Almeno uno dei parametri non è stato inserito correttamente";
+        else {
+            $orario     = date_create_from_format('H:i', $time);
+            $data       = date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d');
+            $dataora = date('Y-m-d H:i:s', strtotime("$data $orario"));
+            echo $dataora;
+            
+            $conn        = dbConnect();
+            $queryc      = ("select * from Clienti c where c.Nome = $nome and c.Cognome = $cognome");
+            $result      = mysql_query(queryc);
+            $number_rows = mysql_num_rows($result);
+            if ($number_rows > 1) {
+                echo "<p>Più clienti hanno si chiamano ".$nome." ".$cognome.", scegline uno:</p>";
+                $number_cols = mysql_num_fields($result);
+                form_start("POST", "confermaAppuntamento.php");
+                $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
+            <caption>Prodotti modificabili</caption>
+            <thead>
+                <tr>
+                    <th scope="col">Codice Cliente</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Cognome</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Data di nascita</th>
+                </tr>
+            </thead>
+            <tbody>
+            ';
+                $tb = "";
+                //corpo tabella
+                while ($row = mysqli_fetch_row($result)) {
+                    
+                    $tb .= "<tr>\n";
+                    for ($i = 0; $i < $number_cols + 1; $i++) {
+                        $tb .= "<td>";
+                        if (!isset($row[$i]))
+                            $tb .= " ";
+                        if ($i == 0)
+                            $tb .= "<input type=\"radio\" name=\"CodCliente\" value= \"" . $row[$i] . "\"\/>";
+                        else {
+                            $tb .= $row[$i - 1];
+                        }
+                        
+                        $tb .= "</td>\n";
+                    }
+                    $tb .= "</tr>\n";
+                }
+                
+                $tf       = "</tbody></table>";
+                $to_print = $th . $tb . $tf;
+                echo $to_print;
+                echo "<input type='submit' name='submit' value='Procedi'>";
+                echo "<input type='reset' value='Cancella'>";
+                // echo"</fieldset>";
+                echo "</form>";
+            } //fine n_righe>1
+            if(!isset($_POST['CodCliente'])) {
+            	$CodClienteA = mysqli_query($conn, "SELECT RitCod('$nome', '$cognome')") or die("Query fallita " . mysqli_error($conn));
+            	$CodCliente = mysqli_fetch_row($CodClienteA);
+            }
+            else
+            	$CodCliente=$_POST['CodCliente'];
 
-PROBLEMA SE DUE CLIENTI HANNO LO STESSO NOME NON SA QUALE SCEGLIERE ! FAGLIELO SCEGLIERE
-
-
-$queryc =("select * from Clienti c where c.Nome = $nome and c.Cognome = $cognome");
-$result = mysql_query(queryc);
-$number_cols = mysql_num_fields($result);
-echo "Ci sono piu' persone con lo stesso nome per questo appuntamento seleziona quale:";
-//intestazione tabella
-echo "<table border = 1>\n";
-echo "<tr align=center>\n";
-for ($i=0; $i<$number_cols; $i++)
-  {
-    echo "<th>" . mysql_field_name ($result, $i). "</th>\n";
-  }
-echo "</tr>\n";
-//corpo tabella
-while ($row = mysql_fetch_row($result))
-{
-  echo "<tr align=left>\n";
-  for ($i=0; $i<$number_cols; $i++)
-  {
-    echo "<td>";
-    if(!isset($row[$i]))
-      {echo "NULL";}
-    else
-      {
-      	echo $row[$i];
-      }
-    echo "</td>\n";
-  }
-  echo "</td>\n";
+            if (isset($submit)) {
+                $query = "INSERT INTO Appuntamenti (CodCliente ,  DataOra ,  CodTipoAppuntamento) values
+	      	('$CodCliente', '$dataora', '$tipo')";
+                
+                $ok = mysqli_query($conn, $query);
+    			if($ok)                
+                	echo "<b>Appuntamento di $nome inserito correttamente il $date alle $time</b><br>";
+                
+            }
+            mysqli_close($conn);
+        }
+    }
 }
-
-echo "</table>";
-
-
-*/
-include("NuovoAppuntamento.php");
-
-include("DBlibrary.php");
-  $conn = dbconnect();
-	$submit=$_POST["submit"];
-	$nome=$_POST["nome"];
-	$cognome=$_POST["cognome"];
-	$sconto=$_POST["sconto"];
-	$costo=$_POST["costo"];
-	
-	$TipoAppuntamento=$_POST["TipoAppuntamento"];
-	
-	$gg=$_POST["gg"];
-	$mm=$_POST["mm"];
-	if($mm<=date('m') && $gg<=date('d')) 
-	$yyyy = date('Y')+1;
-	else
-	$yyyy = date('Y');
-	$hh=$_POST["hh"];
-	$min=$_POST["min"];
-	$app=$yyyy."-".$mm."-".$gg." ".$hh.":".$min.":00";
-
-
-
-
-//Estraiamo codice cliente
-	$CodClienteA=mysqli_query($conn, "SELECT RitCod('$nome', '$cognome')")
-		or die("Query fallita " . mysqli_error($conn));
-	$CodCliente = mysqli_fetch_row($CodClienteA);
-
-	
-
-  if (isset($submit))
-  {		$query = "INSERT INTO Appuntamenti (Costo, DataOra) values
-	      	($costo, '$app' );
-		INSERT INTO AppuntamentiClienti (CodCliente, Sconto, TipoAppuntamento) values
-		(.$CodCliente[0].,$sconto,'$TipoAppuntamento',);";
-		
- 		$ok = mysqli_query($conn, "CALL InserimentoAppuntamentoCliente('$CodCliente[0]', '$app', '$sconto', '$costo', '$TipoAppuntamento');") or 
-      			die ("Query Inserimento Fallita " . mysqli_error());
-	
-	echo "<b>Appuntamento di $nome inserito correttamente il $gg del $mm alle $hh:$min</b><br>";
-	
-	};
-	mysqli_close($conn);
-
 ?>
-
-
-
-
