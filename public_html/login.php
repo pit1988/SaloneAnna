@@ -2,7 +2,7 @@
 require_once "library.php";
 include "utils/DBlibrary.php";
 
-if(isset($REQUEST['username']) && isset($_REQUEST['password'])){
+if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 	$err="Arrivato dopo il check";
 	$username = $_REQUEST['username'];
 	$password = $_REQUEST['password'];
@@ -17,7 +17,7 @@ if(isset($REQUEST['username']) && isset($_REQUEST['password'])){
 		$_SESSION['username'] = $username; //salvo i dati
 		$_SESSION['password'] = $password;
 		$_SESSION['creazione'] = time(); //salvo l'ultima attività
-		header('location:../index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
+		header('location:index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
 	}
 	else {
 		$err="Nome utente o password errata";
@@ -33,7 +33,7 @@ $title_meta="Salone Anna, parrucchiere a Vicenza";
 $descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
 $keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif="Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
+$rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
 $is_admin=false;
 insert_header($rif, 0, $is_admin);
 echo<<<END

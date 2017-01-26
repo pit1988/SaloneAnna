@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 } else {
     require 'library.php';
-    $title      = "Compleanni: Salone Anna";
+    $title = "Compleanni: Salone Anna";
     $title_meta = "Compleanni: Salone Anna";
     $descr      = "";
     $keywords   = "Compleanni, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Compleanni nel mese</strong>';
     insert_header($rif, 2, true);
     
-    include("DBlibrary.php");
+    include("utils/DBlibrary.php");
     $conn = dbconnect();
     
     $query  = "SELECT c.CodCliente, c.Nome, c.Cognome, c.DataNascita FROM Clienti c WHERE DataNascita BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY))";

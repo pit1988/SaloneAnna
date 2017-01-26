@@ -1,78 +1,76 @@
-<body background="sfondo.jpg">
-	<p align="right" valign="top">/Home/Appuntamenti/NuovoAppuntamento</p>
-	<!-- Site navigation menu -->
-	<table>
-		<tr>
-			<td>
-				<ul class="navbar">
-					<li><a href="index.php">Home page</a></li>
-					<li><a href="Clienti.php">Clienti</a></li>
-					<li><a href="Prodotti.php">Prodotti</a></li>
-					<li><a href="Appuntamenti.php">Appuntamenti</a></li>
-				</ul>
-			</td>
-			<td>
-				<table>
-					<tr>
-						<h2>Nuovo Appuntamento Clienti</h2>
-					</tr>
-					<tr>
-						<form method=post action="conferma_appuntamento.php">
-							<?php
-								if (!isset($_GET["CodCliente"]))
-										{
-												echo "<tr>
-												<td><b>Cliente:</b><i>Nome:</i><input type=text size=40 name=nome></td>
-												<td><i>Cognome:</i><input type=text size=40 name=cognome></td>
-												</tr>";
-										}
-								else
-										{
-												$CodCliente = $_GET["CodCliente"];
-												echo "<input type=hidden name=CodCliente value=" . $CodCliente . ">";
-										}
-								;
-								?>	
-					<tr>
-					<b>Tipo appuntamento:</b>
-					<select name="TipoAppuntamento">
-					<option value="shampoo">Shampoo</option>
-					<option value="taglio">Taglio</option>
-					<option value="piega e phon">Piega e Phon</option>
-					<option value="piega e casco">Piega e Casco</option>
-					<option value="ondulazione">Ondulazione</option>
-					<option value="colore">Colore</option>
-					<option value="riflessante">Riflessante</option>
-					<option value="decolorazione">Decolorazione</option>
-					<option value="meches">Meches</option>
-					<option value="trattamenti">Trattamenti</option>
-					<option value="manicure/pedicure">Manicure/Pedicure</option>
-					</select>	
-					</tr>
-					<tr>
-					<td><b>Data:</b>
-					<i>Giorno:</i><input type=text size=40 name=gg></td>
-					<td><i>Mese: </i><input type=text size=40 name=mm></td>
-					</tr>
-					<tr>		
-					<td><b>Orario:</b>
-					<i>Ore: </i><input type=text size=40 name=hh></td>
-					<td><i>Minuti: </i><input type=text size=40 name=min></td>
-					</tr>
-					<tr>
-					<td><b>Costo:</b><input type=text size=40 name=costo></td>
-					</tr>
-					<tr>
-					<td><b>Sconto:</b><input type=text size=40 name=sconto></td>
-					</tr>
-					<tr>
-					<td><input type=submit name=submit value="Conferma"></td>
-					<td><input type=reset name=reset value="Cancella"></td>
-					</form>
-					</td>
-					</tr></form></tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</body>
+
+<?php
+
+session_start();
+session_regenerate_id(TRUE);
+
+// Controllo accesso
+if (!isset($_SESSION['username'] ) )
+{
+	header('location:index.php');
+	exit;
+}
+else
+{
+	require 'library.php';
+	$title="Nuovo appuntamento: Salone Anna";
+	$title_meta="Nuovo appuntamento: Salone Anna";
+	$descr="";
+	$keywords="Nuovo, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	
+	page_start($title, $title_meta, $descr, $keywords,'');
+	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
+	insert_header($rif, 4, true);
+	content_begin();
+	//aggiungere tabindex
+	echo '<h2>Nuovo Cliente</h2>
+            <form action="NuovoCliente.php" onsubmit="return true;" method="post">
+                <ul>
+                    <li>
+                        <p>
+                            <label for="TipoAppuntamento">Nome</label>
+                            <input type="radio" name="TipoAppuntamento" value="shampoo" />Shampoo
+							<input type="radio" name="TipoAppuntamento" value="taglio" />Taglio
+							<input type="radio" name="TipoAppuntamento" value="piega e phon" />Piega e Phon
+							<input type="radio" name="TipoAppuntamento" value="piega e casco" />Piega e Casco
+							<input type="radio" name="TipoAppuntamento" value="ondulazione" />Ondulazione
+							<input type="radio" name="TipoAppuntamento" value="colore" />Colore
+							<input type="radio" name="TipoAppuntamento" value="riflessante" />Riflessante
+							<input type="radio" name="TipoAppuntamento" value="decolorazione" />Decolorazione
+							<input type="radio" name="TipoAppuntamento" value="meches" />Meches
+							<input type="radio" name="TipoAppuntamento" value="trattamenti" />Trattamenti
+                        </p>
+                        <p>
+                            <label for="data">Data</label>
+                        <input type="text" name="data" id="data" tabindex="104"
+                        </p>
+                    </li>
+                    <li xml:lang="en">
+                        <p>
+                            <label for="orario">Orario</label>
+                            <input type="text" name="orario" id="orario" tabindex="102" />
+                        </p>
+                    </li>
+                    <li>
+                        <label for="costo">Costo</label>
+                         <input type="text" name="costo" id="costo" tabindex="103" />
+                    </li>
+                        <li>
+                        <label for="sconto">Sconto</label>
+                         <input type="text" name="sconto" id="sconto" tabindex="103" />
+                    </li>
+                    <li>
+                        <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
+                        <input type="reset" value="cancella"
+                        <span id="errors"></span>
+                    </li>
+                    <li>
+                        <div class="divider"></div>
+                    </li>
+                </ul>
+            </form>
+';
+    content_end();
+    page_end();
+}
+?>

@@ -4,7 +4,7 @@
 session_start();
 session_regenerate_id(TRUE);
 require 'library.php';
-require 'utils/dbconnect.php';
+require 'utils/DBlibrary.php';
 
 // Controllo accesso
 if (!isset($_SESSION['username'])) {
@@ -54,14 +54,13 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Nuovo Cliente</strong>';
     insert_header($rif, 2, true);
     content_begin();
-    echo '<h2>Nuovo Cliente</h2>';
-
     if(isset($err))
         echo $err;
     if(isset($esito))
         echo $esito;
-    echo '
-<form action="NuovoCliente.php" onsubmit="return true;" method="post">
+
+    echo '<h2>Nuovo Cliente</h2>
+            <form action="NuovoCliente.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
                         <p>
@@ -87,7 +86,7 @@ if (!isset($_SESSION['username'])) {
                         <label for="data">Data di nascita</label>
                         <input type="text" name="data" id="data" tabindex="104"
                     <li xml:lang="en">
-                        <input class="btn btn-submit" type="submit" name="submit" value="submit" tabindex="105"/>
+                        <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella"
                         <span id="errors"></span>
                     </li>
