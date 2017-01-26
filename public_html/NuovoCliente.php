@@ -3,37 +3,64 @@
 
 session_start();
 session_regenerate_id(TRUE);
+require 'library.php';
+require 'utils/dbconnect.php';
 
 // Controllo accesso
-if (!isset($_SESSION['username'] ) )
-{
-	header('location:index.php');
-	exit;
-}
-else
-{
-/*	if(!isset($_POST['submit']) || !isset($_POST['first_name']) || !isset($_POST['last_name']) || !isset($_POST['email']) || !isset($_POST['phone']) || !isset($_POST['data'])){
-		$err= "Uno dei parametri non è stato inserito correttamente";
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} else{ 
+    if(isset($_POST['submit'])) {
+        if (!isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['email']) OR !isset($_POST['phone']) OR !isset($_POST['data'])) {
+            $err= "Almeno uno dei parametri non è stato inserito correttamente";
+        }
+        else{
+            $sub=$_POST['submit'];
+            $nome = $_POST['first_name'];
+            $cognome = $_POST['last_name'];
+            $email = $_POST['email'];
+            $telefono = $_POST['phone'];
+            $date=$_POST['data'];
+            if(strlen($nome)==0 OR strlen($cognome)==0 OR strlen($email)==0 OR strlen($telefono)==0 OR strlen($date)==0)
+                $err= "Almeno uno dei parametri non è stato inserito correttamente";
+            else{
+                $data = date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d');
+                $conn = dbConnect();
+                $qry = "SELECT * FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email' AND DataNascita='$data'";
+    
+                $result = mysqli_query($conn, $qry);
+                
+                $num_rows = mysqli_num_rows($result);
+                if ($num_rows > 0)
+                    $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
+                else {
+                    $qry = "INSERT INTO Clienti(Nome,Cognome,Telefono,Email,DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', '$data')";
+                    $ris = mysqli_query($conn, $qry);
+                    if (!$ris) {
+                        $err= "<p>Non è stato possibile inserire il nuovo cliente</p>";
+                    } else
+                        $esito= "<p>Operazione eseguita con successo</p>";
+                }
+            }
+        }
+    }
+    $title = "Inserimento nuovo cliente: Salone Anna";
+    $title_meta = "Inserimento nuovo cliente: Salone Anna";
+    $descr = "";
+    $keywords = "Inserimento, Clienti, Nuovo, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Nuovo Cliente</strong>';
+    insert_header($rif, 2, true);
+    content_begin();
+    echo '<h2>Nuovo Cliente</h2>';
 
-		  $nome = $_POST['nome'];
-  $cognome= $_POST['cognome'];
-  $email = $_POST['email'];
-  $telefono = $_POST['telefono'];
-  $data=*/
-
-	}
-	require 'library.php';
-	$title="Clienti: Salone Anna";
-	$title_meta="Clienti: Salone Anna";
-	$descr="";
-	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
-	
-	page_start($title, $title_meta, $descr, $keywords,'');
-	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
-	insert_header($rif, 2, true);
-	content_begin();
-				echo '<h2>Nuovo Cliente</h2>
-
+    if(isset($err))
+        echo $err;
+    if(isset($esito))
+        echo $esito;
+    echo '
 <form action="NuovoCliente.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
@@ -60,7 +87,7 @@ else
                         <label for="data">Data di nascita</label>
                         <input type="text" name="data" id="data" tabindex="104"
                     <li xml:lang="en">
-                        <input class="btn btn-submit" type="submit" value="Invia" tabindex="105"/>
+                        <input class="btn btn-submit" type="submit" name="submit" value="submit" tabindex="105"/>
                         <input type="reset" value="cancella"
                         <span id="errors"></span>
                     </li>
@@ -70,8 +97,8 @@ else
                 </ul>
             </form>
 ';
-		content_end();
+    content_end();
     page_end();
-		}
+}
 ?>
-			
+            
