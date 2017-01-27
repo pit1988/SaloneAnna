@@ -126,8 +126,9 @@ function listaClienti() {
 }
 
 function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNascita = "") {
-	$data = date("Y-m-d", $dataNascita);
-	return eseguiQuery("INSERT Clienti(Nome, Cognome, Email, Telefono, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', '$data')");
+	$data = strtotime($dataNascita);
+	$data = date("Y-m-d", $data);
+	return eseguiQuery("INSERT Clienti(Nome, Cognome, Telefono, Email, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', '$data')");
 }
 
 function eliminaCliente($codice) {
