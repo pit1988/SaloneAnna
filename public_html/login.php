@@ -36,8 +36,8 @@ page_start($title, $title_meta, $descr, $keywords, '');
 $rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
 $is_admin=false;
 insert_header($rif, 0, $is_admin);
+content_begin();
 echo<<<END
-<div id="content">
 <form id="contenitore-login" name="login" action="login.php" method="POST">
 <p><i>Username</i></p>
 <p><input id="inputUsername" type="text" name="username" value="" tabindex="100" accesskey="u"></p>
@@ -45,9 +45,9 @@ echo<<<END
 <p><input id="inputPassword" type="password" name="password" value="" tabindex="101" accesskey="p"></p>
 <p><input id="accedi" type="submit" value="Login..." tabindex="102" accesskey="s"></p>
 </form>
-</div>
 END;
 if(isset($err))
     echo"<strong id=\"logError\">Errore: $err</strong>";
+content_end();
 page_end();
 ?>
