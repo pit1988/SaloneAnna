@@ -23,6 +23,10 @@ function eseguiQuery($query) {
 	return $result;
 }
 
+function checkCommaSet(&$set) { //metodo di supporto usato durante l'aggiornamento delle entità
+	if($set != "") {$set = $set.", ";}
+}
+
 /*******************MESSAGGI************************/
 
 class Messaggio { //classe che rappresenta un messaggio
@@ -66,22 +70,30 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 
 function aggiungiMessaggio($email, $nome, $cognome, $contenuto) { //se ci sono errori in qualche query la funzione restituisce FALSE, altrimenti TRUE
 	$conn = dbconnect();
-	$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
-	if($cliente && $cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
-		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
-		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
-		if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
-		else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
-	}
-	if($cliente) {
-		$contenuto = htmlentities($contenuto);
-		$dataora = date("Y-m-d H:i:s", time());
-		$codcliente = $cliente->fetch_assoc();
-		$codcliente = $codcliente['CodCliente'];
-		$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
-		$conn->close();
-		if($result) return TRUE;
-		return FALSE;
+	$errore = FALSE;
+	$checkChiocciola = strpos($email, '@');
+	$checkPunto = strrpos($email, '.');
+	if($email == "" || ($checkChiocciola === FALSE || $checkPunto === FALSE || $checkChiocciola>$checkPunto) || $nome=="" || $cognome=="") {$errore = TRUE;}
+	if($errore === FALSE) {
+		$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
+		if($cliente && $cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
+			$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
+			//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
+			if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
+			else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
+		}
+		if($cliente) {
+			$nome = htmlentities($nome);
+			$cognome = htmlentities($cognome);
+			$contenuto = htmlentities($contenuto);
+			$dataora = date("Y-m-d H:i:s", time());
+			$codcliente = $cliente->fetch_assoc();
+			$codcliente = $codcliente['CodCliente'];
+			$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
+			$conn->close();
+			if($result) return TRUE;
+			return FALSE;
+		}
 	}
 	$conn->close();
 	return FALSE;
@@ -127,8 +139,15 @@ function listaClienti() {
 
 function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNascita = "") {
 	$data = strtotime($dataNascita);
-	$data = date("Y-m-d", $data);
-	return eseguiQuery("INSERT Clienti(Nome, Cognome, Telefono, Email, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', '$data')");
+	if($data !== FALSE) {$data = "'".date("Y-m-d", $data)."'";}
+	else {$data = "NULL";}
+	$nome = htmlentities($nome);
+	$cognome = htmlentities($cognome);
+	$checkChiocciola = strpos($email, '@');
+	$checkPunto = strrpos($email, '.');
+	if($telefono == "") {$telefono="NULL";}
+	if($email == "" || ($checkChiocciola === FALSE || $checkPunto === FALSE || $checkChiocciola>$checkPunto)) {$email="NULL";}
+	return eseguiQuery("INSERT Clienti(Nome, Cognome, Telefono, Email, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', $data)");
 }
 
 function eliminaCliente($codice) {
@@ -136,9 +155,19 @@ function eliminaCliente($codice) {
 }
 
 function aggiornaCliente($codice, $nome = "", $cognome = "", $telefono = "", $email = "", $dataNascita = "") {
+	$set = "";
+	if($nome != "") {$nome = htmlentities($nome); $set = $set."Nome='$nome'";}
+	if($cognome != "") {$cognome = htmlentities($cognome); checkCommaSet($set); $set = $set."Cognome='$cognome'";}
+	if($telefono != "") {checkCommaSet($set); $set = $set."Telefono='$telefono'";}
+	$checkChiocciola = strpos($email, '@');
+	$checkPunto = strrpos($email, '.');
+	if($checkChiocciola !== FALSE && $checkPunto !== FALSE && $checkChiocciola<$checkPunto) {checkCommaSet($set); $set = $set."Email='$email'";}
 	if($dataNascita != "") {
 		$data = strtotime($dataNascita);
-		$data = date("Y-m-d", $data);
+		if($data !== FALSE) {$data = date("Y-m-d", $data); checkCommaSet($set); $set = $set."DataNascita='$data'";}
 	}
+	return eseguiQuery("UPDATE Clienti
+	SET $set
+	WHERE CodCliente=$codice");
 }
 ?>
