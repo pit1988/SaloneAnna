@@ -1,130 +1,104 @@
-<body background="sfondo.jpg">
-	<p align="right" valign="top">/Home/Appuntamenti/ModificaAppuntamento</p>
-	<body background="sfondo.jpg">
-		<p align="right" valign="top">/Home/Appuntamenti/ModificaAppuntamento</p>
-		<!-- Site navigation menu -->
-		<table>
-			<tr>
-				<td>
-					<ul class="navbar">
-						<li><a href="index.php">Home page</a></li>
-						<li><a href="Clienti.php">Clienti</a></li>
-						<li><a href="Prodotti.php">Prodotti</a></li>
-						<li><a href="Appuntamenti.php">Appuntamenti</a></li>
-					</ul>
-				</td>
-				<td>
-					<table>
 
-        
 <?php
 
-include("DBlibrary.php");
-$conn = dbconnect();
+session_start();
+session_regenerate_id(TRUE);
 
-$CodApp  = $_GET['CodApp'];
-$nome    = $_GET["nome" . $CodApp];
-$cognome = $_GET["cognome" . $CodApp];
-
-echo "<h3>Appuntamento #$CodApp di $nome $cognome :</h3><br>";
-
-$query = "
-    		SELECT s.DataOra, p.Nome as NomeProdotto, s.Utilizzo, a.Costo as CostoAppuntamento, ap.Sconto, ap.TipoAppuntamento
-			FROM Appuntamenti a NATURAL JOIN AppuntamentiClienti ap NATURAL JOIN storico s NATURAL JOIN Prodotti p
-			WHERE s.Codappuntamento=" . $CodApp . "
-			ORDER BY s.CodAppuntamento;";
-
-echo "<i>Modifica gli appuntamenti:</i>";
-$result      = mysqli_query($conn, $query);
-$number_cols = mysqli_num_fields($result);
-
-echo "<table border = 1>\n";
-echo "<tr align=center>\n";
-//intestazione tabella		
-for ($i = 0; $i < $number_cols; $i++)
-		{
-				echo "<th>" . mysqli_field_seek($result, $i) . "</th>\n";
-		}
-echo "</tr>\n";
-
-//corpo tabella
-while ($row = mysqli_fetch_row($result))
-		{
-				echo "<tr align=left>\n";
-				for ($i = 0; $i < $number_cols; $i++)
-						{
-								echo "<td>";
-								if (!isset($row[$i]))
-												echo " ";
-								else
-												echo $row[$i];
-								echo "</td>\n";
-						}
-				echo "</tr>\n";
-		}
-$intes = mysqli_fetch_row($result);
-
-echo "
-						<form method=POST action=\"ConfermaModificaApp.php\">
-						<tr align=left>
-						<td><input type=datetime name=datetime placeholder=\"AAAA-MM-GG hh:mm:ss\"></td>
-						<td><b><i>Modifica Costo:</i></b></td>
-						<td><input type=text name=costo placeholder=\"Costo Appuntamento €\"></td> 
-						<td><b><i>Modifica Sconto:</i></b></td>
-						<td><input type=text name=sconto placeholder=\"Sconto Appuntamento €\"></td>
-						<td><select name=TipoAppuntamento>
-							<option value=shampoo>Shampoo</option>
-							<option value=taglio>Taglio</option>
-							<option value=piega e phon>Piega e Phon</option>
-							<option value=piega e casco>Piega e Casco</option>
-							<option value=ondulazione>Ondulazione</option>
-							<option value=colore>Colore</option>
-							<option value=riflessante>Riflessante</option>
-							<option value=decolorazione>Decolorazione</option>
-							<option value=meches>Meches</option>
-							<option value=trattamenti>Trattamenti</option>
-							<option value=manicure/pedicure>Manicure/Pedicure</option>
-							</select>
-						</td>
-						</tr>
-							<input type=submit name=modapp value=\"Modifica Appuntamento\" >
-						</form>
-					</table>";
-echo $intes;
-
-//Inserisci Nuovo Prodotto
-echo "<br><i>Aggiungi Prodotto:</i>  ";
-$queryp  = "
-    	SELECT p.CodProdotto, p.Nome FROM Prodotti p WHERE p.Tipo='In Salon Service' AND p.Quantita is not NULL AND p.Quantita>0 ";
-$resultp = mysqli_query($conn, $queryp);
-
-
-$number_cols = mysqli_num_fields($resultp);
-echo "<form method=get action=\"ConfermaModificaApp.php\">
-	<input type=\"hidden\" name=codapp value=" . $CodApp . ">
-	<select name=Prodotto>";
-//corpo tabella
-while ($row = mysqli_fetch_row($resultp))
-		{
-				for ($i = 0; $i < $number_cols; $i++)
-						{
-								if (!isset($row[$i]))
-												echo " ";
-								echo "<option value=" . $row[0] . ">$row[1]</option>";
-						}
-		}
-
-echo "</select> Quantità di prodotto :<input type=text name=newquantita>
-		<input type=submit name=addprod value=\"Aggiungi Prodotto\" ><br>";
-
-
-echo "<br><i>Vuoi cancellare questo appuntamento?</i><input type=submit name=delapp value=\"Cancella\" ></form>
-	<br>Torna a <a href=\"RicercaAppuntamenti.php\">Ricerca Appuntamenti</a>";
-
-mysqli_close($conn);
-?>;
-				</td>
-			</tr>
-		</table>
-</body>
-
+// Controllo accesso
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} else {
+    require 'library.php';
+    require 'utils/DBlibrary.php';
+    
+    $title      = "Modifica appuntamento: Salone Anna";
+    $title_meta = "Modifica appuntamento: Salone Anna";
+    $descr      = "";
+    $keywords   = "Modifica, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';
+    insert_header($rif, 4, true);
+    content_begin();
+    
+    if (!isset($_POST['submit']) OR !isset($_POST['codapp'])) {
+        echo "<p>Problemi di connessione; <a href=\"ScegliAppuntamento.php\">segui il link per selezionare un altro appuntamento da modificare</a></p>";
+    } else {
+        
+        $conn = dbconnect();
+        $cod = $_POST["codapp"];
+        $query = "SELECT CodAppuntamento, Nome, Cognome, DataOra, CodTipoAppuntamento FROM Appuntamenti a JOIN Clienti c WHERE a.CodAppuntamento= '$cod'";
+        
+        $result   = mysqli_query($conn, $query);
+        // nessun risultato
+        $num_rows = mysqli_num_rows($result);
+        if (!$num_rows)
+            echo "<p>L'appuntamento richiesto non è prensente nel database</p>";
+        else {
+            
+            //aggiungere tabindex;
+            $str1 = '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
+                <ul>
+                    <li>
+                        <p> 
+                            <label for="TipoAppuntamento">Tipo appuntamento:</label>
+';
+            
+            $str2 = "";
+            $qry = "SELECT CodTipoAppuntamento, NomeTipo FROM TipoAppuntamento";
+            $conn = dbconnect();
+            $ris = mysqli_query($conn, $qry);
+            $number_rows = mysqli_num_rows($ris);
+            
+            if ($number_rows > 1) {
+                while ($entry = mysqli_fetch_row($ris)) {
+                    if ($entry[0] == $cod)
+                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $entry[0] . '" checked="checked" />' . $entry[1] . "\n";
+                    else
+                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $entry[0] . '" />' . $entry[1] . "\n";
+                }
+            }
+            
+            $row = mysqli_fetch_row($result);
+            
+            $str3 = '</p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="first_name">Nome</label>
+                            <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $row[1] . '"/>
+                        </p>
+                        <p>
+                            <label for="last_name">Cognome</label>
+                            <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $row[2] . '"/>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="data">Data</label>
+                        <input type="text" name="data" id="data" tabindex="104" value="' . date("d/m/Y", strtotime($row[3])) . '"/>
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            <label for="orario">Orario</label>
+                            <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($row[3])) . '"/>
+                        </p>
+                    </li>
+                    <li>
+                        <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
+                        <input type="reset" value="cancella" />
+                        <span id="errors"></span>
+                    </li>
+                </ul>
+                <input type="hidden" name="CodAppuntamento" value="'.$row[0].'">
+            </form>
+';
+            echo $str1 . $str2 . $str3;
+        }
+    }
+    content_end();
+    page_end();
+}
+?>
