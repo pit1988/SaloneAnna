@@ -20,7 +20,7 @@ if (isset($_SESSION['username'] ) ) {
     $name = $_SESSION['username'];
 }
 
-insert_header($rif, 2, $is_admin);
+insert_header($rif, 1, $is_admin);
 content_begin();
 
 

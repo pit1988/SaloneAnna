@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
     $conn = dbconnect();
     
     $cod = $_POST["codprod"];
-    $query = "SELECT p.Nome, p.Marca, p.Tipo, p.Quantita, p.PVendita, p.PRivendita FROM Prodotti p WHERE p.CodProdotto= '$cod'";
+    $query = "SELECT * FROM Prodotti p WHERE p.CodProdotto= '$cod'";
     
     $result = mysqli_query($conn, $query);
     // nessun risultato

@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
     insert_header($rif, 4, true);
     content_begin();
-    //aggiungere tabindex; modificare input type radio in modo da lasciare 
+    //aggiungere tabindex;
     $str1 = '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
