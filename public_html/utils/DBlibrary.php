@@ -44,7 +44,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC';
 	$result = $conn->query($query);
-	if(!$result) {$err = "Errore nella query: ".$conn->error."."; $conn->close();} //intanto segnalo così il caso, è da eliminare se l'errore viene gestito in locale
+	if(!$result) {$messaggi = NULL;}
 	else {
 		$messaggi = array();
 		while($messaggio = mysqli_fetch_assoc($result)) {
@@ -53,9 +53,9 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 			$ora = date("H:i", $time); //formato del tipo 23:46
 			array_push($messaggi, new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Nome'], $messaggio['Cognome']));
 		}
-		$conn->close();
-		return $messaggi; //è un array di Messaggi
 	}
+	$conn->close();
+	return $messaggi; //è un array di Messaggi, non viene garantito che $messaggi sia stato effettivamente istanziato
 }
 
 function eseguiQuery($query) {
@@ -74,8 +74,9 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 	}
 	$contenuto = htmlentities($contenuto);
 	$dataora = date("Y-m-d H:i:s", time());
-	//$codcliente = $cliente['CodCliente'];
-	//$conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, $contenuto, $dataora, 1)");
+	$codcliente = $cliente->fetch_assoc();
+	$codcliente = $codcliente['CodCliente'];
+	$conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, $contenuto, $dataora, 1)");
 	$conn->close();
 }
 
