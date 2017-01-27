@@ -96,7 +96,6 @@ legend{
 }
 
 #logError{      /*Compare dinamicamente a errore di inserimento*/
-   float:right;
    font-size: 1.2em;
    color: #8c001f; 
    margin-right: 1em;
@@ -196,7 +195,7 @@ legend{
     margin: 0 auto;
 }
 #contenitore-menu{
-    width: 376px;
+    width: 470px;
     margin: 0 auto;
 }
 
