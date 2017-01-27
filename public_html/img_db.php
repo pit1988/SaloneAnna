@@ -21,11 +21,11 @@ else{
     $rif="Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
     $is_admin=true;
     insert_header($rif, 1, $is_admin);
+    content_begin();
     $to_print='<form enctype="multipart/form-data" action="img_db.php" method="POST">
-    Image Title: <input type="text" name="img_title" /><br /><br />
-    Image Description: <input type="text" name="img_desc" /><br /><br />
-    Choose a file to upload: <input name="uploadedfile" type="file" /><br /><br />
-    <input name="submit" type="submit" value="submit" />
+    <div class="inputsL">Image Title:</div><div class="inputsR"><input type="text" name="img_title"/></div>
+    <div class="inputsL">Image Description:</div><div class="inputsR"><input type="text" name="img_desc" /></div>
+    <div class="inputsL">Choose a file to upload:</div><div class="inputsR"><input name="uploadedfile" type="file" /></div><input name="submit" type="submit" value="submit" />
     ';
     echo $to_print;
     if(isset($_POST["submit"]))
@@ -83,6 +83,7 @@ else{
     
     if(isset($err))
         echo"<p><b>Errore: $err</b></p>";
+    content_end();
     page_end();
 }
 ?>
