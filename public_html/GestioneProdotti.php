@@ -31,7 +31,6 @@ if (!isset($_SESSION['username'])) {
         echo "<p>Non ci sono entry nella tabella Prodotti</p>";
     else {
         form_start("POST", "ModificaProdotto.php");
-        //echo "<form action=\"ModificaProdotto.php\">";
         $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
             <caption>Prodotti modificabili</caption>
             <thead>
