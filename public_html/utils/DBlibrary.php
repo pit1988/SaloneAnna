@@ -60,27 +60,34 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 
 function eseguiQuery($query) {
 	$conn = dbconnect();
-	$conn->query($query);
+	$result = $conn->query($query); //se ci sono problemi segnala che c'è un errore
 	$conn->close();
+	return $result;
 }
 
 function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 	$conn = dbconnect();
 	$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
 	if($cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
-		$conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ($nome, $cognome, $email)");
+		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ($nome, $cognome, $email)");
 		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
-		$cliente = $conn->query("SELECT MAX(CodCliente) FROM Clienti");
+		if($result==TRUE) $cliente = $conn->query("SELECT MAX(CodCliente) FROM Clienti");
+		else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
 	}
-	$contenuto = htmlentities($contenuto);
-	$dataora = date("Y-m-d H:i:s", time());
-	$codcliente = $cliente->fetch_assoc();
-	$codcliente = $codcliente['CodCliente'];
-	$conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, $contenuto, $dataora, 1)");
+	if($cliente) {
+		$contenuto = htmlentities($contenuto);
+		$dataora = date("Y-m-d H:i:s", time());
+		$codcliente = $cliente->fetch_assoc();
+		$codcliente = $codcliente['CodCliente'];
+		$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
+		$conn->close();
+		return $result;
+	}
 	$conn->close();
+	return FALSE;
 }
 
 function eliminaMessaggio($codice) {
-	eseguiQuery("DELETE FROM Messaggi WHERE CodMessaggio='$codice'");
+	return eseguiQuery("DELETE FROM Messaggi WHERE CodMessaggi=$codice");
 }
 ?>
