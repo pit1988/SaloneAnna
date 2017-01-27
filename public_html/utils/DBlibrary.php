@@ -1,10 +1,10 @@
 <?php
 function dbconnect() {
 	$host = "localhost";
-	/*$user = "pgabelli";
+	$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";*/
-	$user = "agrenden";
+	$db = "pgabelli";
+	/*$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
 	$db = "agrenden";
 	/*$user = "smarches";
