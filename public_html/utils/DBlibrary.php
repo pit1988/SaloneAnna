@@ -1,12 +1,12 @@
 <?php
 function dbconnect() {
 	$host = "localhost";
-	/*$user = "pgabelli";
+	$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";*/
-	$user = "agrenden";
+	$db = "pgabelli";
+	/*$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";
+	$db = "agrenden";*/
 	/*$user = "smarches";
 	$pass = "";
 	$db = "smarches";*/
@@ -15,6 +15,15 @@ function dbconnect() {
 		echo "Connessione fallita(".$conn -> connect_errno."): ".$conn -> connect_error;
 	return $conn;
 };
+
+function eseguiQuery($query) {
+	$conn = dbconnect();
+	$result = $conn->query($query); //se ci sono problemi segnala che c'è un errore, oppure restituisce i risultati nel caso la query sia una SELECT
+	$conn->close();
+	return $result;
+}
+
+/*******************MESSAGGI************************/
 
 class Messaggio { //classe che rappresenta un messaggio
 	public $codice;
@@ -39,11 +48,9 @@ class Messaggio { //classe che rappresenta un messaggio
 }
 
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
-	$conn = dbconnect();
-	$query = 'SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
-	ORDER BY DataOra DESC';
-	$result = $conn->query($query);
+	ORDER BY DataOra DESC');
 	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$messaggi = array();
@@ -54,15 +61,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 			array_push($messaggi, new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Nome'], $messaggio['Cognome']));
 		}
 	}
-	$conn->close();
-	return $messaggi; //è un array di Messaggi, non viene garantito che $messaggi sia stato effettivamente istanziato
-}
-
-function eseguiQuery($query) {
-	$conn = dbconnect();
-	$result = $conn->query($query); //se ci sono problemi segnala che c'è un errore
-	$conn->close();
-	return $result;
+	return $messaggi; //è un array di Messaggi, non viene garantito che $messaggi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
 function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
@@ -89,5 +88,48 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 
 function eliminaMessaggio($codice) {
 	return eseguiQuery("DELETE FROM Messaggi WHERE CodMessaggi=$codice");
+}
+
+/************************Clienti**************************/
+
+class Cliente {
+	public $codice;
+	public $nome;
+	public $cognome;
+	public $telefono;
+	public $email;
+	public $dataNascita;
+	
+	function __construct($codice, $nome, $cognome, $telefono, $email, $dataNascita) {
+		$this->codice = $codice;
+		$this->nome = $nome;
+		$this->cognome = $cognome;
+		$this->telefono = $telefono;
+		$this->email = $email;
+		$this->dataNascita = $dataNascita;
+	}
+}
+
+function listaClienti() {
+	$result = eseguiQuery("SELECT * FROM Clienti");
+	if(!$result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$clienti = array();
+		while($cliente = mysqli_fetch_assoc($result)) {
+			$time = strtotime($cliente['DataNascita']);
+			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			array_push($clienti, new Cliente($cliente['CodCliente'], $cliente['Nome'], $cliente['Cognome'], $cliente['Telefono'], $cliente['Email'], $data));
+		}
+	}
+	return $clienti; //è un array di Clienti, non viene garantito che $clienti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNascita = "") {
+	$data = date("Y-m-d", $dataNascita);
+	return eseguiQuery("INSERT Clienti(Nome, Cognome, Email, Telefono, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', '$data')");
+}
+
+function eliminaCliente($codice) {
+	return eseguiQuery("DELETE FROM Clienti WHERE CodCliente=$codice");
 }
 ?>
