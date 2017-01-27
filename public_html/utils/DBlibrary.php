@@ -48,7 +48,7 @@ class Messaggio { //classe che rappresenta un messaggio
 }
 
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
-	$result = eseguiQuery('SELECT CodMssaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC');
 	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
@@ -71,7 +71,7 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) { //se ci sono e
 		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
 		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
 		if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
-		else {$cliente=NULL;} //se ci sono stati problemi di connessione li segnalo
+		else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
 	}
 	if($cliente) {
 		$contenuto = htmlentities($contenuto);
@@ -113,7 +113,7 @@ class Cliente {
 
 function listaClienti() {
 	$result = eseguiQuery("SELECT * FROM Clienti");
-	if(!$result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	if($result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$clienti = array();
 		while($cliente = mysqli_fetch_assoc($result)) {
@@ -133,5 +133,12 @@ function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNasc
 
 function eliminaCliente($codice) {
 	return eseguiQuery("DELETE FROM Clienti WHERE CodCliente=$codice");
+}
+
+function aggiornaCliente($codice, $nome = "", $cognome = "", $telefono = "", $email = "", $dataNascita = "") {
+	if($dataNascita != "") {
+		$data = strtotime($dataNascita);
+		$data = date("Y-m-d", $data);
+	}
 }
 ?>

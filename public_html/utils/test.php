@@ -1,7 +1,7 @@
 <?php
 require_once 'DBlibrary.php';
 $messaggi=listaMessaggi();
-if($messaggi) {
+if(isset($messaggi)) {
 	foreach ($messaggi as $messaggio) {
 		echo $messaggio->codice."	".$messaggio->contenuto."	".$messaggio->data."	".$messaggio->ora."	".$messaggio->daLeggere."	".$messaggio->nome."	".$messaggio->cognome;
 	}
