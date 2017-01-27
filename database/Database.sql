@@ -9,6 +9,7 @@ DROP TABLE IF EXISTS Account;
 DROP TABLE IF EXISTS Messaggi;
 DROP TABLE IF EXISTS Images;
 DROP TABLE IF EXISTS TipoAppuntamento;
+DROP VIEW IF EXISTS Contatori;
 DROP TRIGGER IF EXISTS ControlloAppuntamentiSpeciali;
 DROP TRIGGER IF EXISTS InserimentoProdotto;
 
