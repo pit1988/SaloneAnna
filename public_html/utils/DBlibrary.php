@@ -68,9 +68,9 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 	$conn = dbconnect();
 	$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
 	if($cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
-		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ($nome, $cognome, $email)");
+		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
 		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
-		if($result==TRUE) $cliente = $conn->query("SELECT MAX(CodCliente) FROM Clienti");
+		if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
 		else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
 	}
 	if($cliente) {
@@ -80,7 +80,7 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 		$codcliente = $codcliente['CodCliente'];
 		$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
 		$conn->close();
-		return $result;
+		return TRUE;
 	}
 	$conn->close();
 	return FALSE;
