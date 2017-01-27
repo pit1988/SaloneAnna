@@ -22,11 +22,11 @@ else
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Appuntamenti</strong>';
 	insert_header($rif, 4, true);
 	content_begin();
-		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
 		hyperlink("Tipo Appuntamento Frequente", "Toptype.php");
 		hyperlink("Ricerca Appuntamenti", "RicercaAppuntamenti.php");
-		hyperlink("Modifica Appuntamenti", "GestioneAppuntamenti.php");
-		hyperlink("Elimina Appuntamenti", "GestioneAppuntamenti.php");
+		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
+		hyperlink("Modifica Appuntamento", "ScegliAppuntamento.php");
+		hyperlink("Elimina Appuntamenti", "EliminaAppuntamenti.php");
 	content_end();
 	page_end();
 }
