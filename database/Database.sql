@@ -25,7 +25,7 @@ CREATE TABLE Clienti(
 INSERT INTO Clienti (CodCliente, Nome, Cognome, Telefono, Email, DataNascita) VALUES
 	('1','Anna Rosa', 'Cortivo', '3394188995', 'anna.cortivo@gmail.com', '1962-01-12'),
 	('2', 'Elena', 'Mason', '3464268921', 'elson@gmail.com', '1985-05-24'),
-	('3', 'Vittoria Maddalena', 'Brignani', '0495345198', '', '1945-11-12'),
+	('3', 'Vittoria Maddalena', 'Brignani', '0495345198', NULL, '1945-11-12'),
 	('4', 'Silvia', 'Zanella', '3382319004', 'silvia.zanella87@gmail.com', '1987-01-25');
 
 
