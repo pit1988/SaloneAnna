@@ -1,12 +1,12 @@
 <?php
 function dbconnect() {
 	$host = "localhost";
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";
-	/*$user = "agrenden";
+	$db = "pgabelli";*/
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";*/
+	$db = "agrenden";
 	/*$user = "smarches";
 	$pass = "";
 	$db = "smarches";*/
@@ -44,7 +44,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC';
 	$result = $conn->query($query);
-	if(!$result) {$messaggi = NULL;}
+	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$messaggi = array();
 		while($messaggio = mysqli_fetch_assoc($result)) {
