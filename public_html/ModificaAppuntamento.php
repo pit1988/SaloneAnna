@@ -38,7 +38,7 @@ if (!isset($_SESSION['username'])) {
         else {
             
             //aggiungere tabindex;
-            $str1 = '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
+            $str1 = '<form action="ConfermaModificaAppuntamento.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
                         <p> 

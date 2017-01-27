@@ -54,7 +54,7 @@ CREATE TABLE Appuntamenti (
 	CodCliente INT,
 	DataOra DATETIME NOT NULL,
 	CodTipoAppuntamento SMALLINT,
-	FOREIGN KEY(CodCliente) REFERENCES Clienti(CodCliente) ON DELETE CASCADE,
+	FOREIGN KEY(CodCliente) REFERENCES Clienti(CodCliente) ON DELETE CASCADE ON UPDATE NO ACTION,
 	FOREIGN KEY(CodTipoAppuntamento) REFERENCES TipoAppuntamento(CodTipoAppuntamento) ON DELETE CASCADE
 )Engine=InnoDB;
 
