@@ -1,49 +1,71 @@
-<body background="sfondo.jpg">
-	<p align="right" valign="top">/Home/Appuntamenti/RicercaAppuntamenti</p>
-	<!-- Site navigation menu -->
-	<table>
-		<tr>
-			<td>
-				<ul class="navbar">
-					<li><a href="index.php">Home page</a></li>
-					<li><a href="Clienti.php">Clienti</a></li>
-					<li><a href="Prodotti.php">Prodotti</a></li>
-					<li><a href="Appuntamenti.php">Appuntamenti</a></li>
-				</ul>
-			</td>
-			<td>
-				<form action="AppClienteGiorno.php" method=POST>
-					<div align="left">
-						<input type=checkbox name="data" value="data" checked> Per Data<br>
-						<input type=checkbox name="cli" value="cli"> Per Cliente<br>
-					</div>
-					<table border='1'>
-						<tr>
-							<td><b>Dati:</b></td>
-							<td><b>Data:</b></td>
-						</tr>
-						<tr>
-							<td>	
-								<i>Nome:</i><input align="right" type="text" name="nome" value=><br>
-								<i>Cognome:</i><input type="text" name="cognome" value=>
-							</td>
-							</td>
-							<td>
-								<?php
-									echo 	"
-										<i>Giorno:</i><input type=text size=40 name=gg value=".date('d')."><br>
-										<i>Mese: </i><input type=text size=40 name=mm value=".date('m')."><br>
-										<i>Anno: </i><input type=text size=40 name=yy value=".date('Y')."><br>
-										<i>Ad un ora precisa?</i><br>	
-										<i>Ore: </i><input type=text size=40 name=hh>
-										";
-									?>
-							</td>
-						</tr>
-					</table>
-					<input type=submit name=submit value=submit>
-				</form>
-			</td>
-		</tr>
-	</table>
-</body>
+<?php
+session_start();
+session_regenerate_id(TRUE);
+// Controllo accesso
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} else {
+    require 'library.php';
+    require 'utils/DBlibrary.php';
+    $title      = "Ricerca Appuntamento: Salone Anna";
+    $title_meta = "Ricerca Appuntamento: Salone Anna";
+    $descr      = "";
+    $keywords   = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Ricerca Appuntamento</strong>';
+    insert_header($rif, 4, true);
+    content_begin();
+    
+    $str_to_print = '
+<form action="AppClienteGiorno.php" method=POST>
+	<fieldset>
+		<legend>Ricerca tramite dati cliente:</legend>
+		<ul>
+			<li>
+				<p>
+					<label for="first_name">Nome</label>
+					<input type="text" name="first_name" id="first_name" tabindex="100"/>
+				</p>
+				<p>
+					<label for="last_name">Cognome</label>
+					<input type="text" name="last_name" id="last_name" tabindex="101" />
+				</p>
+			</li>
+			<li>
+				<p>
+					<input type=checkbox name="cli" value="cli"> Per Cliente
+				</p>
+			</li>
+		</ul>
+	</fieldset>
+	<fieldset>
+		<legend>Ricerca tramite data appuntamento:</legend>
+		<ul>
+			<li>
+				<p>
+					<label for="date">Data</label>
+					<input type="text" name="date" id="date" tabindex="104" />
+				</p>
+			</li>
+			<li>
+				<p>
+					<label for="orario">Ad un ora precisa?</label>
+					<input type="text" name="orario" id="orario" tabindex="102" />
+				</p>
+			</li>
+			<li>
+				<p>
+					<input type=checkbox name="data" value="data" checked> Per Data
+				</p>
+			</li>
+		</ul>
+	</fieldset>
+	<p><input type=submit name=submit value=submit></p>
+</form>
+	';
+    echo $str_to_print;
+    content_end();
+    page_end();
+}
+?>

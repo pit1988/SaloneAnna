@@ -41,8 +41,8 @@
                     </li>
                     <li>
                         <label for="data">Data per appuntamento</label>
-                        <input type="date" name="data" id="data" tabindex="104"
-                    <li xml:lang="en">
+                        <input type="date" name="data" id="data" tabindex="104" />
+                    <li>
                         <input class="btn btn-submit" type="submit" value="Invia" tabindex="105"/>
                         <span id="errors"></span>
                     </li>

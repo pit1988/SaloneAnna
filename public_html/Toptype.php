@@ -46,11 +46,6 @@ SELECT p.Parziali AS Quantità, CONCAT((TRUNCATE((p.Parziali/COUNT(*))*100, 2)),
     }
     $str_toprint .= "</tbody></table>";
     echo $str_toprint;
-?>
-</td>
-</tr>
-</table>
-<?php
     content_end();
     page_end();
 }
