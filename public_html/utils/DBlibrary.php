@@ -71,7 +71,7 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
 		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
 		if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
-		else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
+		else {$cliente=NULL;} //se ci sono stati problemi di connessione li segnalo
 	}
 	if($cliente) {
 		$contenuto = htmlentities($contenuto);
