@@ -13,7 +13,7 @@ if (!isset($_SESSION['username'])) {
         header('loation:NuovoAppuntamento.php');
     } else {
         require 'library.php';
-        require 'utils/DBlibrary.php';
+        include 'utils/DBlibrary.php';
         
         $title = "Nuovo appuntamento: Salone Anna";
         $title_meta = "Nuovo appuntamento: Salone Anna";

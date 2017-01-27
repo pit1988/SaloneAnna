@@ -1,33 +1,50 @@
-<body background="sfondo.jpg">
-<p align="right" valign="top">/Home/Appuntamenti/AppClientiGiorno</p>
-<!-- Site navigation menu -->
-<table>
-	<tr>
-	<td>
-<ul class="navbar">
-  <li><a href="index.php">Home page</a>
-  <li><a href="Clienti.php">Clienti</a>
-  <li><a href="Prodotti.php">Prodotti</a>
-  <li><a href="Appuntamenti.php">Appuntamenti</a>
-</ul>
-	</td>
-	<td>
-
-
-
 <?php
-	include ("DBlibrary.php");
+session_start();
+session_regenerate_id(TRUE);
+// Controllo accesso
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} elseif (!isset($_POST['submit']) OR !isset($_POST['cli']) OR !isset($_POST['data'])) {
+    $err = "<p>Problemi di connessione, <a href=\"RicercaAppuntamenti.php\"> segui il link per tornare alla pagina di ricerca</a>";
+} else {
+
+    require 'library.php';
+    require 'utils/DBlibrary.php';
+    $title      = "Ricerca Appuntamento: Salone Anna";
+    $title_meta = "Ricerca Appuntamento: Salone Anna";
+    $descr      = "";
+    $keywords   = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="RicercaAppuntamento.php">Ricerca Appuntamento</a> / <strong>Risultati</strong>';
+    insert_header($rif, 4, true);
+    content_begin();
+
+	include ("utils/DBlibrary.php");
 	$conn = dbconnect();
 
-	$submit=$_POST["submit"];
-	$nome=$_POST["nome"];
-	$cognome=$_POST["cognome"];
-
-	$gg=$_POST["gg"];
-	$mm=$_POST["mm"];
-	$yyyy=$_POST["yy"];
-	$hh=$_POST["hh"];
-	$app=$yyyy."-".$mm."-".$gg;
+	$s_client = $_POST['cli'];
+	$s_data = $_POST['data'];
+	echo $s_client.$s_data;
+/*
+	if (($s_client==true && (!isset($_POST['first_name']) OR !isset($_POST['last_name']))) OR ($s_data==true && (!isset($_POST['data'])))) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
+            $err = "Almeno uno dei parametri non è stato inserito correttamente";
+        } else {
+            $sub = $_POST['submit'];
+            $nome = $_POST['first_name'];
+            $cognome = $_POST['last_name'];
+            $date = $_POST['date'];
+            $time = $_POST['orario'];
+            
+            if (strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($date) == 0 OR strlen($time) == 0) //OR strlen($costo) == 0 OR strlen($sconto) == 0)
+                $err = "Almeno uno dei parametri non è stato inserito correttamente";
+            else {
+                $orario = $time.":00";
+                $data = date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d');
+                $dataora = date('Y-m-d H:i:s', strtotime("$data $orario"));
+                
+                
+                $conn = dbConnect();
 
 	$data=isset($_POST["data"])?$_POST["data"]:"";
 	$cliente=isset($_POST["cli"])?$_POST["cli"]:"";
@@ -40,7 +57,7 @@
 
 	$query="
 	SELECT c.Nome, c.Cognome, a.DataOra
-	FROM Clienti c NATURAL JOIN AppuntamentiClienti	ac NATURAL JOIN Appuntamenti a";
+	FROM Clienti c JOIN Appuntamenti a";
 
 	$where=" WHERE TRUE";
 
@@ -91,6 +108,10 @@
 	echo "</table>";
 
 	mysqli_close($conn);
+}
+	    
+} */
+content_end();
+    page_end();
+}
 ?>
-
-	</td>
