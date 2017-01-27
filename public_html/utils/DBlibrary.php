@@ -1,12 +1,12 @@
 <?php
 function dbconnect() {
 	$host = "localhost";
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";
-	/*$user = "agrenden";
+	$db = "pgabelli";*/
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";*/
+	$db = "agrenden";
 	/*$user = "smarches";
 	$pass = "";
 	$db = "smarches";*/
@@ -48,7 +48,7 @@ class Messaggio { //classe che rappresenta un messaggio
 }
 
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
-	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	$result = eseguiQuery('SELECT CodMssaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC');
 	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
@@ -64,10 +64,10 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 	return $messaggi; //è un array di Messaggi, non viene garantito che $messaggi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
-function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
+function aggiungiMessaggio($email, $nome, $cognome, $contenuto) { //se ci sono errori in qualche query la funzione restituisce FALSE, altrimenti TRUE
 	$conn = dbconnect();
 	$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
-	if($cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
+	if($cliente && $cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
 		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
 		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
 		if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
@@ -80,7 +80,8 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) {
 		$codcliente = $codcliente['CodCliente'];
 		$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
 		$conn->close();
-		return TRUE;
+		if($result) return TRUE;
+		return FALSE;
 	}
 	$conn->close();
 	return FALSE;
