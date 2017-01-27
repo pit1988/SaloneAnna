@@ -25,7 +25,8 @@ else
 		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
 		hyperlink("Tipo Appuntamento Frequente", "Toptype.php");
 		hyperlink("Ricerca Appuntamenti", "RicercaAppuntamenti.php");
-		hyperlink("Gestione Appuntamenti", "GestioneAppuntamenti.php");
+		hyperlink("Modifica Appuntamenti", "GestioneAppuntamenti.php");
+		hyperlink("Elimina Appuntamenti", "GestioneAppuntamenti.php");
 	content_end();
 	page_end();
 }

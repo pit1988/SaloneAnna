@@ -1,83 +1,74 @@
-<body background="sfondo.jpg">
-<p align="right" valign="top">/Home/GestioneAppuntamenti</p>
-<!-- Site navigation menu -->
-
-<table>
-  <td width= "10%" valign="top" height="10">
-    <ul class="navbar">
-      <li><a href="index.php">Home page</a>
-      <li><a href="Clienti.php">Clienti</a>
-      <li><a href="Prodotti.php">Prodotti</a>
-      <li><a href="Appuntamenti.php">Appuntamenti</a>
-    </ul>
-  </td>
-<td>
 <?php
-  session_start();
-  session_regenerate_id(TRUE);
-
-  // Controllo accesso
-
-  if (!isset($_SESSION['username'] ) )
-  {
-  header('location:Accesso.php');
-  exit;
-  }
-  else
-  {
-  echo "Benvenuto ".$_SESSION['username'];
-  echo"<form method=post action=\"ConfermaModificaAppuntamenti.php\">
-  <input type=submit name=\"submit\" value=\"Conferma\"><br>";
-
-  include ("DBlibrary.php");
-  $conn=dbconnect();
-
-  $query = "SELECT c.Nome, c.Cognome, c.CodCliente, a.DataOra, a.CodAppuntamento, a.Costo, ac.TipoAppuntamento FROM Appuntamenti a NATURAL JOIN AppuntamentiClienti ac NATURAL JOIN Clienti c WHERE DATE(a.DataOra)>CURDATE()";
-  $result = $conn->query($query);
-
-
-  $number_cols = $result->num_fields;
-
-  echo "<b><h2>Lista Appuntamenti Prossimi</h2></b>";
-  echo "<table border = 1>\n";
-  echo "<tr align=center>\n";
-  for($i=0; $i<$number_cols+1; $i++)
-    {
-  	if($i==$number_cols) echo"<th> Modifica </th>\n";
-  	else echo "<th>" . mysqli_field_seek ($result, $i). "</th>\n";
+session_start();
+session_regenerate_id(TRUE);
+// Controllo accesso
+if (!isset($_SESSION['username'])) {
+    header('location:index.php');
+    exit;
+} else {
+    require 'library.php';
+    require 'utils/DBlibrary.php';
+    $title      = "Ricerca Appuntamento: Salone Anna";
+    $title_meta = "Ricerca Appuntamento: Salone Anna";
+    $descr      = "";
+    $keywords   = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    page_start($title, $title_meta, $descr, $keywords, '');
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Gestione Appuntamenti</strong>';
+    insert_header($rif, 4, true);
+    content_begin();
+    
+    $conn = dbconnect();
+    
+    $query  = "SELECT a.CodAppuntamento AS 'ID', c.Nome, c.Cognome, c.CodCliente, a.DataOra, ta.NomeTipo AS 'Tipo' FROM Appuntamenti a JOIN TipoAppuntamento ta JOIN Clienti c WHERE DATE(a.DataOra)>=CURDATE() ORDER BY a.DataOra ASC, a.CodAppuntamento ASC";
+    $result = $conn->query($query);
+    
+    $number_cols = mysqli_num_fields($result);
+    
+    echo "<b><h2>Lista Appuntamenti Prossimi</h2></b>";
+    $num_rows = mysqli_num_rows($result);
+    if (!$num_rows)
+        echo "<p>Non ci sono appuntamenti da mostrare</p>";
+    else {
+        form_start("POST", "ConfermaModificaAppuntamenti.php");
+        echo '<fieldset>
+          <input type=submit name="submit" value="Conferma">';
+        $str_to_print = '<table id="topProd" summary="Classifica degli appuntamenti, divisi per tipo">
+    <caption>Classifica degli appuntamenti, divisi per tipo</caption>
+    <thead>
+    <tr>
+      <th scope="col">Seleziona</th>
+    ';
+        for ($i = 0; $i < $number_cols; $i++) {
+            $str_to_print .= '<th scope="col">' . (mysqli_fetch_field_direct($result, $i) ->name) . "</th>\n";
+        }
+        $str_to_print .= "</tr></thead></tbody>\n";
+        
+        while ($row = mysqli_fetch_row($result)) {
+            
+            $str_to_print .= "<tr>\n";
+            for ($i = 0; $i < $number_cols + 1; $i++) {
+                $str_to_print .= "<td>";
+                if (!isset($row[$i]))
+                    $str_to_print .= " ";
+                if ($i == 0)
+                    $str_to_print .= "<input type=\"radio\" name=\"codapp\" value= \"" . $row[$i] . "\"\/>";
+                else {
+                    $str_to_print .= $row[$i - 1];
+                }
+                
+                $str_to_print .= "</td>\n";
+            }
+            $str_to_print .= "</tr>\n";
+        }
+        
+        $str_to_print .= "</tbody></table>";
+        echo $str_to_print;
+        echo "<input type=submit name=\"submit\" value=\"Conferma\">
+      </td>
+      </form>";
     }
-  echo "</tr>\n";
-
-  //intestazione tabella
-
-  //corpo tabella
-  while ($row = mysqli_fetch_row($result))
-  {
-
-
-  echo "<tr align=left>\n";
-    for ($i=0; $i<$number_cols+1; $i++)
-    {
-  	echo "<td align=center>";
-      if(!isset($row[$i])) echo " ";
-      else if($i==3) echo "<input type=\"text\" name=\"DataOra\" value=\"$row[$i]\" />";
-      else
-        {echo $row[$i];} 
-  	if($i==$number_cols)echo "<input type=submit name=\"ok\" value='modifica' >";
-
-   
-      echo "</td>\n";
-    }
-    echo "</tr>\n";
-  }
-
-  echo "</table>";
-
-  echo"<input type=submit name=\"submit\" value=\"Conferma\">
-  </td>
-  </form>
-
-  	</td>";
-  }
-  mysqli_close($conn);
+    
+    content_end();
+    page_end();
+}
 ?>
