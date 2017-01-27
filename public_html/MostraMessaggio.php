@@ -28,7 +28,7 @@ if (!isset($_SESSION['username'])) {
 			<li><p><em>Messaggio inviato da:</em>' . $row[0] . ' ' . $row[1] . '</p></li>
 			<li><p><em>Ricevuto: </em>' . date("d/m/Y H:i", strtotime($row[3])) . '</p></li>
 			<li><p><em>Telefono cliente: </em><a href="tel: ' . $row[4] . '"">' . $row[4] . '</a> ; <em xml:lang="en">email:</em> <a href="mailto:' . $row[5] . '"">' . $row[5] . '</a></p></li>
-			<li><p><em>Contentuto: </em>' . $row[2] . '</p></li>
+			<li><p><em>Contentuto: </em></p><p>' . $row[2] . '</p></li>
 		</ul>
         ';
             $qr2      = "UPDATE Messaggi SET ToRead='false' WHERE CodMessaggi='$cmsg'";
