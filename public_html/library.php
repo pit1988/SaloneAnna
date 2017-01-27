@@ -135,7 +135,7 @@ function contenitore_menu($num) {
 /* funzione per inserire il menu per l'amministratore; num serve ad evidenziare l'elemento del menu in cui si è */
 function contenitore_menu_admin($num) { /*TOTO: Cambiare ordine elementi menu; sistemare tabindex ed id*/
     $to_print='
-<div id="contenitore-menu">
+<div id="contenitore-menu-admin">
 <p class="nascosto">
 <a href="#content" title="salta al contenuto principale">Salta menu navigazione</a>
 </p>
@@ -175,7 +175,7 @@ function subtitle($str) {
 
 /* Funzione che ritorna un link, associato ad una URL. */
 function hyperlink($str, $url) {
-    echo "<p><a href=\"$url\">$str</a></p>";
+    echo "<p><a class=\"createButton\" href=\"$url\">$str</a></p>";
 };
 
 /***************************************/
