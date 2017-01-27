@@ -191,8 +191,12 @@ legend{
 
 
 /*Menu*/
-#contenitore-menu {
-    width: 476px;
+#contenitore-menu-admin{
+    width: 700px;
+    margin: 0 auto;
+}
+#contenitore-menu{
+    width: 376px;
     margin: 0 auto;
 }
 
@@ -553,20 +557,20 @@ img {
     display: block;
 }
 
-/* VENDITA - Parte Admin e form */
+/* Parte Admin e form */
 
-.createButtons{
-    display: flex;
-}
 
 .createButton{
-    text-decoration: none; 
+    text-decoration: none;
     font-weight: bold;
     padding: 0.5em 1em 0.5em 1em;
-    margin: 1em;
+    margin: 2em auto;
     color: white;
     border: solid 1px #a30025;
     background: #b40029;
+    display: block;
+    width: 50%;
+    text-align: center;
 
 }
 
@@ -685,7 +689,7 @@ input[type="button"], input[type="submit"]{
     overflow:hidden;
 }
 
-.footer .footer-left .footer-menu a{
+.footer .footer-left a{
     padding-left: 2px;
     padding-right: 2px;
 }
