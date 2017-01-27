@@ -48,6 +48,6 @@ echo<<<END
 </div>
 END;
 if(isset($err))
-    echo"<BR><b>Errore: $err</b>";
+    echo"<strong id=\"logError\">Errore: $err</strong>";
 page_end();
 ?>
