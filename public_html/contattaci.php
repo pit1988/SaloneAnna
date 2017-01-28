@@ -1,8 +1,8 @@
 <?php
     $title="Contattaci: Salone Anna";
     $title_meta="Contattaci: Salone Anna";
-    $descr="Pagina con le modalità di contatto di GGarden. Ci puoi trovare a Padova, via Trieste, 63";
-    $keywords="GGarden, telefono, email, mail, indirizzo, dove trovarci, dove siamo, Padova, sede, via Trieste, e-mail, mappa";
+    $descr="Pagina con le modalità di contatto di Salone Anna. Ci puoi trovare a Montecchio Maggiore, via L.Ariosto 2";
+    $keywords="Salone, Anna, telefono, email, mail, indirizzo, dove trovarci, dove siamo, Vicenza, Montecchio, Maggiore, sede, via Ariosto, e-mail, mappa";
     require 'library.php';
     $onload="caricamentoContattaci(); replaceMap();";
     page_start($title, $title_meta, $descr, $keywords, $onload);
@@ -53,21 +53,20 @@
             </form>
         </div>
         <div>
-            <div class="Gaddress">
+            <div class="SaloneAnna">
                 <div class="info">
-                    <p>Oppure puoi trovarci nella nostra sede: in via Trieste, 63 - 35121 Padova PD.</p>
-                    <p>Siamo aperti dal luned&igrave; al sabato, dalle ore 8:30 alle 13:30 e dalle 15:00 alle 19:30.</p>
-                    <p>Il nostro numero di telefono &egrave;: <a href="tel:+1 555 123456" tabindex="106">+1 555 123456</a>.</p>
+                    <p>Oppure puoi trovarci nella nostra sede: in via L.Ariosto, 2 - 36075 Montecchio Maggiore VI.</p>
+                    <p>Siamo aperti dal Marted&igrave; al Gioved&igrave; dalle ore 8:30 alle 12:30 e dalle 15:00 alle 18:00.</p>
+                    <p>Venerd&igrave; e Sabato orario continuato dalle 7:30 alle 18:30.</p>
+                    <p>Il nostro numero di telefono &egrave;: <a href="tel:+39 04444 697939" tabindex="106">+39 04444 697939</a>.</p>
                 </div>
             </div>
         </div>
         <div id="divMappa">
             <div id="visualizzaMappa">
-                <a href="https://www.google.it/maps/place/Torre+Archimede,+Via+Trieste,+63,+35121+Padova+PD/@45.4113311,11.8854431,17z/data=!3m1!4b1!4m5!3m4!1s0x477eda58b44676df:0xfacae5884fca17f5!8m2!3d45.4113311!4d11.8876318" tabindex="105"><img id="fotoMappa" src="img/mappa.png" alt="Mappa della sede di GGarden" /></a>
+                <a href="https://www.google.it/maps/place/Parrucchiera+Anna+Cortivo/@45.496225,11.4236863,17z/data=!3m1!4b1!4m5!3m4!1s0x477f379bcb0739f5:0x5a67551b2fe8938a!8m2!3d45.496225!4d11.425875?hl=it" tabindex="105"><img id="fotoMappa" src="img/mappa.png" alt="Mappa della sede di Salone Anna" /></a>
             </div>
         </div>
-    </div>
-
 <?php
     content_end();
     page_end();
