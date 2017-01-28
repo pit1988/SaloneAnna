@@ -1,14 +1,19 @@
 <?php
-    if (isset($POST['submit'])) {
+    echo "1";
+    if (isset($_POST['submit'])) {
+        echo "2";
         include 'utils/DBlibrary.php';
-        // permette di inviare il messaggio anche se non c'è la data
         if (!isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['contenuto'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
             $err = "Almeno uno dei parametri non è stato inserito correttamente";
+            echo "3";
         } else {
+            echo "4";
             $sub = $_POST['submit'];
+            $email=$_POST['email'];
             $nome = $_POST['first_name'];
             $cognome = $_POST['last_name'];
             $contenuto = $_POST['contenuto'];
+            echo $nome.$cognome.$contenuto;
         $ris=aggiungiMessaggio($email, $nome, $cognome, $contenuto);
         if($ris)
             $msg="Messaggio inserito con successo";
@@ -27,7 +32,7 @@
     $onload="caricamentoContattaci(); replaceMap();";
     page_start($title, $title_meta, $descr, $keywords, $onload);
     $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
-    insert_header($rif, 5, false);
+    insert_header($rif, 4, false);
     content_begin();
 ?>
 
@@ -36,8 +41,14 @@
             <h3>Qualsiasi informazione in modo semplice</h3>
         </div>
         <div class="body_contattaci">
+<?php
+    if(isset($msg))
+        echo "<p>".$msg."</p>";
+    if(isset($err))
+        echo "<p>".$err."</p>";
+?>
             <noscript><p>Compila tutti i campi dati; inserisci un indirizzo <span xml:lang="en">e-mail</span> valido</p></noscript>
-            <form action="" onsubmit="return validazioneFormContattaci();" method="post">
+            <form action="contattaci.php" onsubmit="return validazioneformcontattaci();" method="POST">
                 <ul>
                     <li>
                         <p>
@@ -56,8 +67,8 @@
                         </p>
                     </li>
                     <li>
-                        <label for="comments">Messaggio</label>
-                        <textarea cols="46" rows="3" name="comments" id="comments" tabindex="103"></textarea>
+                        <label for="contenuto">Messaggio</label>
+                        <textarea cols="46" rows="3" name="contenuto" id="contenuto" tabindex="103"></textarea>
                     </li>
                     <?php
                     /* <li>
@@ -65,7 +76,7 @@
                         <input type="date" name="data" id="data" tabindex="104" />
                     <li> */
                     ?>
-                        <input class="btn btn-submit" type="submit" value="Invia" tabindex="105"/>
+                        <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <span id="errors"></span>
                     </li>
                     <li>
