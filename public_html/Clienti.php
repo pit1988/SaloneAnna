@@ -20,10 +20,12 @@ else
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
-	insert_header($rif, 2, true);
+	insert_header($rif, 5, true);
 	content_begin();
 		hyperlink("Compleanni Questo Mese", "QueryCompleanno.php");
+		hyperlink("Mostra l'elenco di tutti i clienti","ElencoClienti.php");
 		hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
+		hyperlink("Elimina clienti dall'elenco","EliminaCliente.php");
 		hyperlink("Storico Prodotti","StoricoProd.php");
 	content_end();
 	page_end();

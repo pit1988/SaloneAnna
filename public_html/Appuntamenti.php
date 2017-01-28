@@ -20,7 +20,7 @@ else
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Appuntamenti</strong>';
-	insert_header($rif, 4, true);
+	insert_header($rif, 6, true);
 	content_begin();
 		hyperlink("Tipo Appuntamento Frequente", "Toptype.php");
 		hyperlink("Ricerca Appuntamenti", "RicercaAppuntamenti.php");

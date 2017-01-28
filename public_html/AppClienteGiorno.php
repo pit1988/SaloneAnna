@@ -9,14 +9,17 @@ if (!isset($_SESSION['username'])) {
     require_once 'library.php';
     require_once 'utils/DBlibrary.php';
     if (!isset($_POST['submit']) OR (!isset($_POST['cli']) AND !isset($_POST['data']))) {
-        $err = "<p>Problemi di connessione, potresti non aver selezionato alcuna casella di ricerca. Segui il link per tornare alla <a href=\"RicercaAppuntamenti.php\">pagina di ricerca</a></p>";
+        $err = "<p>Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } else {
         $s_client = isset($_POST["cli"]) ? true : false;
-        $s_data   = isset($_POST["data"]) ? true : false;
+        $s_data   = isset($_POST["date"]) ? true : false;
         
-        if (($s_client == true && (!isset($_POST['first_name']) OR !isset($_POST['last_name']))) OR ($s_data == true && (!isset($_POST['data'])))) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
+        if (($s_client == true && (empty($_POST['first_name']) OR (empty($_POST['last_name']) ))) OR ($s_data == true && (empty($_POST['date'])) )) { 
             $err = "Almeno uno dei parametri non è stato inserito correttamente";
+
         } else {
+            if(empty($_POST['date']))
+            echo "lunghezza stringa data=";
             $sub = $_POST['submit'];
             
             $query = "SELECT c.Nome, c.Cognome, a.DataOra	FROM Clienti c JOIN Appuntamenti a";
@@ -33,17 +36,17 @@ if (!isset($_SESSION['username'])) {
                     $query .= " AND ";
                 else
                     $query .= " WHERE ";
-                $date = $_POST['date'];
-                $where .= "DATE(a.DataOra)=\"'$app'\"";
-                if (isset($_POST['orario'])) {
+                $date = date_format(date_create_from_format('d/m/Y', $_POST['date']), 'Y-m-d');
+                $query .= "DATE(a.DataOra)=\"$date\"";
+                if (!empty($_POST['orario'])) {
                     $hh = substr($_POST['orario'], 0, 2);
-                    $where .= " AND HOUR(a.DataOra)>=\"'$hh.'\"";
+                    $query .= " AND HOUR(a.DataOra)>=\"$hh\"";
                 }
             }
             
             $conn  = dbConnect();
             $query = $query;
-            
+            echo $query;
             $result = $conn->query($query);
             
             $num_rows = mysqli_num_rows($result);
@@ -55,8 +58,8 @@ if (!isset($_SESSION['username'])) {
                 $number_cols = mysqli_num_fields($result);
                 
                 $ris .= "<p><strong>Storico:</strong></p>";
-                $ris .= '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
-            <caption>Prodotti modificabili</caption>
+                $ris .= '<table id="ListaAppuntamenti" summary="Lista degli appuntamenti">
+            <caption>Lista degli appuntamenti</caption>
             <thead>
                 <tr>' . "\n";
                 for ($i = 0; $i < $number_cols; $i++) {

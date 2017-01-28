@@ -6,36 +6,39 @@ session_regenerate_id(TRUE);
 if (!isset($_SESSION['username'])) {
     header('location:index.php');
     exit;
-} elseif (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
-    $err = "Problemi di connessione";
 } else {
     require 'library.php';
     include("utils/DBlibrary.php");
     
-    $title = "Gestione Prodotti: Salone Anna";
+    $title      = "Gestione Prodotti: Salone Anna";
     $title_meta = "Gestione Prodotti: Salone Anna";
-    $descr = "";
-    $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $descr      = "";
+    $keywords   = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
     insert_header($rif, 4, true);
     content_begin();
     
-    $conn = dbconnect();
-    
-    $cod = $_POST["codprod"];
-    $query = "SELECT * FROM Prodotti p WHERE p.CodProdotto= '$cod'";
-    
-    $result = mysqli_query($conn, $query);
-    // nessun risultato
-    $num_rows = mysqli_num_rows($result);
-    if (!$num_rows)
-        echo "<p>Non è presente il prodotto richiesto</p>";
-    else {
-        $row = mysqli_fetch_row($result);
-        $to_print = '<form method="POST" action="esito_modifica.php">
-    		<ul>
+    if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
+        $err = "Problemi di connessione";
+    } else {
+        
+        
+        $conn = dbconnect();
+        
+        $cod   = $_POST["codprod"];
+        $query = "SELECT * FROM Prodotti p WHERE p.CodProdotto= '$cod'";
+        
+        $result   = mysqli_query($conn, $query);
+        // nessun risultato
+        $num_rows = mysqli_num_rows($result);
+        if (!$num_rows)
+            $err = "<p>Non è presente il prodotto richiesto</p>";
+        else {
+            $row      = mysqli_fetch_row($result);
+            $to_print = '<form method="POST" action="esito_modifica.php">
+            <ul>
                     <li>
                         <p>
                             <label for="nome">Nome</label>
@@ -74,13 +77,17 @@ if (!isset($_SESSION['username'])) {
                     </li>
                 </ul>
                 <input type="submit" name="submit" value="Procedi">
-        		<input type="reset" value="Cancella">
+                <input type="reset" value="Cancella">
             </form>
-    	';
-        echo $to_print;
+        ';
+            echo $to_print;
+        }
+        
     }
+    if (isset($err))
+        echo $err;
     content_end();
     page_end();
+    mysqli_close($conn);
 }
-mysqli_close($conn);
 ?>

@@ -14,7 +14,7 @@
       $keywords = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
       page_start($title, $title_meta, $descr, $keywords, '');
       $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Gestione Appuntamenti</strong>';
-      insert_header($rif, 4, true);
+      insert_header($rif, 6, true);
       content_begin();
       
       $conn = dbconnect();

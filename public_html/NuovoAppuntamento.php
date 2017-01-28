@@ -19,7 +19,7 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
-    insert_header($rif, 4, true);
+    insert_header($rif, 6, true);
     content_begin();
     //aggiungere tabindex;
     $str1 = '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
