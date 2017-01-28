@@ -248,4 +248,22 @@ class Appuntamento {
 		$this->codice = $email;
 	}
 }
+
+function listaAppuntamenti() {
+	$result = eseguiQuery("SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
+	FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente
+	ORDER BY DataOra DESC");
+	if(!$result) {$appuntamenti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$appuntamenti = array();
+		while($appuntamento = mysqli_fetch_assoc($result)) {
+			$time = strtotime($appuntamento['DataNascita']);
+			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			$ora = date("H:i", $time); //formato del tipo 23:46
+			$prezzo = round($appuntamento['prezzo'] * ((100-$appuntamento['sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
+			array_push($appuntamenti, new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']));
+		}
+	}
+	return $appuntamenti; //è un array di Clienti, non viene garantito che $clienti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
 ?>

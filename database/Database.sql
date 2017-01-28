@@ -32,7 +32,7 @@ INSERT INTO Clienti (CodCliente, Nome, Cognome, Telefono, Email, DataNascita) VA
 CREATE TABLE TipoAppuntamento ( 
 	CodTipoAppuntamento SMALLINT PRIMARY KEY AUTO_INCREMENT,
 	NomeTipo VARCHAR(30) NOT NULL,
-	Costo DOUBLE,
+	Costo DOUBLE NOT NULL,
 	Sconto DOUBLE 
 )Engine=InnoDB;
 
