@@ -1,4 +1,24 @@
 <?php
+    if (isset($POST['submit'])) {
+        include 'utils/DBlibrary.php';
+        // permette di inviare il messaggio anche se non c'è la data
+        if (!isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['contenuto'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
+            $err = "Almeno uno dei parametri non è stato inserito correttamente";
+        } else {
+            $sub = $_POST['submit'];
+            $nome = $_POST['first_name'];
+            $cognome = $_POST['last_name'];
+            $contenuto = $_POST['contenuto'];
+        $ris=aggiungiMessaggio($email, $nome, $cognome, $contenuto);
+        if($ris)
+            $msg="Messaggio inserito con successo";
+        else{
+            $err=true;
+            $msg="Sono presenti errori; riprova per favore";
+        }
+
+      }  
+    }
     $title="Contattaci: Salone Anna";
     $title_meta="Contattaci: Salone Anna";
     $descr="Pagina con le modalità di contatto di Salone Anna. Ci puoi trovare a Montecchio Maggiore, via L.Ariosto 2";
@@ -39,10 +59,12 @@
                         <label for="comments">Messaggio</label>
                         <textarea cols="46" rows="3" name="comments" id="comments" tabindex="103"></textarea>
                     </li>
-                    <li>
+                    <?php
+                    /* <li>
                         <label for="data">Data per appuntamento</label>
                         <input type="date" name="data" id="data" tabindex="104" />
-                    <li>
+                    <li> */
+                    ?>
                         <input class="btn btn-submit" type="submit" value="Invia" tabindex="105"/>
                         <span id="errors"></span>
                     </li>

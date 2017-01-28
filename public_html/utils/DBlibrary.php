@@ -23,6 +23,10 @@ function eseguiQuery($query) {
 	return $result;
 }
 
+function checkCommaSet(&$set) { //metodo di supporto usato durante l'aggiornamento delle entità
+	if($set != "") {$set = $set.", ";}
+}
+
 /*******************MESSAGGI************************/
 
 class Messaggio { //classe che rappresenta un messaggio
@@ -48,6 +52,7 @@ class Messaggio { //classe che rappresenta un messaggio
 }
 
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
+	eseguiQuery("DELETE FROM Messaggi WHERE DataOra < (CURDATE() - INTERVAL 2 MONTH)"); //non mi interessa se va a buon fine perché non è una query essenziale, se questa query fallisce ma quella sotto no allora la funzione ha esito positivo
 	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC');
@@ -66,22 +71,30 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 
 function aggiungiMessaggio($email, $nome, $cognome, $contenuto) { //se ci sono errori in qualche query la funzione restituisce FALSE, altrimenti TRUE
 	$conn = dbconnect();
-	$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
-	if($cliente && $cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
-		$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
-		//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
-		if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
-		else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
-	}
-	if($cliente) {
-		$contenuto = htmlentities($contenuto);
-		$dataora = date("Y-m-d H:i:s", time());
-		$codcliente = $cliente->fetch_assoc();
-		$codcliente = $codcliente['CodCliente'];
-		$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
-		$conn->close();
-		if($result) return TRUE;
-		return FALSE;
+	$errore = FALSE;
+	$checkChiocciola = strpos($email, '@');
+	$checkPunto = strrpos($email, '.');
+	if($email == "" || ($checkChiocciola === FALSE || $checkPunto === FALSE || $checkChiocciola>$checkPunto) || $nome=="" || $cognome=="") {$errore = TRUE;}
+	if($errore === FALSE) {
+		$cliente = $conn->query("SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email'");
+		if($cliente && $cliente->num_rows == 0) { //se il cliente è nuovo lo aggiungo al database
+			$result = $conn->query("INSERT INTO Clienti(Nome, Cognome, Email) VALUES ('$nome', '$cognome', '$email')");
+			//per inserire il messaggio mi serve il codice del cliente, quindi devo eseguire nuovamente la query per ottenerlo
+			if($result==1) {$cliente = $conn->query("SELECT MAX(CodCliente) AS CodCliente FROM Clienti");}
+			else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
+		}
+		if($cliente) {
+			$nome = htmlentities($nome);
+			$cognome = htmlentities($cognome);
+			$contenuto = htmlentities($contenuto);
+			$dataora = date("Y-m-d H:i:s", time());
+			$codcliente = $cliente->fetch_assoc();
+			$codcliente = $codcliente['CodCliente'];
+			$result = $conn->query("INSERT INTO Messaggi(CodCliente, Contenuto, DataOra, ToRead) VALUES ($codcliente, '$contenuto', '$dataora', 1)");
+			$conn->close();
+			if($result) return TRUE;
+			return FALSE;
+		}
 	}
 	$conn->close();
 	return FALSE;
@@ -113,7 +126,7 @@ class Cliente {
 
 function listaClienti() {
 	$result = eseguiQuery("SELECT * FROM Clienti");
-	if($result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	if(!$result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$clienti = array();
 		while($cliente = mysqli_fetch_assoc($result)) {
@@ -127,8 +140,15 @@ function listaClienti() {
 
 function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNascita = "") {
 	$data = strtotime($dataNascita);
-	$data = date("Y-m-d", $data);
-	return eseguiQuery("INSERT Clienti(Nome, Cognome, Telefono, Email, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', '$data')");
+	if($data !== FALSE) {$data = "'".date("Y-m-d", $data)."'";}
+	else {$data = "NULL";}
+	$nome = htmlentities($nome);
+	$cognome = htmlentities($cognome);
+	$checkChiocciola = strpos($email, '@');
+	$checkPunto = strrpos($email, '.');
+	if($telefono == "") {$telefono="NULL";}
+	if($email == "" || ($checkChiocciola === FALSE || $checkPunto === FALSE || $checkChiocciola>$checkPunto)) {$email="NULL";}
+	return eseguiQuery("INSERT Clienti(Nome, Cognome, Telefono, Email, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', $data)");
 }
 
 function eliminaCliente($codice) {
@@ -136,9 +156,96 @@ function eliminaCliente($codice) {
 }
 
 function aggiornaCliente($codice, $nome = "", $cognome = "", $telefono = "", $email = "", $dataNascita = "") {
+	$set = "";
+	if($nome != "") {$nome = htmlentities($nome); $set = $set."Nome='$nome'";}
+	if($cognome != "") {$cognome = htmlentities($cognome); checkCommaSet($set); $set = $set."Cognome='$cognome'";}
+	if($telefono != "") {checkCommaSet($set); $set = $set."Telefono='$telefono'";}
+	$checkChiocciola = strpos($email, '@');
+	$checkPunto = strrpos($email, '.');
+	if($checkChiocciola !== FALSE && $checkPunto !== FALSE && $checkChiocciola<$checkPunto) {checkCommaSet($set); $set = $set."Email='$email'";}
 	if($dataNascita != "") {
 		$data = strtotime($dataNascita);
-		$data = date("Y-m-d", $data);
+		if($data !== FALSE) {$data = date("Y-m-d", $data); checkCommaSet($set); $set = $set."DataNascita='$data'";}
+	}
+	return eseguiQuery("UPDATE Clienti
+	SET $set
+	WHERE CodCliente=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+}
+
+/**********************TIPO APPUNTAMENTI***********************/
+
+class TipoAppuntamento {
+	public $codice;
+	public $nome;
+	public $costo;
+	public $sconto;
+	
+	function __construct($codice, $nome, $costo, $sconto) {
+		$this->codice = $codice;
+		$this->nome = $nome;
+		$this->costo = $costo;
+		$this->sconto = $sconto;
+	}
+}
+
+function listaTipoAppuntamenti() {
+	$result = eseguiQuery("SELECT * FROM TipoAppuntamento");
+	if(!$result) {$tipi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$tipi = array();
+		while($tipo = mysqli_fetch_assoc($result)) {
+			array_push($tipi, new TipoAppuntamento($tipo['CodTipoAppuntamento'], $tipo['NomeTipo'], $tipo['Costo'], $tipo['Sconto']));
+		}
+	}
+	return $tipi; //è un array di TipoAppuntamento, non viene garantito che $tipi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function aggiungiTipoAppuntamento($nome, $costo=0, $sconto=0) {
+	$nome = htmlentities($nome);
+	if($nome === "") {return FALSE;} //un TipoAppuntamento senza nome non ha senso
+	if($costo === "") {$costo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
+	if($sconto === "") {$sconto=0;}
+	echo "INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)";
+	return eseguiQuery("INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)");
+}
+
+function eliminaTipoAppuntamento($codice) {
+	return eseguiQuery("DELETE FROM TipoAppuntamento WHERE CodTipoAppuntamento=$codice");
+}
+
+function aggiornaTipoAppuntamento($codice, $nome = "", $costo = -1, $sconto = -1) {
+	$set = "";
+	if($nome != "") {$nome = htmlentities($nome); $set = $set."NomeTipo='$nome'";}
+	if($costo > -1) {checkCommaSet($set); $set = $set."Costo=$costo";} //uso -1 come valore nullo perché 0 potrebbe essere un numero valido, soprattutto per sconto
+	if($sconto > -1) {checkCommaSet($set); $set = $set."Sconto=$sconto";}
+	return eseguiQuery("UPDATE TipoAppuntamento
+	SET $set
+	WHERE CodTipoAppuntamento=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+}
+
+/***********************APPUNTAMENTI***********************/
+
+class Appuntamento {
+	public $codice;
+	public $data;
+	public $ora;
+	public $tipo;
+	public $prezzo;
+	public $nome;
+	public $cognome;
+	public $telefono;
+	public $email;
+	
+	function __construct($codice, $data, $ora, $tipo, $prezzo, $nome, $cognome, $telefono, $email) {
+		$this->codice = $codice;
+		$this->codice = $data;
+		$this->codice = $ora;
+		$this->codice = $tipo;
+		$this->codice = $prezzo; //inteso come costo già scontato
+		$this->codice = $nome;
+		$this->codice = $cognome;
+		$this->codice = $telefono;
+		$this->codice = $email;
 	}
 }
 ?>
