@@ -18,7 +18,17 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 4, true);
     content_begin();
 
+    if(isset($_POST['submit'])){
+      if(isset($_POST['Ids'])){
+    $ids=$_POST['Ids'];
+    foreach($ids as $d){
+      $query_el="delete from Clienti where Id='$d'";
+      mysql_query($query_el,$conn) or err('impossibile eliminare Id=$d');
+      echo"Il prodotto con Id='$d' e` stato cancellato con successo<BR>";
+    }
+
     include("utils/DBlibrary.php");
+    //inserire funzione prelievo prodotti.
     $conn = dbconnect();
     
     $query = "SELECT * FROM Prodotti p WHERE p.Quantita is not NULL AND p.Quantita>0 ";
