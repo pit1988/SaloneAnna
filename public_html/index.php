@@ -22,8 +22,7 @@ if (isset($_SESSION['username'] ) ) {
 
 insert_header($rif, 0, $is_admin,'');
 content_begin();
-echo "Benvenuto ".$name;
-echo '<img valign= "center" align= "center" src="parrucchiera.jpg" >';
+echo"<div id=\"immagine\" class=\"center\" title=\"Modella\" alt=\"Immagine modella bionda\"></div>";
 content_end();
 page_end();
 ?>
