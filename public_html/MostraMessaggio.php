@@ -31,7 +31,7 @@ if (!isset($_SESSION['username'])) {
 			<li><p><em>Contentuto: </em></p><p>' . $row[2] . '</p></li>
 		</ul>
         ';
-            $qr2      = "UPDATE Messaggi SET ToRead='false' WHERE CodMessaggi='$cmsg'";
+            $qr2 = "UPDATE Messaggi SET ToRead='false' WHERE CodMessaggi='$cmsg'";
             $result   = mysqli_query($conn, $qr2);
         }
     }
