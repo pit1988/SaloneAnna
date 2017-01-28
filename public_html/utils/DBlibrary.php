@@ -52,6 +52,7 @@ class Messaggio { //classe che rappresenta un messaggio
 }
 
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
+	eseguiQuery("DELETE FROM Messaggi WHERE DataOra < (CURDATE() - INTERVAL 2 MONTH)"); //non mi interessa se va a buon fine perché non è una query essenziale, se questa query fallisce ma quella sotto no allora la funzione ha esito positivo
 	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC');
@@ -125,7 +126,7 @@ class Cliente {
 
 function listaClienti() {
 	$result = eseguiQuery("SELECT * FROM Clienti");
-	if($result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	if(!$result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$clienti = array();
 		while($cliente = mysqli_fetch_assoc($result)) {
@@ -168,6 +169,83 @@ function aggiornaCliente($codice, $nome = "", $cognome = "", $telefono = "", $em
 	}
 	return eseguiQuery("UPDATE Clienti
 	SET $set
-	WHERE CodCliente=$codice");
+	WHERE CodCliente=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+}
+
+/**********************TIPO APPUNTAMENTI***********************/
+
+class TipoAppuntamento {
+	public $codice;
+	public $nome;
+	public $costo;
+	public $sconto;
+	
+	function __construct($codice, $nome, $costo, $sconto) {
+		$this->codice = $codice;
+		$this->nome = $nome;
+		$this->costo = $costo;
+		$this->sconto = $sconto;
+	}
+}
+
+function listaTipoAppuntamenti() {
+	$result = eseguiQuery("SELECT * FROM TipoAppuntamento");
+	if(!$result) {$tipi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$tipi = array();
+		while($tipo = mysqli_fetch_assoc($result)) {
+			array_push($tipi, new TipoAppuntamento($tipo['CodTipoAppuntamento'], $tipo['NomeTipo'], $tipo['Costo'], $tipo['Sconto']));
+		}
+	}
+	return $tipi; //è un array di TipoAppuntamento, non viene garantito che $tipi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function aggiungiTipoAppuntamento($nome, $costo=0, $sconto=0) {
+	$nome = htmlentities($nome);
+	if($nome === "") {return FALSE;} //un TipoAppuntamento senza nome non ha senso
+	if($costo === "") {$costo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
+	if($sconto === "") {$sconto=0;}
+	echo "INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)";
+	return eseguiQuery("INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)");
+}
+
+function eliminaTipoAppuntamento($codice) {
+	return eseguiQuery("DELETE FROM TipoAppuntamento WHERE CodTipoAppuntamento=$codice");
+}
+
+function aggiornaTipoAppuntamento($codice, $nome = "", $costo = -1, $sconto = -1) {
+	$set = "";
+	if($nome != "") {$nome = htmlentities($nome); $set = $set."NomeTipo='$nome'";}
+	if($costo > -1) {checkCommaSet($set); $set = $set."Costo=$costo";} //uso -1 come valore nullo perché 0 potrebbe essere un numero valido, soprattutto per sconto
+	if($sconto > -1) {checkCommaSet($set); $set = $set."Sconto=$sconto";}
+	return eseguiQuery("UPDATE TipoAppuntamento
+	SET $set
+	WHERE CodTipoAppuntamento=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+}
+
+/***********************APPUNTAMENTI***********************/
+
+class Appuntamento {
+	public $codice;
+	public $data;
+	public $ora;
+	public $tipo;
+	public $prezzo;
+	public $nome;
+	public $cognome;
+	public $telefono;
+	public $email;
+	
+	function __construct($codice, $data, $ora, $tipo, $prezzo, $nome, $cognome, $telefono, $email) {
+		$this->codice = $codice;
+		$this->codice = $data;
+		$this->codice = $ora;
+		$this->codice = $tipo;
+		$this->codice = $prezzo; //inteso come costo già scontato
+		$this->codice = $nome;
+		$this->codice = $cognome;
+		$this->codice = $telefono;
+		$this->codice = $email;
+	}
 }
 ?>
