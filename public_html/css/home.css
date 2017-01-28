@@ -51,7 +51,8 @@ html, body{padding:0px;
     margin:0px;
     font-family: Verdana, Helevetica, sans-serif;
     color: black;
-    background-color:#fcfcb0;}
+    background-color:#C4B49D;
+}
 
 
 #headheader{
@@ -191,7 +192,7 @@ legend{
 
 /*Menu*/
 #contenitore-menu-admin{
-    width: 700px;
+    width: 742px;
     margin: 0 auto;
 }
 #contenitore-menu{
@@ -211,7 +212,7 @@ legend{
     padding: 0;
     width: 100%;
     overflow: hidden;
-    background-color: #fcfcb0;
+    background-color: #C4B49D;
 }
 
 li {
@@ -235,7 +236,7 @@ li a:hover {
 /*Contenuto-Body-Centro*/
 
 #content{
-    background-color:#fcfcb0;
+    background-color:#c4b49d;
     margin:0 auto;
     padding: 1em;
     width:70%;
@@ -255,7 +256,7 @@ li a:hover {
 }
 
 #immagine{
-    background-image:url(../img/home1.jpeg);
+    background-image:url(../public_html/img/home1.jpeg);
     background-repeat:no-repeat;
     background-position:center;
     width:100%;
@@ -267,7 +268,7 @@ li a:hover {
     font-size:1.2em;
     text-align: center;
     border-radius: 0px 0px 20px 20px;
-    background: #585346;
+    background: #736F56;
 }
 
 .titolo_contattaci h2{
@@ -294,9 +295,20 @@ li a:hover {
 }
 
 
-.titolo-tabella h3 {
-   font-size: 30px;
+#titolo-prezzi{
+   font-size: 1.9em;
    font-weight: 400;
+   font-style:normal;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+   margin: 1em;
+}
+
+.rtipo{
+   font-size: 1,4px;
+   font-weight: 600;
    font-style:normal;
    text-align:center;
    font-family: "Roboto", helvetica, arial, sans-serif;
@@ -320,14 +332,6 @@ tr {
   font-size:16px;
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
-}
-
-.titolo-tabella {
-  display: block;
-  margin: auto;
-  max-width: 600px;
-  padding:5px;
-  width: 100%;
 }
 
 thead tr{
@@ -355,8 +359,8 @@ td {
 
 
 th {
-  color:#D5DDE5;;
-  background:#1b1e24;
+  color:#D5DDE5;
+  background:#736F56;
   border-bottom:4px solid #9ea7af;
   border-right: 1px solid #343a45;
   font-size:23px;
@@ -486,10 +490,10 @@ form input {
     font-size: 1em;
 }
 form textarea {
-    margin: 1em 0.5em 1em 0.5em;
+    margin: 1em 2em 1em 3em;
     border: 1px solid #ccc;
     padding: 6px 10px;
-    width: 80%;
+    width: 70%;
     color: #555;
 }
 form small {

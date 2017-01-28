@@ -52,7 +52,7 @@ html, body{
     margin:0px;
     font-family: Verdana, Helevetica, sans-serif;
     color: black;
-    background-color:#fcfcb0;
+    background-color:#C4B49D;
 }
 
 
@@ -236,7 +236,7 @@ fieldset{
     padding: 0;
     width: 101%;
     overflow: hidden;
-    background-color: #fcfcb0;
+    background-color: #C4B49D;
 }
 
 li {
