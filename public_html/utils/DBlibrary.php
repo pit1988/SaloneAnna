@@ -55,7 +55,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 	eseguiQuery("DELETE FROM Messaggi WHERE DataOra < (CURDATE() - INTERVAL 2 MONTH)"); //non mi interessa se va a buon fine perché non è una query essenziale, se questa query fallisce ma quella sotto no allora la funzione ha esito positivo
 	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
-	ORDER BY DataOra DESC');
+	ORDER BY DataOra ASC');
 	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$messaggi = array();
