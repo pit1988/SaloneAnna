@@ -8,9 +8,15 @@
             $sub = $_POST['submit'];
             $nome = $_POST['first_name'];
             $cognome = $_POST['last_name'];
-            $date = $_POST['data'];
             $contenuto = $_POST['contenuto'];
-        $ris=aggiungiMessaggio($email, $nome, $cognome, $contenuto, $data);
+        $ris=aggiungiMessaggio($email, $nome, $cognome, $contenuto);
+        if($ris)
+            $msg="Messaggio inserito con successo";
+        else{
+            $err=true;
+            $msg="Sono presenti errori; riprova per favore";
+        }
+
       }  
     }
     $title="Contattaci: Salone Anna";
@@ -53,10 +59,12 @@
                         <label for="comments">Messaggio</label>
                         <textarea cols="46" rows="3" name="comments" id="comments" tabindex="103"></textarea>
                     </li>
-                    <li>
+                    <?php
+                    /* <li>
                         <label for="data">Data per appuntamento</label>
                         <input type="date" name="data" id="data" tabindex="104" />
-                    <li>
+                    <li> */
+                    ?>
                         <input class="btn btn-submit" type="submit" value="Invia" tabindex="105"/>
                         <span id="errors"></span>
                     </li>
