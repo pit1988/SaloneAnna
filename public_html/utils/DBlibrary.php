@@ -1,10 +1,10 @@
 <?php
 function dbconnect() {
 	$host = "localhost";
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";
-	/*$user = "agrenden";
+	$db = "pgabelli";*/
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
 	$db = "agrenden";
 	/*$user = "smarches";
@@ -25,6 +25,10 @@ function eseguiQuery($query) {
 
 function checkCommaSet(&$set) { //metodo di supporto usato durante l'aggiornamento delle entità
 	if($set != "") {$set = $set.", ";}
+}
+
+function checkAndWhere(&$where) { //metodo di supporto usato durante i check
+	if($where != "") {$where = $where." AND ";}
 }
 
 /*******************MESSAGGI************************/
@@ -52,10 +56,11 @@ class Messaggio { //classe che rappresenta un messaggio
 }
 
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
-	eseguiQuery("DELETE FROM Messaggi WHERE DataOra < (CURDATE() - INTERVAL 2 MONTH)"); //non mi interessa se va a buon fine perché non è una query essenziale, se questa query fallisce ma quella sotto no allora la funzione ha esito positivo
-	$result = eseguiQuery('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	$conn = dbconnect();
+	$conn->query("DELETE FROM Messaggi WHERE DataOra < (CURDATE() - INTERVAL 2 MONTH)"); //non mi interessa se va a buon fine perché non è una query essenziale, se questa query fallisce ma quella sotto no allora la funzione ha esito positivo
+	$result = $conn->query('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
-	ORDER BY DataOra ASC');
+	ORDER BY DataOra DESC');
 	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$messaggi = array();
@@ -66,6 +71,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 			array_push($messaggi, new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Nome'], $messaggio['Cognome']));
 		}
 	}
+	$conn->close();
 	return $messaggi; //è un array di Messaggi, non viene garantito che $messaggi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
@@ -130,8 +136,11 @@ function listaClienti() {
 	else {
 		$clienti = array();
 		while($cliente = mysqli_fetch_assoc($result)) {
-			$time = strtotime($cliente['DataNascita']);
-			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			if($cliente['DataNascita'] !== NULL) {
+				$time = strtotime($cliente['DataNascita']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			}
+			else {$data = NULL;}
 			array_push($clienti, new Cliente($cliente['CodCliente'], $cliente['Nome'], $cliente['Cognome'], $cliente['Telefono'], $cliente['Email'], $data));
 		}
 	}
@@ -139,8 +148,7 @@ function listaClienti() {
 }
 
 function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNascita = "") {
-	$data = strtotime($dataNascita);
-	if($data !== FALSE) {$data = "'".date("Y-m-d", $data)."'";}
+	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $dataNascita)) {$data = "'".date_format(date_create_from_format("d/m/Y", $dataNascita), "Y-m-d")."'";}
 	else {$data = "NULL";}
 	$nome = htmlentities($nome);
 	$cognome = htmlentities($cognome);
@@ -163,13 +171,41 @@ function aggiornaCliente($codice, $nome = "", $cognome = "", $telefono = "", $em
 	$checkChiocciola = strpos($email, '@');
 	$checkPunto = strrpos($email, '.');
 	if($checkChiocciola !== FALSE && $checkPunto !== FALSE && $checkChiocciola<$checkPunto) {checkCommaSet($set); $set = $set."Email='$email'";}
-	if($dataNascita != "") {
-		$data = strtotime($dataNascita);
-		if($data !== FALSE) {$data = date("Y-m-d", $data); checkCommaSet($set); $set = $set."DataNascita='$data'";}
+	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $dataNascita)) {
+		$data = "'".date_format(date_create_from_format("d/m/Y", $dataNascita), "Y-m-d")."'";
+		checkCommaSet($set);
+		$set = $set."DataNascita=$data";
 	}
 	return eseguiQuery("UPDATE Clienti
 	SET $set
 	WHERE CodCliente=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+}
+
+function checkCliente($nome, $cognome, $telefono = "", $email = "", $data = "") {
+	$where = "Nome='$nome' AND Cognome='$cognome'"; //nome e cognome sono campi obbligatori
+	if($telefono != "") {checkAndWhere($where); $where = $where."Telefono='$telefono'";}
+	if($email != "") {checkAndWhere($where); $where = $where."Email='$email'";} //non controllo il formato dell'email perché se è errato non verranno trovati clienti
+	if($data != "") {
+		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
+		if($data !== FALSE) {
+			checkAndWhere($where);
+			$where = $where."DataNascita='$data'";
+		}
+	}
+	$result = eseguiQuery("SELECT * FROM Clienti WHERE $where");
+	if(!isset($result)) {return NULL;}
+	else {
+		$clienti = array();
+		while($cliente = mysqli_fetch_assoc($result)) {
+			if($cliente['DataNascita'] !== NULL) {
+				$time = strtotime($cliente['DataNascita']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			}
+			else {$data = NULL;}
+			array_push($clienti, new Cliente($cliente['CodCliente'], $cliente['Nome'], $cliente['Cognome'], $cliente['Telefono'], $cliente['Email'], $data));
+		}
+		return $clienti;
+	}
 }
 
 /**********************TIPO APPUNTAMENTI***********************/
@@ -257,13 +293,69 @@ function listaAppuntamenti() {
 	else {
 		$appuntamenti = array();
 		while($appuntamento = mysqli_fetch_assoc($result)) {
-			$time = strtotime($appuntamento['DataNascita']);
-			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
-			$ora = date("H:i", $time); //formato del tipo 23:46
+			if($cliente['DataOra'] !== NULL) {
+				$time = strtotime($cliente['DataOra']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+				$ora = date("H:i", $time); //formato del tipo 23:46
+			}
+			else {$data = NULL; $ora = NULL;}
 			$prezzo = round($appuntamento['prezzo'] * ((100-$appuntamento['sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
 			array_push($appuntamenti, new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']));
 		}
 	}
 	return $appuntamenti; //è un array di Clienti, non viene garantito che $clienti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function aggiungiAppuntamento($codCliente, $data, $ora, $codTipo) {
+	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
+		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
+	}
+	else {return FALSE;}
+	$ora = strtotime($ora);
+	if($ora !== FALSE) {
+		$dataora = "'$data ".date("H:i:s", $ora)."'";
+		return eseguiQuery("INSERT Appuntamenti(CodCliente, DataOra, CodTipoAppuntamento) VALUES ($codCliente, $dataora, $codAppuntamento)");
+	}
+	else {return FALSE;}
+}
+
+function eliminaAppuntamento($codice) {
+	return eseguiQuery("DELETE FROM Appuntamenti WHERE CodAppuntamento=$codice");
+}
+
+function aggiornaAppuntamento($codice, $codCliente=0, $data="", $ora="", $codTipo=0) {
+	$conn = dbconnect();
+	$set = "";
+	if($codCliente > 0) {$set = $set."CodCliente=$codCliente";}
+	if($codTipo > 0) {checkCommaSet($set); $set = $set."CodTipoAppuntamento=$codTipo";}
+	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) && $ora != "") {
+		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
+		$ora = strtotime($ora);
+		if($ora !== FALSE) {
+			checkCommaSet($set);
+			$set = $set."DataOra='$data ".date("H:i:s", $ora)."'";
+		}
+	}
+	else if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) || $ora != "") {
+		$dataora = $conn->query("SELECT DataOra FROM Appuntamenti WHERE CodAppuntamento=$codice");
+		if($dataora) {
+			$dataora = strtotime($dataora['DataOra']);
+			if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
+				$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
+				checkCommaSet($set);
+				$set = $set."DataOra='$data ".date("H:i:s", $dataora)."'";
+			}
+			else {
+				$ora = strtotime($ora);
+				if($ora !== FALSE) {
+					checkCommaSet($set);
+					$set = $set."DataOra='".date("Y-m-d", $dataora)." ".date("H:i:s", $ora)."'";
+				}
+			}
+		}
+	}
+	$result = $conn->query("UPDATE TipoAppuntamento SET $set WHERE CodAppuntamento=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+	$conn->close();
+	return $result;
 }
 ?>
