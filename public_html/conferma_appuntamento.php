@@ -11,7 +11,8 @@ if (!isset($_SESSION['username'])) {
 } else {
     if (!isset($_POST['submit'])) {
         header('loation:NuovoAppuntamento.php');
-    } else {
+    } 
+    else {
         require 'library.php';
         include 'utils/DBlibrary.php';
         
@@ -25,94 +26,94 @@ if (!isset($_SESSION['username'])) {
         insert_header($rif, 6, true);
         content_begin();
         
-        if (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
+        //codcliente, orario e data e tipoappuntamento
+        if (isset($_POST['TipoAppuntamento']) AND isset($_POST['CodCliente']) AND isset($_POST['data']) AND isset($_POST['orario'])){
+            $codCliente = $_POST['CodCliente'];
+            $codTipo = $_POST['TipoAppuntamento'];
+            $data = $_POST['data'];
+            $ora = $_POST['orario'];
+            $nomeCognome = $_POST['nomeCognome'];
+            $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo);
+
+            if (!($ok==false))
+                echo "<p>Appuntamento di nomeCognome inserito correttamente il $data alle $ora</p>";
+        }
+        elseif (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
             $err = "Almeno uno dei parametri non è stato inserito correttamente";
-        } else {
+        } 
+        else {
             $sub = $_POST['submit'];
-            $tipo = $_POST['TipoAppuntamento'];
+            $codTipo = $_POST['TipoAppuntamento'];
             $nome = $_POST['first_name'];
             $cognome = $_POST['last_name'];
-            $date = $_POST['data'];
-            $time = $_POST['orario'];
+            $data = $_POST['data'];
+            $ora = $_POST['orario'];
             
-            if (strlen($tipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($date) == 0 OR strlen($time) == 0) //OR strlen($costo) == 0 OR strlen($sconto) == 0)
+            if (strlen($codTipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($data) == 0 OR strlen($ora) == 0) //
                 $err = "Almeno uno dei parametri non è stato inserito correttamente";
             else {
-                $orario = $time.":00";
-                $data = date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d');
-                $dataora = date('Y-m-d H:i:s', strtotime("$data $orario"));
-                
-                
-                $conn = dbConnect();
-                $queryc = "SELECT * FROM Clienti c WHERE c.Nome = '$nome' AND c.Cognome = '$cognome'";
-                
-                $result = mysqli_query($conn, $queryc);
-                $number_rows = mysqli_num_rows($result);
-                if ($number_rows > 1) {
-                    echo "<p>Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
-                    $number_cols = mysqli_num_fields($result);
-                    form_start("POST", "confermaAppuntamento.php");
-                    $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
-	            <caption>Prodotti modificabili</caption>
-	            <thead>
-	                <tr>
-	                    <th scope="col">Codice Cliente</th>
-	                    <th scope="col">Nome</th>
-	                    <th scope="col">Cognome</th>
-	                    <th scope="col">Telefono</th>
-	                    <th scope="col">Email</th>
-	                    <th scope="col">Data di nascita</th>
-	                </tr>
-	            </thead>
-	            <tbody>
-	            ';
-                    $tb = "";
-                    //corpo tabella
-                    while ($row = mysqli_fetch_row($result)) {
-                        
-                        $tb .= "<tr>\n";
-                        for ($i = 0; $i < $number_cols + 1; $i++) {
-                            $tb .= "<td>";
-                            if (!isset($row[$i]))
-                                $tb .= " ";
-                            if ($i == 0)
-                                $tb .= "<input type=\"radio\" name=\"CodCliente\" value= \"" . $row[$i] . "\"\/>";
-                            else {
-                                $tb .= $row[$i - 1];
-                            }
-                            
-                            $tb .= "</td>\n";
+                $result = checkCliente($nome, $cognome);
+                if(is_null($result)){
+                    echo "<p>Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
+                    hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
+                }
+                else{ //uno o più
+                    $number_rows = count($result);
+                    if ($number_rows > 1) {
+                        echo "<p>Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
+                        form_start("POST", "conferma_appuntamento.php");
+                        $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
+                                <caption>Prodotti modificabili</caption>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Codice</th>
+                                    <th scope="col">Nome</th>
+                                    <th scope="col">Cognome</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col" xml:lang="en">E-mail</th>
+                                    <th scope="col">Data nascita</th>
+                                    <th scope="col">Selezione</th>
+                                </tr>
+                            </thead>
+                            <tbody>';
+                        $tb="";
+                        foreach ($result as $cliente) {
+                            $tb.= "<tr>
+                            <td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td><td><input type='radio' name='CodCliente' value=$cliente->codice></td>
+                            </tr>";
                         }
-                        $tb .= "</tr>\n";
+                        $tf="</tbody></table>";
+                        $to_print = $th . $tb . $tf;
+                        echo $to_print;
+
+                        echo '
+                            <input type="hidden" name="nomeCognome" id="nomeCognome" value="'.$nome." ".$cognome.'" />
+                            <input type="hidden" name="data" id="data" value="'.$data.'" />
+                            <input type="hidden" name="orario" id="orario" value="'.$ora.'" />
+                            <input type="hidden" name="TipoAppuntamento" id="TipoAppuntamento" value="'.$codTipo.'" />';
+                        echo "<input type='submit' name='submit' value='Procedi'>";
+                        echo "<input type='reset' value='Cancella'>";
+                        // echo"</fieldset>";
+                        echo "</form>";
+                    } //fine n_righe>1
+                    else{ //unico risultato
+                        // prendi il codice cliente dall'unica riga
+                        $codCliente=$result[0]->codice;
+                        $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo); //ricontrollare paramen
+                        if ($ok)
+                            echo "<p>Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
+                        else
+                            echo "<p>Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
                     }
                     
-                    $tf = "</tbody></table>";
-                    $to_print = $th . $tb . $tf;
-                    echo $to_print;
-                    echo "<input type='submit' name='submit' value='Procedi'>";
-                    echo "<input type='reset' value='Cancella'>";
-                    // echo"</fieldset>";
-                    echo "</form>";
-                } //fine n_righe>1
-                if (!isset($_POST['CodCliente'])) {
-                	$query="SELECT CodCliente FROM Clienti c WHERE c.Nome = '$nome' AND c.Cognome = '$cognome'";
-                    $CodClienteA = mysqli_query($conn, $query); //or die("Query fallita " . mysqli_error($conn));
-                    $CodCliente = mysqli_fetch_row($CodClienteA)[0];
-                } else
-                    $CodCliente = $_POST['CodCliente'];
-                
-                $query = "INSERT INTO Appuntamenti (CodCliente ,  DataOra ,  CodTipoAppuntamento) VALUES
-		      	('$CodCliente', '$dataora', '$tipo')";
-		      	
-                $ok = mysqli_query($conn, $query);
-                if ($ok)
-                    echo "<b>Appuntamento di $nome inserito correttamente il $date alle $time</b><br>";
-                
-                mysqli_close($conn);
+                }
             }
-            content_end();
-            page_end();
-        }
+        } //è stato inserito o si sono verificati errori
+
+
+
+        content_end();
+        page_end();
     }
 }
 
