@@ -68,7 +68,7 @@ INSERT INTO Appuntamenti (CodAppuntamento, CodCliente, DataOra, CodTipoAppuntame
 
 
 CREATE TABLE Prodotti(
-	CodProdotto INT PRIMARY KEY, 
+	CodProdotto INT PRIMARY KEY AUTO_INCREMENT, 
 	Nome VARCHAR(20) NOT NULL,
 	Marca VARCHAR(30) NOT NULL,
 	Tipo VARCHAR(30) NOT NULL,
@@ -95,7 +95,7 @@ CREATE TABLE ProdApp(
 	CodProdotto INT,
 	Utilizzo DOUBLE,
 	FOREIGN KEY(CodProdotto) REFERENCES Prodotti(CodProdotto) ON UPDATE CASCADE,
-	FOREIGN KEY(CodAppuntamento) REFERENCES AppuntamentiClienti(CodAppuntamento) ON UPDATE
+	FOREIGN KEY(CodAppuntamento) REFERENCES Appuntamenti(CodAppuntamento) ON UPDATE
 	CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
 

@@ -269,7 +269,6 @@ function aggiungiTipoAppuntamento($nome, $costo=0, $sconto=0) {
 	if($nome === "") {return FALSE;} //un TipoAppuntamento senza nome non ha senso
 	if($costo === "") {$costo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
 	if($sconto === "") {$sconto=0;}
-	echo "INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)";
 	return eseguiQuery("INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)");
 }
 
@@ -404,5 +403,110 @@ function mostraAppuntamento($codice) {
 		$prezzo = round($appuntamento['Costo'] * ((100-$appuntamento['Sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
 		return new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']);
 	}
+}
+
+/**********************TIPO PRODOTTI*********************/
+
+class Prodotto {
+	public $codice;
+	public $nome;
+	public $marca;
+	public $tipo;
+	public $quantita;
+	public $prezzo;
+	public $prezzoRiv;
+	
+	function __construct($codice, $nome, $marca, $tipo, $quantita, $prezzo, $prezzoRiv) {
+		$this->codice = $codice;
+		$this->nome = $nome;
+		$this->marca = $marca;
+		$this->tipo = $tipo;
+		$this->quantita = $quantita;
+		$this->prezzo = $prezzo;
+		$this->prezzoRiv = $prezzoRiv;
+	}
+}
+
+function listaProdotti() {
+	$result = eseguiQuery("SELECT * FROM Prodotti");
+	if(!$result) {$prodotti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$prodotti = array();
+		while($prodotto = mysqli_fetch_assoc($result)) {
+			array_push($prodotti, new Prodotto($prodotto['CodProdotto'], $prodotto['Nome'], $prodotto['Marca'], $prodotto['Tipo'], $prodotto['Quantita'], $prodotto['Prezzo'], $prodotto['PRivendita']));
+		}
+	}
+	return $prodotti; //è un array di Prodotti, non viene garantito che $prodotti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function aggiungiProdotto($nome, $marca, $tipo, $quantita, $prezzo=0, $prezzoRiv=0) { //marca e tipo possono eventualmente essere lasciati vuoti, quantita, prezzo e prezzoRiv di base sono 0
+	if($nome === "") {return FALSE;} //un Prodotto senza nome, marca e tipo non ha senso
+	else {$nome = htmlentities($nome);}
+	if($marca === "") {return FALSE;}
+	else {$marca = htmlentities($marca);}
+	if($tipo === "") {return FALSE;}
+	else {$tipo = htmlentities($tipo);}
+	if($quantita === "" || quantita <= 0) {return FALSE;}
+	if($prezzo === "") {$prezzo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
+	if($prezzoRiv === "") {$prezzoRiv=0;}
+	$prezzo = round($prezzo, 2); //approssimo le cifre decimali ad un massimo di due
+	$prezzoRiv = round($prezzoRiv, 2);
+	return eseguiQuery("INSERT Prodotti(Nome, Marca, Tipo, Quantita, Prezzo, PRivendita) VALUES('$nome', '$marca', '$tipo', $quantita, $prezzo, $prezzoRiv)");
+}
+
+function eliminaProdotto($codice) {
+	return eseguiQuery("DELETE FROM Prodotti WHERE CodProdotto=$codice");
+}
+
+function cambiaQuantitaProdotto($codice, $quantita) {
+	if($quantita === "") {$quantita = 0;} //controllo di sicurezza che non dovrebbe mai essere eseguito
+	return eseguiQuery("UPDATE Prodotti SET Quantita=$quantita WHERE CodProdotto=$codice");
+}
+
+function mostraProdotto($codice) {
+	$prodotto = eseguiQuery("SELECT * FROM Prodotti WHERE CodProdotto=$codice");
+	if(!$prodotto) {return NULL;}
+	else {
+		$prodotto = mysqli_fetch_assoc($prodotto);
+		return new Prodotto($prodotto['CodProdotto'], $prodotto['Nome'], $prodotto['Marca'], $prodotto['Tipo'], $prodotto['Quantita'], $prodotto['Prezzo'], $prodotto['PRivendita']);
+	}
+}
+
+/********************PRODOTTI APPUNTAMENTO********************/
+
+class ProdottoAppuntamento {
+	public $codProdotto;
+	public $codAppuntamento;
+	public $nome;
+	public $marca;
+	public $tipo;
+	public $utilizzo; //numero prodotti usati durante l'appuntamento
+	
+	function __construct($codProdotto, $codAppuntamento, $nome, $marca, $tipo, $utilizzo) {
+		$this->codProdotto = $codProdotto;
+		$this->codAppuntamento = $codAppuntamento;
+		$this->nome = $nome;
+		$this->marca = $marca;
+		$this->tipo = $tipo;
+		$this->utilizzo = $utilizzo;
+	}
+}
+
+function listaProdottiAppuntamento($codAppuntamento) {
+	$result = eseguiQuery("SELECT CodProdotto, CodAppuntamento, Nome, Marca, Tipo, Utlizzo
+	FROM ProdApp JOIN Prodotti ON ProdApp.CodProdotto=Prodotti.CodProdotto
+	WHERE CodAppuntamento=$codAppuntamento");
+	if(!$result) {$prodotti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$prodotti = array();
+		while($prodotto = mysqli_fetch_assoc($result)) {
+			array_push($prodotti, new Prodotto($prodotto['CodProdotto'], $prodotto['Nome'], $prodotto['Marca'], $prodotto['Tipo'], $prodotto['Quantita'], $prodotto['Prezzo'], $prodotto['PRivendita']));
+		}
+	}
+	return $prodotti; //è un array di Prodotti, non viene garantito che $prodotti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function cambiaUtilizzoProdottiAppuntamento($codAppuntamento, $codProdotto, $utilizzo) {
+	
 }
 ?>
