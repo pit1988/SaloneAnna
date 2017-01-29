@@ -1,10 +1,10 @@
 <?php
 function dbconnect() {
 	$host = "localhost";
-	/*$user = "pgabelli";
+	$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";*/
-	$user = "agrenden";
+	$db = "pgabelli";
+	/*$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
 	$db = "agrenden";
 	/*$user = "smarches";
@@ -110,6 +110,20 @@ function eliminaMessaggio($codice) {
 	return eseguiQuery("DELETE FROM Messaggi WHERE CodMessaggi=$codice");
 }
 
+function mostraMessaggio($codice) {
+	$messaggio = eseguiQuery("SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
+	WHERE CodMessaggi=$codice");
+	if(!$messaggio) {return NULL;}
+	else {
+		$messaggio = mysqli_fetch_assoc($messaggio);
+		$time = strtotime($messaggio['DataOra']);
+		$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+		$ora = date("H:i", $time); //formato del tipo 23:46
+		return new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Nome'], $messaggio['Cognome']);
+	}
+}
+
 /************************Clienti**************************/
 
 class Cliente {
@@ -208,6 +222,20 @@ function checkCliente($nome, $cognome, $telefono = "", $email = "", $data = "") 
 	}
 }
 
+function mostraCliente($codice) {
+	$cliente = eseguiQuery("SELECT * FROM Clienti WHERE CodCliente=$codice");
+	if(!$cliente) {return NULL;}
+	else {
+		$cliente = mysqli_fetch_assoc($cliente);
+		if($cliente['DataNascita'] !== NULL) {
+			$data = strtotime($cliente['DataNascita']);
+			$data = date("d/m/Y", $data); //formato del tipo 05/01/2017
+		}
+		else {$data = NULL;}
+		return new Cliente($cliente['CodCliente'], $cliente['Nome'], $cliente['Cognome'], $cliente['Telefono'], $cliente['Email'], $data);
+	}
+}
+
 /**********************TIPO APPUNTAMENTI***********************/
 
 class TipoAppuntamento {
@@ -274,14 +302,14 @@ class Appuntamento {
 	
 	function __construct($codice, $data, $ora, $tipo, $prezzo, $nome, $cognome, $telefono, $email) {
 		$this->codice = $codice;
-		$this->codice = $data;
-		$this->codice = $ora;
-		$this->codice = $tipo;
-		$this->codice = $prezzo; //inteso come costo già scontato
-		$this->codice = $nome;
-		$this->codice = $cognome;
-		$this->codice = $telefono;
-		$this->codice = $email;
+		$this->data = $data;
+		$this->ora = $ora;
+		$this->tipo = $tipo;
+		$this->prezzo = $prezzo; //inteso come costo già scontato
+		$this->nome = $nome;
+		$this->cognome = $cognome;
+		$this->telefono = $telefono;
+		$this->email = $email;
 	}
 }
 
@@ -293,17 +321,17 @@ function listaAppuntamenti() {
 	else {
 		$appuntamenti = array();
 		while($appuntamento = mysqli_fetch_assoc($result)) {
-			if($cliente['DataOra'] !== NULL) {
-				$time = strtotime($cliente['DataOra']);
+			if($appuntamento['DataOra'] !== NULL) {
+				$time = strtotime($appuntamento['DataOra']);
 				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
 				$ora = date("H:i", $time); //formato del tipo 23:46
 			}
 			else {$data = NULL; $ora = NULL;}
-			$prezzo = round($appuntamento['prezzo'] * ((100-$appuntamento['sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
+			$prezzo = round($appuntamento['Costo'] * ((100-$appuntamento['Sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
 			array_push($appuntamenti, new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']));
 		}
 	}
-	return $appuntamenti; //è un array di Clienti, non viene garantito che $clienti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+	return $appuntamenti; //è un array di Appuntamenti, non viene garantito che $appuntamenti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
 function aggiungiAppuntamento($codCliente, $data, $ora, $codTipo) {
@@ -314,7 +342,7 @@ function aggiungiAppuntamento($codCliente, $data, $ora, $codTipo) {
 	$ora = strtotime($ora);
 	if($ora !== FALSE) {
 		$dataora = "'$data ".date("H:i:s", $ora)."'";
-		return eseguiQuery("INSERT Appuntamenti(CodCliente, DataOra, CodTipoAppuntamento) VALUES ($codCliente, $dataora, $codAppuntamento)");
+		return eseguiQuery("INSERT Appuntamenti(CodCliente, DataOra, CodTipoAppuntamento) VALUES ($codCliente, $dataora, $codTipo)");
 	}
 	else {return FALSE;}
 }
@@ -338,6 +366,7 @@ function aggiornaAppuntamento($codice, $codCliente=0, $data="", $ora="", $codTip
 	}
 	else if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) || $ora != "") {
 		$dataora = $conn->query("SELECT DataOra FROM Appuntamenti WHERE CodAppuntamento=$codice");
+		$dataora = mysqli_fetch_assoc($dataora);
 		if($dataora) {
 			$dataora = strtotime($dataora['DataOra']);
 			if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
@@ -354,8 +383,26 @@ function aggiornaAppuntamento($codice, $codCliente=0, $data="", $ora="", $codTip
 			}
 		}
 	}
-	$result = $conn->query("UPDATE TipoAppuntamento SET $set WHERE CodAppuntamento=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
+	$result = $conn->query("UPDATE Appuntamenti SET $set WHERE CodAppuntamento=$codice"); //se $set è vuoto (non viene aggiornato nulla) viene restituito FALSE
 	$conn->close();
 	return $result;
+}
+
+function mostraAppuntamento($codice) {
+	$appuntamento = eseguiQuery("SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
+	FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente
+	WHERE CodAppuntamento=$codice");
+	if(!$appuntamento) {return NULL;}
+	else {
+		$appuntamento = mysqli_fetch_assoc($appuntamento);
+		if($appuntamento['DataOra'] !== NULL) {
+			$time = strtotime($appuntamento['DataOra']);
+			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			$ora = date("H:i", $time); //formato del tipo 23:46
+		}
+		else {$data = NULL; $ora = NULL;}
+		$prezzo = round($appuntamento['Costo'] * ((100-$appuntamento['Sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
+		return new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']);
+	}
 }
 ?>
