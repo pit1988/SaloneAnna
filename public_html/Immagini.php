@@ -25,7 +25,6 @@ else{
         hyperlink("Visualizza galleria","foto.php");
         hyperlink("Elimina foto","EliminaFoto.php");
         hyperlink("Modifica foto","ModificaFoto.php");
-        hyperlink("Storico Prodotti","StoricoProd.php");
     content_end();
     page_end();
 }

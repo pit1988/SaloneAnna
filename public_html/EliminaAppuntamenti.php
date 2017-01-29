@@ -40,19 +40,18 @@ else
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Elimina Appuntamenti</strong>';
-	insert_header($rif, 7, true);
+	insert_header($rif, 6, true);
 	content_begin();
 	
     $result = listaAppuntamenti();
 
-	echo "<b><h2>Lista degli appuntamenti da oggi in poi</h2></b>";
+	echo "<h2>Lista degli appuntamenti da oggi in poi</h2>";
 	
 	if (!$result)
 	  echo "<p>Non ci sono appuntamenti da mostrare</p>";
 	else {
-	  form_start("POST", "ModificaAppuntamento.php");
+	  form_start("POST", "EliminaAppuntamenti.php");
 	  echo '<fieldset>';
-	    // <input type=submit name="submit" value="Conferma">';
 	  $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
 	<caption>Appuntamenti successivi alla data corrente</caption>
 	<thead>
@@ -87,5 +86,3 @@ else
 }
 
 ?>
-
-

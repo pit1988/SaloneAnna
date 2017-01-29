@@ -70,10 +70,10 @@ if (!isset($_SESSION['username'])) {
                 $tb .= "<td>";
                 if (!isset($row[$i]))
                     $tb .= " ";
-                if ($i == number_cols)
+                if ($i == $number_cols)
                     $tb .= "<input type=\"radio\" name=\"codprod\" value= \"" . $row[0] . "\"\/>";
                 else {
-                    $tb .= $row[$i - 1];
+                    $tb .= $row[$i];
                 }
                 
                 $tb .= "</td>\n";

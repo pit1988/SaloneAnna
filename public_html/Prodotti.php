@@ -26,6 +26,7 @@
     hyperlink("Modifica Prodotti", "ScegliProdotto.php");
     hyperlink("Elimina Prodotti", "EliminaProdotti.php");
     hyperlink("Inserisci un nuovo prodotto", "InserisciProdotto.php");
+    hyperlink("Storico Prodotti","StoricoProd.php");
 
 	content_end();
   page_end();

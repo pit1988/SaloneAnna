@@ -40,41 +40,41 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
                     <li>
                         <p>
                             <label for="nome">Nome</label>
-                            <input type="text" name="nome" id="nome" tabindex="100" value="' . $row[0] . '" />
+                            <input type="text" name="nome" id="nome" tabindex="100" value="' . $row[1] . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="marca">Marca</label>
-                            <input type="text" name="marca" id="marca" tabindex="101" value="' . $row[1] . '" />
+                            <input type="text" name="marca" id="marca" tabindex="101" value="' . $row[2] . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="tipo">Tipo</label>
-                            <input type="text" name="tipo" id="tipo" tabindex="102" value="' . $row[2] . '" />
+                            <input type="text" name="tipo" id="tipo" tabindex="102" value="' . $row[3] . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="quantita">Quanità</label>
-                            <input type="text" name="quantita" id="quantita" tabindex="103" value="' . $row[3] . '" />
+                            <input type="text" name="quantita" id="quantita" tabindex="103" value="' . $row[4] . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="pvendita">Prezzo alla vendita</label>
-                            <input type="text" name="pvendita" id="pvendita" tabindex="104" value="' . $row[4] . '" />
+                            <input type="text" name="pvendita" id="pvendita" tabindex="104" value="' . $row[5] . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="privendita">Prezzo di rivendita</label>
-                            <input type="text" name="privendita" id="privendita" tabindex="105" value=' . $row[5] . ' />
+                            <input type="text" name="privendita" id="privendita" tabindex="105" value=' . $row[6] . ' />
                         </p>
                     </li>
                 </ul>
-                <input type="hidden" name="codprod" value="'.$cod'" />
+                <input type="hidden" name="codprod" value="'.$cod.'" />
                 <input type="submit" name="submit" value="Procedi">
         		<input type="reset" value="Cancella">
             </form>

@@ -39,7 +39,7 @@ if (!isset($_SESSION['username'])) {
             $tipo      = $_POST['tipo'];
             $quantita  = $_POST['quantita'];
             $pvendita  = $_POST['pvendita'];
-            $rivendita = $_POST['rivendita'];
+            $rivendita = $_POST['privendita'];
             $codprod   = $_POST['codprod'];
             $ris       = modificaProdotto($codprod, $nome, $marca, $tipo, $quanita, $pvendita, $rivendita);
             if ($ris)
