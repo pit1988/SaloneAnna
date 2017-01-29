@@ -31,8 +31,8 @@ if (!isset($_SESSION['username'])) {
     
     
     $number_cols = mysqli_num_fields($result);
-    
-    echo "<strong>I prodotti piu' usati in appuntamento sono:</strong>";
+    echo "<h2>Prodotti pi&ugrave; usati</h2>";
+    echo "<em class="info">I prodotti pi&ugrave; usati in appuntamento sono:</em>";
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)

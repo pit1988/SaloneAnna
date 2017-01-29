@@ -21,6 +21,7 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Elimina Prodotti</strong>';
     insert_header($rif, 4, true);
     content_begin();
+    echo "<h2>Elimina Prodotti</h2>";
     
     if (isset($_POST['submit']) && isset($_POST['codprod'])) {
         $ids = $_POST['codprod'];
@@ -54,7 +55,7 @@ if (!isset($_SESSION['username'])) {
     else {
         form_start("POST", "EliminaProdotti.php");
         $th = '<table id="ProdottiMagazzino" summary="Elimina Prodotti dal magazzino">
-            <caption>Elimina Prodotti dal magazzino</caption>
+            <caption class="nascosto">Elimina Prodotti dal magazzino</caption>
             <thead>
                 <tr>
                     <th scope="col">CodProdotto</th>

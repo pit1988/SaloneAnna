@@ -17,6 +17,7 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Gestione Prodotti</strong>';
     insert_header($rif, 4, true);
     content_begin();
+    echo "<h2>Modifica Prodotti</h2>";
 
     include("utils/DBlibrary.php");
     $conn = dbconnect();
@@ -32,7 +33,7 @@ if (!isset($_SESSION['username'])) {
     else {
         form_start("POST", "ModificaProdotto.php");
         $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
-            <caption>Prodotti modificabili</caption>
+            <caption class="nascosto">Prodotti modificabili</caption>
             <thead>
                 <tr>
                     <th scope="col">CodProdotto</th>

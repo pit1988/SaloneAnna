@@ -89,7 +89,7 @@ if (!isset($_SESSION['username'])) {
     }
 }
 $form = '
-<p>Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
+<p class="info">Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
   <form method=post action="StoricoProd.php">
   <ul>
     <li>
@@ -116,6 +116,7 @@ page_start($title, $title_meta, $descr, $keywords, '');
 $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Storico Prodotti</strong>';
 insert_header($rif, 5, true);
 content_begin();
+echo "<h2>Storico prodotto</h2>";
 echo $form;
 echo $err;
 echo $to_print;

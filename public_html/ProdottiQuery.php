@@ -31,8 +31,9 @@ if (!isset($_SESSION['username'])) {
     
     
     $number_cols = mysqli_num_fields($result);
-    
-    echo "<strong>I prodotti in esaurimento sono:</strong>";
+
+    echo "<h2>Prodotti in esaurimento</h2>";
+    echo "<em class="info">I prodotti in esaurimento sono:</em>";
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)

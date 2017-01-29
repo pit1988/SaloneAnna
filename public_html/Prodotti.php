@@ -21,6 +21,8 @@
     insert_header($rif, 4, true);
     content_begin();
 
+    echo "<h2>Menù Prodotti</h2>";
+
     hyperlink("Prodotti in esaurimento", "ProdottiQuery.php");
     hyperlink("Maggior numero di prodotti Usati", "ProdottiMax.php");
     hyperlink("Modifica Prodotti", "ScegliProdotto.php");

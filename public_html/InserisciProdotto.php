@@ -39,6 +39,8 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
     insert_header($rif, 4, true);
     content_begin();
+    echo "<h2>Inserisci nuovo prodotto</h2>";
+
     
     $to_print = '<form method="POST" action="esito_modifica.php">
         <ul>
