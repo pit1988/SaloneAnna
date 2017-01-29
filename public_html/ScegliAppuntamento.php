@@ -17,19 +17,14 @@
       insert_header($rif, 6, true);
       content_begin();
       
-      $conn = dbconnect();
+      $result = listaAppuntamenti();
       
-      $query  = "SELECT a.CodAppuntamento AS 'ID', c.Nome, c.Cognome, c.CodCliente, a.DataOra, ta.NomeTipo AS 'Tipo' FROM Appuntamenti a JOIN TipoAppuntamento ta on a.CodAppuntamento=ta.CodTipoAppuntamento JOIN Clienti c on a.CodCliente=c.CodCliente WHERE DATE(a.DataOra)>=CURDATE() ORDER BY a.DataOra ASC, a.CodAppuntamento ASC";
-      $result = $conn->query($query);
-      
-      $number_cols = mysqli_num_fields($result);
       
       echo "<b><h2>Lista degli appuntamenti da oggi in poi</h2></b>";
-      $num_rows = mysqli_num_rows($result);
-      if (!$num_rows)
+      
+      if (!$result)
           echo "<p>Non ci sono appuntamenti da mostrare</p>";
       else {
-          // form_start("POST", "ConfermaModificaAppuntamenti.php");
           form_start("POST", "ModificaAppuntamento.php");
           echo '<fieldset>';
             // <input type=submit name="submit" value="Conferma">';
@@ -37,28 +32,19 @@
       <caption>Appuntamenti successivi alla data corrente</caption>
       <thead>
       <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Cognome</th>
+        <th scope="col">Data</th>
+        <th scope="col">Ora</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Prezzo</th>
         <th scope="col">Seleziona</th>
-      ';
-          for ($i = 0; $i < $number_cols; $i++) {
-              $str_to_print .= '<th scope="col">' . (mysqli_fetch_field_direct($result, $i) ->name) . "</th>\n";
-          }
-          $str_to_print .= "</tr></thead></tbody>\n";
+      </tr></thead></tbody>';
           
-          while ($row = mysqli_fetch_row($result)) {
-              
+          foreach ($result as $appuntamento) {
               $str_to_print .= "<tr>\n";
-              for ($i = 0; $i < $number_cols + 1; $i++) {
-                  $str_to_print .= "<td>";
-                  if (!isset($row[$i]))
-                      $str_to_print .= " ";
-                  if ($i == 0)
-                      $str_to_print .= "<input type=\"radio\" name=\"codapp\" value= \"" . $row[$i] . "\"\/>";
-                  else {
-                      $str_to_print .= $row[$i - 1];
-                  }
-                  
-                  $str_to_print .= "</td>\n";
-              }
+              $str_to_print.= "<tr><td>".$appuntamento->codice."</td><td>".$appuntamento->nome."</td><td>".$appuntamento->cognome."</td><td>".$appuntamento->data."</td><td>".$appuntamento->ora."</td><td>".$appuntamento->tipo."</td><td>".$appuntamento->prezzo."</td><td><input type=\"radio\" name=\"codMsg[]\" value= \"" . $appuntamento->codice . "\"/></td></tr>";
               $str_to_print .= "</tr>\n";
           }
           
@@ -73,3 +59,13 @@
       page_end();
   }
   ?>
+
+  public $codice;
+  public $data;
+  public $ora;
+  public $tipo;
+  public $prezzo;
+  public $nome;
+  public $cognome;
+  public $telefono;
+  public $email;
