@@ -26,7 +26,7 @@ if (!isset($_SESSION['username'])) {
             if(strlen($nome)==0 OR strlen($cognome)==0) // OR strlen($email)==0 OR strlen($telefono)==0 OR strlen($date)==0)
                 $err= "Almeno uno dei parametri non è stato inserito correttamente";
             else{
-                $data = date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d');
+                $data = (strlen($date)==0? "" :date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d'));
                 $conn = dbConnect();
                 $qry = "SELECT * FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email' AND DataNascita='$data'";
     
@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
                 if ($num_rows > 0)
                     $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
                 else {
-                    $ris = aggiungiCliente($nome, $cognome, $telefono, $email, $date)
+                    $ris = aggiungiCliente($nome, $cognome, $telefono, $email, $date);
                     if (!$ris) {
                         $err= "<p>Non è stato possibile inserire il nuovo cliente</p>";
                     } else
@@ -52,7 +52,7 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Nuovo Cliente</strong>';
-    insert_header($rif, 2, true);
+    insert_header($rif, 5, true);
     content_begin();
     if(isset($err))
         echo $err;

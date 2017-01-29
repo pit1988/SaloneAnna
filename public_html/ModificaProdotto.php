@@ -35,7 +35,7 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
         echo "<p>Non è presente il prodotto richiesto</p>";
     else {
         $row = mysqli_fetch_row($result);
-        $to_print = '<form method="POST" action="esito_modifica.php">
+        $to_print = '<form method="POST" action="esito_modifica_prodotto.php">
     		<ul>
                     <li>
                         <p>

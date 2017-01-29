@@ -46,17 +46,10 @@ if (!isset($_SESSION['username'])) {
 ';
             
             $str2 = "";
-            $qry = "SELECT CodTipoAppuntamento, NomeTipo FROM TipoAppuntamento";
-            $conn = dbconnect();
-            $ris = mysqli_query($conn, $qry);
-            $number_rows = mysqli_num_rows($ris);
-            
-            if ($number_rows > 1) {
-                while ($entry = mysqli_fetch_row($ris)) {
-                    if ($entry[0] == $cod)
-                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $entry[0] . '" checked="checked" />' . $entry[1] . "\n";
-                    else
-                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $entry[0] . '" />' . $entry[1] . "\n";
+            $result= listaTipoAppuntamenti();
+            if($result){
+                foreach ($result as $tipoApp){
+                    $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" />' . $tipoApp->nome."\n";
                 }
             }
             

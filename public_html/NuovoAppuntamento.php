@@ -30,13 +30,10 @@ if (!isset($_SESSION['username'])) {
 ';
     
     $str2        = "";
-    $qry         = "SELECT CodTipoAppuntamento, NomeTipo FROM TipoAppuntamento";
-    $conn        = dbconnect();
-    $result      = mysqli_query($conn, $qry);
-    $number_rows = mysqli_num_rows($result);
-    if ($number_rows > 1) {
-        while ($row = mysqli_fetch_row($result)) {
-            $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $row[0] . '" />' . $row[1]."\n";
+    $result= listaTipoAppuntamenti();
+    if($result){
+        foreach ($result as $tipoApp){
+            $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" />' . $tipoApp->nome."\n";
         }
     }
     $str3 = '</p>

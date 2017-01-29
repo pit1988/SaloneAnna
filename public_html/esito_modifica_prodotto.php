@@ -53,7 +53,7 @@ if (!isset($_SESSION['username'])) {
         echo ($msg);
     if (isset($err))
         echo ($err);
-    hyperlink("Modifica altri prodotti", "GestioneProdotti.php");
+    hyperlink("Modifica altri prodotti", "ScegliProdotto.php");
     hyperlink("Torna alla home", "index.php");
     content_end();
     page_end();

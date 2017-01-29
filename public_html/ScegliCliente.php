@@ -14,24 +14,6 @@ else
 {	
 	require 'library.php';
 	include 'utils/DBlibrary.php';
-
-	if(isset($_POST['submit'])) {
-	    $num=0;
-	    if(isset($_POST['Ids'])) {
-		    $ids=$_POST['Ids'];
-		    foreach($ids as $d){
-		      $ris=eliminaCliente($d);
-		      if($ris)
-		      	++$num;
-		    }
-		}
-	    if($num==0)
-	    	$msg="<p>Non sono stati cancellati clienti </p>";
-	    if($num==1)
-	    	$msg="<p>È stato cancellato $num cliente </p>";
-	    if($num>1)
-	    	$msg="<p>Sono stati cancellati $num clienti </p>";
-	}
 	
 	$title="Elenco clienti: Salone Anna";
 	$title_meta="Elenco clienti: Salone Anna";
@@ -60,7 +42,7 @@ else
             <tbody>';
 		foreach ($ris as $cliente) {
 				$str_to_print.= "<tr>
-				<td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td><td><input type='checkbox' name='codCliente' value=$cliente->codice></td>
+				<td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td><td><input type='radio' name='codCliente' value=$cliente->codice></td>
 				</tr>";
 		}
 		$str_to_print.="
