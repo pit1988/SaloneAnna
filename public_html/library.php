@@ -141,7 +141,6 @@ function contenitore_menu_admin($num) { /*TOTO: Cambiare ordine elementi menu; s
 </p>
 <ul class="menu">
 <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
-<!-- <li><a href="foto.php" id="pict" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Foto</a></li> -->
 <li><a href="listino.php" id="list" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="l" tabindex="12">Prezzi</a></li>
 <li><a href="Immagini.php" id="insf" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="13">Immagini</a></li>
 <li><a href="Prodotti.php" id="prod" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="p" tabindex="15">Prodotti </a></li>

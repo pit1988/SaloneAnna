@@ -44,7 +44,7 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Messaggi.php">Messaggi</a> / <strong>Leggi Messaggio</strong>';
-    insert_header($rif, 5, true);
+    insert_header($rif, 7, true);
     content_begin();
     if (isset($err))
         echo $err;
