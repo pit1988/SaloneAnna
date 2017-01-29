@@ -493,20 +493,30 @@ class ProdottoAppuntamento {
 }
 
 function listaProdottiAppuntamento($codAppuntamento) {
-	$result = eseguiQuery("SELECT CodProdotto, CodAppuntamento, Nome, Marca, Tipo, Utlizzo
+	$result = eseguiQuery("SELECT ProdApp.CodProdotto, CodAppuntamento, Nome, Marca, Tipo, Utilizzo
 	FROM ProdApp JOIN Prodotti ON ProdApp.CodProdotto=Prodotti.CodProdotto
 	WHERE CodAppuntamento=$codAppuntamento");
-	if(!$result) {$prodotti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	if(!$result) {$prodottiApp = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
-		$prodotti = array();
-		while($prodotto = mysqli_fetch_assoc($result)) {
-			array_push($prodotti, new Prodotto($prodotto['CodProdotto'], $prodotto['Nome'], $prodotto['Marca'], $prodotto['Tipo'], $prodotto['Quantita'], $prodotto['Prezzo'], $prodotto['PRivendita']));
+		$prodottiApp = array();
+		while($prodottoApp = mysqli_fetch_assoc($result)) {
+			array_push($prodottiApp, new ProdottoAppuntamento($prodottoApp['CodProdotto'], $prodottoApp['CodAppuntamento'], $prodottoApp['Nome'], $prodottoApp['Marca'], $prodottoApp['Tipo'], $prodottoApp['Utilizzo']));
 		}
 	}
-	return $prodotti; //è un array di Prodotti, non viene garantito che $prodotti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+	return $prodottiApp; //è un array di ProdottoAppuntamento, non viene garantito che $prodottiApp sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
 function cambiaUtilizzoProdottiAppuntamento($codAppuntamento, $codProdotto, $utilizzo) {
-	
+	$conn = dbconnect();
+	$result = $conn->query("SELECT CodProdotto FROM ProdApp WHERE CodProdotto=$codProdotto AND CodAppuntamento=$codAppuntamento");
+	if(!isset($result)) {$fatto = FALSE;} //c'è stato un errore
+	else if($result->num_rows == 0) { //il prodotto non c'è
+		$fatto = $conn->query("INSERT INTO ProdApp(CodProdotto, CodAppuntamento, Utilizzo) VALUES ($codProdotto, $codAppuntamento, $utilizzo)");
+	}
+	else { //il prodotto c'è già
+		$fatto = $conn->query("UPDATE ProdApp SET Utilizzo=$utilizzo WHERE CodAppuntamento=$codAppuntamento AND CodProdotto=$codProdotto");
+	}
+	$conn->close();
+	return $fatto;
 }
 ?>
