@@ -25,6 +25,7 @@ else
 		hyperlink("Compleanni Questo Mese", "QueryCompleanno.php");
 		hyperlink("Mostra l'elenco di tutti i clienti","ElencoClienti.php");
 		hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
+		hyperlink("Modifica clienti presenti nell'elenco","ScegliCliente.php");
 		hyperlink("Elimina clienti dall'elenco","EliminaCliente.php");
 		hyperlink("Storico Prodotti","StoricoProd.php");
 	content_end();

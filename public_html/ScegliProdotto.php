@@ -35,7 +35,6 @@ if (!isset($_SESSION['username'])) {
             <caption>Prodotti modificabili</caption>
             <thead>
                 <tr>
-                    <th scope="col">Modifica</th>
                     <th scope="col">CodProdotto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Marca</th>
@@ -43,12 +42,12 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Quantità</th>
                     <th scope="col">PVendita</th>
                     <th scope="col">PRivendita</th>
+                    <th scope="col">Seleziona</th>
                 </tr>
             </thead>
 
             <tfoot>
                 <tr>
-                    <th scope="col">Modifica</th>
                     <th scope="col">CodProdotto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Marca</th>
@@ -56,6 +55,7 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Quantità</th>
                     <th scope="col">PVendita</th>
                     <th scope="col">PRivendita</th>
+                    <th scope="col">Seleziona</th>
                 </tr>
             </tfoot>
 
@@ -70,8 +70,8 @@ if (!isset($_SESSION['username'])) {
                 $tb .= "<td>";
                 if (!isset($row[$i]))
                     $tb .= " ";
-                if ($i == 0)
-                    $tb .= "<input type=\"radio\" name=\"codprod\" value= \"" . $row[$i] . "\"\/>";
+                if ($i == number_cols)
+                    $tb .= "<input type=\"radio\" name=\"codprod\" value= \"" . $row[0] . "\"\/>";
                 else {
                     $tb .= $row[$i - 1];
                 }

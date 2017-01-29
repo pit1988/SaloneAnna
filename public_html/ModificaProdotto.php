@@ -57,8 +57,8 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
                     </li>
                     <li>
                         <p>
-                            <label for="quanita">Quanità</label>
-                            <input type="text" name="quanita" id="quanita" tabindex="103" value="' . $row[3] . '" />
+                            <label for="quantita">Quanità</label>
+                            <input type="text" name="quantita" id="quantita" tabindex="103" value="' . $row[3] . '" />
                         </p>
                     </li>
                     <li>
@@ -74,6 +74,7 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
                         </p>
                     </li>
                 </ul>
+                <input type="hidden" name="codprod" value="'.$cod'" />
                 <input type="submit" name="submit" value="Procedi">
         		<input type="reset" value="Cancella">
             </form>

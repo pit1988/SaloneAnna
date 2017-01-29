@@ -7,31 +7,43 @@ if (!isset($_SESSION['username'])) {
     header('location:index.php');
     exit;
 } else {
-    require 'library.php';
-    $title = "Gestione Prodotti: Salone Anna";
-    $title_meta = "Gestione Prodotti: Salone Anna";
-    $descr = "";
-    $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    require 'library.php';    
+    include("utils/DBlibrary.php");
+
+    $conn = dbconnect();
+
+    $title      = "Elimina Prodotti: Salone Anna";
+    $title_meta = "Elimina Prodotti: Salone Anna";
+    $descr      = "";
+    $keywords   = "Elimina, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Gestione Prodotti</strong>';
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Elimina Prodotti</strong>';
     insert_header($rif, 4, true);
     content_begin();
-
-    if(isset($_POST['submit'])){
-      if(isset($_POST['Ids'])){
-    $ids=$_POST['Ids'];
-    foreach($ids as $d){
-      $query_el="delete from Clienti where Id='$d'";
-      mysql_query($query_el,$conn) or err('impossibile eliminare Id=$d');
-      echo"Il prodotto con Id='$d' e` stato cancellato con successo<BR>";
-    }
-
-    include("utils/DBlibrary.php");
-    //inserire funzione prelievo prodotti.
-    $conn = dbconnect();
     
-    $query = "SELECT * FROM Prodotti p WHERE p.Quantita is not NULL AND p.Quantita>0 ";
+    if (isset($_POST['submit']) && isset($_POST['codprod'])) {
+        $ids = $_POST['codprod'];
+        $n_el=0;
+        $n_err=0;
+        foreach ($ids as $d) {
+            $query_el = "delete from Prodotti where CodProdotto='$d'";
+            $ris=mysqli_query($conn, $query_el);
+            if($ris) ++$n_el;
+            else ++$n_err;
+        }
+
+        if($n_el>0)
+            if($n_el==1)
+                echo "<p>È stato cancellato $n_el prodotto</p>";
+            else
+                echo "<p>Sono stati cancellati $n_el prodotti</p>";
+        if($n_err>0) echo "<p>Durante la cancellazione si sono verificati $n_err errori</p>";
+    }
+    
+
+    
+    $query  = "SELECT * FROM Prodotti p WHERE p.Quantita is not NULL AND p.Quantita>0 ";
     $result = mysqli_query($conn, $query);
     
     $number_cols = mysqli_num_fields($result);
@@ -40,12 +52,11 @@ if (!isset($_SESSION['username'])) {
     if (!$num_rows)
         echo "<p>Non ci sono entry nella tabella Prodotti</p>";
     else {
-        form_start("POST", "ModificaProdotto.php");
-        $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
-            <caption>Prodotti modificabili</caption>
+        form_start("POST", "EliminaProdotti.php");
+        $th = '<table id="ProdottiMagazzino" summary="Elimina Prodotti dal magazzino">
+            <caption>Elimina Prodotti dal magazzino</caption>
             <thead>
                 <tr>
-                    <th scope="col">Modifica</th>
                     <th scope="col">CodProdotto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Marca</th>
@@ -53,12 +64,12 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Quantità</th>
                     <th scope="col">PVendita</th>
                     <th scope="col">PRivendita</th>
+                    <th scope="col">Seleziona</th>
                 </tr>
             </thead>
 
             <tfoot>
                 <tr>
-                    <th scope="col">Modifica</th>
                     <th scope="col">CodProdotto</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Marca</th>
@@ -66,6 +77,7 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Quantità</th>
                     <th scope="col">PVendita</th>
                     <th scope="col">PRivendita</th>
+                    <th scope="col">Seleziona</th>
                 </tr>
             </tfoot>
 
@@ -80,10 +92,10 @@ if (!isset($_SESSION['username'])) {
                 $tb .= "<td>";
                 if (!isset($row[$i]))
                     $tb .= " ";
-                if ($i == 0)
-                    $tb .= "<input type=\"radio\" name=\"codprod\" value= \"" . $row[$i] . "\"\/>";
+                if ($i == $number_cols)
+                    $tb .= "<input type=\"checkbox\" name=\"codprod[]\" value= \"" . $row[0] . "\"\/>";
                 else {
-                    $tb .= $row[$i - 1];
+                    $tb .= $row[$i];
                 }
                 
                 $tb .= "</td>\n";
@@ -91,16 +103,16 @@ if (!isset($_SESSION['username'])) {
             $tb .= "</tr>\n";
         }
         
-        $tf= "</tbody></table>";
+        $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
-        echo"<input type='submit' name='submit' value='Procedi'>";
-        echo"<input type='reset' value='Cancella'>";
+        echo "<input type='submit' name='submit' value='Procedi'>";
+        echo "<input type='reset' value='Cancella'>";
         // echo"</fieldset>";
-        echo"</form>";
+        echo "</form>";
     }
     content_end();
     page_end();
+    mysqli_close($conn);
 }
-mysqli_close($conn);
 ?>
