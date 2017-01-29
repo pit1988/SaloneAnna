@@ -13,15 +13,15 @@ if (!isset($_SESSION['username'] ) )
     exit;
 }
 else{
-    $title="Salone Anna: Inserisci foto";
-    $title_meta="Salone Anna, parrucchiere a Vicenza";
-    $descr="Pagina per inserire fotografie all'interno del sito";
+    $title="Salone Anna";
+    $title_meta="Foto: Salone Anna, parrucchiere a Vicenza";
+    $descr="Da questa pagina si possooi ";
     $keywords="Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
     page_start($title, $title_meta, $descr, $keywords,'');
-    $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
+    $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Immagini</strong>';
     insert_header($rif, 1, true);
     content_begin();
-        hyperlink("Inserisci foto", "img_db.php");
+        hyperlink("Inserisci foto", "NuovaFoto.php");
         hyperlink("Visualizza galleria","foto.php");
         hyperlink("Elimina foto","EliminaFoto.php");
         hyperlink("Modifica foto","ModificaFoto.php");
