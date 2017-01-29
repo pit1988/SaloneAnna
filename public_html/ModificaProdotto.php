@@ -6,9 +6,7 @@ session_regenerate_id(TRUE);
 if (!isset($_SESSION['username'])) {
     header('location:index.php');
     exit;
-} elseif (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
-    $err = "Problemi di connessione";
-} else {
+} else{
     require 'library.php';
     include("utils/DBlibrary.php");
     
@@ -21,7 +19,10 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
     insert_header($rif, 4, true);
     content_begin();
-    
+
+if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
+    $err = "Problemi di connessione";
+} else {
     $conn = dbconnect();
     
     $cod = $_POST["codprod"];
@@ -79,8 +80,11 @@ if (!isset($_SESSION['username'])) {
     	';
         echo $to_print;
     }
+    mysqli_close($conn);
+}
+    if(isset($err))
+        echo($err);
     content_end();
     page_end();
 }
-mysqli_close($conn);
 ?>

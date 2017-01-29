@@ -34,6 +34,7 @@ if (!isset($_SESSION['username'])) {
             $qr2 = "UPDATE Messaggi SET ToRead='false' WHERE CodMessaggi='$cmsg'";
             $result   = mysqli_query($conn, $qr2);
         }
+        mysqli_close($conn);
     }
     
     $title      = "Messaggi: Salone Anna";
