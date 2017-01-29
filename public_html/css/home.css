@@ -114,8 +114,8 @@ legend{
     margin: 5px;
     color: white;
     
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
     
 }
 
@@ -144,8 +144,8 @@ legend{
     text-decoration: none;
     padding: 1.5px 15px 1.5px 15px;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 
 }
 
@@ -158,7 +158,7 @@ legend{
 
 /* BreadCrumbs Part*/
 #breadcrumbs{
-    border: 1px dotted #fbc997;
+    border: 1px dotted #4e4b3b;
     clear: both;
 }
 
@@ -179,8 +179,8 @@ legend{
     font: bold 12px Arial, Helvetica, sans-serif;
     color: #fff;
     padding: 10px 20px;
-    border: solid 1px #a30025;
-    background: ##8A4830;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
     
 }
 
@@ -256,7 +256,7 @@ li a:hover {
 }
 
 #immagine{
-    background-image:url(../public_html/img/home1.jpeg);
+    background-image:url(../img/home1.png);
     background-repeat:no-repeat;
     background-position:center;
     width:100%;
@@ -268,11 +268,19 @@ li a:hover {
     font-size:1.2em;
     text-align: center;
     border-radius: 0px 0px 20px 20px;
-    background: #736F56;
+    background: #4e4b3b;
 }
 
 .titolo_contattaci h2{
     font-size:1.4em;
+}
+
+.SaloneAnna .info{
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    text-align: center;
+    font-style: oblique;
 }
 
 /*Listino Prezzi*/
@@ -295,7 +303,7 @@ li a:hover {
 }
 
 
-#titolo-prezzi{
+h2{
    font-size: 1.9em;
    font-weight: 400;
    font-style:normal;
@@ -307,9 +315,9 @@ li a:hover {
 }
 
 .rtipo{
-   font-size: 1.2em;
+   font-size: 1em;
    font-weight: 600;
-   font-style:normal;
+   font-style: oblique;
    text-align:center;
    font-family: "Roboto", helvetica, arial, sans-serif;
    text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
@@ -318,17 +326,21 @@ li a:hover {
 
 #thprima{
   border-top-left-radius:3px;
+  font-size:1.4em;
+
 }
 
 #thseconda{
   border-top-right-radius:3px;
   border-right:none;
+  font-size:1.4em;
+
 }
 
 tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
-  color:#666B85;
+  color:#3e4150;
   font-size:1em;
   font-weight:normal;
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
@@ -359,16 +371,23 @@ td {
 
 
 th {
-  color:#D5DDE5;
-  background:#736F56;
+  color:#FFFFFF;
+  background:#4e4b3b;
   border-bottom:4px solid #9ea7af;
   border-right: 1px solid #343a45;
-  font-size:1.4em;
+  font-size:1em;
   font-weight: 100;
   padding:24px;
   text-align:left;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;
+}
+
+/* Tabelle */
+
+caption {
+    margin: 1em;
+    font-style: italic;
 }
 
 /* Realizzazioni */
@@ -501,14 +520,6 @@ form small {
     margin: 0 0 0 0.5em;
 }
 
-.info {
-    display: block;
-    margin: 0 0 0.5em 0;
-    color: #31456b;
-    max-width: 60%;
-    clear: both;
-    padding:0px 50px 50px 100px;
-}
 
 #frameMappa {
     width: 100%;
@@ -566,8 +577,13 @@ h4{
 }
 
 .info {
-    float: left;
-    font-style : oblique;
+    display: block;
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    padding: 0px 2em 2em 0px;
+    text-align-last: center;
+    font-style: oblique;
     width: 100%;
 }
 
@@ -641,8 +657,8 @@ img {
     color: white;
     float: right;
     
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
     
 }
 
@@ -660,8 +676,8 @@ img {
     padding: 0.5em 1em 0.5em 1em;
     margin: 2em auto;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
     display: block;
     width: 50%;
     text-align: center;
@@ -680,8 +696,8 @@ img {
     padding: 0.5em 1em 0.5em 1em;
     margin: 1em;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 }
 
 input[type="button"], input[type="submit"]{
@@ -690,8 +706,8 @@ input[type="button"], input[type="submit"]{
     text-align: center;
     text-decoration: none;
     color: #fff;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 }
 
 #dynamicInputPrice li{

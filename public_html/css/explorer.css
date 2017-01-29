@@ -160,7 +160,7 @@ legend{
 
 /* BreadCrumbs Part*/
 #breadcrumbs{
-    border: 1px dotted #fbc997;
+    border: 1px dotted #4e4b3b;
     clear: both;
 }
 
@@ -233,6 +233,17 @@ li a:hover {
 
 /*Contenuto-Body-Centro*/
 
+h2{
+   font-size: 1.9em;
+   font-weight: 400;
+   font-style:normal;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+   margin: 1em;
+}
+
 #content{
     background-color:#b0fcb0;
     margin:0 auto;
@@ -244,6 +255,13 @@ li a:hover {
 
 .informazioni{
     display:block;
+}
+.SaloneAnna .info{
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    text-align: center;
+    font-style: oblique;
 }
 
 .center {
@@ -268,16 +286,11 @@ li a:hover {
     font-size:1.4em;
     text-align: center;
     border-radius: 0px 0px 20px 20px;
-    background: #b40029;
+    background: #4e4b3b;
 }
 
 .titolo_contattaci h2{
     font-size:1.4em;
-}
-
-.info{
-    clear: both;
-    padding:0px 50px 50px 100px;
 }
 
 /* Realizzazioni */
@@ -420,6 +433,11 @@ form small {
     display: block;
     margin: 0 0 0.5em 0;
     color: #31456b;
+    clear: both;
+    padding: 0px 2em 2em 0px;
+    text-align-last: center;
+    font-style: oblique;
+    width: 100%;
 }
 
 #frameMappa {
@@ -480,12 +498,6 @@ h4{
     clear:left;
     text-align: left;
     color: #003e30;
-}
-
-.info {
-    float: left;
-    font-style : oblique;
-    width: 100%;
 }
 
 .prodotto .id{
@@ -559,8 +571,8 @@ img {
     color: white;
     float: right;
     
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
     
 }
 
@@ -586,8 +598,8 @@ hr{
     padding: 0.5em 1em 0.5em 1em;
     margin: 1em;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 }
 
 .productButtons{
@@ -600,8 +612,8 @@ hr{
     padding: 0.5em 1em 0.5em 1em;
     margin: 1em;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 }
 
 input[type="button"], input[type="submit"]{
@@ -610,8 +622,8 @@ input[type="button"], input[type="submit"]{
     text-align: center;
     text-decoration: none;
     color: #fff;
-    border: solid 1px #a30025;
-    background: #b40029;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 }
 
 #dynamicInputPrice li{
