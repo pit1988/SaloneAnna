@@ -24,7 +24,7 @@ else{
         hyperlink("Inserisci foto", "NuovaFoto.php");
         hyperlink("Visualizza galleria","foto.php");
         hyperlink("Elimina foto","EliminaFoto.php");
-        hyperlink("Modifica foto","ModificaFoto.php");
+        hyperlink("Modifica foto","SelezionaFoto.php");
     content_end();
     page_end();
 }
