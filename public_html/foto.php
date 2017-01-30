@@ -33,7 +33,7 @@ content_begin();
 	echo "<dl id=\"foto\">";
 
 	while($row=mysqli_fetch_array($result)) {
-	    echo "<dd><figure>.<img	src=uploads/".$row['Img_filename']."><figcaption>" . $row['Img_title'] . "</figcaption></figure></dd>";
+	    echo "<dd><figure><img src=uploads/".$row['Img_filename']."><figcaption>" . $row['Img_desc'] . "</figcaption></figure></dd>";
 	}
 
 	echo "</dl>";
