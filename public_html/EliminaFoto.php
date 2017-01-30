@@ -7,28 +7,27 @@ session_start();
 session_regenerate_id(TRUE);
 
 // Controllo accesso
-if (!isset($_SESSION['username'] ) )
-{
+if (!isset($_SESSION['username'])) {
     header('location:index.php');
     exit;
-}
-else{
+} else {
     if (isset($_POST['submit']) && isset($_POST['codImg'])) {
         $ids   = $_POST['codImg'];
         $n_el  = 0;
         $n_err = 0;
         foreach ($ids as $codice) {
-            $conn = dbconnect();
+            $conn     = dbconnect();
             $query_tl = "SELECT Img_filename from Images where Img_title='$codice'";
-            $result=mysqli_query($conn, $query_tl);
-
-            if($result){
-                $filename=(mysqli_fetch_row($result))[0];
+            $result   = mysqli_query($conn, $query_tl);
+            
+            if ($result) {
+                $row      = mysqli_fetch_row($result);
+                $filename = $row[0];
                 if (file_exists("uploads/$filename"))
                     unlink("uploads/$filename");
             }
             $query_el = "delete from Images where Img_title='$codice'";
-            $ris=mysqli_query($conn, $query_el);
+            $ris      = mysqli_query($conn, $query_el);
             if ($ris)
                 ++$n_el;
             else
@@ -43,17 +42,17 @@ else{
         if ($n_err > 0)
             $msg = "<p>Durante la cancellazione si sono verificati $n_err errori</p>";
     }
-    $title="Salone Anna: Inserisci foto";
-    $title_meta="Salone Anna, parrucchiere a Vicenza";
-    $descr="Pagina per inserire fotografie all'interno del sito";
-    $keywords="Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
+    $title      = "Salone Anna: Inserisci foto";
+    $title_meta = "Salone Anna, parrucchiere a Vicenza";
+    $descr      = "Pagina per inserire fotografie all'interno del sito";
+    $keywords   = "Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif="Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
-    $is_admin=true;
+    $rif      = "Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
+    $is_admin = true;
     insert_header($rif, 1, $is_admin);
     content_begin();
-
-    $conn=dbconnect();
+    
+    $conn   = dbconnect();
     $query  = "SELECT * FROM Images";
     $result = mysqli_query($conn, $query);
     
@@ -93,7 +92,7 @@ else{
             <td>$row[0]</td>
             <td>$row[1]</td>
             <td><a href=\"uploads/$row[2]\">$row[2]</a></td>
-            <td>".'<input type="checkbox" name="codImg[]" value= "' . $row[0] . '" /></td>
+            <td>" . '<input type="checkbox" name="codImg[]" value= "' . $row[0] . '" /></td>
             </tr>';
         }
         

@@ -30,19 +30,17 @@ else
             <caption>Messaggi</caption>
             <thead>
                 <tr>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Cognome</th>
+                    <th scope="col">Mittente</th>
                     <th scope="col">Messaggio</th>
-                    <th scope="col">Data</th>
-                    <th scope="col">Ora</th>
+                    <th scope="col">Ricevuto</th>
                 </tr>
             </thead>
             <tbody>';
 		foreach ($ris as $messaggio) {
 			if($messaggio->daLeggere==true)
-				$str_to_print.= "<tr><td><strong>".$messaggio->nome."</strong></td><td><strong>" .$messaggio->cognome."</strong></td><td><strong><a href=\"MostraMessaggio.php?codmsg=".$messaggio->codice." \">".(strlen($messaggio->contenuto)>60? substr($messaggio->contenuto, 0, 60)."...":$messaggio->contenuto)."</a></strong></td><td>".$messaggio->data."</td><td>".$messaggio->ora."</td></tr>";
+				$str_to_print.= "<tr><td><strong>".$messaggio->nome." " .$messaggio->cognome."</strong></td><td><strong><a href=\"MostraMessaggio.php?codmsg=".$messaggio->codice." \">".(strlen($messaggio->contenuto)>60? substr($messaggio->contenuto, 0, 60)."...":$messaggio->contenuto)."</a></strong></td><td>".$messaggio->data." ".$messaggio->ora."</td></tr>";
 			else
-				$str_to_print.= "<tr><td>".$messaggio->nome."</td><td>".$messaggio->cognome."</td><td><a href=\"MostraMessaggio.php?codmsg=".$messaggio->codice." \">".(strlen($messaggio->contenuto)>60? substr($messaggio->contenuto, 0, 60)."...":$messaggio->contenuto)."</a></td><td>".$messaggio->data."</td><td>".$messaggio->ora."</td></tr>";
+				$str_to_print.= "<tr><td>".$messaggio->nome." ".$messaggio->cognome."</td><td><a href=\"MostraMessaggio.php?codmsg=".$messaggio->codice." \">".(strlen($messaggio->contenuto)>60? substr($messaggio->contenuto, 0, 60)."...":$messaggio->contenuto)."</a></td><td>".$messaggio->data." ".$messaggio->ora."</td></tr>";
 		}
 		$str_to_print.="</tbody></table>";
 		unset($messaggio); //fortemente consigliato perché altrimenti l'oggetto $messaggio rimane in memoria

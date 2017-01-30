@@ -257,6 +257,7 @@ li a:hover {
 #immagine{
     background-image:url(../img/home1.png);
     background-repeat:no-repeat;
+    background-size: contain;
     background-position:center;
     width:100%;
 }

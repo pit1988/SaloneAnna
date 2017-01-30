@@ -1,32 +1,136 @@
-\documentclass[12pt,a4paper]{article}
-\usepackage{./stile}
+\documentclass[12pt,a4paper,titlepage]{article}
+%va sempre messo article per "program documentation"
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=1cm,right=1cm]{geometry}
+\usepackage{soulutf8,color}
+\usepackage{graphicx}
 
-%posizione dei file di capitolo per il documento corrente
-%default scts (sections)
-\newcommand{\docs}{./sezioni/}
-%posizione delle immagini per il documento corrente
-\newcommand{\docsImg}{./sezioni/img/}
+\usepackage{emptypage}                     
+% pagine vuote senza testatina e piede di pagina
 
-%
-%	Dati locali del documento
-%
-%Titolo documento
-\newcommand{\titoloDocumento}{Relazione Progetto Tecnologie Web}
-%Prima data di creazione del documento
-\newcommand{\dataCreazione}{28 dicembre 2015}
-\newcommand{\dataUM}{9 Novembre 2016}
-%Inserite la versione attuale del documento
-\newcommand{\versione}{1.0}
-%
+%\usepackage{hyperref}                     
+% collegamenti ipertestuali
+
+\usepackage{fancyhdr}
+% pacchetto per intestazione e pie pagina
+
+\pagestyle{fancy}
 
 
+% \\ indica interruzione di riga
 
-\rhead{\titoloDocumento}
-\lfoot{Versione: \versione}
-\title{\titoloDocumento}
+% compilate 2 volte per documenti con indice
+
+% {\em qui testo in corsivo}
+% {\bfseries qui testo in grossetto}
+
+%LISTE NUMERATE
+%\begin{enumerate}
+%\item primo
+%\item secondo
+%\item terzo
+%\end{enumerate}
+
+%LISTE PUNTATE
+%\begin{itemize}
+%\item primo
+%\item secondo
+%\item \dots
+%\end{itemize}
+
+%TABELLA
+%\begin{tabular}{|c|c|c|}
+%indica una tabella con 3 colonne e pos. testo centrale. La barra verticale ( | ) indica che vi e' una linea divisoria verticale tra le celle.
+%\hline	linea separatrice orizzontale
+%testo1& testo2& testo3\\
+% & segna la fine del testo nella cella , \\ indica il fine della riga 
+
+%GRAFICI
+%\begin{figure}
+%\includegraphics{filegrafico}
+%comando per includere le immagini (controllare i formati)
+%\caption{didascalia}
+%\label{nome}
+%\end{figure}
+
+
+%----------------------------------------------------------- INIZIO TEMPLATE TITOLO
+
+\usepackage{xcolor} % Importa i colori per la prima pagina
+\usepackage{fix-cm} % Permette l'incremento del font oltre misura
+
+
+\newcommand{\HRule}[1]{\hfill \rule{0.2\linewidth}{#1}} % Horizontal rule at the bottom of the page, adjust width here
+
+\definecolor{grey}{rgb}{0.9,0.9,0.9} % Colore del box del titolo
 
 \begin{document}
-\input{\docs front.tex}
+	
+	\thispagestyle{empty} % Toglie il numero della pagina nella prima pagina
+	
+	%----------------------------------------------------------------------------------------
+	%	TITLE SECTION
+	%----------------------------------------------------------------------------------------
+	
+	\colorbox{grey}{
+		\parbox[t]{1.0\linewidth}{
+			\centering \fontsize{50pt}{80pt}\selectfont % Il primo Ã¨ la grandezza del font, il secondo lo spazio lasciato
+			\vspace*{0.7cm} % Spazio dall'inizio del box al titolo
+			
+			\raggedleft
+			\includegraphics[width=0.7\linewidth]{../public_html/img/logo.png}
+			
+			\hfill Relazione Salone Anna \\
+			
+			\vspace*{0.7cm} % Spazio dalla fine del testo alla fine del box
+		}
+	}
+	
+	%----------------------------------------------------------------------------------------
+	
+	\vfill % Spazio dalla fine del box alle altre informazioni
+	
+	%----------------------------------------------------------------------------------------
+	%	Informazioni sul documento
+	%----------------------------------------------------------------------------------------
+	
+	{\centering \large 
+		\hfill \textbf{Nome Progetto} Salone Anna \\
+		\hfill \textbf{Redazione} 	Pietro Gabelli \\
+		\hfill 						Sebastiano Marchesini \\
+		\hfill						Andrea Grendene \\
+		\hfill \textbf{Destinato} 	Ombretta Gaggi \\ 
+		
+		\HRule{1pt}
+		
+		\textbf{Sommario} \\
+		Relazione progetto Salone Anna destinato a Tecnologie Web.
+		
+	} % Linea orizzontale di estetica
+	
+	
+	%----------------------------------------------------------------------------------------
+	
+	\clearpage % Parta bianca finale della pagina
+	
+	%----------------------------------------------------------- FINE TEMPLATE TITOLO
+	
+	\lhead{\includegraphics[width=0.2\linewidth]{../public_html/img/logo.png}}
+	\chead{}
+	\lfoot{Relazione Progetto}
+	\cfoot{}
+	\rfoot{\thepage}
+	\renewcommand{\headrulewidth}{0.2pt}
+	\renewcommand{\footrulewidth}{0.2pt}
+	
+	
+	\tableofcontents
+	%crea indice automaticamente
+	\thispagestyle{empty}
 
 \newpage
 %\pagenumbering{arabic}
