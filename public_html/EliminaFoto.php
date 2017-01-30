@@ -27,7 +27,7 @@ if (!isset($_SESSION['username'])) {
                     unlink("uploads/$filename");
             }
             $query_el = "delete from Images where Img_title='$codice'";
-            $ris      = mysqli_query($conn, $query_el);
+            $ris = mysqli_query($conn, $query_el);
             if ($ris)
                 ++$n_el;
             else
@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
     $descr      = "Pagina per inserire fotografie all'interno del sito";
     $keywords   = "Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif      = "Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
+    $rif      = "<strong xml:lang=&quot;en&quot;>Home</strong>";
     $is_admin = true;
     insert_header($rif, 1, $is_admin);
     content_begin();
