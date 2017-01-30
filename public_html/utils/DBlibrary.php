@@ -20,7 +20,7 @@ function dbconnect() {
 	$db = "pgabelli";
 	/*$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";*/
+	$db = "agrenden";
 	/*$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
@@ -54,16 +54,18 @@ class Messaggio { //classe che rappresenta un messaggio
 	public $ora;
 	public $daLeggere;
 	public $email;
+	public $telefono;
 	public $nome;
 	public $cognome;
 	
-	function __construct($codice, $contenuto, $data, $ora, $daLeggere, $email, $nome, $cognome) {
+	function __construct($codice, $contenuto, $data, $ora, $daLeggere, $email, $telefono, $nome, $cognome) {
 		$this->codice = $codice;
 		$this->contenuto = $contenuto;
 		$this->data = $data;
 		$this->ora = $ora;
 		$this->daLeggere = $daLeggere;
 		$this->email = $email;
+		$this->telefono = $telefono;
 		$this->nome = $nome;
 		$this->cognome = $cognome;
 	}
@@ -72,7 +74,7 @@ class Messaggio { //classe che rappresenta un messaggio
 function listaMessaggi() { //i messaggi verranno già ordinati dal più recente al più vecchio
 	$conn = dbconnect();
 	$conn->query("DELETE FROM Messaggi WHERE DataOra < (CURDATE() - INTERVAL 2 MONTH)"); //non mi interessa se va a buon fine perché non è una query essenziale, se questa query fallisce ma quella sotto no allora la funzione ha esito positivo
-	$result = $conn->query('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	$result = $conn->query('SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Telefono, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	ORDER BY DataOra DESC');
 	if(!$result) {$messaggi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
@@ -82,7 +84,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 			$time = strtotime($messaggio['DataOra']);
 			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
 			$ora = date("H:i", $time); //formato del tipo 23:46
-			array_push($messaggi, new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Nome'], $messaggio['Cognome']));
+			array_push($messaggi, new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Telefono'], $messaggio['Nome'], $messaggio['Cognome']));
 		}
 	}
 	$conn->close();
@@ -125,16 +127,20 @@ function eliminaMessaggio($codice) {
 }
 
 function mostraMessaggio($codice) {
-	$messaggio = eseguiQuery("SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Nome, Cognome
+	$messaggio = eseguiQuery("SELECT CodMessaggi, Contenuto, DataOra, ToRead, Email, Telefono, Nome, Cognome
 	FROM Messaggi JOIN Clienti ON Messaggi.CodCliente = Clienti.CodCliente
 	WHERE CodMessaggi=$codice");
 	if(!$messaggio) {return NULL;}
 	else {
-		$messaggio = mysqli_fetch_assoc($messaggio);
-		$time = strtotime($messaggio['DataOra']);
-		$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
-		$ora = date("H:i", $time); //formato del tipo 23:46
-		return new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, $messaggio['ToRead'], $messaggio['Email'], $messaggio['Nome'], $messaggio['Cognome']);
+		$letto = eseguiQuery("UPDATE Messaggi SET ToRead='false' WHERE CodMessaggi=$codice");
+		if(!$letto) {return NULL;}
+		else {
+			$messaggio = mysqli_fetch_assoc($messaggio);
+			$time = strtotime($messaggio['DataOra']);
+			$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			$ora = date("H:i", $time); //formato del tipo 23:46
+			return new Messaggio($messaggio['CodMessaggi'], $messaggio['Contenuto'], $data, $ora, 1, $messaggio['Email'], $messaggio['Telefono'], $messaggio['Nome'], $messaggio['Cognome']);
+		}
 	}
 }
 
