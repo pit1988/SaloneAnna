@@ -60,7 +60,7 @@ if (!isset($_SESSION['username'])) {
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p>Non ci sono entry nella tabella Prodotti</p>";
+        echo "<p>Non ci sono immagini da mostrare</p>";
     else {
         form_start("POST", "EliminaFoto.php");
         $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
