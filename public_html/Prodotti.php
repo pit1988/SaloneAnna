@@ -25,7 +25,7 @@
 
     hyperlink("Prodotti in esaurimento", "ProdottiQuery.php");
     hyperlink("Maggior numero di prodotti Usati", "ProdottiMax.php");
-    hyperlink("Modifica Prodotti", "ScegliProdotto.php");
+    // hyperlink("Modifica Prodotti", "ScegliProdotto.php");
     hyperlink("Elimina Prodotti", "EliminaProdotti.php");
     hyperlink("Inserisci un nuovo prodotto", "InserisciProdotto.php");
     hyperlink("Storico Prodotti","StoricoProd.php");
