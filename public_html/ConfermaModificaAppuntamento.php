@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
             
             $ok = aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo);
             if ($ok)
-                echo "<b>L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</b><br>";
+                echo "<b>L'appuntamento è stato modificato correttamente ed è il $data alle $ora</b><br>";
             else
                 echo "<p>Non è stato possibile modificare l'appuntamento selezionato</p>";
         }
