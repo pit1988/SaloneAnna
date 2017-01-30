@@ -9,13 +9,13 @@ if (!isset($_SESSION['username'])) {
     require_once 'library.php';
     require_once 'utils/DBlibrary.php';
     if (!isset($_POST['submit']) OR (!isset($_POST['cli']) AND !isset($_POST['data']))) {
-        $err = "<p class=/"errorSuggestion/">Potresti non aver selezionato alcuna casella di ricerca.</p>";
+        $err = "<p class=\"errorSuggestion\">Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } else {
         $s_client = isset($_POST["cli"]) ? true : false;
         $s_data   = isset($_POST["date"]) ? true : false;
         
         if (($s_client == true && (empty($_POST['first_name']) OR (empty($_POST['last_name']) ))) OR ($s_data == true && (empty($_POST['date'])) )) { 
-            $err = "<p class=/"errorSuggestion/">Almeno uno dei parametri non è stato inserito correttamente</p>";
+            $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
 
         } else {
             if(empty($_POST['date']))
@@ -52,12 +52,12 @@ if (!isset($_SESSION['username'])) {
             $num_rows = mysqli_num_rows($result);
             $ris      = "";
             if (!$num_rows)
-                $ris = "<p class=/"inforesult/">La ricerca non ha prodotto risultati</p>";
+                $ris = "<p class=\"inforesult\">La ricerca non ha prodotto risultati</p>";
             else {
                 
                 $number_cols = mysqli_num_fields($result);
                 
-                $ris .= "<p class=/"inforesult/"><strong>Storico:</strong></p>";
+                $ris .= "<p class=\"inforesult\"><strong>Storico:</strong></p>";
                 $ris .= '<table id="ListaAppuntamenti" summary="Lista degli appuntamenti">
             <caption class="nasconsto">Lista degli appuntamenti</caption>
             <thead>

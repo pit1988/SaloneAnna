@@ -20,9 +20,9 @@ if (!isset($_SESSION['username'])) {
         $codprod   = $_POST['codprod'];
         $ris       = inserisciProdotto($nome, $marca, $tipo, $quanita, $pvendita, $rivendita);
         if ($ris)
-            $msg = "<p class=/"inforesut/">Modifica avvenuta correttamente</p>";
+            $msg = "<p class=\"inforesut\">Modifica avvenuta correttamente</p>";
         else
-            $msg = "<p class=/"inforesut/">Non è stato possibile modificare il prodotto selezionato</p>";
+            $msg = "<p class=\"inforesut\">Non è stato possibile modificare il prodotto selezionato</p>";
         echo $msg;
     }
     

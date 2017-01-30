@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 5, true);
     content_begin();
         if (!isset($_POST['submit']) OR !isset($_POST['codCliente'])) {
-        $err = "<p class=/"errorSuggestion/">Problemi di connessione</p>";
+        $err = "<p class=\"errorSuggestion\">Problemi di connessione</p>";
     } else {
         $cod = $_POST["codCliente"];
         
@@ -29,7 +29,7 @@ if (!isset($_SESSION['username'])) {
         // nessun risultato
         $num_rows = mysqli_num_rows($result);
         if(is_null($result))
-            $err= "<p class=/"inforesult/">Non è presente il cliente richiesto</p>";
+            $err= "<p class=\"inforesult\">Non è presente il cliente richiesto</p>";
         else {
             $nome = $_POST['first_name'];
             $cognome = $_POST['last_name'];
@@ -38,13 +38,13 @@ if (!isset($_SESSION['username'])) {
             $date=$_POST['data'];
             $codice   = $_POST['codCliente'];
             if(strlen($nome)==0 OR strlen($cognome)==0) // OR strlen($email)==0 OR strlen($telefono)==0 OR strlen($date)==0)
-                $err= "<p class=/"errorSuggestion/">Almeno uno dei parametri non è stato inserito correttamente</p>";
+                $err= "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else{
                 $ris = aggiornaCliente($codice, $nome, $cognome, $telefono, $email, $date);
                 if ($ris)
-                    $msg = "<p class=/"inforesult/">Modifica avvenuta correttamente</p>";
+                    $msg = "<p class=\"inforesult\">Modifica avvenuta correttamente</p>";
                 else
-                    $msg = "<p class=/"errorSuggestion/">Non è stato possibile modificare il cliente selezionato</p>";
+                    $msg = "<p class=\"errorSuggestion\">Non è stato possibile modificare il cliente selezionato</p>";
             }
         }
     }

@@ -36,10 +36,10 @@ if (!isset($_SESSION['username'])) {
             $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo);
 
             if (!($ok==false))
-                echo "<p class=/"inforesult/">Appuntamento di nomeCognome inserito correttamente il $data alle $ora</p>";
+                echo "<p class=\"inforesult\">Appuntamento di nomeCognome inserito correttamente il $data alle $ora</p>";
         }
         elseif (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
-            $err = "<p class=/"errorSuggestion/">Almeno uno dei parametri non è stato inserito correttamente</p>";
+            $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
         } 
         else {
             $sub = $_POST['submit'];
@@ -50,18 +50,18 @@ if (!isset($_SESSION['username'])) {
             $ora = $_POST['orario'];
             
             if (strlen($codTipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($data) == 0 OR strlen($ora) == 0) //
-                $err = "<p class=/"errorSuggestion/">Almeno uno dei parametri non è stato inserito correttamente</p>";
+                $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else {
                 $result = checkCliente($nome, $cognome);
                 if(is_null($result) OR count($result)==0){
-                    echo "<p class=/"errorSuggestion/">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
+                    echo "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
                     hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
                 }
                 else{ //uno o più
                     $number_rows = count($result);
                     echo $number_rows;
                     if ($number_rows > 1) {
-                        echo "<p class=/"inforesult/">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
+                        echo "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
                         form_start("POST", "conferma_appuntamento.php");
                         $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
                                 <caption>Prodotti modificabili</caption>
@@ -102,9 +102,9 @@ if (!isset($_SESSION['username'])) {
                         $codCliente=$result[0]->codice;
                         $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo); //ricontrollare paramen
                         if ($ok)
-                            echo "<p class=/"inforesult/">Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
+                            echo "<p class=\"inforesult\">Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
                         else
-                            echo "<p class=/"inforesult/">Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
+                            echo "<p class=\"inforesult\">Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
                     }
                     
                 }
