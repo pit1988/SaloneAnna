@@ -74,7 +74,7 @@ if (!isset($_SESSION['username'])) {
                         <li>
                             <p>
                                 <label for="orario">Orario</label>
-                                <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($result->data)) . '"/>
+                                <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($result->ora)) . '"/>
                             </p>
                         </li>
                     </div>
