@@ -248,7 +248,7 @@ h2{
     background-color:#b0fcb0;
     margin:0 auto;
     padding: 1em;
-    width:70%;
+    width:80%;
     color: black;
     clear: both;
 }
@@ -291,6 +291,11 @@ h2{
 
 .titolo_contattaci h2{
     font-size:1.4em;
+}
+
+.inforesult {
+    font-weight: bold;
+    text-align: center;
 }
 
 /* Realizzazioni */

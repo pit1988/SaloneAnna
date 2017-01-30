@@ -34,12 +34,12 @@ ol, ul {
 blockquote, q {
     quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after,q:before, q:after {
     content: '';
     content: none;
 }
 table {
+    margin: 0 auto;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -91,8 +91,7 @@ h1{
 
 /*Login*/
 legend{
-
-   font-size:1.4em;
+   font-size:0.9em;
    padding: 1em 0em 1em 0em;	
 }
 
@@ -239,7 +238,7 @@ li a:hover {
     background-color:#c4b49d;
     margin:0 auto;
     padding: 1em;
-    width:70%;
+    width:80%;
     color: black;
     clear: both;
 }
@@ -281,6 +280,11 @@ li a:hover {
     clear: both;
     text-align: center;
     font-style: oblique;
+}
+
+.inforesult {
+    font-weight: bold;
+    text-align: center;
 }
 
 /*Listino Prezzi*/
@@ -581,7 +585,6 @@ h4{
     margin: 0 0 0.5em 0;
     color: #31456b;
     clear: both;
-    padding: 0px 2em 2em 0px;
     text-align-last: center;
     font-style: oblique;
     width: 100%;
