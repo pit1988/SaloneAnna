@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
     content_begin();
     
     if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
-        $err = "<p>Problemi di connessione</p>";
+        $err = "<p class=/"errorSuggestion/">Problemi di connessione</p>";
     } else {
         $conn = dbconnect();
         
@@ -32,7 +32,7 @@ if (!isset($_SESSION['username'])) {
         // nessun risultato
         $num_rows = mysqli_num_rows($result);
         if (!$num_rows)
-            echo "<p>Non è presente il prodotto richiesto</p>";
+            echo "<p class=/"inforesult/">Non è presente il prodotto richiesto</p>";
         else {
             $nome      = $_POST['nome'];
             $marca     = $_POST['marca'];
@@ -43,9 +43,9 @@ if (!isset($_SESSION['username'])) {
             $codprod   = $_POST['codprod'];
             $ris       = modificaProdotto($codprod, $nome, $marca, $tipo, $quanita, $pvendita, $rivendita);
             if ($ris)
-                $msg = "<p>Modifica avvenuta correttamente</p>";
+                $msg = "<p class=/"inforesult/">Modifica avvenuta correttamente</p>";
             else
-                $msg = "<p>Non è stato possibile modificare il prodotto selezionato</p>";
+                $msg = "<p class=/"errorSuggestion/">Non è stato possibile modificare il prodotto selezionato</p>";
             echo $msg;
         }
     }

@@ -20,15 +20,11 @@ if (!isset($_SESSION['username'])) {
         $codprod   = $_POST['codprod'];
         $ris       = inserisciProdotto($nome, $marca, $tipo, $quanita, $pvendita, $rivendita);
         if ($ris)
-            $msg = "<p>Modifica avvenuta correttamente</p>";
+            $msg = "<p class=/"inforesut/">Modifica avvenuta correttamente</p>";
         else
-            $msg = "<p>Non è stato possibile modificare il prodotto selezionato</p>";
+            $msg = "<p class=/"inforesut/">Non è stato possibile modificare il prodotto selezionato</p>";
         echo $msg;
     }
-    
-    
-    hyperlink("Modifica altri prodotti", "GestioneProdotti.php");
-    hyperlink("Torna alla home", "index.php");
     
     $title      = "Gestione Prodotti: Salone Anna";
     $title_meta = "Gestione Prodotti: Salone Anna";
@@ -42,7 +38,10 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Inserisci nuovo prodotto</h2>";
 
     
-    $to_print = '<form method="POST" action="esito_modifica.php">
+    $to_print = '
+    <form method="POST" action="esito_modifica.php">
+    <fieldset>
+    <legend>Completa le informazioni per inserire un nuovo prodotto</legend>
         <ul>
                 <li>
                     <p>
@@ -83,7 +82,11 @@ if (!isset($_SESSION['username'])) {
             </ul>
             <input type="submit" name="submit" value="Procedi">
             <input type="reset" value="Cancella">
+        </fieldset>
         </form>
+
+        // hyperlink("Modifica altri prodotti", "GestioneProdotti.php");
+        // hyperlink("Torna alla home", "index.php");
     ';
     if (isset($msg))
         echo ($msg);

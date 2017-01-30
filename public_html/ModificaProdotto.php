@@ -32,10 +32,13 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
     // nessun risultato
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p>Non è presente il prodotto richiesto</p>";
+        echo "<p class=\"inforesult\">Non è presente il prodotto richiesto</p>";
     else {
         $row = mysqli_fetch_row($result);
-        $to_print = '<form method="POST" action="esito_modifica_prodotto.php">
+        $to_print = '
+        <form method="POST" action="esito_modifica_prodotto.php">
+        <fieldset>
+        <legend>Seleziona il prodotto da modificare</legend>
     		<ul>
                     <li>
                         <p>
@@ -77,7 +80,7 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
                 <input type="hidden" name="codprod" value="'.$cod.'" />
                 <input type="submit" name="submit" value="Procedi">
         		<input type="reset" value="Cancella">
-            </form>
+            </fieldset></form>
     	';
         echo $to_print;
     }
