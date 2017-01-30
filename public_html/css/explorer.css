@@ -553,23 +553,6 @@ img {
     max-width: 93%;
 }
 
-.dati{
-}
-
-.riquadro_prezzi{
-    width: 96%;
-}
-
-.radio{
-    float:right;
-}
-
-.prezzo{
-    color: #232323;
-    font-style: oblique;
-    text-align: right;
-    margin: 10px;
-}
 
 .subbutton{
     padding-right: 10px;
@@ -631,15 +614,6 @@ input[type="button"], input[type="submit"]{
     background: #4e4b3b;
 }
 
-#dynamicInputPrice li{
-    padding-bottom: 1em; 
-}
-
-#dynamicInputPrice span{
-    clear: both; 
-}
-
-
 
 .inputsL{
    float: left;
@@ -653,15 +627,6 @@ input[type="button"], input[type="submit"]{
     margin-bottom: 1em;
 }
 
-.inputsR SPAN{
-    display:none;
-}
-
-.inputsL input {
-    text-align: right;
-    width: 70%;
-}
-
 .inputR{
     width: 49%;
 }
@@ -671,10 +636,28 @@ input[type="button"], input[type="submit"]{
     color: #b40029;
 }
 
-#name, #scientificName {
-    width: 25%;
+.datiAppun {
+    float: left;
+    width: 49%;
 }
 
+.tipoAppun {
+    float: right;
+    width: 49%;
+}
+
+.tipoAppun p {
+    float: left;
+    width: 30%;
+    border-bottom: 1px outset;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.confermAppun{
+    clear: both;
+    text-align: center;
+}
 
 /* Footer */
 

@@ -747,16 +747,27 @@ input[type="button"], input[type="submit"]{
     color: #b40029;
 }
 
-#dato_contenuto, #prezzo_formato{
+.datiAppun {
+    float: left;
+    width: 49%;
+}
+
+.tipoAppun {
     float: right;
+    width: 49%;
 }
 
-#name{
-    width: 25%;
+.tipoAppun p {
+    float: left;
+    width: 30%;
+    border-bottom: 1px outset;
+    text-align: center;
+    padding: 0.5em;
 }
 
-#scientificName {
-    width: 33%;
+.confermAppun{
+    clear: both;
+    text-align: center;
 }
 
 /* Footer */

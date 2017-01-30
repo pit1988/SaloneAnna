@@ -21,11 +21,14 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
     insert_header($rif, 6, true);
     content_begin();
+    echo "<h2>Nuovo Appuntamento</h2>";
+
     //aggiungere tabindex;
     $str1 = '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
+             <fieldset><legend>Compila le informazioni richieste per inserire un appuntamento</legend>
                 <ul>
-                    <li>
-                        <p> 
+                    <div class="tipoAppun">
+                        <li>
                             <label for="TipoAppuntamento">Tipo appuntamento:</label>
 ';
     
@@ -33,11 +36,11 @@ if (!isset($_SESSION['username'])) {
     $result= listaTipoAppuntamenti();
     if($result){
         foreach ($result as $tipoApp){
-            $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" />' . $tipoApp->nome."\n";
+            $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
         }
     }
-    $str3 = '</p>
-                    </li>
+    $str3 = '</li></div>
+                <div class="datiAppun">
                     <li>
                         <p>
                             <label for="first_name">Nome</label>
@@ -60,13 +63,16 @@ if (!isset($_SESSION['username'])) {
                             <input type="text" name="orario" id="orario" tabindex="102" />
                         </p>
                     </li>
+                </div>
+                <div class="confermAppun">
                     <li>
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella" />
                         <span id="errors"></span>
                     </li>
-                    
+                </div>
                 </ul>
+            </fieldset>
             </form>
 ';
     echo $str1 . $str2 . $str3;
