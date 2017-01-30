@@ -96,14 +96,6 @@ else
 $str3='
 <div id="breadcrumbs">
 <span id="rifnav" >Ti trovi in: '.$pth.'</span>
-<form class="headersearch" action="cgi-bin/search.cgi" method="post">
-<fieldset>
-<legend class="nascosto">Cerca un prodotto o un servizio</legend>
-<label for="ricerca" class="nascosto">Inserisci i termini da cercare</label>
-<input type="text" name="ricerca" id="ricerca" class="ricerca" accesskey="s" tabindex="2" />
-<input type="submit" name="conferma" id="conferma" class="ricerca" value="Cerca" accesskey="d" tabindex="3"/>
-</fieldset>
-</form>
 </div>';
 echo $str1.$str2.$str3;
 if($is_admin == true)
