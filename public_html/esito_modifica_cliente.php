@@ -23,15 +23,12 @@ if (!isset($_SESSION['username'])) {
         if (!isset($_POST['submit']) OR !isset($_POST['codCliente'])) {
         $err = "<p class=/"errorSuggestion/">Problemi di connessione</p>";
     } else {
-        $conn = dbconnect();
+        $cod = $_POST["codCliente"];
         
-        $cod   = $_POST["codCliente"];
-        $query = "SELECT * FROM Prodotti p WHERE p.CodProdotto= '$cod'";
-        
-        $result   = mysqli_query($conn, $query);
+        $result   = mostraCliente($cod);
         // nessun risultato
         $num_rows = mysqli_num_rows($result);
-        if (!$num_rows)
+        if(is_null($result))
             $err= "<p class=/"inforesult/">Non è presente il cliente richiesto</p>";
         else {
             $nome = $_POST['first_name'];
@@ -43,8 +40,7 @@ if (!isset($_SESSION['username'])) {
             if(strlen($nome)==0 OR strlen($cognome)==0) // OR strlen($email)==0 OR strlen($telefono)==0 OR strlen($date)==0)
                 $err= "<p class=/"errorSuggestion/">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else{
-                $dataNascita=(strlen($date)==0? "" :date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d'));
-                $ris = aggiornaCliente($codice, $nome, $cognome, $telefono, $email, $dataNascita);
+                $ris = aggiornaCliente($codice, $nome, $cognome, $telefono, $email, $date);
                 if ($ris)
                     $msg = "<p class=/"inforesult/">Modifica avvenuta correttamente</p>";
                 else

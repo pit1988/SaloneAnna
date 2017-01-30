@@ -16,7 +16,6 @@ if (!isset($_SESSION['username'])) {
             $err= "Almeno uno dei parametri non è stato inserito correttamente";
         }
         else{
-            
             $sub=$_POST['submit'];
             $nome = $_POST['first_name'];
             $cognome = $_POST['last_name'];
@@ -26,21 +25,23 @@ if (!isset($_SESSION['username'])) {
             if(strlen($nome)==0 OR strlen($cognome)==0) // OR strlen($email)==0 OR strlen($telefono)==0 OR strlen($date)==0)
                 $err= "Almeno uno dei parametri non è stato inserito correttamente";
             else{
-                $data = (strlen($date)==0? "" :date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d'));
-                $conn = dbConnect();
-                $qry = "SELECT * FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome' AND Email='$email' AND DataNascita='$data'";
-    
-                $result = mysqli_query($conn, $qry);
-                
-                $num_rows = mysqli_num_rows($result);
-                if ($num_rows > 0)
-                    $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
-                else {
+                $result = checkCliente($nome, $cognome, $telefono, $email, $date);
+                if(is_null($result)){
                     $ris = aggiungiCliente($nome, $cognome, $telefono, $email, $date);
                     if (!$ris) {
                         $err= "<p>Non è stato possibile inserire il nuovo cliente</p>";
                     } else
                         $esito= "<p>Operazione eseguita con successo</p>";
+                }
+                else{ //uno o più
+                    $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
+
+
+                //to here
+                if ($num_rows > 0)
+                    
+                else {
+                    
                 }
             }
         }

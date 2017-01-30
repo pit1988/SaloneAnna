@@ -53,12 +53,13 @@ if (!isset($_SESSION['username'])) {
                 $err = "Almeno uno dei parametri non è stato inserito correttamente";
             else {
                 $result = checkCliente($nome, $cognome);
-                if(is_null($result)){
+                if(is_null($result) OR count($result)==0){
                     echo "<p>Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
                     hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
                 }
                 else{ //uno o più
                     $number_rows = count($result);
+                    echo $number_rows;
                     if ($number_rows > 1) {
                         echo "<p>Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
                         form_start("POST", "conferma_appuntamento.php");

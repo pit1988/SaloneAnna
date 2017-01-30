@@ -43,15 +43,14 @@ if (!isset($_SESSION['username'])) {
                 $data = date_format(date_create_from_format('d/m/Y', $date), 'Y-m-d');
                 $dataora = date('Y-m-d H:i:s', strtotime("$data $orario"));
                 
-                
-                $conn = dbConnect();
-                $queryc = "SELECT * FROM Clienti c WHERE c.Nome = '$nome' AND c.Cognome = '$cognome'";
-                
-                $result = mysqli_query($conn, $queryc);
-                $number_rows = mysqli_num_rows($result);
-                if ($number_rows > 1) {
+                $result = checkCliente($nome, $cognome);
+                if(is_null($result)){
+                    echo "<p>Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
+                    hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
+                }
+                else{ //uno o più
+                    $number_rows = count($result);
                     echo "<p>Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
-                    $number_cols = mysqli_num_fields($result);
                     form_start("POST", "confermaModificaAppuntamento.php");
                     $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
 	            <caption>Prodotti modificabili</caption>
@@ -69,22 +68,10 @@ if (!isset($_SESSION['username'])) {
 	            ';
                     $tb = "";
                     //corpo tabella
-                    while ($row = mysqli_fetch_row($result)) {
-                        
-                        $tb .= "<tr>\n";
-                        for ($i = 0; $i < $number_cols + 1; $i++) {
-                            $tb .= "<td>";
-                            if (!isset($row[$i]))
-                                $tb .= " ";
-                            if ($i == 0)
-                                $tb .= "<input type=\"radio\" name=\"CodCliente\" value= \"" . $row[$i] . "\"\/>";
-                            else {
-                                $tb .= $row[$i - 1];
-                            }
-                            
-                            $tb .= "</td>\n";
-                        }
-                        $tb .= "</tr>\n";
+                    foreach ($result as $cliente) {
+                        $tb.= "<tr>
+                        <td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td><td><input type='radio' name='CodCliente' value=$cliente->codice></td>
+                        </tr>";
                     }
                     
                     $tf = "</tbody></table>";
