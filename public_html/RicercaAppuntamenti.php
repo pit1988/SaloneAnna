@@ -16,10 +16,11 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Ricerca Appuntamento</strong>';
     insert_header($rif, 6, true);
     content_begin();
-    
+    echo "<h2>Ricerca Appuntamento</h2>";
+
     $str_to_print = '
 <form action="AppClienteGiorno.php" method=POST>
-	<fieldset>
+	<fieldset class="inputsL">
 		<legend>Ricerca tramite dati cliente:</legend>
 		<ul>
 			<li>
@@ -39,7 +40,7 @@ if (!isset($_SESSION['username'])) {
 			</li>
 		</ul>
 	</fieldset>
-	<fieldset>
+	<fieldset class="inputsR">
 		<legend>Ricerca tramite data appuntamento:</legend>
 		<ul>
 			<li>
