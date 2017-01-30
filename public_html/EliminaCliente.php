@@ -41,11 +41,15 @@ else
 	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Elimina clienti</strong>';
 	insert_header($rif, 5, true);
 	content_begin();
+	echo "<h2>Elimina Cliente</h2>";
 	$ris=listaClienti();
 	if($ris){
-		$str_to_print='<form action="EliminaCliente.php" method="POST">
+		$str_to_print='
+		<form action="EliminaCliente.php" method="POST">
+		<fieldset>
+		<legend>Selezione i clienti che vuoi eliminare</legend>
 		<table id="clientiTab" summary="Rimozione clienti">
-            <caption>Rimozione clienti</caption>
+            <caption class="nascosto">Rimozione clienti</caption>
             <thead>
                 <tr>
                 	<th scope="col">Codice</th>
@@ -67,13 +71,12 @@ else
 		</tbody></table>
 		<input type='submit' name='submit' value='Procedi'>
 		<input type='reset' value='Cancella'>
-		</form>
+		</fieldset></form>
 		";
-                    // echo"</fieldset>";
 		unset($cliente); //fortemente consigliato perché altrimenti l'oggetto $cliente rimane in memoria
 	}
 	else 
-		$str_to_print="Non sono presenti clienti da poter cancellare";
+		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti da poter cancellare</p>";
 	if(isset($msg))
 		echo $msg;
 	echo $str_to_print;

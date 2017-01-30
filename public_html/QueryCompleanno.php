@@ -17,7 +17,9 @@ if (!isset($_SESSION['username'])) {
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Compleanni nel mese</strong>';
     insert_header($rif, 5, true);
-    
+    content_begin();
+    echo "<h2>Compleanni questo mese</h2>";
+
     include("utils/DBlibrary.php");
     $conn = dbconnect();
     
@@ -26,14 +28,14 @@ if (!isset($_SESSION['username'])) {
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        $err = "<p>Non ci sono compleanni previsti per i prossimi 31 giorni</p>";
+        $err = "<p class=\"inforesult\">Non ci sono compleanni previsti per i prossimi 31 giorni</p>";
     else {
         $number_cols = mysqli_num_fields($result);
         
-        echo "<b>I compleanni questo mese sono:</b>";
+        echo "<p class=\"info\">I compleanni questo mese sono:</b>";
         
         $th = '<table class="storicoApp" summary="Storico Appuntamenti cliente">
-              <caption>Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
+              <caption class=\"inforesult\">Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
               <thead>
                   <tr>
                       <th scope="col">Codice Cliente</th>

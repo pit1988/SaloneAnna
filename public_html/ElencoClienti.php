@@ -22,10 +22,12 @@ else
 	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Elenco clienti</strong>';
 	insert_header($rif, 5, true);
 	content_begin();
+	echo "<h2>Elenco Clienti</h2>";
+
 	$ris=listaClienti();
 	if($ris){
 		$str_to_print='<table id="clientiTab" summary="Elenco clienti">
-            <caption>Elenco clienti</caption>
+            <caption class="nascosto">Elenco clienti</caption>
             <thead>
                 <tr>
                 	<th scope="col">Codice</th>
@@ -44,7 +46,7 @@ else
 		unset($cliente); //fortemente consigliato perché altrimenti l'oggetto $cliente rimane in memoria
 	}
 	else 
-		$str_to_print="Non sono presenti clienti nel database";
+		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti nel database</p>";
 	echo $str_to_print;
 	content_end();
 	page_end();

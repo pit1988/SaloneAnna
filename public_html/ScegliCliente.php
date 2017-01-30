@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -23,11 +22,16 @@ else
 	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Elenco clienti</strong>';
 	insert_header($rif, 5, true);
 	content_begin();
+	echo "<h2>Modifica cliente</h2>";
+
 	$ris=listaClienti();
 	if($ris){
-		$str_to_print='<form action="ModificaCliente.php" method="POST">
+		$str_to_print='
+		<form action="ModificaCliente.php" method="POST">
+        <fieldset>
+        <legend>Modifica i campi per correggere i dati cliente</legend>
 		<table id="clientiTab" summary="Elenco clienti">
-            <caption>Elenco clienti</caption>
+            <caption class="inforesult">Elenco clienti</caption>
             <thead>
                 <tr>
                 	<th scope="col">Codice</th>
@@ -49,13 +53,12 @@ else
 		</tbody></table>
 		<input type='submit' name='submit' value='Procedi' />
 		<input type='reset' value='Cancella' />
-		</form>
+		</fieldset></form>
 		";
-                    // echo"</fieldset>";
 		unset($cliente); //fortemente consigliato perché altrimenti l'oggetto $cliente rimane in memoria
 	}
 	else 
-		$str_to_print="<p>Non sono presenti clienti nell'elenco</p>";
+		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti nell'elenco</p>";
 	if(isset($msg))
 		echo $msg;
 	echo $str_to_print;
