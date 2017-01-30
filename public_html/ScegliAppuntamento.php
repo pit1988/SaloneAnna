@@ -44,7 +44,7 @@
           
           foreach ($result as $appuntamento) {
               $str_to_print .= "<tr>\n";
-              $str_to_print.= "<tr><td>".$appuntamento->codice."</td><td>".$appuntamento->nome."</td><td>".$appuntamento->cognome."</td><td>".$appuntamento->data."</td><td>".$appuntamento->ora."</td><td>".$appuntamento->tipo."</td><td>".$appuntamento->prezzo."</td><td><input type=\"radio\" name=\"codMsg[]\" value= \"" . $appuntamento->codice . "\"/></td></tr>";
+              $str_to_print.= "<tr><td>".$appuntamento->codice."</td><td>".$appuntamento->nome."</td><td>".$appuntamento->cognome."</td><td>".$appuntamento->data."</td><td>".$appuntamento->ora."</td><td>".$appuntamento->tipo."</td><td>".$appuntamento->prezzo."</td><td><input type=\"radio\" name=\"codapp\" value= \"" . $appuntamento->codice . "\"/></td></tr>";
               $str_to_print .= "</tr>\n";
           }
           

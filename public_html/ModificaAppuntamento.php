@@ -19,24 +19,18 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';
-    insert_header($rif, 4, true);
+    insert_header($rif, 6, true);
     content_begin();
     
     if (!isset($_POST['submit']) OR !isset($_POST['codapp'])) {
         echo "<p>Problemi di connessione; <a href=\"ScegliAppuntamento.php\">segui il link per selezionare un altro appuntamento da modificare</a></p>";
     } else {
-        
-        $conn = dbconnect();
-        $cod = $_POST["codapp"];
-        $query = "SELECT CodAppuntamento, Nome, Cognome, DataOra, CodTipoAppuntamento FROM Appuntamenti a JOIN Clienti c WHERE a.CodAppuntamento= '$cod'";
-        
-        $result   = mysqli_query($conn, $query);
+        $cod=$_POST['codapp'];
+        $result = mostraAppuntamento($cod);
         // nessun risultato
-        $num_rows = mysqli_num_rows($result);
-        if (!$num_rows)
+        if (!$result)
             echo "<p>L'appuntamento richiesto non è prensente nel database</p>";
         else {
-            
             //aggiungere tabindex;
             $str1 = '<form action="ConfermaModificaAppuntamento.php" onsubmit="return true;" method="post">
                 <ul>
@@ -46,37 +40,39 @@ if (!isset($_SESSION['username'])) {
 ';
             
             $str2 = "";
-            $result= listaTipoAppuntamenti();
-            if($result){
-                foreach ($result as $tipoApp){
-                    $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" />' . $tipoApp->nome."\n";
+            $res= listaTipoAppuntamenti();
+            if(!is_null($res)){
+                foreach ($res as $tipoApp){
+                    if(($tipoApp->nome)  == ($result->tipo))
+                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" checked="checked"/>' . $tipoApp->nome."\n";
+                    else
+                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" />' . $tipoApp->nome."\n";
                 }
             }
             
-            $row = mysqli_fetch_row($result);
             
             $str3 = '</p>
                     </li>
                     <li>
                         <p>
                             <label for="first_name">Nome</label>
-                            <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $row[1] . '"/>
+                            <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $result->nome . '"/>
                         </p>
                         <p>
                             <label for="last_name">Cognome</label>
-                            <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $row[2] . '"/>
+                            <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $result->cognome . '"/>
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="data">Data</label>
-                        <input type="text" name="data" id="data" tabindex="104" value="' . date("d/m/Y", strtotime($row[3])) . '"/>
+                        <input type="text" name="data" id="data" tabindex="104" value="' . $result->data . '"/>
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="orario">Orario</label>
-                            <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($row[3])) . '"/>
+                            <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($result->data)) . '"/>
                         </p>
                     </li>
                     <li>
@@ -85,7 +81,7 @@ if (!isset($_SESSION['username'])) {
                         <span id="errors"></span>
                     </li>
                 </ul>
-                <input type="hidden" name="CodAppuntamento" value="'.$row[0].'">
+                <input type="hidden" name="CodAppuntamento" value="'.$result->codice.'">
             </form>
 ';
             echo $str1 . $str2 . $str3;

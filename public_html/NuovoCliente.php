@@ -26,7 +26,7 @@ if (!isset($_SESSION['username'])) {
                 $err= "Almeno uno dei parametri non è stato inserito correttamente";
             else{
                 $result = checkCliente($nome, $cognome, $telefono, $email, $date);
-                if(is_null($result)){
+                if(is_null($result) OR count($result)==0){
                     $ris = aggiungiCliente($nome, $cognome, $telefono, $email, $date);
                     if (!$ris) {
                         $err= "<p>Non è stato possibile inserire il nuovo cliente</p>";
@@ -35,13 +35,6 @@ if (!isset($_SESSION['username'])) {
                 }
                 else{ //uno o più
                     $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
-
-
-                //to here
-                if ($num_rows > 0)
-                    
-                else {
-                    
                 }
             }
         }

@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';
-    insert_header($rif, 4, true);
+    insert_header($rif, 6, true);
         content_begin();
         
         if (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
@@ -44,14 +44,14 @@ if (!isset($_SESSION['username'])) {
                 $dataora = date('Y-m-d H:i:s', strtotime("$data $orario"));
                 
                 $result = checkCliente($nome, $cognome);
-                if(is_null($result)){
+                if(is_null($result) OR count($result)==0){
                     echo "<p>Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
                     hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");
                 }
                 else{ //uno o più
                     $number_rows = count($result);
                     echo "<p>Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
-                    form_start("POST", "confermaModificaAppuntamento.php");
+                    form_start("POST", "ConfermaModificaAppuntamento.php");
                     $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
 	            <caption>Prodotti modificabili</caption>
 	            <thead>
