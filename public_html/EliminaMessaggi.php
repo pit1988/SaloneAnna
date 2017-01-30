@@ -26,11 +26,11 @@ if (!isset($_SESSION['username'])) {
         
         if ($n_el > 0)
             if ($n_el == 1)
-                $msg = "<p>È stato cancellato $n_el messaggio</p>";
+                $msg = "<p class=/"inforesult/">È stato cancellato $n_el messaggio</p>";
             else
-                $msg = "<p>Sono stati cancellati $n_el messaggi</p>";
+                $msg = "<p class=/"inforesult/">Sono stati cancellati $n_el messaggi</p>";
         if ($n_err > 0)
-            $msg = "<p>Durante la cancellazione si sono verificati $n_err errori</p>";
+            $msg = "<p class=/"errorSuggestion/">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     
     $title      = "Messaggi: Salone Anna";
@@ -42,10 +42,12 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Messaggi.php">Messaggi</a> / <strong>Elimina Messaggi</strong>';
     insert_header($rif, 7, true);
     content_begin();
+    echo "<h2>Gestione Messaggi</h2>";
     $ris = listamessaggi();
     if ($ris) {
         $str_to_print = '<form action="EliminaMessaggi.php" method="POST"><table id="messaggi" summary="Messaggi">
-            <caption>Messaggi</caption>
+            <fieldset><legend>Seleziona un messaggio da eliminare</legend>
+            <caption class="info">Tabella messaggi</caption>
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -69,10 +71,11 @@ if (!isset($_SESSION['username'])) {
         $str_to_print .= "</tbody></table>
 		<input type='submit' name='submit' value='Procedi'>
 		<input type='reset' value='Cancella'>
+		</fieldset>
 		</form>";
         unset($messaggio); //fortemente consigliato perché altrimenti l'oggetto $messaggio rimane in memoria
     } else
-        $str_to_print = "Non sono presenti messaggi";
+        $str_to_print = "<p class=/"inforesult/">Non sono presenti messaggi</p>";
     if (isset($msg))
         echo $msg;
     echo $str_to_print;
