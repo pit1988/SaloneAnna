@@ -20,6 +20,8 @@ if (!isset($_SESSION['username'])) {
     $is_admin = true;
     insert_header($rif, 1, $is_admin);
     content_begin();
+    echo "<h2>Modifica Foto</h2>";
+
     
     if (isset($_POST['submit']) && isset($_POST['codImg'])) {
         $codice = $_POST['codImg'];
@@ -33,7 +35,9 @@ if (!isset($_SESSION['username'])) {
             $filename = $row[0];
             $descr    = $row[1];
             
-            $to_print = '<form enctype="multipart/form-data" action="NuovaFoto.php" method="POST">
+            $to_print = '
+            <form enctype="multipart/form-data" action="NuovaFoto.php" method="post">
+                <fieldset><legend>Inserisci una nuova foto</legend>
                     <ul>
                         <li>
                             <p>
@@ -52,10 +56,11 @@ if (!isset($_SESSION['username'])) {
                             </p>
                         </li>
                     </ul>
-                </form>
+                </fieldset>
+            </form>
             ';
         } else
-            $to_print = "<p>Errore, non è stata selezionata alcuna foto o la foto non è più presente nel database</p>";
+            $to_print = "<p class=\"errorSuggestion\">Errore, non è stata selezionata alcuna foto o la foto non è più presente nel <span lang=\"en\">database</span></p>";
     }
     
     elseif (isset($_POST['invia']) && isset($_POST['img_desc']) && isset($_POST['img_old_file']) && isset($_POST['codImg_old'])) {
@@ -66,7 +71,7 @@ if (!isset($_SESSION['username'])) {
             $img_name = $_FILES["uploadedfile"]["name"];
             if (($_FILES["uploadedfile"]["type"] == "image/gif" || $_FILES["uploadedfile"]["type"] == "image/jpeg" || $_FILES["uploadedfile"]["type"] == "image/jpg" || $_FILES["uploadedfile"]["type"] == "image/pjpeg" && $_FILES["uploadedfile"]["size"] < 20000)) {
                 if ($_FILES["uploadedfile"]["error"] > 0) {
-                    $to_print = "<p>Un errore si è presentato durante il caricamento: <span lang=\"en-us\">" . $_FILES["uploadedfile"]["error"] . "</span></p>";
+                    $to_print = "<p class=\"errorSuggestion\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $_FILES["uploadedfile"]["error"] . "</span></p>";
                 } else {
                     if (file_exists("uploads/$filename"))
                         unlink("uploads/$filename");
@@ -85,37 +90,37 @@ if (!isset($_SESSION['username'])) {
                     
                     $ris = mysqli_query($conn, $query_el);
                     move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], "uploads/" . $new_img_name);
-                    $to_print = "<p>Immagine memorizzata in: " . "<span lang=\"en\"uploads</span>/" . $new_img_name . "</p>";
+                    $to_print = "<p class=\"inforesult\">Immagine memorizzata in: " . "<span lang=\"en\"uploads</span>/" . $new_img_name . "</p>";
                     $qry      = "UPDATE Images SET Img_desc='$img_desc', Img_filename='$new_img_name' WHERE Img_title='$codice'";
                     
                     if (!mysqli_query($conn, $qry)) {
-                        $to_print = "<p>Non è stato possibile inserire l'immagine nel database</p>";
+                        $to_print = "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
                     } else {
-                        $to_print = "<p>È stato aggiunto un file nel <span lang=\"en-us\">database</span></p>";
+                        $to_print = "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
                     }
                 }
             } else {
-                $to_print = "Il <span lang=\"en-us\">file</span> inserito non è valido</p>";
+                $to_print = "<p class=\"errorSuggestion\">Il <span lang=\"en\">file</span> inserito non è valido</p>";
             }
         }
         //cambia solo la descrizione.
         else {
             $qry = "UPDATE Images SET Img_desc='$img_desc' WHERE Img_title='$codice'";
             if (!mysqli_query($conn, $qry)) {
-                $to_print = "<p>Non è stato possibile inserire l'immagine nel database</p>";
+                $to_print = "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
             } else {
-                $to_print = "<p>È stato aggiunto un file nel <span lang=\"en-us\">database</span></p>";
+                $to_print = "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
             }
         }
     }
     
     else {
-        $to_print = "<p>Non hai selezionato alcuna immagine</p>";
+        $to_print = "<p class=\"errorSuggestion\">Non hai selezionato alcuna immagine</p>";
     }
     
     
     echo $to_print;
-    echo "<div><p>Immagine da modificare</p><img src=\"uploads/$filename\" alt=\"\" /></div>";
+    echo "<div><p class=\"inforesult\">Immagine da modificare</p><img src=\"uploads/$filename\" alt=\"\" /></div>";
     
     content_end();
     page_end();

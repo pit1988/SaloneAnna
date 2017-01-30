@@ -36,11 +36,11 @@ if (!isset($_SESSION['username'])) {
         
         if ($n_el > 0)
             if ($n_el == 1)
-                $msg = "<p>È stato cancellato $n_el messaggio</p>";
+                $msg = "<p class=\"inforesult\">È stata cancellata $n_el foto</p>";
             else
-                $msg = "<p>Sono stati cancellati $n_el messaggi</p>";
+                $msg = "<p class=\"inforesult\">Sono state cancellate $n_el foto</p>";
         if ($n_err > 0)
-            $msg = "<p>Durante la cancellazione si sono verificati $n_err errori</p>";
+            $msg = "<p class=\"errorSuggestion\>Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     $title      = "Salone Anna: Inserisci foto";
     $title_meta = "Salone Anna, parrucchiere a Vicenza";
@@ -51,6 +51,7 @@ if (!isset($_SESSION['username'])) {
     $is_admin = true;
     insert_header($rif, 1, $is_admin);
     content_begin();
+    echo "<h2>Elimina Foto</h2>";
     
     $conn   = dbconnect();
     $query  = "SELECT * FROM Images";
@@ -60,11 +61,12 @@ if (!isset($_SESSION['username'])) {
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p>Non ci sono immagini da mostrare</p>";
+        echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
     else {
         form_start("POST", "EliminaFoto.php");
+        echo "<fieldset><legend>Seleziona la/le immagine/i che vuoi eliminare</legend>";
         $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
-            <caption>Seleziona le immagini da eliminare</caption>
+            <caption class="nascosto">Tabella di immagini</caption>
             <thead>
                 <tr>
                     <th scope="col">Img_title</th>
@@ -101,7 +103,7 @@ if (!isset($_SESSION['username'])) {
         echo $to_print;
         echo "<input type='submit' name='submit' value='Procedi'>";
         echo "<input type='reset' value='Cancella'>";
-        // echo"</fieldset>";
+        echo"</fieldset>";
         echo "</form>";
     }
     content_end();

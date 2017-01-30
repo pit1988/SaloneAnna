@@ -22,6 +22,8 @@ else{
     $is_admin=true;
     insert_header($rif, 1, $is_admin);
     content_begin();
+    echo "<h2>Modifica Foto</h2>";
+
     
     $conn=dbconnect();
     $query  = "SELECT * FROM Images";
@@ -31,48 +33,49 @@ else{
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p>Non ci sono entry nella tabella Prodotti</p>";
+        echo "<p class=\"info\">Non ci sono entry nella tabella Prodotti</p>";
     else {
-        form_start("POST", "ModificaFoto.php");
-        $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
-            <caption>Seleziona le immagini da eliminare</caption>
-            <thead>
-                <tr>
-                    <th scope="col">Img_title</th>
-                    <th scope="col">Img_desc</th>
-                    <th scope="col">Img_filename</th>
-                    <th scope="col">Seleziona</th>
-                </tr>
-            </thead>
+        form_start("post", "ModificaFoto.php");
+        echo "<fieldset><legend>Seleziona l\' immagine che vuoi modificare</legend>";
+            $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
+                <caption class="nascosto">Tabella immagini</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Img_title</th>
+                        <th scope="col">Img_desc</th>
+                        <th scope="col">Img_filename</th>
+                        <th scope="col">Seleziona</th>
+                    </tr>
+                </thead>
 
-            <tfoot>
-                <tr>
-                    <th scope="col">Img_title</th>
-                    <th scope="col">Img_desc</th>
-                    <th scope="col">Img_filename</th>
-                    <th scope="col">Seleziona</th>
-                </tr>
-            </tfoot>
+                <tfoot>
+                    <tr>
+                        <th scope="col">Img_title</th>
+                        <th scope="col">Img_desc</th>
+                        <th scope="col">Img_filename</th>
+                        <th scope="col">Seleziona</th>
+                    </tr>
+                </tfoot>
 
-            <tbody>
-            ';
-        $tb = "";
-        //corpo tabella
-        while ($row = mysqli_fetch_row($result)) {
-            $tb .= "<tr>
-            <td>$row[0]</td>
-            <td>$row[1]</td>
-            <td><a href=\"uploads/$row[2]\">$row[2]</a></td>
-            <td>".'<input type="radio" name="codImg" value= "' . $row[0] . '" /></td>
-            </tr>';
-        }
-        
-        $tf       = "</tbody></table>";
-        $to_print = $th . $tb . $tf;
-        echo $to_print;
-        echo "<input type='submit' name='submit' value='Procedi'>";
-        echo "<input type='reset' value='Cancella'>";
-        // echo"</fieldset>";
+                <tbody>
+                ';
+            $tb = "";
+            //corpo tabella
+            while ($row = mysqli_fetch_row($result)) {
+                $tb .= "<tr>
+                <td>$row[0]</td>
+                <td>$row[1]</td>
+                <td><a href=\"uploads/$row[2]\">$row[2]</a></td>
+                <td>".'<input type="radio" name="codImg" value= "' . $row[0] . '" /></td>
+                </tr>';
+            }
+
+            $tf       = "</tbody></table>";
+            $to_print = $th . $tb . $tf;
+            echo $to_print;
+            echo "<input type='submit' name='submit' value='Procedi'>";
+            echo "<input type='reset' value='Cancella'>";
+        echo"</fieldset>";
         echo "</form>";
     }
     content_end();
