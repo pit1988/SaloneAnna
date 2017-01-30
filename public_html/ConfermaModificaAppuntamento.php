@@ -35,9 +35,9 @@ if (!isset($_SESSION['username'])) {
             
             $ok = aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo);
             if ($ok)
-                echo "<b>L'appuntamento è stato modificato correttamente ed è il $data alle $ora</b><br>";
+                echo "<p class=\"inforesut\">L'appuntamento è stato modificato correttamente ed è il $data alle $ora</p>";
             else
-                echo "<p>Non è stato possibile modificare l'appuntamento selezionato</p>";
+                echo "<p class=\"errorSuggestion\">Non è stato possibile modificare l'appuntamento selezionato</p>";
         }
         
         if (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
@@ -52,20 +52,21 @@ if (!isset($_SESSION['username'])) {
             $cod     = $_POST['CodAppuntamento'];
             
             if (strlen($tipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($data) == 0 OR strlen($ora) == 0 OR strlen($cod) == 0) //OR strlen($costo) == 0 OR strlen($sconto) == 0)
-                $err = "Almeno uno dei parametri non è stato inserito correttamente";
+                $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else {
                 
                 $result = checkCliente($nome, $cognome);
                 if (is_null($result) OR count($result) == 0) {
-                    echo "<p>Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
+                    echo "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
                     hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
                 }
                 
                 else { //uno o più
                     $number_rows = count($result);
                     if ($number_rows > 1) {
-                        echo "<p>Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
+                        echo "<p class=\"info\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
                         form_start("POST", "ConfermaModificaAppuntamento.php");
+                        echo "<fieldset><legend>Modifica i campi per correggere l'appuntamento</legend>";
                         $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
                     <caption>Prodotti modificabili</caption>
                     <thead>
@@ -98,16 +99,16 @@ if (!isset($_SESSION['username'])) {
                         echo "<input type='hidden' name='orario' value='$ora'>";
                         echo "<input type='submit' name='submit' value='Procedi'>";
                         echo "<input type='reset' value='Cancella'>";
-                        // echo"</fieldset>";
+                        echo"</fieldset>";
                         echo "</form>";
                     } else {
                         //una riga
                         $CodCliente = $result[0]->codice;
                         $ok = aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo);
                         if ($ok)
-                            echo "<b>L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</b><br>";
+                            echo "<p class=\"inforesult\">L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</p>";
                         else
-                            echo "<p>Non è stato possibile modificare l'appuntamento selezionato</p>";
+                            echo "<p class=\"errorSuggestion\">Non è stato possibile modificare l'appuntamento selezionato</p>";
                     }
                 } //fine n_righe>1
             }

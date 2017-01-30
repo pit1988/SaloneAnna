@@ -21,21 +21,24 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';
     insert_header($rif, 6, true);
     content_begin();
+    echo "<h2>Modifica Appuntamento</h2>";
+
     
     if (!isset($_POST['submit']) OR !isset($_POST['codapp'])) {
-        echo "<p>Problemi di connessione; <a href=\"ScegliAppuntamento.php\">segui il link per selezionare un altro appuntamento da modificare</a></p>";
+        echo "<p class=\"errorSuggestion\">Problemi di connessione; <a href=\"ScegliAppuntamento.php\">segui il link per selezionare un altro appuntamento da modificare</a></p>";
     } else {
         $cod=$_POST['codapp'];
         $result = mostraAppuntamento($cod);
         // nessun risultato
         if (!$result)
-            echo "<p>L'appuntamento richiesto non è prensente nel database</p>";
+            echo "<p class=\"errorSuggestion\">L'appuntamento richiesto non è prensente nel database</p>";
         else {
             //aggiungere tabindex;
             $str1 = '<form action="ConfermaModificaAppuntamento.php" onsubmit="return true;" method="post">
+            <fieldset><legend>Modifica i dati per correggere l\'appuntamento</legend>
                 <ul>
-                    <li>
-                        <p> 
+                    <div class="tipoAppun">
+                        <li>
                             <label for="TipoAppuntamento">Tipo appuntamento:</label>
 ';
             
@@ -44,44 +47,47 @@ if (!isset($_SESSION['username'])) {
             if(!is_null($res)){
                 foreach ($res as $tipoApp){
                     if(($tipoApp->nome)  == ($result->tipo))
-                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" checked="checked"/>' . $tipoApp->nome."\n";
+                        $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . ' checked="checked" " /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
                     else
-                        $str2 .= '<input type="radio" name="TipoAppuntamento" value="' . $tipoApp->codice . '" />' . $tipoApp->nome."\n";
+                        $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
                 }
             }
-            
-            
-            $str3 = '</p>
-                    </li>
-                    <li>
-                        <p>
-                            <label for="first_name">Nome</label>
-                            <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $result->nome . '"/>
-                        </p>
-                        <p>
-                            <label for="last_name">Cognome</label>
-                            <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $result->cognome . '"/>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <label for="data">Data</label>
-                        <input type="text" name="data" id="data" tabindex="104" value="' . $result->data . '"/>
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <label for="orario">Orario</label>
-                            <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($result->data)) . '"/>
-                        </p>
-                    </li>
-                    <li>
-                        <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
-                        <input type="reset" value="cancella" />
-                        <span id="errors"></span>
-                    </li>
+
+            $str3 = '</li></div>
+                    <div class="datiAppun">
+                        <li>
+                            <p>
+                                <label for="first_name">Nome</label>
+                                <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $result->nome . '"/>
+                            </p>
+                            <p>
+                                <label for="last_name">Cognome</label>
+                                <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $result->cognome . '"/>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="data">Data</label>
+                            <input type="text" name="data" id="data" tabindex="104" value="' . $result->data . '"/>
+                            </p>
+                        </li>
+                        <li>
+                            <p>
+                                <label for="orario">Orario</label>
+                                <input type="text" name="orario" id="orario" tabindex="102" value="' . date("H:i", strtotime($result->data)) . '"/>
+                            </p>
+                        </li>
+                    </div>
+                    <div class="confermAppun">
+                        <li>
+                            <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
+                            <input type="reset" value="cancella" />
+                            <span id="errors"></span>
+                        </li>
+                    </div>
                 </ul>
                 <input type="hidden" name="CodAppuntamento" value="'.$result->codice.'">
+            </fieldset>
             </form>
 ';
             echo $str1 . $str2 . $str3;
