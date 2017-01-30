@@ -14,27 +14,29 @@ if (!isset($_SESSION['username'])) {
         $err = "Non è stato selezionato alcun messaggio, torna a <a href=\"Messaggi.php\" e riprova";
     } else {
         $cmsg = $_GET["codmsg"];
-        $query  = "SELECT c.Nome, c.Cognome, m.Contenuto, m.DataOra, c.Telefono, c.Email FROM Messaggi m JOIN Clienti c WHERE m.CodCliente=c.CodCliente AND m.CodMessaggi='$cmsg'";
-        $conn     = dbconnect();
-        $result   = mysqli_query($conn, $query);
-        // nessun risultato
-        $num_rows = mysqli_num_rows($result);
-        if (!$num_rows)
+        
+        $result = mostraMessaggio($cmsg);
+        
+        if (is_null($result)) {
             echo "<p>Non è presente il messaggio richiesto</p>";
-        else {
-            $row      = mysqli_fetch_row($result);
+        } else {
+            /*$to_print = '
+                <ul>
+                    <li><p><em>Messaggio inviato da:</em>' . $result->nome . ' ' . $result->cognome . '</p></li>
+                    <li><p><em>Ricevuto: </em>' . $result->data . ' ' . $result->ora . '</p></li>
+                    <li><p><em>Telefono cliente: </em><a href="tel: ' . $result->telefono . '"">' . $result->telefono . '</a> ; <em xml:lang="en">email:</em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
+                    <li><p><em>Contentuto: </em></p><p>' . $result->contenuto . '</p></li>
+                </ul>
+                ';*/
             $to_print = '
-        <ul>
-			<li><p><em>Messaggio inviato da:</em>' . $row[0] . ' ' . $row[1] . '</p></li>
-			<li><p><em>Ricevuto: </em>' . date("d/m/Y H:i", strtotime($row[3])) . '</p></li>
-			<li><p><em>Telefono cliente: </em><a href="tel: ' . $row[4] . '"">' . $row[4] . '</a> ; <em xml:lang="en">email:</em> <a href="mailto:' . $row[5] . '"">' . $row[5] . '</a></p></li>
-			<li><p><em>Contentuto: </em></p><p>' . $row[2] . '</p></li>
-		</ul>
-        ';
-            $qr2 = "UPDATE Messaggi SET ToRead='false' WHERE CodMessaggi='$cmsg'";
-            $result   = mysqli_query($conn, $qr2);
+                <ul>
+                    <li><p><em>Messaggio inviato da:</em>' . $result->nome . ' ' . $result->cognome . '</p></li>
+                    <li><p><em>Ricevuto: </em>' . $result->data . ' ' . $result->ora . '</p></li>
+                    <li><p><em xml:lang="en">email:</em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
+                    <li><p><em>Contentuto: </em></p><p>' . $result->contenuto . '</p></li>
+                </ul>
+                ';
         }
-        mysqli_close($conn);
     }
     
     $title      = "Messaggi: Salone Anna";
