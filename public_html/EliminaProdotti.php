@@ -36,10 +36,10 @@ if (!isset($_SESSION['username'])) {
 
         if($n_el>0)
             if($n_el==1)
-                echo "<p class=/"inforesult/">È stato cancellato $n_el prodotto</p>";
+                echo "<p class=\"inforesult\">È stato cancellato $n_el prodotto</p>";
             else
-                echo "<p class=/"inforesult/">Sono stati cancellati $n_el prodotti</p>";
-        if($n_err>0) echo "<p class=/"errorSuggestion/">Durante la cancellazione si sono verificati $n_err errori</p>";
+                echo "<p class=\"inforesult\">Sono stati cancellati $n_el prodotti</p>";
+        if($n_err>0) echo "<p class=\"errorSuggestion\">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     
 
@@ -51,10 +51,10 @@ if (!isset($_SESSION['username'])) {
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p class=/"errorSuggestion/">Non ci sono entry nella tabella Prodotti</p>";
+        echo "<p class=\"errorSuggestion\">Non ci sono entry nella tabella Prodotti</p>";
     else {
         form_start("POST", "EliminaProdotti.php");
-        echo "<fieldset><legend>Seleziona il prodotto da eliminare</legend>"
+        echo "<fieldset><legend>Seleziona il prodotto da eliminare</legend>";
         $th = '<table id="ProdottiMagazzino" summary="Elimina Prodotti dal magazzino">
             <caption class="nascosto">Elimina Prodotti dal magazzino</caption>
             <thead>

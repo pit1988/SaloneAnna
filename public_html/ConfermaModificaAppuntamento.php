@@ -34,6 +34,10 @@ if (!isset($_SESSION['username'])) {
             $CodCliente = $_POST['CodCliente'];
             
             $ok = aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo);
+            if ($ok)
+                echo "<b>L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</b><br>";
+            else
+                echo "<p>Non è stato possibile modificare l'appuntamento selezionato</p>";
         }
         
         if (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
@@ -72,6 +76,7 @@ if (!isset($_SESSION['username'])) {
                             <th scope="col">Telefono</th>
                             <th scope="col">Email</th>
                             <th scope="col">Data di nascita</th>
+                            <th scope="col">Seleziona</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -99,17 +104,16 @@ if (!isset($_SESSION['username'])) {
                         //una riga
                         $CodCliente = $result[0]->codice;
                         $ok = aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo);
+                        if ($ok)
+                            echo "<b>L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</b><br>";
+                        else
+                            echo "<p>Non è stato possibile modificare l'appuntamento selezionato</p>";
                     }
                 } //fine n_righe>1
             }
             
         }
         
-        if (isset($ok))
-            if ($ok)
-                echo "<b>L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</b><br>";
-            else
-                echo "<p>Non è stato possibile modificare l'appuntamento selezionato</p>";
         echo 'Vuoi modificare altri appuntamenti? Torna a <a href="ScegliAppuntamento.php">Scegli Appuntamento</a>';
         content_end();
         page_end();
