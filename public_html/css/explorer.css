@@ -455,9 +455,10 @@ form small {
 }
 
 .errorSuggestion{
-    font-size: 0.8em;
+    font-size: 1em;
     font-style: oblique;
     color: #8c001f;
+    margin: 1em;
     vertical-align: text-top;
 }
 
