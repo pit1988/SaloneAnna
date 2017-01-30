@@ -23,57 +23,53 @@ if (!isset($_SESSION['username'])) {
 if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
     $err = "Problemi di connessione";
 } else {
-    $conn = dbconnect();
-    
-    $cod = $_POST["codprod"];
-    $query = "SELECT * FROM Prodotti p WHERE p.CodProdotto= '$cod'";
-    
-    $result = mysqli_query($conn, $query);
+    $cod=$_POST['codprod'];
+    $result = mostraProdotto($cod);
     // nessun risultato
-    $num_rows = mysqli_num_rows($result);
+    $num_rows = count($result);
     if (!$num_rows)
         echo "<p class=\"inforesult\">Non è presente il prodotto richiesto</p>";
     else {
-        $row = mysqli_fetch_row($result);
+        //$prodotto=$result[0];
         $to_print = '
-        <form method="POST" action="esito_modifica_prodotto.php">
+        <form method="POST" action="ConfermaModificaProdotto.php">
         <fieldset>
         <legend>Seleziona il prodotto da modificare</legend>
     		<ul>
                     <li>
                         <p>
                             <label for="nome">Nome</label>
-                            <input type="text" name="nome" id="nome" tabindex="100" value="' . $row[1] . '" />
+                            <input type="text" name="nome" id="nome" tabindex="100" value="' . $result->nome . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="marca">Marca</label>
-                            <input type="text" name="marca" id="marca" tabindex="101" value="' . $row[2] . '" />
+                            <input type="text" name="marca" id="marca" tabindex="101" value="' . $result->marca . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="tipo">Tipo</label>
-                            <input type="text" name="tipo" id="tipo" tabindex="102" value="' . $row[3] . '" />
+                            <input type="text" name="tipo" id="tipo" tabindex="102" value="' . $result->tipo . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="quantita">Quanità</label>
-                            <input type="text" name="quantita" id="quantita" tabindex="103" value="' . $row[4] . '" />
+                            <input type="text" name="quantita" id="quantita" tabindex="103" value="' . $result->quantita . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="pvendita">Prezzo alla vendita</label>
-                            <input type="text" name="pvendita" id="pvendita" tabindex="104" value="' . $row[5] . '" />
+                            <input type="text" name="pvendita" id="pvendita" tabindex="104" value="' . $result->prezzo . '" />
                         </p>
                     </li>
                     <li>
                         <p>
                             <label for="privendita">Prezzo di rivendita</label>
-                            <input type="text" name="privendita" id="privendita" tabindex="105" value=' . $row[6] . ' />
+                            <input type="text" name="privendita" id="privendita" tabindex="105" value=' . $result->prezzoRiv . ' />
                         </p>
                     </li>
                 </ul>
@@ -84,7 +80,6 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
     	';
         echo $to_print;
     }
-    mysqli_close($conn);
 }
     if(isset($err))
         echo($err);

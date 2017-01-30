@@ -20,14 +20,11 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Modifica Prodotti</h2>";
 
     include("utils/DBlibrary.php");
-    $conn = dbconnect();
     
-    $query = "SELECT * FROM Prodotti p WHERE p.Quantita is not NULL AND p.Quantita>0 ";
-    $result = mysqli_query($conn, $query);
+    $result = listaProdotti();
     
-    $number_cols = mysqli_num_fields($result);
-    
-    $num_rows = mysqli_num_rows($result);
+    $num_rows = count($result);
+
     if (!$num_rows)
         echo "<p>Non ci sono entry nella tabella Prodotti</p>";
     else {
@@ -64,24 +61,9 @@ if (!isset($_SESSION['username'])) {
             ';
         $tb = "";
         //corpo tabella
-        while ($row = mysqli_fetch_row($result)) {
-            
-            $tb .= "<tr>\n";
-            for ($i = 0; $i < $number_cols + 1; $i++) {
-                $tb .= "<td>";
-                if (!isset($row[$i]))
-                    $tb .= " ";
-                if ($i == $number_cols)
-                    $tb .= "<input type=\"radio\" name=\"codprod\" value= \"" . $row[0] . "\"\/>";
-                else {
-                    $tb .= $row[$i];
-                }
-                
-                $tb .= "</td>\n";
-            }
-            $tb .= "</tr>\n";
-        }
-        
+        foreach ($result as $prodotto)
+            $tb.="<tr><td>".$prodotto->codice."</td><td>".$prodotto->nome."</td><td>".$prodotto->marca."</td><td>".$prodotto->tipo."</a></td><td>".$prodotto->quantita."</td><td>".$prodotto->prezzo."</td><td>".$prodotto->prezzoRiv."</td><td><input type=\"radio\" name=\"codprod\" value= \"" . $prodotto->codice . "\"\/></td></tr>";
+
         $tf= "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
@@ -93,5 +75,4 @@ if (!isset($_SESSION['username'])) {
     content_end();
     page_end();
 }
-mysqli_close($conn);
 ?>

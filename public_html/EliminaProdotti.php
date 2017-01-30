@@ -28,8 +28,7 @@ if (!isset($_SESSION['username'])) {
         $n_el=0;
         $n_err=0;
         foreach ($ids as $d) {
-            $query_el = "delete from Prodotti where CodProdotto='$d'";
-            $ris=mysqli_query($conn, $query_el);
+            $ris=eliminaProdotto($d);
             if($ris) ++$n_el;
             else ++$n_err;
         }
@@ -41,9 +40,7 @@ if (!isset($_SESSION['username'])) {
                 echo "<p class=\"inforesult\">Sono stati cancellati $n_el prodotti</p>";
         if($n_err>0) echo "<p class=\"errorSuggestion\">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
-    
 
-    
     $result = listaProdotti();
     
     
