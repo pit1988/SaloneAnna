@@ -18,7 +18,7 @@ else{
     $descr="Pagina per inserire fotografie all'interno del sito";
     $keywords="Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif="Ti trovi in: <strong xml:lang=&quot;en&quot;>Home</strong>";
+    $rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
     $is_admin=true;
     insert_header($rif, 1, $is_admin);
     content_begin();
@@ -33,7 +33,7 @@ else{
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p class=\"info\">Non ci sono entry nella tabella Prodotti</p>";
+        echo "<p class=\"info\">Non sono presenti fotografie da modificare</p>";
     else {
         form_start("post", "ModificaFoto.php");
         echo "<fieldset><legend>Seleziona l\' immagine che vuoi modificare</legend>";

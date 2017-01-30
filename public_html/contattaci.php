@@ -48,7 +48,7 @@
         echo "<p>".$err."</p>";
 ?>
             <noscript><p>Compila tutti i campi dati; inserisci un indirizzo <span xml:lang="en">e-mail</span> valido</p></noscript>
-            <form action="contattaci.php" onsubmit="return validazioneformcontattaci();" method="POST">
+            <form action="contattaci.php" onsubmit="return validazioneformcontattaci();" method="post">
                 <ul>
                     <li>
                         <p>

@@ -39,7 +39,7 @@ if (!isset($_SESSION['username'])) {
 
     
     $to_print = '
-    <form method="POST" action="esito_modifica.php">
+    <form method="post" action="esito_modifica.php">
     <fieldset>
     <legend>Completa le informazioni per inserire un nuovo prodotto</legend>
         <ul>

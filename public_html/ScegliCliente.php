@@ -27,7 +27,7 @@ else
 	$ris=listaClienti();
 	if($ris){
 		$str_to_print='
-		<form action="ModificaCliente.php" method="POST">
+		<form action="ModificaCliente.php" method="post">
         <fieldset>
         <legend>Seleziona il cliente per poterlo modificare</legend>
 		<table id="clientiTab" summary="Elenco clienti">

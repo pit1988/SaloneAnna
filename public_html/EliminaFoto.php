@@ -63,7 +63,7 @@ if (!isset($_SESSION['username'])) {
     if (!$num_rows)
         echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
     else {
-        form_start("POST", "EliminaFoto.php");
+        form_start("post", "EliminaFoto.php");
         echo "<fieldset><legend>Seleziona la/le immagine/i che vuoi eliminare</legend>";
         $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
             <caption class="nascosto">Tabella di immagini</caption>

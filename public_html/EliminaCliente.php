@@ -45,7 +45,7 @@ else
 	$ris=listaClienti();
 	if($ris){
 		$str_to_print='
-		<form action="EliminaCliente.php" method="POST">
+		<form action="EliminaCliente.php" method="post">
 		<fieldset>
 		<legend>Selezione i clienti che vuoi eliminare</legend>
 		<table id="clientiTab" summary="Rimozione clienti">

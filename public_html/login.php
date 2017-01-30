@@ -38,7 +38,7 @@ $is_admin=false;
 insert_header($rif, 0, $is_admin);
 content_begin();
 echo<<<END
-<form id="contenitore-login" name="login" action="login.php" method="POST">
+<form id="contenitore-login" name="login" action="login.php" method="post">
 <p><i>Username</i></p>
 <p><input id="inputUsername" type="text" name="username" value="" tabindex="100" accesskey="u"></p>
 <p><i>Password</i></p>

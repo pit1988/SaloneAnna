@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Gestione Messaggi</h2>";
     $ris = listamessaggi();
     if ($ris) {
-        $str_to_print = '<form action="EliminaMessaggi.php" method="POST"><table id="messaggi" summary="Messaggi">
+        $str_to_print = '<form action="EliminaMessaggi.php" method="post"><table id="messaggi" summary="Messaggi">
             <fieldset><legend>Seleziona un messaggio da eliminare</legend>
             <caption>Tabella messaggi</caption>
             <thead>

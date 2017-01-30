@@ -25,7 +25,7 @@
       if (!$result)
           echo "<p>Non ci sono appuntamenti da mostrare</p>";
       else {
-          form_start("POST", "ModificaAppuntamento.php");
+          form_start("post", "ModificaAppuntamento.php");
           echo '<fieldset>';
             // <input type=submit name="submit" value="Conferma">';
           $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
@@ -59,13 +59,3 @@
       page_end();
   }
   ?>
-
-  public $codice;
-  public $data;
-  public $ora;
-  public $tipo;
-  public $prezzo;
-  public $nome;
-  public $cognome;
-  public $telefono;
-  public $email;

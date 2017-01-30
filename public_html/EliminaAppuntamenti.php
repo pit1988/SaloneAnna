@@ -50,7 +50,7 @@ if (!isset($_SESSION['username'])) {
     if (!$result)
         echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>";
     else {
-        form_start("POST", "EliminaAppuntamenti.php");
+        form_start("post", "EliminaAppuntamenti.php");
         echo '<fieldset><legend>Seleziona gli appuntamenti che vuoi eliminare</legend>';
         $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
 	<caption>Appuntamenti successivi alla data corrente</caption>
@@ -79,6 +79,7 @@ if (!isset($_SESSION['username'])) {
     }
     if (isset($msg))
         echo $msg;
+    if (isset($str_to_print))
     echo $str_to_print;
     content_end();
     page_end();

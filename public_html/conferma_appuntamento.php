@@ -62,7 +62,7 @@ if (!isset($_SESSION['username'])) {
                     echo $number_rows;
                     if ($number_rows > 1) {
                         echo "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
-                        form_start("POST", "conferma_appuntamento.php");
+                        form_start("post", "conferma_appuntamento.php");
                         $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
                                 <caption>Prodotti modificabili</caption>
                                 <thead>

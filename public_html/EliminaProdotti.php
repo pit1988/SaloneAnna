@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
     if(count($result)==0)
         echo "<p class=\"errorSuggestion\">Non ci sono entry nella tabella Prodotti</p>";
     else {
-        form_start("POST", "EliminaProdotti.php");
+        form_start("post", "EliminaProdotti.php");
         echo "<fieldset><legend>Seleziona il prodotto da eliminare</legend>";
         $th = '<table id="ProdottiMagazzino" summary="Elimina Prodotti dal magazzino">
             <caption class="nascosto">Elimina Prodotti dal magazzino</caption>
