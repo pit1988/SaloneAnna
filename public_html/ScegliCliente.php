@@ -29,7 +29,7 @@ else
 		$str_to_print='
 		<form action="ModificaCliente.php" method="POST">
         <fieldset>
-        <legend>Modifica i campi per correggere i dati cliente</legend>
+        <legend>Seleziona il cliente per poterlo modificare</legend>
 		<table id="clientiTab" summary="Elenco clienti">
             <caption class="inforesult">Elenco clienti</caption>
             <thead>
