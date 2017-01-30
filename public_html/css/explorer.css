@@ -160,18 +160,19 @@ legend{
 
 /* BreadCrumbs Part*/
 #breadcrumbs{
-    border: 1px dotted #4e4b3b;
+    border-top: 1px dotted #4e4b3b;
+    border-bottom: 1px dotted #4e4b3b;
     clear: both;
 }
 
 #rifnav {
     font-style: oblique;
-    width: 29%;
-    margin-left: 2em;
-    float: left;
+    width: 100%;
+    margin: 1em auto 1em 2em;
     color: black;
-    margin-top: 20px;
+    display: block;
 }
+
 
 #conferma{
     outline: none;
