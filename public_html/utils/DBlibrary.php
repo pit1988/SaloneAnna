@@ -353,6 +353,19 @@ function listaAppuntamenti() {
 	return $appuntamenti; //è un array di Appuntamenti, non viene garantito che $appuntamenti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
+function checkOrarioLibero($data, $ora) { //il controllo della quantità di tempo a disposizione per eseguire la richiesta del cliente è responsabilità dell'amministratore
+	if($ora !== "") {
+		$ora = strtotime($ora);
+		if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) && $ora !== FALSE) {
+			$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
+			$dataora = "'$data ".date("H:i:s", $ora)."'";
+			$result = eseguiQuery("SELECT CodAppuntamento FROM Appuntamenti WHERE DataOra=$dataora");
+			if(!isset($result) || $result->num_rows > 0) {return FALSE;} //se c'è un errore restituisco FALSE perché il problema non dipende dall'input dell'utente
+		}
+	}
+	return TRUE;
+}
+
 function aggiungiAppuntamento($codCliente, $data, $ora, $codTipo) {
 	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
 		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
