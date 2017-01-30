@@ -263,29 +263,6 @@ function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzio
         or die("Query fallita" . mysqli_error($conn));
 };
 
-function get_pwd($login) {
-    $conn = dbConnect();
-    $query= "SELECT * FROM Account WHERE username='$login'";
-    $result=mysqli_query($conn, $query)
-        or die("Query fallita " . mysqli_error($conn));
-    $output=mysqli_fetch_assoc($result);
-    if ($output)
-        return $output['password'];
-    else 
-        return FALSE;
-};
-
-/* inizia la sessione e verifica che l'utente sia autenticato */
-function authenticate() {
-    session_start();
-    // session_regenerate_id(TRUE);
-    $login=$_SESSION['username'];
-    if (! $login) {
-        return FALSE;
-    } else {
-        return $login;
-    }
-};
 
 ?>
 
