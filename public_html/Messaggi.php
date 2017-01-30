@@ -28,7 +28,7 @@ else
 	$ris=listamessaggi();
 	if($ris){
 		$str_to_print='<table id="messaggi" summary="Messaggi">
-            <caption class="info">Tabella messaggi</caption>
+            <caption>Tabella messaggi</caption>
             <thead>
                 <tr>
                     <th scope="col">Mittente</th>
@@ -47,7 +47,7 @@ else
 		unset($messaggio); //fortemente consigliato perché altrimenti l'oggetto $messaggio rimane in memoria
 	}
 	else 
-		$str_to_print="<p class=/"inforesult/">Non sono presenti messaggi</p>";
+		$str_to_print="<p class=\"inforesult\">Non sono presenti messaggi</p>";
 	echo $str_to_print;
 	content_end();
 	page_end();

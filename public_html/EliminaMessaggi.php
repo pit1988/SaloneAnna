@@ -26,11 +26,11 @@ if (!isset($_SESSION['username'])) {
         
         if ($n_el > 0)
             if ($n_el == 1)
-                $msg = "<p class=/"inforesult/">È stato cancellato $n_el messaggio</p>";
+                $msg = "<p class=\"inforesult\">È stato cancellato $n_el messaggio</p>";
             else
-                $msg = "<p class=/"inforesult/">Sono stati cancellati $n_el messaggi</p>";
+                $msg = "<p class=\"inforesult\">Sono stati cancellati $n_el messaggi</p>";
         if ($n_err > 0)
-            $msg = "<p class=/"errorSuggestion/">Durante la cancellazione si sono verificati $n_err errori</p>";
+            $msg = "<p class=\"errorSuggestion\">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     
     $title      = "Messaggi: Salone Anna";
@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
     if ($ris) {
         $str_to_print = '<form action="EliminaMessaggi.php" method="POST"><table id="messaggi" summary="Messaggi">
             <fieldset><legend>Seleziona un messaggio da eliminare</legend>
-            <caption class="info">Tabella messaggi</caption>
+            <caption>Tabella messaggi</caption>
             <thead>
                 <tr>
                     <th scope="col">Nome</th>
@@ -75,7 +75,7 @@ if (!isset($_SESSION['username'])) {
 		</form>";
         unset($messaggio); //fortemente consigliato perché altrimenti l'oggetto $messaggio rimane in memoria
     } else
-        $str_to_print = "<p class=/"inforesult/">Non sono presenti messaggi</p>";
+        $str_to_print = "<p class=\"inforesult\">Non sono presenti messaggi</p>";
     if (isset($msg))
         echo $msg;
     echo $str_to_print;
