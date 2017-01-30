@@ -26,11 +26,11 @@ if (!isset($_SESSION['username'])) {
         
         if ($n_el > 0)
             if ($n_el == 1)
-                $msg = "<p>È stato cancellato $n_el appuntamento</p>";
+                $msg = "<p class=\"inforesult\">È stato cancellato $n_el appuntamento</p>";
             else
-                $msg = "<p>Sono stati cancellati $n_el appuntamenti</p>";
+                $msg = "<p class=\"inforesult\">Sono stati cancellati $n_el appuntamenti</p>";
         if ($n_err > 0)
-            $msg = "<p>Durante la cancellazione si sono verificati $n_err errori</p>";
+            $msg = "<p class=\"errorSuggestion\">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     
     $title      = "Elimina appuntamenti: Salone Anna";
@@ -48,10 +48,10 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Lista degli appuntamenti da oggi in poi</h2>";
     
     if (!$result)
-        echo "<p>Non ci sono appuntamenti da mostrare</p>";
+        echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>";
     else {
         form_start("POST", "EliminaAppuntamenti.php");
-        echo '<fieldset>';
+        echo '<fieldset><legend>Seleziona gli appuntamenti che vuoi eliminare</legend>';
         $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
 	<caption>Appuntamenti successivi alla data corrente</caption>
 	<thead>
