@@ -23,6 +23,7 @@ else
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Messaggi</strong>';
 	insert_header($rif, 7, true);
 	content_begin();
+	echo "<h2>Gestione Messaggi</h2>";
 	hyperlink("Elimina messaggi","EliminaMessaggi.php");
 	$ris=listamessaggi();
 	if($ris){

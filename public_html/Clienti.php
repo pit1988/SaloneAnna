@@ -22,6 +22,7 @@ else
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';
 	insert_header($rif, 5, true);
 	content_begin();
+    echo "<h2>Men&ugrave; Clienti</h2>";
 		hyperlink("Compleanni Questo Mese", "QueryCompleanno.php");
 		hyperlink("Mostra l'elenco di tutti i clienti","ElencoClienti.php");
 		hyperlink("Inserisci un nuovo cliente","NuovoCliente.php");

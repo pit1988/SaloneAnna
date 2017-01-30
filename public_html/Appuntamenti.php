@@ -22,6 +22,7 @@ else
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Appuntamenti</strong>';
 	insert_header($rif, 6, true);
 	content_begin();
+    echo "<h2>Men&ugrave; Appuntamenti</h2>";
 		hyperlink("Tipo Appuntamento Frequente", "Toptype.php");
 		hyperlink("Ricerca Appuntamenti", "RicercaAppuntamenti.php");
 		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
