@@ -32,11 +32,11 @@ if (!isset($_SESSION['username'])) {
     
     $number_cols = mysqli_num_fields($result);
     echo "<h2>Prodotti pi&ugrave; usati</h2>";
-    echo "<em class="info">I prodotti pi&ugrave; usati in appuntamento sono:</em>";
+    echo "<em class=\"info\">I prodotti pi&ugrave; usati in appuntamento sono:</em>";
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p>Non ci sono entry nella tabella Appuntamenti o nella tabella dei Prodotti</p>";
+        echo "<p class=\"inforesult\">Non ci sono entry nella tabella Appuntamenti o nella tabella dei Prodotti</p>";
     else {
         $th = '<table id="ProdottiMagazzino" summary="Prodotti più usati">
             <caption>Prodotti più usati negli appuntamenti</caption>

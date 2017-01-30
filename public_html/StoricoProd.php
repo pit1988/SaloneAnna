@@ -25,7 +25,7 @@ if (!isset($_SESSION['username'])) {
 
         $num_rows = mysqli_num_rows($CodClienteA);
         if (!$num_rows)
-            $err .= "<p>Non è presente il cliente richiesto</p>";
+            $err .= "<p class=\"inforesult\">Non è presente il cliente richiesto</p>";
         else {
             // vedere se fare lo stesso lavoro per gli altri clienti omonimi
             $CodCliente = mysqli_fetch_row($CodClienteA);
@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
             
             $num_rows = mysqli_num_rows($result);
             if (!$num_rows)
-                $err .= "<p>Non sono presenti prodotti per il cliente selezionato</p>";
+                $err .= "<p class=\"inforesult\">Non sono presenti prodotti per il cliente selezionato</p>";
             else {
                 $number_cols = mysqli_num_fields($result);
                 
@@ -114,7 +114,7 @@ $keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Col
 
 page_start($title, $title_meta, $descr, $keywords, '');
 $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Storico Prodotti</strong>';
-insert_header($rif, 5, true);
+insert_header($rif, 4, true);
 content_begin();
 echo "<h2>Storico prodotto</h2>";
 echo $form;

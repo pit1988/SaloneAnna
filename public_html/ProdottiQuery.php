@@ -33,11 +33,11 @@ if (!isset($_SESSION['username'])) {
     $number_cols = mysqli_num_fields($result);
 
     echo "<h2>Prodotti in esaurimento</h2>";
-    echo "<em class="info">I prodotti in esaurimento sono:</em>";
+    echo "<em class=\"info\">I prodotti in esaurimento sono:</em>";
     
     $num_rows = mysqli_num_rows($result);
     if (!$num_rows)
-        echo "<p>Non ci sono prodotti da mostrare</p>";
+        echo "<p class=\"inforesult\">Non ci sono prodotti da mostrare</p>";
     else {
         $th = '<table id="ProdottiMagazzino" summary="Prodotti in esaurimento">
             <caption>Prodotti presenti in numero inferiore a 6</caption>
