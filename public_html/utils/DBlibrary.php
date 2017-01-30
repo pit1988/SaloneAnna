@@ -552,4 +552,43 @@ function cambiaUtilizzoProdottiAppuntamento($codAppuntamento, $codProdotto, $uti
 	$conn->close();
 	return $fatto;
 }
+
+/*****************************IMMAGINI***************************/
+
+
+
+/*******************************QUERY****************************/
+
+function prodottiInEsaurimento() {
+	$result = eseguiQuery("SELECT * FROM Prodotti WHERE quantita<6 AND quantita!=0");
+	if(!$result) {$prodotti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$prodotti = array();
+		while($prodotto = mysqli_fetch_assoc($result)) {
+			array_push($prodotti, new Prodotto($prodotto['CodProdotto'], $prodotto['Nome'], $prodotto['Marca'], $prodotto['Tipo'], $prodotto['Quantita'], $prodotto['Prezzo'], $prodotto['PRivendita']));
+		}
+	}
+	return $prodotti; //è un array di Prodotti, non viene garantito che $prodotti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function elencoClientiCompleanni() {
+	$result = eseguiQuery("SELECT * FROM Clienti WHERE DataNascita BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY))");
+	if(!$result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$clienti = array();
+		while($cliente = mysqli_fetch_assoc($result)) {
+			if($cliente['DataNascita'] !== NULL) {
+				$time = strtotime($cliente['DataNascita']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+			}
+			else {$data = NULL;}
+			array_push($clienti, new Cliente($cliente['CodCliente'], $cliente['Nome'], $cliente['Cognome'], $cliente['Telefono'], $cliente['Email'], $data));
+		}
+	}
+	return $clienti; //è un array di Clienti, non viene garantito che $clienti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function listaAppuntamentiPerTipo() {
+	return eseguiQuery("SELECT p.Parziali AS Quantità, CONCAT((TRUNCATE((p.Parziali/COUNT(*))*100, 2)), ' %')  AS Percentuale, NomeTipo AS 'Tipo Appuntamento' FROM Contatori p JOIN Appuntamenti a JOIN TipoAppuntamento ta on a.CodAppuntamento=ta.CodTipoAppuntamento GROUP BY a.CodTipoAppuntamento");
+}
 ?>
