@@ -50,7 +50,7 @@ function page_end() {
 <li><a href="#finePagina" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a></li>
 </ul>
 <div class="footer-left">
-<h3 id="logo_mini"><span>Ggarden</span></h3>
+<h3 id="logo_mini"><span>Salone Anna</span></h3>
 <p class="footer-nome-azienda">Salone Anna &copy; 2017</p>
 </div>
 <div class="footer-center">
@@ -87,7 +87,7 @@ function page_end() {
 function insert_header($pth, $num, $is_admin) {
 $str1='
 <div id="header">
-<div id="logo"><h1><span id="logo" xml:lang="en" class="nascosto">Salone Anna</span></h1></div>';
+<h1><span id="logo" class="nascosto">Salone Anna</span></h1>';
 $str2='';
 if($is_admin == false)
     $str2= '<div><a id="login" href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
