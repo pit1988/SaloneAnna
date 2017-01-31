@@ -11,9 +11,9 @@ if (isset($_SESSION['username'] ) )
 $title="Salone Anna: tariffe, orari, indirizzo";
 $title_meta="Salone Anna, parrucchiere a Vicenza";
 $descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
-$keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
+$keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
+$rif="<strong xml:lang=\"en\">Home</strong>";
 
 
 
@@ -55,14 +55,29 @@ if(!$is_logged) {
 	}
 
 	echo<<<END
-<form id="contenitore-login" name="login" action="login.php" method="post">
+<form id="contenitore-login" action="login.php" method="post">
 	<fieldset>
 		<legend>Inserisci i dati per accedere alla parte amministratore</legend>
-		<p><i>Username</i></p>
-		<p><input id="inputUsername" type="text" name="username" value="" tabindex="100" accesskey="u"></p>
-		<p><i>Password</i></p>
-		<p><input id="inputPassword" type="password" name="password" value="" tabindex="101" accesskey="p"></p>
-		<p><input id="accedi" name="submit" type="submit" value="Login..." tabindex="102" accesskey="s"></p>
+		<ul>
+			<li>
+				<p>
+					<label for="username">Nome utente</label>
+					<input type="text" name="username" id="username" tabindex="100">
+				</p>
+			</li>
+			<li>
+				<p>
+					<label for="password" xml:lang="en">Password</label>
+					<input type="password" id="password" name="password" tabindex="101">
+				</p>
+			</li>
+			<li>
+				<p>
+					<input class="btn btn-submit" type="submit" name="submit" value="Accedi" tabindex="105"/>
+                    <span id="errors"></span>
+                </p>
+            <li>
+        </ul>
 	</fieldset>
 </form>
 END;
@@ -76,3 +91,4 @@ if(isset($msg))
 content_end();
 page_end();
 ?>
+
