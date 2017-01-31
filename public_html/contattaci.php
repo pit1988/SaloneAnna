@@ -71,6 +71,7 @@
                         <input type="date" name="data" id="data" tabindex="104" />
                     <li> */
                     ?>
+                    <li>
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <span id="errors"></span>
                     </li>

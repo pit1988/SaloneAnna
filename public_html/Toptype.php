@@ -19,10 +19,11 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Classifica Appuntamenti</h2>";
     
     $result = listaAppuntamentiPerTipo();
-    if(mysqli_num_rows($result) == 0)
+    if(mysqli_num_rows($result) == 0){
         $str_to_print = "<p class=\"inforesult\">Non sono presenti appuntamenti nel database</p>";
+    }
     else{
-        $th          = '<table id="topProd" summary="Classifica degli appuntamenti, divisi per tipo">
+        $th = '<table id="topProd" summary="Classifica degli appuntamenti, divisi per tipo">
         <caption class="inforesult">Classifica degli appuntamenti, divisi per tipo</caption>
         <thead>
             <tr>
@@ -42,9 +43,9 @@ if (!isset($_SESSION['username'])) {
         
         
         $tf = "</tbody></table>";
-        $str_toprint = $th . $tb . $tf;
+        $str_to_print = $th . $tb . $tf;
     }
-    echo $str_toprint;
+    echo $str_to_print;
     content_end();
     page_end();
 }

@@ -113,7 +113,7 @@ function contenitore_menu($num) {
 </p>
 <ul class="menu">
 <li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
-<li><a href="foto.php" id="foto" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="f" tabindex="11">Foto</a></li>
+<li><a href="foto.php" id="foto" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="p" tabindex="11">Foto</a></li>
 <li><a href="chi_siamo.php" id="chsia" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Chi Siamo</a></li>
 <li><a href="listino.php" id="list" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="l" tabindex="12">Prezzi</a></li>
 <li><a href="contattaci.php" id="cont" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="m" tabindex="13">Contattaci</a></li>
