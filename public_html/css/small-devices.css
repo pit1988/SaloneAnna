@@ -189,6 +189,7 @@ fieldset{
     border: 1px dotted #4e4b3b;
     clear: both;
     width: auto;
+    text-align: center;
 }
 
 #rifnav {
@@ -237,6 +238,8 @@ fieldset{
     width: 101%;
     overflow: hidden;
     background-color: #C4B49D;
+
+    font-size: 89%;
 }
 
 li {
@@ -271,10 +274,7 @@ h2{
 }
 
 #content{
-    background-color:#b0fcb0;
     margin:0 auto;
-    padding: 1em;
-    width:70%;
     color: black;
     clear: both;
 }
@@ -307,7 +307,7 @@ h2{
 }
 
 .SaloneAnna .info{
-    margin: 0 0 0.5em 0;
+    margin: 0 0 1em 0;
     color: #31456b;
     clear: both;
     text-align: center;
@@ -319,79 +319,43 @@ h2{
     text-align: center;
 }
 
+input[type="button"], input[type="submit"]{
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
+    font-size: 0.75em;
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+}
+
+.info p {
+    margin-bottom: 0.5em;
+    font-size: 90%;
+}
+
 /* Realizzazioni */
 
-#gallery{
-    width: 100%;
-    height: 40em;
+.photo {
+    width: 90%;
 }
 
-#content img{
-    display: block;
-    max-width: 99%;
-    height: auto;
-    margin: 0.8em auto;
+.contentfigura {
+    text-align: center;
 }
 
-
-#content div #header img{
-    float:left;
-    display: block;
-    max-width: 99%;
-    height: auto;
-    margin: 0 auto;
-
+#content img {
+    border: 0.3em solid;
+    margin-top: 2em;
+    max-width: 100%;
 }
 
-#content div #header h2{
-    float:left;
-    margin:24px 0 0 0;
-    font-size:100%;
-}
-
-#content div #zoom{
-    width:99%;
-    margin:0 0 5px 0;
-    padding: 5px;
-    border:1px solid #ccc;
-    height: 49%;
-}
-
-#content div #zoom h3{
-    margin:0;
-    font-size:100%;
-    color: #666;
-    text-align:center;
-}
-
-#content div #zoom img{
-    display:block;
-    margin: 0 auto;
-    max-width: 99%;
-    height: auto;
-
-}
-
-#content div #minipics{
-    margin-bottom: 5px;
-    float: left;
-    height:49%;
-}
-
-#content div #minipics ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    
-}
-
-#content div #minipics li{
-    position: center;
-    width: 22%;
-    margin:0 0.05em 0 0.05em;
-    border:0.04em solid #ccc;
-    padding: 0.03em;
-
+figcaption {
+    text-align: center;
 }
 
 
@@ -406,6 +370,7 @@ h2{
 }
 
 .body_contattaci{
+    text-align: center;
     padding-top : 20px;
     border-color : #333333;
 }
@@ -635,80 +600,111 @@ hr{
 }
 
 
-/* VENDITA - Parte Admin e form */
+/*Listino Prezzi*/
 
-.createButtons {
-    width: 91%;
-    font-size: 1.1em;
-    display: inline-block;
-}
 
-.createButton{
-    text-decoration: none; 
-    font-weight: bold;
-    padding: 0.5em 1em 0.5em 1em;
-    margin: 0.4em;
-    color: white;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-    float: left;
-    text-align: center;
-    width: 85%;
+#listino{
+    margin: 1em auto;
+    width:100%;
 
-}
-
-#productButtons{
-    height: 7em;
-    font-size: 0.8em;
-}
-
-.productButton{
-    text-decoration: none; 
-    font-weight: bold;
-    padding: 0.5em 1em 0.5em 1em;
-    margin: 0.4em;
-    color: white;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-    float: left;
-    text-align: center;
-    width: 85%;
-}
-
-input[type="button"], input[type="submit"]{
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-    font-size: 0.75em;
-}
-
-#image{
-    width: 92%;
-    font-size: 0.75em;
-}
-
-#conferma_inserimento{
-    margin-right:10%;
-    outline: none;
-    text-align: center;
-    font: bold 1em Arial, Helvetica, sans-serif;
-    color: #fff;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-}
-
-.inputsL strong {
-    float: left;
+    background: white;
+    border-radius:3px;
+    border-collapse: collapse;
+    height: 320px;
+    margin: auto;
+    max-width: 600px;
+    padding:5px;
     width: 100%;
-    margin-bottom: 0.5em;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: float 5s infinite;
 }
 
-span.inputR {
-    display: none;
+
+h2{
+   font-size: 1.9em;
+   font-weight: 400;
+   font-style:normal;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+   margin: 1em;
+}
+
+.rtipo{
+   font-size: 1em;
+   font-weight: 600;
+   font-style: oblique;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+#thprima{
+  border-top-left-radius:3px;
+  font-size:1.4em;
+
+}
+
+#thseconda{
+  border-top-right-radius:3px;
+  border-right:none;
+  font-size:1.4em;
+
+}
+
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#3e4150;
+  font-size:1em;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+thead tr{
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+
+.cintervento{
+    background:#EBEBEB;
+}
+
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:center;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:0.9em;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+
+th {
+  color:#FFFFFF;
+  background:#4e4b3b;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:1em;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+/* Tabelle */
+
+caption {
+    margin: 1em;
+    font-style: italic;
 }
 
 .mobile{
