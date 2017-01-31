@@ -79,9 +79,16 @@ if (!isset($_SESSION['username'])) {
                             <tbody>';
                         $tb="";
                         foreach ($result as $cliente) {
-                            $tb.= "<tr>
-                            <td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td><td><input type='radio' name='CodCliente' value=$cliente->codice></td>
-                            </tr>";
+                            $tb.= "
+                                <tr>
+                                    <td>".$cliente->codice."</td><td>".$cliente->nome."</td>
+                                    <td>".$cliente->cognome."</td>
+                                    <td>".$cliente->telefono."</a></td>
+                                    <td>".$cliente->email."</td>
+                                    <td>".$cliente->dataNascita."</td>
+                                    <td><input type='radio' name='CodCliente' value=$cliente->codice></td>
+                                </tr>
+                                ";
                         }
                         $tf="</tbody></table>";
                         $to_print = $th . $tb . $tf;

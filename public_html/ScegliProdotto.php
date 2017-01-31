@@ -29,7 +29,9 @@ if (!isset($_SESSION['username'])) {
         echo "<p>Non ci sono entry nella tabella Prodotti</p>";
     else {
         form_start("post", "ModificaProdotto.php");
-        $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
+        $th = '
+        <fieldset>
+        <table id="ProdottiMagazzino" summary="Prodotti in magazzino">
             <caption class="nascosto">Prodotti modificabili</caption>
             <thead>
                 <tr>
@@ -62,14 +64,23 @@ if (!isset($_SESSION['username'])) {
         $tb = "";
         //corpo tabella
         foreach ($result as $prodotto)
-            $tb.="<tr><td>".$prodotto->codice."</td><td>".$prodotto->nome."</td><td>".$prodotto->marca."</td><td>".$prodotto->tipo."</a></td><td>".$prodotto->quantita."</td><td>".$prodotto->prezzo."</td><td>".$prodotto->prezzoRiv."</td><td><input type=\"radio\" name=\"codprod\" value= \"" . $prodotto->codice . "\"\/></td></tr>";
+            $tb.="
+                <tr>
+                    <td>".$prodotto->codice."</td>
+                    <td>".$prodotto->nome."</td>
+                    <td>".$prodotto->marca."</td>
+                    <td>".$prodotto->tipo."</a></td>
+                    <td>".$prodotto->quantita."</td>
+                    <td>".$prodotto->prezzo."</td><td>".$prodotto->prezzoRiv."</td>
+                    <td><input type=\"radio\" name=\"codprod\" value= \"" . $prodotto->codice . "\"\/></td>
+                </tr>";
 
         $tf= "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
         echo"<input type='submit' name='submit' value='Procedi'>";
         echo"<input type='reset' value='Cancella'>";
-        // echo"</fieldset>";
+        echo"</fieldset>";
         echo"</form>";
     }
     content_end();
