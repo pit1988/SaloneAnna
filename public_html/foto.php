@@ -33,7 +33,7 @@ content_begin();
 
 	while($row=mysqli_fetch_array($result)) {
 	    echo "
-	    	<dd id=\"foto\">
+	    	<dd id=\"photo\">
 		    	<figure>
 		    		<p class=\"contentfigura\"><img src=uploads/".$row['Img_filename']." /></p>
 		    		<figcaption>" . $row['Img_desc'] . "</figcaption>
