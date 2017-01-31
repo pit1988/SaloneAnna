@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Inserisci nuova Foto</h2>";
     if (isset($_POST["submit"])) {
         $img_desc = $_POST["img_desc"];
-        $ris=aggiungiImmagine($img_desc, $_FILES['userfile']);
+        $ris=aggiungiImmagine($img_desc, $_FILES['uploadedfile']);
         if (isset($ris) && (!$ris)) {
             $err= "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
         } 
@@ -42,8 +42,8 @@ if (!isset($_SESSION['username'])) {
         <ul>
             <li>
                 <p>
-                    <label for="uploadedfiled">Inserisci un\'immagine</label>
-                    <input name="uploadedfile" id="uploadedfiled" type="file" />
+                    <label for="uploadedfile">Inserisci un\'immagine</label>
+                    <input name="uploadedfile" id="uploadedfile" type="file" />
                 </p>
                 <p>
                     <label for="img_desc">Descrizione</label>
