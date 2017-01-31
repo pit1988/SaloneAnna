@@ -25,24 +25,29 @@ content_begin();
 
 
 	// collegarsi al DB, leggere le immagini ed inserirle.
-	$conn=dbconnect();
-	$qry="SELECT * FROM Images";
-	$result=mysqli_query($conn, $qry);
+	$result = listaImmagini();
+    
+    $num_rows = count($result);
+
+
 	echo "<h2>Image Gallery</h2>\n";
-	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
 
-	while($row=mysqli_fetch_array($result)) {
-	    echo "
-	    	<dd id=\"photo\">
-		    	<figure>
-		    		<p class=\"contentfigura\"><img src=uploads/".$row['Img_filename']." /></p>
-		    		<figcaption>" . $row['Img_desc'] . "</figcaption>
-		    	</figure>
-	    	</dd>
-	    	";
-	}
+    if ($num_rows>0){
+    	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
 
+    	foreach ($result as $foto) {
+            echo "
+    	    	<dd class=\"photo\">
+    		    	<figure>
+    		    		<p class=\"contentfigura\"><img src=\"uploads/".$foto->nome."\" alt=\"" . $foto->descrizione. " \"/></p>
+    		    		<figcaption>" . $foto->descrizione. "</figcaption>
+    		    	</figure>
+    	    	</dd>
+    	    	";
+        }
 	echo "</dl>";
+    }
+    else echo 
 
 
 	
