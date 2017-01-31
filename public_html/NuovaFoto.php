@@ -23,36 +23,15 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Inserisci nuova Foto</h2>";
     if (isset($_POST["submit"])) {
         $img_desc = $_POST["img_desc"];
-        $img_name = $_FILES["uploadedfile"]["name"];
-        if (($_FILES["uploadedfile"]["type"] == "image/gif" || $_FILES["uploadedfile"]["type"] == "image/jpeg" || $_FILES["uploadedfile"]["type"] == "image/jpg" || $_FILES["uploadedfile"]["type"] == "image/pjpeg" && $_FILES["uploadedfile"]["size"] < 20000)) {
-            if ($_FILES["uploadedfile"]["error"] > 0) {
-                echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $_FILES["uploadedfile"]["error"] . "</span></p>";
-            } else {
-                $conn         = dbconnect();
-                $i            = 1;
-                $success      = false;
-                $new_img_name = $img_name;
-                while (!$success) {
-                    if (file_exists("uploads/" . $new_img_name)) {
-                        $i++;
-                        $new_img_name = "$i" . $img_name;
-                    } else {
-                        $success = true;
-                    }
-                }
-                move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], "uploads/" . $new_img_name);
-                echo "<p class=\"inforesult\">Immagine memorizzata in: " . "<span lang=\"en\"uploads</span>/" . $new_img_name . "</p>";
-                $qry = "INSERT INTO Images(Img_desc,Img_filename) VALUES('$img_desc','$new_img_name')";
-                if (!mysqli_query($conn, $qry)) {
-                    echo "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
-                } else {
-                    echo "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
-                }
-            }
-        } else {
-            echo "<p class=\"errorSuggestion\">Il <span lang=\"en\">file</span> inserito non è valido</p>";
+        $ris=aggiungiImmagine($img_desc, $_FILES['userfile']);
+        if (isset($ris) && (!$ris)) {
+            $err= "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
+        } 
+        else {
+            echo "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
         }
     }
+    
     
     if (isset($err))
         echo "<p class=\"errorSuggestion\"><b>Errore: $err</b></p>";

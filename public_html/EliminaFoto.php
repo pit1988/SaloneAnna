@@ -16,19 +16,9 @@ if (!isset($_SESSION['username'])) {
         $n_el  = 0;
         $n_err = 0;
         foreach ($ids as $codice) {
-            $conn     = dbconnect();
-            $query_tl = "SELECT Img_filename from Images where Img_title='$codice'";
-            $result   = mysqli_query($conn, $query_tl);
+            $result   = eliminaImmagine($codice);
             
-            if ($result) {
-                $row      = mysqli_fetch_row($result);
-                $filename = $row[0];
-                if (file_exists("uploads/$filename"))
-                    unlink("uploads/$filename");
-            }
-            $query_el = "delete from Images where Img_title='$codice'";
-            $ris = mysqli_query($conn, $query_el);
-            if ($ris)
+            if ($result) 
                 ++$n_el;
             else
                 ++$n_err;

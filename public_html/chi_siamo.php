@@ -11,13 +11,15 @@ $title_meta="Salone Anna, parrucchiere a Vicenza";
 $descr="Chi è Anna Cortivo, descrizione delle esperienze, lavori e storia.";
 $keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, Storia";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
-$name="visitatore";
+$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Chi Siamo</strong>';
 $is_admin=false;
+$name="visitatore";
 
 if (isset($_SESSION['username'] ) ) {
-	$is_admin=true;
-	$name = $_SESSION['username'];
+    $is_admin=true;
+    content_begin();
+    $name = $_SESSION['username'];
+    $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Foto</strong>';
 }
 
 insert_header($rif, 2, $is_admin,'');

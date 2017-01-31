@@ -69,48 +69,31 @@ if (!isset($_SESSION['username'])) {
         $filename = $_POST['img_old_file'];
         if (isset($_FILES["uploadedfile"])) {
             $img_name = $_FILES["uploadedfile"]["name"];
-            if (($_FILES["uploadedfile"]["type"] == "image/gif" || $_FILES["uploadedfile"]["type"] == "image/jpeg" || $_FILES["uploadedfile"]["type"] == "image/jpg" || $_FILES["uploadedfile"]["type"] == "image/pjpeg" && $_FILES["uploadedfile"]["size"] < 20000)) {
-                if ($_FILES["uploadedfile"]["error"] > 0) {
-                    $to_print = "<p class=\"errorSuggestion\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $_FILES["uploadedfile"]["error"] . "</span></p>";
-                } else {
-                    if (file_exists("uploads/$filename"))
-                        unlink("uploads/$filename");
-                    $query_el     = "delete from Images where Img_title='$codice'";
-                    $i            = 1;
-                    $success      = false;
-                    $new_img_name = $img_name;
-                    while (!$success) {
-                        if (file_exists("uploads/" . $new_img_name)) {
-                            $i++;
-                            $new_img_name = "$i" . $img_name;
-                        } else {
-                            $success = true;
-                        }
-                    }
-                    
-                    $ris = mysqli_query($conn, $query_el);
-                    move_uploaded_file($_FILES["uploadedfile"]["tmp_name"], "uploads/" . $new_img_name);
-                    $to_print = "<p class=\"inforesult\">Immagine memorizzata in: " . "<span lang=\"en\"uploads</span>/" . $new_img_name . "</p>";
-                    $qry      = "UPDATE Images SET Img_desc='$img_desc', Img_filename='$new_img_name' WHERE Img_title='$codice'";
-                    
-                    if (!mysqli_query($conn, $qry)) {
-                        $to_print = "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
-                    } else {
-                        $to_print = "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
-                    }
-                }
+            $ris=modificaImmagine($codice, $img_desc, $_FILES["uploadedfile"]);
+
+            if (!$ris) {
+                        $to_print = "<p class=\"errorSuggestion\">Modiifcare l'immagine selezionata</span></p>";
             } else {
-                $to_print = "<p class=\"errorSuggestion\">Il <span lang=\"en\">file</span> inserito non è valido</p>";
+                $to_print = "<p class=\"inforesult\">L'immagine è stata modificata con successo</p>";
             }
         }
         //cambia solo la descrizione.
         else {
+            $ris=modificaImmagine($codice, $img_desc);
+
+            if (!$ris) {
+                $to_print = "<p class=\"errorSuggestion\">Modiifcare l'immagine selezionata</span></p>";
+            } else {
+                $to_print = "<p class=\"inforesult\">L'immagine è stata modificata con successo</p>";
+            }
+
+/*
             $qry = "UPDATE Images SET Img_desc='$img_desc' WHERE Img_title='$codice'";
             if (!mysqli_query($conn, $qry)) {
                 $to_print = "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
             } else {
                 $to_print = "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
-            }
+            }*/
         }
     }
     

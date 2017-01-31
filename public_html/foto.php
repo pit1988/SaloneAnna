@@ -16,7 +16,6 @@ $name="visitatore";
 
 if (isset($_SESSION['username'] ) ) {
     $is_admin=true;
-    content_begin();
     $name = $_SESSION['username'];
     $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Foto</strong>';
 }
@@ -29,11 +28,18 @@ content_begin();
 	$conn=dbconnect();
 	$qry="SELECT * FROM Images";
 	$result=mysqli_query($conn, $qry);
-	echo "<h2>Image Gallery</h2>";
-	echo "<dl id=\"foto\">";
+	echo "<h2>Image Gallery</h2>\n";
+	echo "<dl id=\"foto\">\n<dt>Foto</dt>";
 
 	while($row=mysqli_fetch_array($result)) {
-	    echo "<dd><figure><img src=uploads/".$row['Img_filename']."><figcaption>" . $row['Img_desc'] . "</figcaption></figure></dd>";
+	    echo "
+	    	<dd>
+		    	<figure>
+		    		<img src=uploads/".$row['Img_filename']." />
+		    		<figcaption>" . $row['Img_desc'] . "</figcaption>
+		    	</figure>
+	    	</dd>
+	    	";
 	}
 
 	echo "</dl>";

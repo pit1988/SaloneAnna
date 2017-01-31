@@ -579,46 +579,114 @@ function listaImmagini() {
 	return $immagini; //è un array di Immagini, non viene garantito che $immagini sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
-function aggiungiImmagine($desc, $nameHTML) { //dovrebbe bastarmi sapere la descrizione e il nome HTML
-	if (!isset($_FILES['userfile']) || !is_uploaded_file($_FILES['userfile']['tmp_name'])) { //controllo che non siano avvenuti errori
-		return FALSE;
-	}
-	$dimensioni = $_FILES["$nameHTML"]['dim']; //le dimensioni del file
-	if($dimensioni > 500000) {return FALSE;} //valore da verificare
-	$dirTemp = $_FILES["$nameHTML"]['tmp_name']; //la directory temporanea dove si trova il file appena caricato
-	$nome = $_FILES["$nameHTML"]['name']; //il nome del file
-	if(file_exists("../uploads/$nome")) {return FALSE;} //controllo se il file esiste già
-	//DA VERIFICARE
-	$estensione = pathinfo($dirTemp.'/'.basename($nome), PATHINFO_EXTENSION); //l'estensione del file
-	if($estensione != 'jpg' && $estensione != 'jpeg' && $estensione != 'png' && $estensione != 'gif') {return FALSE;}
-	if(move_uploaded_file($userfile_tmp, "../uploads/$nome")) {
-		$result = eseguiQuery("INSERT INTO Images(Img_desc, Img_filename) VALUES ($desc, $nome)");
-		if($result) {return TRUE;}
-		return FALSE;
-	}
-	else {return FALSE;}
+function aggiungiImmagine($img_desc, $userfile) { //dovrebbe bastarmi sapere la descrizione e il nome HTML
+	// if (!is_uploaded_file($userfile["tmp_name"])) { //controllo che non siano avvenuti errori
+	// 	return FALSE;
+	// }
+	if (($userfile["type"] == "image/gif" || $userfile["type"] == "image/jpeg" || $userfile["type"] == "image/jpg" || $userfile["type"] == "image/pjpeg"|| $userfile["type"] == "image/png" && $userfile["size"] < 20000)) {
+            if ($userfile["error"] > 0) {
+                echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $userfile["error"] . "</span></p>";
+            } else {
+
+                $conn         = dbconnect();
+                $i            = 1;
+                $success      = false;
+                $new_img_name = $userfile['name'];
+                while (!$success) {
+                    if (file_exists("uploads/" . $new_img_name)) {
+                        $i++;
+                        $new_img_name = "$i" . $img_name;
+                    } else {
+                        $success = true;
+                    }
+                }
+                $ris=move_uploaded_file($userfile["tmp_name"], "uploads/" . $new_img_name);
+                if (!$ris){
+                	$conn->close();
+                	return false;
+                }
+                $qry = "INSERT INTO Images(Img_desc,Img_filename) VALUES('$img_desc','$new_img_name')";
+                if (!mysqli_query($conn, $qry)) {
+                	$conn->close();
+                    return false;
+                } else {
+                	$conn->close();
+                    return true;
+                }
+            }
+        }
 }
 
 function eliminaImmagine($codice) {
 	$conn = dbconnect();
 	$nome = $conn->query("SELECT Img_filename FROM Images WHERE Img_title=$codice");
 	if($nome) {
-		$esito = unlink("../uploads/$nome"); //elimina il file, restituisce TRUE se l'operazione ha esito positivo, FALSE altrimenti
-		if($esito == TRUE) {
-			$esito = $conn->query("DELETE FROM Images WHERE Img_title=$codice");
-			if($esito) {
+		$nome = mysqli_fetch_assoc($nome);
+		$nome = $nome['Img_filename'];
+		if (file_exists("uploads/$nome")){
+			$esito = unlink("uploads/$nome"); //elimina il file, restituisce TRUE se l'operazione ha esito positivo, FALSE altrimenti
+			if(!$esito){
 				$conn->close();
-				return TRUE;
+				return FALSE;
 			}
+		}
+			
+		$esito = $conn->query("DELETE FROM Images WHERE Img_title=$codice");
+		$conn->close();
+		if($esito) {
+			return TRUE;
+		}
+		else{
+			return FALSE;
 		}
 	}
 	$conn->close();
 	return FALSE;
 }
 
-function modificaDescrizioneImmagine($codice, $descrizione) {
-	$descrizione = htmlentities($descrizione);
-	return eseguiQuery("UPDATE Images SET Img_desc=$descrizione WHERE Img_title=$codice");
+function modificaImmagine($codice, $descrizione, $userfile="") {
+	if($userfile!=""){
+		if (!is_uploaded_file($userfile['tmp_name'])) { //controllo che non siano avvenuti errori
+			return FALSE;
+		}
+		if (($userfile["type"] == "image/gif" || $userfile["type"] == "image/jpeg" || $userfile["type"] == "image/jpg" || $userfile["type"] == "image/pjpeg"|| $userfile["type"] == "image/png" && $userfile["size"] < 20000)) {
+            if ($userfile["error"] > 0) {
+                echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $userfile["error"] . "</span></p>";
+            } else {
+                $conn = dbconnect();
+                $i = 1;
+                $success = false;
+                $new_img_name = $userfile['name'];
+                while (!$success) {
+                    if (file_exists("uploads/" . $new_img_name)) {
+                        $i++;
+                        $new_img_name = "$i" . $img_name;
+                    } else {
+                        $success = true;
+                    }
+                }
+                $ris=move_uploaded_file($userfile["tmp_name"], "uploads/" . $new_img_name);
+                if (!$ris) {
+                	$conn->close();
+                	return false;
+                }
+                else {
+                    if(!eliminaImmagine($codice)){
+                    	$conn->close();
+                    	return false;
+                    }
+                    $qry = "INSERT INTO Images(Img_title, Img_desc, Img_filename) VALUES('$codice', '$descrizione','$new_img_name')";
+                    return eseguiQuery($qry);
+                }
+            }
+        }
+
+	} 
+	else {
+		$descrizione = htmlentities($descrizione);
+		return eseguiQuery("UPDATE Images SET Img_desc='$descrizione' WHERE Img_title='$codice'");
+	}
+
 }
 
 /*******************************QUERY****************************/
