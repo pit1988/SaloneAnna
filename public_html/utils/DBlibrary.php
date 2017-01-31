@@ -539,6 +539,20 @@ function listaProdottiAppuntamento($codAppuntamento) {
 	return $prodottiApp; //è un array di ProdottoAppuntamento, non viene garantito che $prodottiApp sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
+function listaProdottiAppuntamentoMax() {
+	$result = eseguiQuery("SELECT ProdApp.CodProdotto, CodAppuntamento, Nome, Marca, Tipo, Utilizzo
+	FROM ProdApp JOIN Prodotti ON ProdApp.CodProdotto=Prodotti.CodProdotto
+	ORDER BY Utilizzo DESC LIMIT 10");
+	if(!$result) {$prodottiApp = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$prodottiApp = array();
+		while($prodottoApp = mysqli_fetch_assoc($result)) {
+			array_push($prodottiApp, new ProdottoAppuntamento($prodottoApp['CodProdotto'], $prodottoApp['CodAppuntamento'], $prodottoApp['Nome'], $prodottoApp['Marca'], $prodottoApp['Tipo'], $prodottoApp['Utilizzo']));
+		}
+	}
+	return $prodottiApp; //è un array di ProdottoAppuntamento, non viene garantito che $prodottiApp sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
 function cambiaUtilizzoProdottiAppuntamento($codAppuntamento, $codProdotto, $utilizzo) {
 	$conn = dbconnect();
 	$result = $conn->query("SELECT CodProdotto FROM ProdApp WHERE CodProdotto=$codProdotto AND CodAppuntamento=$codAppuntamento");

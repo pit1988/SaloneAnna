@@ -19,22 +19,13 @@ if (!isset($_SESSION['username'])) {
     content_begin();
     
     include("utils/DBlibrary.php");
-    $conn = dbconnect();
+
+    $result = listaProdottiAppuntamentoMax();
     
-    $query  = "
-      SELECT p.CodProdotto, p.Nome, p.Tipo, p.Marca, p.PRivendita, a.Utilizzo
-      FROM Prodotti p NATURAL JOIN ProdApp a
-      ORDER BY Utilizzo DESC
-      LIMIT 10;
-    ";
-    $result = mysqli_query($conn, $query);
-    
-    
-    $number_cols = mysqli_num_fields($result);
     echo "<h2>Prodotti pi&ugrave; usati</h2>";
     echo "<em class=\"info\">I prodotti pi&ugrave; usati in appuntamento sono:</em>";
     
-    $num_rows = mysqli_num_rows($result);
+    $num_rows = count($result);
     if (!$num_rows)
         echo "<p class=\"inforesult\">Non ci sono entry nella tabella Appuntamenti o nella tabella dei Prodotti</p>";
     else {
@@ -46,7 +37,6 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Nome</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Marca</th>
-                    <th scope="col">PRivendita</th>
                     <th scope="col">Utilizzo</th>
                 </tr>
             </thead>
@@ -57,7 +47,6 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Nome</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Marca</th>
-                    <th scope="col">PRivendita</th>
                     <th scope="col">Utilizzo</th>
             </tfoot>
 
@@ -65,19 +54,16 @@ if (!isset($_SESSION['username'])) {
             ';
         $tb = "";
         //corpo tabella
-        while ($row = mysqli_fetch_row($result)) {
-            
-            $tb .= "<tr>\n";
-            for ($i = 0; $i < $number_cols; $i++) {
-                $tb .= "<td>";
-                if (!isset($row[$i]))
-                    $tb .= " ";
-                else {
-                    $tb .= $row[$i];
-                }
-                $tb .= "</td>\n";
-            }
-            $tb .= "</tr>\n";
+        foreach ($result as $prodottoApp) {
+            $tb.="
+                <tr>
+                    <td>$prodottoApp->codProdotto</td>
+                    <td>$prodottoApp->nome</td>
+                    <td>$prodottoApp->marca</td>
+                    <td>$prodottoApp->tipo</td>
+                    <td>$prodottoApp->utilizzo</td>
+                </tr>
+            ";
         }
         
         $tf = "</tbody></table>";
