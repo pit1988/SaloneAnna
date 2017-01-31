@@ -32,7 +32,7 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
     else {
         //$prodotto=$result[0];
         $to_print = '
-        <form method="POST" action="ConfermaModificaProdotto.php">
+        <form method="post" action="ConfermaModificaProdotto.php">
         <fieldset>
         <legend>Seleziona il prodotto da modificare</legend>
     		<ul>
