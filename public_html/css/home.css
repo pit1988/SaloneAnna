@@ -118,10 +118,6 @@ legend{
     
 }
 
-#legend{
-    margin: 1.3em;
-}
-
 #accedi{
     float:right;
     padding: 0 15px 0 15px;
@@ -145,14 +141,6 @@ legend{
     color: white;
     border: solid 1px #4e4b3b;
     background: #4e4b3b;
-
-}
-
-#updateOk, #updateError{
-   float:right;
-   font-size: 1em;
-   color: #8c001f; 
-   margin-right: 1em;  
 }
 
 /* BreadCrumbs Part*/
@@ -169,25 +157,6 @@ legend{
     color: black;
     display: block;
 }
-
-#conferma{
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font: bold 12px Arial, Helvetica, sans-serif;
-    color: #fff;
-    padding: 10px 20px;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-    
-}
-
-.ricerca{
-    position:relative;
-    left:7%;
-}
-
 
 /*Menu*/
 #contenitore-menu-admin{
@@ -247,13 +216,6 @@ li a:hover {
     display:block;
 }
 
-.center {
-    display: block;
-    margin: auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
-
 #immagine{
     background-image:url(../img/home1.png);
     background-repeat:no-repeat;
@@ -282,6 +244,19 @@ li a:hover {
     text-align: center;
     font-style: oblique;
 }
+
+/*  info vecchia non so se tocca
+
+.info {
+    display: block;
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    text-align-last: center;
+    font-style: oblique;
+    width: 100%;
+}
+*/
 
 .inforesult {
     font-weight: bold;
@@ -404,7 +379,6 @@ caption {
 }
 
 .contentfigura {
-    height: 350px;
     text-align: center;
 }
 
@@ -507,49 +481,6 @@ form small {
    font-style: oblique;
    color: #8c001f;
    margin-bottom: 2em;
-}
-
-
-/* VENDITA */
-
-.maintitle{
-    text-align: center;
-    color: white;
-    font-size: 30px;
-    border: solid 1px #585346;
-    background: #585346;
-    clear:both;
-}
-
-.cnome{
-    font-size: 1.4em; 
-    font-style: italic;
-    text-align: center;
-    color: #003e30;
-}
-
-.nome_scientifico{
-    padding: 0.8em;
-}
-
-.tipo{
-    padding: 0.8em;
-}
-
-h4{
-    clear:left;
-    text-align: left;
-    color: #003e30;
-}
-
-.info {
-    display: block;
-    margin: 0 0 0.5em 0;
-    color: #31456b;
-    clear: both;
-    text-align-last: center;
-    font-style: oblique;
-    width: 100%;
 }
 
 .prodotto .id{
@@ -709,14 +640,6 @@ input[type="button"], input[type="submit"]{
     background: #4e4b3b;
 }
 
-#dynamicInputPrice li{
-    padding-bottom: 1em; 
-}
-
-#dynamicInputPrice span{
-    clear: both; 
-}
-
 .inputsL{
    float: left;
     width: 25%;
@@ -731,15 +654,6 @@ input[type="button"], input[type="submit"]{
 
 .inputsL input {
     text-align: right;
-}
-
-.inputR{
-    width: 49%;
-}
-
-.errorExecutor {
-    padding: 1.5em;
-    color: #b40029;
 }
 
 .datiAppun {

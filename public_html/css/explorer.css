@@ -118,10 +118,6 @@ legend{
     
 }
 
-#legend{
-    margin: 1.3em;
-}
-
 #accedi{
     vertical-align: text-bottom;  
     padding-left: 20px;
@@ -151,13 +147,6 @@ legend{
 
 }
 
-#updateOk, #updateError{
-   float:right;
-   font-size: 1em;
-   color: #8c001f; 
-   margin-right: 1em;  
-}
-
 /* BreadCrumbs Part*/
 #breadcrumbs{
     border-top: 1px dotted #4e4b3b;
@@ -172,26 +161,6 @@ legend{
     color: black;
     display: block;
 }
-
-
-#conferma{
-    outline: none;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    font: bold 12px Arial, Helvetica, sans-serif;
-    color: #fff;
-    padding: 10px 20px;
-    border: solid 1px #a30025;
-    background: #b40029;
-    
-}
-
-.ricerca{
-    position:relative;
-    left:7%;
-}
-
 
 /*Menu*/
 #contenitore-menu {
@@ -265,12 +234,6 @@ h2{
     font-style: oblique;
 }
 
-.center {
-    display: block;
-    margin: auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
-}
 
 #immagine{
     background-image:url("../img/prato.jpg");
@@ -308,7 +271,6 @@ h2{
 }
 
 .contentfigura {
-    height: 350px;
     text-align: center;
 }
 
@@ -435,102 +397,6 @@ form small {
 }
 
 
-/* VENDITA */
-
-.maintitle{
-    clear: both;
-    text-align: center;
-    color: white;
-    font-size: 30px;
-    border: solid 1px #585346;
-    background: #585346;
-}
-
-.cnome{
-    text-align: center;			
-    color: #003e30;
-    font-size: 1.4em;
-    margin-top: 0.5em;
-}
-
-.nome_scientifico{
-    padding: 0.8em;
-}
-
-.tipo{
-    padding: 0.8em;
-}
-
-h4{
-    clear:left;
-    text-align: left;
-    color: #003e30;
-}
-
-.prodotto .id{
-    float: right;
-}
-
-.prodotto .desc{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 96%;
-}
-
-
-.dati{
-    color: #3e000e;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.contenuto{
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.goFast {
-    padding: 2em;
-    text-align: right;
-    margin-bottom: 1em;
-    font-style: oblique;
-    display: inline-block;
-    float:right;
-}
-
-.prodotto .nome_scientifico{
-    font-style: oblique;
-}
-
-.prodotto .tipo{
-    font-weight: bold;
-}
-
-.img{
-    text-align: center;
-    margin: 0 auto;
-}
-
-img {
-    max-width: 93%;
-}
-
-
-.subbutton{
-    padding-right: 10px;
-    color: white;
-    float: right;
-    
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-    
-}
-
-.check{
-    padding-bottom: 1em;
-    display: block;
-}
-
 /* Messaggio */
 
 #messaggio ul li {
@@ -566,36 +432,6 @@ img {
     color: #31456b;''
 }
 
-/* VENDITA - Parte Admin e form */
-
-.createButtons{
-    float:left;
-    padding: 2em;
-}
-
-.createButton{
-    text-decoration: none; 
-    font-weight: bold;
-    padding: 0.5em 1em 0.5em 1em;
-    margin: 1em;
-    color: white;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-}
-
-.productButtons{
-    padding: 2em;
-}
-
-.productButton{
-    text-decoration: none; 
-    font-weight: bold;
-    padding: 0.5em 1em 0.5em 1em;
-    margin: 1em;
-    color: white;
-    border: solid 1px #4e4b3b;
-    background: #4e4b3b;
-}
 
 input[type="button"], input[type="submit"]{
     outline: none;
@@ -618,15 +454,6 @@ input[type="button"], input[type="submit"]{
     float: left;
     width: 74%;
     margin-bottom: 1em;
-}
-
-.inputR{
-    width: 49%;
-}
-
-.errorExecutor {
-    padding: 1.5em;
-    color: #b40029;
 }
 
 .datiAppun {
