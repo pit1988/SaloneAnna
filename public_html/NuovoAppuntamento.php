@@ -25,10 +25,11 @@ if (!isset($_SESSION['username'])) {
 
     //aggiungere tabindex;
     $str1 = '<form action="ConfermaNuovoAppuntamento.php" onsubmit="return true;" method="post">
-             <fieldset><legend>Compila le informazioni richieste per inserire un appuntamento</legend>
-                <ul>
-                    <p class="tipoAppun">
-                        <li>
+             <fieldset>
+                <legend>Compila le informazioni richieste per inserire un appuntamento</legend>
+                    <ul>
+                        <li class="tipoAppun">
+                            <p>
                             <label for="TipoAppuntamento">Tipo appuntamento:</label>
 ';
     
@@ -36,12 +37,13 @@ if (!isset($_SESSION['username'])) {
     $result= listaTipoAppuntamenti();
     if($result){
         foreach ($result as $tipoApp){
-            $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
+            $str2 .= '<input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label>";
         }
     }
-    $str3 = '</li></p>
-                <p class="datiAppun">
-                    <li>
+    $str3 = '       
+                        </p>
+                    </li>
+                    <li class="datiAppun">
                         <p>
                             <label for="first_name">Nome</label>
                             <input type="text" name="first_name" id="first_name" tabindex="100"/>
@@ -63,14 +65,11 @@ if (!isset($_SESSION['username'])) {
                             <input type="text" name="orario" id="orario" tabindex="102" />
                         </p>
                     </li>
-                </p>
-                <p class="confermAppun">
-                    <li>
+                    <li class="confermAppun">
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella" />
                         <span id="errors"></span>
                     </li>
-                </p>
                 </ul>
             </fieldset>
             </form>

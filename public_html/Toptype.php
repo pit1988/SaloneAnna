@@ -30,7 +30,10 @@ if (!isset($_SESSION['username'])) {
                 <th scope="col">Quantità</th>
                 <th scope="col">Percentuale</th>
                 <th scope="col">Tipo Appuntamento</th>
-            </tr>';
+            </tr>
+        </thead>
+        <tbody>
+        ';
         $tb          = "";
         while ($row = mysqli_fetch_row($result)) {
             $tb .= "

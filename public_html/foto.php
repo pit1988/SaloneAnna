@@ -29,7 +29,6 @@ content_begin();
     
     $num_rows = count($result);
 
-
 	echo "<h2>Image Gallery</h2>\n";
 
     if ($num_rows>0){
@@ -39,7 +38,7 @@ content_begin();
             echo "
     	    	<dd class=\"photo\">
     		    	<figure>
-    		    		<p class=\"contentfigura\"><img src=\"uploads/".$foto->nome."\" alt=\"" . $foto->descrizione. " \"/></p>
+    		    		<p class=\"contentfigura\"><img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/></p>
     		    		<figcaption>" . $foto->descrizione. "</figcaption>
     		    	</figure>
     	    	</dd>
@@ -47,7 +46,8 @@ content_begin();
         }
 	echo "</dl>";
     }
-    echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
+    else
+        echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
 
 
 	

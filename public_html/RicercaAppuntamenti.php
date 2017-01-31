@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
 			</li>
 			<li>
 				<p>
-					<input type=checkbox name="cli" value="cli"> Per Cliente
+					<input type=checkbox name="cli" value="cli" /> Per Cliente
 				</p>
 			</li>
 		</ul>
@@ -57,12 +57,12 @@ if (!isset($_SESSION['username'])) {
 			</li>
 			<li>
 				<p>
-					<input type=checkbox name="data" value="data" checked> Per Data
+					<input type="checkbox" name="data" value="data"> Per Data
 				</p>
 			</li>
 		</ul>
 	</fieldset>
-	<p><input type=submit name=submit value=submit></p>
+	<p><input type="submit" name="submit" value="Invia"></p>
 </form>
 	';
     echo $str_to_print;

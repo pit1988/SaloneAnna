@@ -82,7 +82,18 @@ if (!isset($_SESSION['username'])) {
         $tb = "";
         //corpo tabella
         foreach ($result as $prodotto)
-            $tb.="<tr><td>".$prodotto->codice."</td><td>".$prodotto->nome."</td><td>".$prodotto->marca."</td><td>".$prodotto->tipo."</a></td><td>".$prodotto->quantita."</td><td>".$prodotto->prezzo."</td><td>".$prodotto->prezzoRiv."</td><td><input type=\"checkbox\" name=\"codprod[]\" value= \"" . $prodotto->codice . "\"\/></td></tr>";
+            $tb.="
+                <tr>
+                    <td>".$prodotto->codice."</td>
+                    <td>".$prodotto->nome."</td>
+                    <td>".$prodotto->marca."</td>
+                    <td>".$prodotto->tipo."</a></td>
+                    <td>".$prodotto->quantita."</td>
+                    <td>".$prodotto->prezzo."</td>
+                    <td>".$prodotto->prezzoRiv."</td>
+                    <td><input type=\"checkbox\" name=\"codprod[]\" value= \"" . $prodotto->codice . "\" /></td>
+                </tr>
+            ";
         
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
