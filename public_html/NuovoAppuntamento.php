@@ -29,15 +29,15 @@ if (!isset($_SESSION['username'])) {
                 <legend>Compila le informazioni richieste per inserire un appuntamento</legend>
                     <ul>
                         <li class="tipoAppun">
+                            <p>Tipo appuntamento:</p>
                             <p>
-                            <label for="TipoAppuntamento">Tipo appuntamento:</label>
 ';
     
     $str2        = "";
     $result= listaTipoAppuntamenti();
     if($result){
         foreach ($result as $tipoApp){
-            $str2 .= '<input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label>";
+            $str2 .= '<input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label>\n";
         }
     }
     $str3 = '       
