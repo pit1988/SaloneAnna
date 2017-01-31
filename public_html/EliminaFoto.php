@@ -43,14 +43,11 @@ if (!isset($_SESSION['username'])) {
     content_begin();
     echo "<h2>Elimina Foto</h2>";
     
-    $conn   = dbconnect();
-    $query  = "SELECT * FROM Images";
-    $result = mysqli_query($conn, $query);
+    $result = listaImmagini();
     
-    $number_cols = mysqli_num_fields($result);
-    
-    $num_rows = mysqli_num_rows($result);
-    if (!$num_rows)
+    $num_rows = count($result);
+
+    if ($num_rows==0)
         echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
     else {
         form_start("post", "EliminaFoto.php");
@@ -79,15 +76,15 @@ if (!isset($_SESSION['username'])) {
             ';
         $tb = "";
         //corpo tabella
-        while ($row = mysqli_fetch_row($result)) {
+        foreach ($result as $foto) {
             $tb .= "<tr>
-            <td>$row[0]</td>
-            <td>$row[1]</td>
-            <td><a href=\"uploads/$row[2]\">$row[2]</a></td>
-            <td>" . '<input type="checkbox" name="codImg[]" value= "' . $row[0] . '" /></td>
+            <td>$foto->codice</td>
+            <td>$foto->descrizione</td>
+            <td><a href=\"uploads/$foto->nome\">$foto->nome</a></td>
+            <td>".'<input type="checkbox" name="codImg[]" value= "' . $foto->codice . '" /></td>
             </tr>';
         }
-        
+
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;

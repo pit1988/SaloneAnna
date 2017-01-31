@@ -567,13 +567,22 @@ class Immagine {
 	}
 }
 
+function mostraImmagine($codice) {
+	$immagine = eseguiQuery("SELECT * from Images where Img_title='$codice'");
+	if(!$immagine) {return NULL;}
+	else {
+		$immagine = mysqli_fetch_assoc($immagine);
+		return new Immagine($immagine['Img_title'], $immagine['Img_filename'], $immagine['Img_desc']);
+	}
+}
+
 function listaImmagini() {
-	$result = eseguiQuery("SELECT * FROM Immagini");
+	$result = eseguiQuery("SELECT * FROM Images");
 	if(!$result) {$immagini = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$immagini = array();
 		while($immagine = mysqli_fetch_assoc($result)) {
-			array_push($immagini, new Prodotto($immagine['Img_title'], $immagine['Img_desc'], $immagine['Img_filename']));
+			array_push($immagini, new Immagine($immagine['Img_title'], $immagine['Img_filename'], $immagine['Img_desc']));
 		}
 	}
 	return $immagini; //è un array di Immagini, non viene garantito che $immagini sia stato effettivamente istanziato perché potrebbero esserci stato un errore

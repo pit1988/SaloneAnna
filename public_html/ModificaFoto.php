@@ -22,21 +22,22 @@ if (!isset($_SESSION['username'])) {
     content_begin();
     echo "<h2>Modifica Foto</h2>";
 
+    $modified=false;
     
     if (isset($_POST['submit']) && isset($_POST['codImg'])) {
         $codice = $_POST['codImg'];
+        echo $codice;
         
-        $conn     = dbconnect();
-        $query_tl = "SELECT Img_filename, Img_desc from Images where Img_title='$codice'";
-        $result   = mysqli_query($conn, $query_tl);
+        $result   = mostraImmagine($codice);
         
-        if ($result) {
-            $row      = mysqli_fetch_row($result);
-            $filename = $row[0];
-            $descr    = $row[1];
+        $n_rows=count($result);
+
+        if ($n_rows==1) {
             
+            $filename = $result->nome;
+            $descr    = $result->descrizione;
             $to_print = '
-            <form enctype="multipart/form-data" action="NuovaFoto.php" method="post">
+            <form enctype="multipart/form-data" action="ModificaFoto.php" method="post">
                 <fieldset><legend>Inserisci una nuova foto</legend>
                     <ul>
                         <li>
@@ -54,10 +55,14 @@ if (!isset($_SESSION['username'])) {
                                 <input class="btn btn-submit" type="submit" name="invia" value="Invia" tabindex="105"/>
                                 <span id="errors"></span>
                             </p>
+                            <p>
+                                <label for="oldfile">Immagine da modificare</label>
+                                <img src="uploads/' . $filename . '" class="oldfile" alt="'.$descr.'" />
                         </li>
                     </ul>
                 </fieldset>
             </form>
+            
             ';
         } else
             $to_print = "<p class=\"errorSuggestion\">Errore, non è stata selezionata alcuna foto o la foto non è più presente nel <span lang=\"en\">database</span></p>";
@@ -82,7 +87,7 @@ if (!isset($_SESSION['username'])) {
             $ris=modificaImmagine($codice, $img_desc);
 
             if (!$ris) {
-                $to_print = "<p class=\"errorSuggestion\">Modiifcare l'immagine selezionata</span></p>";
+                $to_print = "<p class=\"errorSuggestion\">Modifcare l'immagine selezionata</span></p>";
             } else {
                 $to_print = "<p class=\"inforesult\">L'immagine è stata modificata con successo</p>";
             }
@@ -103,7 +108,6 @@ if (!isset($_SESSION['username'])) {
     
     
     echo $to_print;
-    echo "<div><p class=\"inforesult\">Immagine da modificare</p><img src=\"uploads/$filename\" alt=\"\" /></div>";
     
     content_end();
     page_end();

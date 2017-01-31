@@ -25,18 +25,15 @@ else{
     echo "<h2>Modifica Foto</h2>";
 
     
-    $conn=dbconnect();
-    $query  = "SELECT * FROM Images";
-    $result = mysqli_query($conn, $query);
+    $result = listaImmagini();
     
-    $number_cols = mysqli_num_fields($result);
-    
-    $num_rows = mysqli_num_rows($result);
+    $num_rows = count($result);
+
     if (!$num_rows)
         echo "<p class=\"info\">Non sono presenti fotografie da modificare</p>";
     else {
         form_start("post", "ModificaFoto.php");
-        echo "<fieldset><legend>Seleziona l\' immagine che vuoi modificare</legend>";
+        echo "<fieldset><legend>Seleziona l'immagine che vuoi modificare</legend>";
             $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
                 <caption class="nascosto">Tabella immagini</caption>
                 <thead>
@@ -61,12 +58,12 @@ else{
                 ';
             $tb = "";
             //corpo tabella
-            while ($row = mysqli_fetch_row($result)) {
+            foreach ($result as $foto) {
                 $tb .= "<tr>
-                <td>$row[0]</td>
-                <td>$row[1]</td>
-                <td><a href=\"uploads/$row[2]\">$row[2]</a></td>
-                <td>".'<input type="radio" name="codImg" value= "' . $row[0] . '" /></td>
+                <td>$foto->codice</td>
+                <td>$foto->descrizione</td>
+                <td><a href=\"uploads/$foto->nome\">$foto->nome</a></td>
+                <td>".'<input type="radio" name="codImg" value= "' . $foto->codice . '" /></td>
                 </tr>';
             }
 
