@@ -1,13 +1,9 @@
 <?php
-    echo "1";
     if (isset($_POST['submit'])) {
-        echo "2";
         include 'utils/DBlibrary.php';
         if (!isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['contenuto'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
             $err = "Almeno uno dei parametri non è stato inserito correttamente";
-            echo "3";
         } else {
-            echo "4";
             $sub = $_POST['submit'];
             $email=$_POST['email'];
             $nome = $_POST['first_name'];

@@ -27,14 +27,12 @@ if (!isset($_SESSION['username'])) {
         $conn = dbconnect();
         
         $cod   = $_POST["codCliente"];
-        $query = "SELECT Nome, Cognome, Email, Telefono, DataNascita FROM Clienti p WHERE p.CodCliente= '$cod'";
-
-        $result   = mysqli_query($conn, $query);
+        
+        $result   = mostraCliente($cod);
  
-        if (!$result)
+        if (is_null($result))
             $err = "<p class=\"info\">Non è presente il cliente selezionato</p>";
         else {
-            $row = mysqli_fetch_row($result);
             
             echo '<h2>Modifica Cliente</h2>
             <form action="ConfermaModificaCliente.php" onsubmit="return true;" method="post">
@@ -43,30 +41,30 @@ if (!isset($_SESSION['username'])) {
                     <li>
                         <p>
                             <label for="first_name">Nome</label>
-                            <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $row[0] . '" />
+                            <input type="text" name="first_name" id="first_name" tabindex="100" value="' . $result->nome . '" />
                         </p>
                         <p>
                             <label for="last_name">Cognome</label>
-                            <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $row[1] . '" />
+                            <input type="text" name="last_name" id="last_name" tabindex="101" value="' . $result->cognome . '" />
                         </p>
                     </li>
                     <li xml:lang="en">
                         <p>
                             <label for="email">E-Mail</label>
-                            <input type="text" name="email" id="email" tabindex="102" value="' . $row[2] . '" />
+                            <input type="text" name="email" id="email" tabindex="102" value="' . $result->email . '" />
                         </p>
                     </li>
                     <li>
                         <label for="phone">Telefono</label>
-                         <input type="text" name="phone" id="phone" tabindex="103" value="' . $row[3] . '" />
+                         <input type="text" name="phone" id="phone" tabindex="103" value="' . $result->telefono . '" />
                     </li>
                     <li>
                         <label for="data">Data di nascita</label>
-                        <input type="text" name="data" id="data" tabindex="104" value="' . ((empty($row[4])) ?: date("d/m/Y", strtotime($row[4]))) . '" />
+                        <input type="text" name="data" id="data" tabindex="104" value="' . $result->dataNascita . '" />
                     <li xml:lang="en">
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella" />
-                        <input type="hidden" name="codCliente" value="' . $cod . '" />
+                        <input type="hidden" name="codCliente" value="' . $result->codice . '" />
                         <span id="errors"></span>
                     </li>
                     <li>
@@ -84,4 +82,3 @@ if (!isset($_SESSION['username'])) {
     page_end();
 }
 ?>
-            

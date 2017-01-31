@@ -91,14 +91,6 @@ if (!isset($_SESSION['username'])) {
             } else {
                 $to_print = "<p class=\"inforesult\">L'immagine è stata modificata con successo</p>";
             }
-
-/*
-            $qry = "UPDATE Images SET Img_desc='$img_desc' WHERE Img_title='$codice'";
-            if (!mysqli_query($conn, $qry)) {
-                $to_print = "<p class=\"errorSuggestion\">Non è stato possibile inserire l'immagine nel <span lang=\"en\">database</span></p>";
-            } else {
-                $to_print = "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
-            }*/
         }
     }
     

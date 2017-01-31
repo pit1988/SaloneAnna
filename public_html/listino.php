@@ -6,22 +6,20 @@ session_start();
 
 session_regenerate_id(TRUE);
 
-$title="Salone Anna: tariffe, orari, indirizzo";
-$title_meta="Salone Anna, parrucchiere a Vicenza";
-$descr="Chi è Anna Cortivo, descrizione delle esperienze, lavori e storia.";
-$keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, Storia";
+$title="Listino prezzi Salone Anna";
+$title_meta="Listino prezziSalone Anna, parrucchiere a Vicenza";
+$descr="";
+$keywords="Listino, Prezzi, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, Storia";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
-$name="visitatore";
+$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prezzi</strong>';
 $is_admin=false;
 
 if (isset($_SESSION['username'] ) ) {
 	$is_admin=true;
-	$name = $_SESSION['username'];
 }
 
 insert_header($rif, 3, $is_admin,'');
-    content_begin();
+content_begin();
 ?>
 
 <h2 id="titolo-prezzi">Listino Prezzi</h2>
