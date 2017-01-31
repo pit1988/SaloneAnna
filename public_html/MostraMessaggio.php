@@ -23,11 +23,11 @@ if (!isset($_SESSION['username'])) {
             $to_print = '
             <div id="messaggio">
                 <ul>
-                    <li><p id="nomecognome"><em>Messaggio inviato da:</em>' . $result->nome . ' ' . $result->cognome . '</p></li>
-                    <li><p id="dataora"><em>Ricevuto: </em>' . $result->data . ' ' . $result->ora . '</p></li>
-                    <li><p id="telefono"><em>Telefono cliente: </em><a href="tel: ' . $result->telefono . '"">' . $result->telefono . '</a></p>
-                        <p id="mail"><em xml:lang="en">email:</em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
-                    <li><p id="contenuto"><em>Contentuto: </em></p><p>' . $result->contenuto . '</p></li>
+                    <li><p id="nomecognome"><em>Messaggio inviato da:  </em>' . $result->nome . ' ' . $result->cognome . '</p></li>
+                    <li><p id="dataora"><em>Ricevuto:  </em>' . $result->data . ' ' . $result->ora . '</p></li>
+                    <li><p id="telefono"><em>Telefono cliente:  </em><a href="tel: ' . $result->telefono . '"">' . $result->telefono . '</a></p>
+                        <p id="mail"><em xml:lang="en">email:  </em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
+                    <li><p id="contenuto"><em>Contenuto:</em>' . $result->contenuto . '</p></li>
                 </ul>
             </div>
                 ';

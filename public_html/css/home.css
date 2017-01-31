@@ -673,6 +673,40 @@ img {
     display: block;
 }
 
+/* Messaggio */
+
+#messaggio ul li {
+    width: 100%;
+    margin: 1em;
+    color: #31456b;
+}
+
+#nomecognome {
+    float: left;
+    width: 49%;
+}
+
+#dataora {
+    float: left;
+    width: 49%;
+}
+
+#telefono {
+    float: left;
+    width: 49%;
+}
+
+#mail {
+    float: right;
+    width: 50%;
+}
+
+#messaggio em {
+    margin: 1em;
+    font-style: italic;
+    font-size: 0.9em;
+}
+
 /* Parte Admin e form */
 
 
