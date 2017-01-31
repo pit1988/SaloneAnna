@@ -56,11 +56,14 @@ if(!$is_logged) {
 
 	echo<<<END
 <form id="contenitore-login" name="login" action="login.php" method="post">
-<p><i>Username</i></p>
-<p><input id="inputUsername" type="text" name="username" value="" tabindex="100" accesskey="u"></p>
-<p><i>Password</i></p>
-<p><input id="inputPassword" type="password" name="password" value="" tabindex="101" accesskey="p"></p>
-<p><input id="accedi" name="submit" type="submit" value="Login..." tabindex="102" accesskey="s"></p>
+	<fieldset>
+		<legend>Inserisci i dati per accedere alla parte amministratore</legend>
+		<p><i>Username</i></p>
+		<p><input id="inputUsername" type="text" name="username" value="" tabindex="100" accesskey="u"></p>
+		<p><i>Password</i></p>
+		<p><input id="inputPassword" type="password" name="password" value="" tabindex="101" accesskey="p"></p>
+		<p><input id="accedi" name="submit" type="submit" value="Login..." tabindex="102" accesskey="s"></p>
+	</fieldset>
 </form>
 END;
 }
