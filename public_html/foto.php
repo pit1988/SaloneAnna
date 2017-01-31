@@ -29,13 +29,13 @@ content_begin();
 	$qry="SELECT * FROM Images";
 	$result=mysqli_query($conn, $qry);
 	echo "<h2>Image Gallery</h2>\n";
-	echo "<dl id=\"foto\">\n<dt>Foto</dt>";
+	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
 
 	while($row=mysqli_fetch_array($result)) {
 	    echo "
-	    	<dd>
+	    	<dd id=\"foto\">
 		    	<figure>
-		    		<img src=uploads/".$row['Img_filename']." />
+		    		<p class=\"contentfigura\"><img src=uploads/".$row['Img_filename']." /></p>
 		    		<figcaption>" . $row['Img_desc'] . "</figcaption>
 		    	</figure>
 	    	</dd>

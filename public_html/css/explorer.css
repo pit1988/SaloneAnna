@@ -302,65 +302,24 @@ h2{
 
 /* Realizzazioni */
 
-#gallery{
-    width: 100%;
+#foto {
+    float: left;
+    width: 33%;
 }
 
-#content img{
-    border:0;
+.contentfigura {
+    height: 350px;
+    text-align: center;
+}
+
+#content img {
+    border: 0.3em solid;
     margin: 1em;
+    max-height: 300px;
 }
 
-#content div #container{
-    width:740px;
-}
-
-#content div #header img{
-    float:left;
-}
-
-#content div #header h2{
-    float:left;
-    margin:24px 0 0 0;
-    font-size:100%;
-}
-
-#content div #zoom{
-   padding: 1em;
-   margin:0 5px 5px 5px;
-   border:1px solid #ccc;
-}
-
-#content div #zoom h3{
-    margin:0;
-    font-size:100%;
-    color: #666;
-    text-align:center;
-}
-
-#content div #zoom img{
-    display:block;
-    margin-left: auto;
-    margin-right: auto;
-    width:400px;
-    height:400px;
-}
-
-#content div #minipics{
-    margin-right:415px      /*per Opera*/
-}
-
-#content div #minipics ul{
-    list-style-type: none;
-    margin: 0;
-    padding: 0
-}
-
-#content div #minipics li{
-    float:left;
-    margin:0 5px 5px 5px;
-    border:1px solid #ccc;
-    padding: 3px
+figcaption {
+    text-align: center;
 }
 
 
