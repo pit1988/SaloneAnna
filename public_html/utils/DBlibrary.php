@@ -555,7 +555,71 @@ function cambiaUtilizzoProdottiAppuntamento($codAppuntamento, $codProdotto, $uti
 
 /*****************************IMMAGINI***************************/
 
+class Immagine {
+	public $codice;
+	public $nome;
+	public $descrizione;
+	
+	function __construct($codice, $nome, $descrizione) {
+		$this->codice = $codice;
+		$this->nome = $nome;
+		$this->descrizione = $descrizione;
+	}
+}
 
+function listaImmagini() {
+	$result = eseguiQuery("SELECT * FROM Immagini");
+	if(!$result) {$immagini = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$immagini = array();
+		while($immagine = mysqli_fetch_assoc($result)) {
+			array_push($immagini, new Prodotto($immagine['Img_title'], $immagine['Img_desc'], $immagine['Img_filename']));
+		}
+	}
+	return $immagini; //è un array di Immagini, non viene garantito che $immagini sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function aggiungiImmagine($desc, $nameHTML) { //dovrebbe bastarmi sapere la descrizione e il nome HTML
+	if (!isset($_FILES['userfile']) || !is_uploaded_file($_FILES['userfile']['tmp_name'])) { //controllo che non siano avvenuti errori
+		return FALSE;
+	}
+	$dimensioni = $_FILES["$nameHTML"]['dim']; //le dimensioni del file
+	if($dimensioni > 500000) {return FALSE;} //valore da verificare
+	$dirTemp = $_FILES["$nameHTML"]['tmp_name']; //la directory temporanea dove si trova il file appena caricato
+	$nome = $_FILES["$nameHTML"]['name']; //il nome del file
+	if(file_exists("../uploads/$nome")) {return FALSE;} //controllo se il file esiste già
+	//DA VERIFICARE
+	$estensione = pathinfo($dirTemp.'/'.basename($nome), PATHINFO_EXTENSION); //l'estensione del file
+	if($estensione != 'jpg' && $estensione != 'jpeg' && $estensione != 'png' && $estensione != 'gif') {return FALSE;}
+	if(move_uploaded_file($userfile_tmp, "../uploads/$nome")) {
+		$result = eseguiQuery("INSERT INTO Images(Img_desc, Img_filename) VALUES ($desc, $nome)");
+		if($result) {return TRUE;}
+		return FALSE;
+	}
+	else {return FALSE;}
+}
+
+function eliminaImmagine($codice) {
+	$conn = dbconnect();
+	$nome = $conn->query("SELECT Img_filename FROM Images WHERE Img_title=$codice");
+	if($nome) {
+		$esito = unlink("../uploads/$nome"); //elimina il file, restituisce TRUE se l'operazione ha esito positivo, FALSE altrimenti
+		if($esito == TRUE) {
+			$esito = $conn->query("DELETE FROM Images WHERE Img_title=$codice");
+			if($esito) {
+				$conn->close();
+				return TRUE;
+			}
+		}
+	}
+	$conn->close();
+	return FALSE;
+}
+
+function modificaDescrizioneImmagine($codice, $descrizione) {
+	$descrizione = htmlentities($descrizione);
+	return eseguiQuery("UPDATE Images SET Img_desc=$descrizione WHERE Img_title=$codice");
+}
 
 /*******************************QUERY****************************/
 
