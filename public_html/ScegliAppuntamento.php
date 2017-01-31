@@ -27,7 +27,6 @@
       else {
           form_start("post", "ModificaAppuntamento.php");
           echo '<fieldset>';
-            // <input type=submit name="submit" value="Conferma">';
           $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
       <caption>Appuntamenti successivi alla data corrente</caption>
       <thead>
@@ -45,13 +44,23 @@
       <tbody>';
           
           foreach ($result as $appuntamento) {
-              $str_to_print.= "<tr><td>".$appuntamento->codice."</td><td>".$appuntamento->nome."</td><td>".$appuntamento->cognome."</td><td>".$appuntamento->data."</td><td>".$appuntamento->ora."</td><td>".$appuntamento->tipo."</td><td>".$appuntamento->prezzo."</td><td><input type=\"radio\" name=\"codapp\" value= \"" . $appuntamento->codice . "\"/></td></tr>";
+              $str_to_print.= "
+                <tr>
+                  <td>".$appuntamento->codice."</td>
+                  <td>".$appuntamento->nome."</td>
+                  <td>".$appuntamento->cognome."</td>
+                  <td>".$appuntamento->data."</td>
+                  <td>".$appuntamento->ora."</td>
+                  <td>".$appuntamento->tipo."</td>
+                  <td>".$appuntamento->prezzo."</td>
+                  <td><input type=\"radio\" name=\"codapp\" value= \"" . $appuntamento->codice . "\"/></td>
+                </tr>";
           }
           
           $str_to_print .= "</tbody></table>";
           echo $str_to_print;
-          echo "<input type=submit name=\"submit\" value=\"Conferma\">
-        </td>
+          echo "<input type=\"submit\" name=\"submit\" value=\"Conferma\">
+        </fieldset>
         </form>";
       }
       

@@ -33,7 +33,9 @@ else{
         echo "<p class=\"info\">Non sono presenti fotografie da modificare</p>";
     else {
         form_start("post", "ModificaFoto.php");
-        echo "<fieldset><legend>Seleziona l'immagine che vuoi modificare</legend>";
+        echo "<fieldset>
+            <legend>Seleziona l'immagine che vuoi modificare</legend>
+            ";
             $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
                 <caption class="nascosto">Tabella immagini</caption>
                 <thead>
@@ -59,12 +61,14 @@ else{
             $tb = "";
             //corpo tabella
             foreach ($result as $foto) {
-                $tb .= "<tr>
-                <td>$foto->codice</td>
-                <td>$foto->descrizione</td>
-                <td><a href=\"uploads/$foto->nome\">$foto->nome</a></td>
-                <td>".'<input type="radio" name="codImg" value= "' . $foto->codice . '" /></td>
-                </tr>';
+                $tb .= "
+                    <tr>
+                        <td>$foto->codice</td>
+                        <td>$foto->descrizione</td>
+                        <td><a href=\"uploads/$foto->nome\">$foto->nome</a></td>
+                        <td>".'<input type="radio" name="codImg" value= "' . $foto->codice . '" /></td>
+                    </tr>
+                    ';
             }
 
             $tf       = "</tbody></table>";

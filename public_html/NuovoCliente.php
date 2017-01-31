@@ -55,6 +55,8 @@ if (!isset($_SESSION['username'])) {
 
     echo '<h2>Nuovo Cliente</h2>
             <form action="NuovoCliente.php" onsubmit="return true;" method="post">
+                <fieldset>
+                <legend>Dati nuovo cliente</legend>
                 <ul>
                     <li>
                         <p>
@@ -88,6 +90,7 @@ if (!isset($_SESSION['username'])) {
                         <div class="divider"></div>
                     </li>
                 </ul>
+                </fieldset>
             </form>
 ';
     content_end();

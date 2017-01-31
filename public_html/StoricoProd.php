@@ -90,20 +90,25 @@ if (!isset($_SESSION['username'])) {
 }
 $form = '
 <p class="info">Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
+<p>
   <form method=post action="StoricoProd.php">
-  <ul>
-    <li>
-        <p>
-            <label for="first_name">Nome</label>
-            <input type="text" name="first_name" id="first_name" tabindex="100"/>
-        
-            <label for="last_name">Cognome</label>
-            <input type="text" name="last_name" id="last_name" tabindex="101" />
-        </p>
-    </li>
-    <li><p><input type=submit name=submit value="Storico Prodotti"/></p></li>
-    </ul>
+    <fieldset>
+      <legend>Ricerca prodotti</legend>
+      <ul>
+        <li>
+            <p>
+                <label for="first_name">Nome</label>
+                <input type="text" name="first_name" id="first_name" tabindex="100"/>
+            
+                <label for="last_name">Cognome</label>
+                <input type="text" name="last_name" id="last_name" tabindex="101" />
+            </p>
+        </li>
+        <li><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
+      </ul>
+    <fieldset>
   </form>
+</p>
   ';
 
 
