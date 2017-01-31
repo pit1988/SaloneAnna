@@ -60,7 +60,7 @@ content_begin();
         <tr><td headers="c1 g8" class="cintervento"> A Freddo </td><td headers="c2 g8" class="cprezzo"> da &euro; 35,00 </td></tr>
         <tr><td headers="c1 g8" class="cintervento"> A Caldo </td><td headers="c2 g8" class="cprezzo"> da &euro; 60,00 </td></tr>
         <tr><td headers="c1 g8" class="cintervento"> Curl e Relax </td><td headers="c2 g8" class="cprezzo"> &euro; 35,00 </td></tr>
-        <tr><td headers="c1 g8" class="cintervento"> Liss\&Color </td><td headers="c2 g8" class="cprezzo"> da &euro; 55,00 </td></tr>
+        <tr><td headers="c1 g8" class="cintervento"> Liss&amp;Color </td><td headers="c2 g8" class="cprezzo"> da &euro; 55,00 </td></tr>
     </tbody>
 
 </table>
