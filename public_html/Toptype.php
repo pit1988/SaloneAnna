@@ -17,35 +17,33 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 6, true);
     content_begin();
     echo "<h2>Classifica Appuntamenti</h2>";
-
-    $conn        = dbconnect();
-    $query       = "
-SELECT p.Parziali AS Quantità, CONCAT((TRUNCATE((p.Parziali/COUNT(*))*100, 2)), ' %')  AS Percentuale, NomeTipo AS 'Tipo Appuntamento' FROM Contatori p JOIN Appuntamenti a JOIN TipoAppuntamento ta on a.CodAppuntamento=ta.CodTipoAppuntamento GROUP BY a.CodTipoAppuntamento";
-    $result      = mysqli_query($conn, $query);
-    $number_cols = mysqli_num_fields($result);
-    $str_toprint = '<table id="topProd" summary="Classifica degli appuntamenti, divisi per tipo">
-    <caption class="inforesult">Classifica degli appuntamenti, divisi per tipo</caption>
-    <thead>
-        <tr>
-        ';
-            for ($i = 0; $i < $number_cols; $i++) {
-                $str_toprint .= '<th scope="col">' . (mysqli_fetch_field_direct($result, $i)->name) . "</th>\n";
-            }
-            $str_toprint .= "</tr></thead><tbody>\n";
-            while ($row = mysqli_fetch_row($result)) {
-                $str_toprint .= "<tr>\n";
-                for ($i = 0; $i < $number_cols; $i++) {
-                    $str_toprint .= "<td>";
-                    if (!isset($row[$i])) {
-                        $str_toprint .= "NULL";
-                    } else {
-                        $str_toprint .= $row[$i];
-                    }
-                    $str_toprint .= "</td>\n";
-                }
-                $str_toprint .= "</td>\n";
-            }
-    $str_toprint .= "</tbody></table>";
+    
+    $result = listaAppuntamentiPerTipo();
+    if(mysqli_num_rows($result) == 0)
+        $str_to_print = "<p class=\"inforesult\">Non sono presenti appuntamenti nel database</p>";
+    else{
+        $th          = '<table id="topProd" summary="Classifica degli appuntamenti, divisi per tipo">
+        <caption class="inforesult">Classifica degli appuntamenti, divisi per tipo</caption>
+        <thead>
+            <tr>
+                <th scope="col">Quantità</th>
+                <th scope="col">Percentuale</th>
+                <th scope="col">Tipo Appuntamento</th>
+            </tr>';
+        $tb          = "";
+        while ($row = mysqli_fetch_row($result)) {
+            $tb .= "
+                <tr>
+                    <td>" . $row[0] . "</td>
+                    <td>" . $row[1] . "</td>
+                    <td>" . $row[2] . "</td>
+                </tr>";
+        }
+        
+        
+        $tf = "</tbody></table>";
+        $str_toprint = $th . $tb . $tf;
+    }
     echo $str_toprint;
     content_end();
     page_end();

@@ -9,7 +9,6 @@
             $nome = $_POST['first_name'];
             $cognome = $_POST['last_name'];
             $contenuto = $_POST['contenuto'];
-            echo $nome.$cognome.$contenuto;
         $ris=aggiungiMessaggio($email, $nome, $cognome, $contenuto);
         if($ris)
             $msg="Messaggio inserito con successo";

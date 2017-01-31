@@ -40,7 +40,15 @@ if (!isset($_SESSION['username'])) {
             </thead>
             <tbody>';
         foreach ($result as $cliente) {
-            $str_to_print .= "<tr><td>" . $cliente->codice . "</td><td>" . $cliente->nome . "</td><td>" . $cliente->cognome . "</td><td>" . $cliente->telefono . "</a></td><td>" . $cliente->email . "</td><td>" . $cliente->dataNascita . "</td></tr>";
+            $str_to_print .= "
+              <tr>
+                <td>" . $cliente->codice . "</td>
+                <td>" . $cliente->nome . "</td>
+                <td>" . $cliente->cognome . "</td>
+                <td>" . $cliente->telefono . "</td>
+                <td>" . $cliente->email . "</td>
+                <td>" . $cliente->dataNascita . "</td>
+              </tr>";
         }
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;

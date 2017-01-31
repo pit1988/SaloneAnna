@@ -41,7 +41,15 @@ if (!isset($_SESSION['username'])) {
             </thead>
             <tbody>';
         foreach ($ris as $cliente) {
-            $str_to_print .= "<tr><td>" . $cliente->codice . "</td><td>" . $cliente->nome . "</td><td>" . $cliente->cognome . "</td><td>" . $cliente->telefono . "</a></td><td>" . $cliente->email . "</td><td>" . $cliente->dataNascita . "</td></tr>";
+            $str_to_print .= "
+            	<tr>
+            		<td>" . $cliente->codice . "</td>
+            		<td>" . $cliente->nome . "</td>
+            		<td>" . $cliente->cognome . "</td>
+            		<td>" . $cliente->telefono . "</td>
+            		<td>" . $cliente->email . "</td>
+            		<td>" . $cliente->dataNascita . "</td>
+            	</tr>";
         }
         $str_to_print .= "</tbody></table>";
         unset($cliente); //fortemente consigliato perché altrimenti l'oggetto $cliente rimane in memoria

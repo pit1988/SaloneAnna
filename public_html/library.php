@@ -25,7 +25,7 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 <link rel="stylesheet" type="text/css" href="css/print.css" media="print"\/>
 <link rel="stylesheet" type="text/css" href="css/small-devices.css" media="screen and (max-width: 650px)"\/>
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer.css"\/><![endif]-->
-<link rel="icon" href="img/logo2.png" type="image/png"\/>
+<link rel="icon" href="img/logo2.png" type="image/png" />
 <script type="text/javascript" src="script/script.js"></script>
 </head>
 ';
@@ -64,8 +64,8 @@ function page_end() {
 </div>
 <div class="testo-footer, center">
 <p class="imgW3C">
-<a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
-<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a>
+<a href="http://validator.w3.org/check?uri=referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0 Strict" height="31" width="88" \/></a>
+<a href="http://jigsaw.w3.org/css-validator/check/referer"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" \/></a>
 </p>
 </div>
 </div>
