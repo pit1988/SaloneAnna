@@ -27,7 +27,7 @@ if (!isset($_SESSION['username'])) {
     $str1 = '<form action="ConfermaNuovoAppuntamento.php" onsubmit="return true;" method="post">
              <fieldset><legend>Compila le informazioni richieste per inserire un appuntamento</legend>
                 <ul>
-                    <div class="tipoAppun">
+                    <p class="tipoAppun">
                         <li>
                             <label for="TipoAppuntamento">Tipo appuntamento:</label>
 ';
@@ -39,8 +39,8 @@ if (!isset($_SESSION['username'])) {
             $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
         }
     }
-    $str3 = '</li></div>
-                <div class="datiAppun">
+    $str3 = '</li></p>
+                <p class="datiAppun">
                     <li>
                         <p>
                             <label for="first_name">Nome</label>
@@ -63,14 +63,14 @@ if (!isset($_SESSION['username'])) {
                             <input type="text" name="orario" id="orario" tabindex="102" />
                         </p>
                     </li>
-                </div>
-                <div class="confermAppun">
+                </p>
+                <p class="confermAppun">
                     <li>
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella" />
                         <span id="errors"></span>
                     </li>
-                </div>
+                </p>
                 </ul>
             </fieldset>
             </form>
