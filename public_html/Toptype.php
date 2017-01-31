@@ -38,9 +38,9 @@ if (!isset($_SESSION['username'])) {
         foreach ($result as $row) {
             $tb .= "
                 <tr>
-                    <td>" . $row[0] . "</td>
-                    <td>" . $row[1] . "</td>
-                    <td>" . $row[2] . "</td>
+                    <td>" . $row->quantita . "</td>
+                    <td>" . $row->percentuale . "</td>
+                    <td>" . $row->nomeTipo . "</td>
                 </tr>";
         }
         
