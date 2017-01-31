@@ -373,7 +373,7 @@ caption {
 
 /* Realizzazioni */
 
-#photo {
+.photo {
     float: left;
     width: 33%;
 }

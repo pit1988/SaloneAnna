@@ -265,7 +265,7 @@ h2{
 
 /* Realizzazioni */
 
-#photo {
+.photo {
     float: left;
     width: 33%;
 }
