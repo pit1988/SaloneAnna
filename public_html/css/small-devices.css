@@ -225,6 +225,11 @@ fieldset{
     margin: 0 auto;
 }
 
+#contenitore-menu-admin {
+    width: 310px;
+    margin: 0 auto;
+}
+
 .vnav{
     background-color: #ffcdcc;
     font-weight: bold;
@@ -235,7 +240,7 @@ fieldset{
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 101%;
+    width: 100%;
     overflow: hidden;
     background-color: #C4B49D;
 
@@ -285,9 +290,7 @@ h2{
 
 .center {
     display: block;
-    margin: auto;
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 1em 2em 1em 2em;
 }
 
 #immagine{
@@ -351,7 +354,7 @@ input[type="button"], input[type="submit"]{
 #content img {
     border: 0.3em solid;
     margin-top: 2em;
-    max-width: 100%;
+    max-width: 95%;
 }
 
 figcaption {
@@ -677,7 +680,7 @@ tr:last-child {
 
 td {
   background:#FFFFFF;
-  padding:20px;
+  padding:10px;
   text-align:center;
   vertical-align:middle;
   font-weight:300;
