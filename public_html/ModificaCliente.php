@@ -37,7 +37,7 @@ if (!isset($_SESSION['username'])) {
             $row = mysqli_fetch_row($result);
             
             echo '<h2>Modifica Cliente</h2>
-            <form action="esito_modifica_cliente.php" onsubmit="return true;" method="post">
+            <form action="ConfermaModificaCliente.php" onsubmit="return true;" method="post">
                 <ul>
                     <li>
                         <p>

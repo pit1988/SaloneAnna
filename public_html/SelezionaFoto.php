@@ -18,7 +18,7 @@ else{
     $descr="Pagina per inserire fotografie all'interno del sito";
     $keywords="Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif="<strong xml:lang=&quot;en&quot;>Home</strong>";
+    $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Modifica Foto</strong>';
     $is_admin=true;
     insert_header($rif, 1, $is_admin);
     content_begin();

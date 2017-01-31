@@ -20,19 +20,19 @@ if (!isset($_SESSION['username'])) {
         $codprod   = $_POST['codprod'];
         $ris       = inserisciProdotto($nome, $marca, $tipo, $quanita, $pvendita, $rivendita);
         if ($ris)
-            $msg = "<p class=\"inforesut\">Modifica avvenuta correttamente</p>";
+            $msg = "<p class=\"inforesut\">Il prodotto è stato creato correttamente</p>";
         else
-            $msg = "<p class=\"inforesut\">Non è stato possibile modificare il prodotto selezionato</p>";
+            $msg = "<p class=\"inforesut\">Non è stato possibile creare il prodotto</p>";
         echo $msg;
     }
     
-    $title      = "Gestione Prodotti: Salone Anna";
-    $title_meta = "Gestione Prodotti: Salone Anna";
+    $title      = "Nuovo Prodotto: Salone Anna";
+    $title_meta = "Nuovo Prodotto: Salone Anna";
     $descr      = "";
-    $keywords   = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $keywords   = "Nuovo, Prodotto, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <a href="GestioneProdotti.php"> Gestione Prodotti</a> / <strong>Modifica Prodotto</strong>';
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Nuovo Prodotto</strong>';
     insert_header($rif, 4, true);
     content_begin();
     echo "<h2>Inserisci nuovo prodotto</h2>";
@@ -85,7 +85,6 @@ if (!isset($_SESSION['username'])) {
         </fieldset>
         </form>
 
-        // hyperlink("Modifica altri prodotti", "GestioneProdotti.php");
         // hyperlink("Torna alla home", "index.php");
     ';
     if (isset($msg))

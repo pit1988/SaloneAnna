@@ -27,7 +27,7 @@
     hyperlink("Maggior numero di prodotti Usati", "ProdottiMax.php");
     // hyperlink("Modifica Prodotti", "ScegliProdotto.php");
     hyperlink("Elimina Prodotti", "EliminaProdotti.php");
-    hyperlink("Inserisci un nuovo prodotto", "InserisciProdotto.php");
+    hyperlink("Inserisci un nuovo prodotto", "NuovoProdotto.php");
     hyperlink("Storico Prodotti","StoricoProd.php");
     hyperlink("Inventario","Inventario.php");
 

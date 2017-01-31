@@ -27,8 +27,8 @@ if (!isset($_SESSION['username'])) {
         
         $result   = mostraCliente($cod);
         // nessun risultato
-        $num_rows = mysqli_num_rows($result);
-        if(is_null($result))
+        $num_rows = count($result);
+        if($num_rows==0)
             $err= "<p class=\"inforesult\">Non è presente il cliente richiesto</p>";
         else {
             $nome = $_POST['first_name'];

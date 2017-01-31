@@ -39,10 +39,10 @@ if (!isset($_SESSION['username'])) {
             }
         }
     }
-    $title = "Inserimento nuovo cliente: Salone Anna";
-    $title_meta = "Inserimento nuovo cliente: Salone Anna";
+    $title = "Nuovo cliente: Salone Anna";
+    $title_meta = "Nuovo cliente: Salone Anna";
     $descr = "";
-    $keywords = "Inserimento, Clienti, Nuovo, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $keywords = "Nuovo, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Nuovo Cliente</strong>';

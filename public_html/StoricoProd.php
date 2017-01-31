@@ -113,7 +113,7 @@ $descr      = "";
 $keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Storico Prodotti</strong>';
+$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a>  / <strong>Storico Prodotti</strong>';
 insert_header($rif, 4, true);
 content_begin();
 echo "<h2>Storico prodotto</h2>";

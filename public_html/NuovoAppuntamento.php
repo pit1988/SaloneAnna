@@ -24,7 +24,7 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Nuovo Appuntamento</h2>";
 
     //aggiungere tabindex;
-    $str1 = '<form action="conferma_appuntamento.php" onsubmit="return true;" method="post">
+    $str1 = '<form action="ConfermaNuovoAppuntamento.php" onsubmit="return true;" method="post">
              <fieldset><legend>Compila le informazioni richieste per inserire un appuntamento</legend>
                 <ul>
                     <div class="tipoAppun">

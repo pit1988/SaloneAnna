@@ -8,13 +8,13 @@ if (!isset($_SESSION['username'])) {
     exit;
 } else {
     require 'library.php';
-    $title = "Prodotti Max: Salone Anna";
-    $title_meta = "Prodotti Max: Salone Anna";
+    $title = "Prodotti in esaurimento: Salone Anna";
+    $title_meta = "Prodotti in esaurimento: Salone Anna";
     $descr = "";
     $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Prodotti Max</strong>';
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Prodotti in esaurimento</strong>';
     insert_header($rif, 4, true);
     content_begin();
     
