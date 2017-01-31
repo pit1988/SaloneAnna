@@ -59,8 +59,8 @@ if (!isset($_SESSION['username'])) {
                 <td>".$prodotto->codice."</td>
                 <td>".$prodotto->nome."</td>
                 <td>".$prodotto->marca."</td>
-                <td>".$prodotto->tipo."</a></td>
-                <td>".$prodotto->quantita."</a></td>
+                <td>".$prodotto->tipo."</td>
+                <td>".$prodotto->quantita."</td>
             </tr>";
         
         $tf = "</tbody></table>";
