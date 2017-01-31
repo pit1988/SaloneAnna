@@ -47,7 +47,7 @@ content_begin();
         }
 	echo "</dl>";
     }
-    else echo 
+    echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
 
 
 	
