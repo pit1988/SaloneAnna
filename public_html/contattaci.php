@@ -29,19 +29,20 @@
     $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
     insert_header($rif, 4, false);
     content_begin();
-?>
+    $pg_start='
 
         <div class="titolo_contattaci">
             <h2>Contattaci</h2>
             <h3>Qualsiasi informazione in modo semplice</h3>
         </div>
         <div class="body_contattaci">
-<?php
+        ';
+    echo $pg_start;
     if(isset($msg))
         echo "<p>".$msg."</p>";
     if(isset($err))
         echo "<p>".$err."</p>";
-?>
+    $to_print='
             <noscript><p>Compila tutti i campi dati; inserisci un indirizzo <span xml:lang="en">e-mail</span> valido</p></noscript>
             <form action="contattaci.php" onsubmit="return validazioneformcontattaci();" method="post">
                 <ul>
@@ -96,7 +97,8 @@
                 <a href="https://www.google.it/maps/place/Parrucchiera+Anna+Cortivo/@45.496225,11.4236863,17z/data=!3m1!4b1!4m5!3m4!1s0x477f379bcb0739f5:0x5a67551b2fe8938a!8m2!3d45.496225!4d11.425875?hl=it" tabindex="105"><img id="fotoMappa" src="img/mappa.png" alt="Mappa della sede di Salone Anna" /></a>
             </div>
         </div>
-<?php
+        ';
+    echo $to_print;
     content_end();
     page_end();
 ?>
