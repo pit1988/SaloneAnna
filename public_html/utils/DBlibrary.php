@@ -20,7 +20,7 @@ function dbconnect() {
 	$db = "pgabelli";
 	/*$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";
+	$db = "agrenden";*/
 	/*$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
@@ -743,7 +743,27 @@ function elencoClientiCompleanni() {
 	return $clienti; //è un array di Clienti, non viene garantito che $clienti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
+class StatisticaTipoAppuntamento {
+	public $quantita;
+	public $percentuale;
+	public $nomeTipo;
+	
+	function __construct($quantita, $percentuale, $nomeTipo) {
+		$this->quantita = $quantita;
+		$this->percentuale = $percentuale;
+		$this->nomeTipo = $nomeTipo;
+	}
+}
+
 function listaAppuntamentiPerTipo() {
-	return eseguiQuery("SELECT p.Parziali AS Quantità, CONCAT((TRUNCATE((p.Parziali/COUNT(*))*100, 2)), ' %')  AS Percentuale, NomeTipo AS 'Tipo Appuntamento' FROM Contatori p JOIN Appuntamenti a JOIN TipoAppuntamento ta on a.CodAppuntamento=ta.CodTipoAppuntamento GROUP BY a.CodTipoAppuntamento");
+	$result = eseguiQuery("SELECT p.Parziali AS Quantità, CONCAT((TRUNCATE((p.Parziali/(SELECT SUM(Parziali) FROM Contatori))*100, 2)), ' %')  AS Percentuale, NomeTipo AS 'Tipo Appuntamento' FROM Contatori p JOIN TipoAppuntamento ta on p.Tipo =ta.CodTipoAppuntamento GROUP BY p.Tipo");
+	if(!$result) {$tipi = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$tipi = array();
+		while($tipo = mysqli_fetch_assoc($result)) {
+			array_push($tipi, new StatisticaTipoAppuntamento($tipo['Quantità'], $tipo['Percentuale'], $tipo['Tipo Appuntamento']));
+		}
+	}
+	return $tipi; //è un array di StatisticaTipoAppuntamento, non viene garantito che $tipi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 ?>
