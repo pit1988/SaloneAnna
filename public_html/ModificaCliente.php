@@ -21,7 +21,7 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 5, true);
     content_begin();
     if (!isset($_POST['submit']) OR !isset($_POST['codCliente'])) {
-        $err = "Errore di connessione";
+        $err = "<p class=\"errorSuggestion\">Errore di connessione</p>";
     } else {
         
         $conn = dbconnect();
@@ -32,12 +32,13 @@ if (!isset($_SESSION['username'])) {
         $result   = mysqli_query($conn, $query);
  
         if (!$result)
-            $err = "<p>Non è presente il cliente selezionato</p>";
+            $err = "<p class=\"info\">Non è presente il cliente selezionato</p>";
         else {
             $row = mysqli_fetch_row($result);
             
             echo '<h2>Modifica Cliente</h2>
             <form action="ConfermaModificaCliente.php" onsubmit="return true;" method="post">
+            <fieldset><legend>Modifica le informazioni per cambiare le informazioni del cliente</legend>
                 <ul>
                     <li>
                         <p>
@@ -69,9 +70,10 @@ if (!isset($_SESSION['username'])) {
                         <span id="errors"></span>
                     </li>
                     <li>
-                        <div class="divider"></div>
+                        <p class="divider"></p>
                     </li>
                 </ul>
+            </fieldset>
             </form>
 ';
         }
