@@ -9,7 +9,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 } else {
     require 'library.php';
-    $title = "Compleanni: Salone Anna";
+    $title      = "Compleanni: Salone Anna";
     $title_meta = "Compleanni: Salone Anna";
     $descr      = "";
     $keywords   = "Compleanni, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
@@ -19,14 +19,14 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 5, true);
     content_begin();
     echo "<h2>Compleanni questo mese</h2>";
-
+    
     include("utils/DBlibrary.php");
     
-    $result = elencoClientiCompleanni();
-    $num_rows=count($result);
-    $tb = "";
-    if($result){
-      $tb='<table id="clientiTab" summary="Elenco clienti">
+    $result   = elencoClientiCompleanni();
+    $num_rows = count($result);
+    $tb       = "";
+    if ($result) {
+        $tb = '<table id="clientiTab" summary="Elenco clienti">
             <caption class="nascosto">Elenco clienti</caption>
             <thead>
                 <tr>
@@ -39,14 +39,13 @@ if (!isset($_SESSION['username'])) {
                 </tr>
             </thead>
             <tbody>';
-    foreach ($result as $cliente) {
-        $str_to_print.= "<tr><td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td></tr>";
-    }
+        foreach ($result as $cliente) {
+            $str_to_print .= "<tr><td>" . $cliente->codice . "</td><td>" . $cliente->nome . "</td><td>" . $cliente->cognome . "</td><td>" . $cliente->telefono . "</a></td><td>" . $cliente->email . "</td><td>" . $cliente->dataNascita . "</td></tr>";
+        }
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
-    }
-    else 
-      $str_to_print="<p class=\"inforesult\">Non sono presenti clienti che compiono gli anni nei prossimi 31 giorni</p>";
+    } else
+        $str_to_print = "<p class=\"inforesult\">Non sono presenti clienti che compiono gli anni nei prossimi 31 giorni</p>";
     echo $str_to_print;
     if (isset($err))
         echo $err;
