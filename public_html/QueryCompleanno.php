@@ -21,66 +21,33 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Compleanni questo mese</h2>";
 
     include("utils/DBlibrary.php");
-    $conn = dbconnect();
     
-    $query  = "SELECT c.CodCliente, c.Nome, c.Cognome, c.DataNascita FROM Clienti c WHERE DataNascita BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY))";
-    $result = mysqli_query($conn, $query);
-    
-    $num_rows = mysqli_num_rows($result);
-    if (!$num_rows)
-        $err = "<p class=\"inforesult\">Non ci sono compleanni previsti per i prossimi 31 giorni</p>";
-    else {
-        $number_cols = mysqli_num_fields($result);
-        
-        echo "<p class=\"info\">I compleanni questo mese sono:</b>";
-        
-        $th = '<table class="storicoApp" summary="Storico Appuntamenti cliente">
-              <caption class=\"inforesult\">Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
-              <thead>
-                  <tr>
-                      <th scope="col">Codice Cliente</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Cognome</th>
-                      <th scope="col">Utilizzo</th>
-                      <th scope="col">Data di Nascita</th>
-                  </tr>
-              </thead>
-
-              <tfoot>
-                  <tr>
-                      <th scope="col">Codice Cliente</th>
-                      <th scope="col">Nome</th>
-                      <th scope="col">Cognome</th>
-                      <th scope="col">Utilizzo</th>
-                      <th scope="col">Data di Nascita</th>
-              </tfoot>
-
-              <tbody>
-              ';
-        //corpo tabella
-        $tb = "";
-        
-        $tb = "";
-        
-        //corpo tabella
-        while ($row = mysqli_fetch_row($result)) {
-            $tb .= "<tr align=left>\n";
-            
-            for ($i = 0; $i < $number_cols; $i++) {
-                $tb .= "<td>";
-                if (!isset($row[$i])) {
-                    $tb .= "NULL";
-                } else {
-                    $tb .= $row[$i];
-                }
-                $tb .= "</td>\n";
-            }
-            $tb .= "</td>\n";
-        }
-        
+    $result = elencoClientiCompleanni();
+    $num_rows=count($result);
+    $tb = "";
+    if($result){
+      $tb='<table id="clientiTab" summary="Elenco clienti">
+            <caption class="nascosto">Elenco clienti</caption>
+            <thead>
+                <tr>
+                  <th scope="col">Codice</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Cognome</th>
+                    <th scope="col">Telefono</th>
+                    <th scope="col" xml:lang="en">E-mail</th>
+                    <th scope="col">Data nascita</th>
+                </tr>
+            </thead>
+            <tbody>';
+    foreach ($result as $cliente) {
+        $str_to_print.= "<tr><td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td></tr>";
+    }
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
     }
+    else 
+      $str_to_print="<p class=\"inforesult\">Non sono presenti clienti che compiono gli anni nei prossimi 31 giorni</p>";
+    echo $str_to_print;
     if (isset($err))
         echo $err;
     content_end();

@@ -8,6 +8,7 @@ if (!isset($_SESSION['username'])) {
     exit;
 } else {
     require 'library.php';
+    include("utils/DBlibrary.php");
     $title = "Prodotti in esaurimento: Salone Anna";
     $title_meta = "Prodotti in esaurimento: Salone Anna";
     $descr = "";
@@ -18,25 +19,14 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 4, true);
     content_begin();
     
+    $result = prodottiInEsaurimento();
     
-    
-    include("utils/DBlibrary.php");
-    $conn = dbconnect();
-    
-    $query  = "
-      SELECT CodProdotto, Nome, Marca, Tipo, Quantita
-  FROM Prodotti
-  WHERE quantita<6 AND quantita!=0;";
-    $result = mysqli_query($conn, $query);
-    
-    
-    $number_cols = mysqli_num_fields($result);
+    $num_rows = count($result);
 
     echo "<h2>Prodotti in esaurimento</h2>";
     echo "<em class=\"info\">I prodotti in esaurimento sono:</em>";
     
-    $num_rows = mysqli_num_rows($result);
-    if (!$num_rows)
+    if ($num_rows==0)
         echo "<p class=\"inforesult\">Non ci sono prodotti da mostrare</p>";
     else {
         $th = '<table id="ProdottiMagazzino" summary="Prodotti in esaurimento">
@@ -64,20 +54,14 @@ if (!isset($_SESSION['username'])) {
             ';
         $tb = "";
         //corpo tabella
-        while ($row = mysqli_fetch_row($result)) {
-            
-            $tb .= "<tr>\n";
-            for ($i = 0; $i < $number_cols; $i++) {
-                $tb .= "<td>";
-                if (!isset($row[$i]))
-                    $tb .= " ";
-                else {
-                    $tb .= $row[$i];
-                }
-                $tb .= "</td>\n";
-            }
-            $tb .= "</tr>\n";
-        }
+        foreach ($result as $prodotto)
+            $tb.="<tr>
+                <td>".$prodotto->codice."</td>
+                <td>".$prodotto->nome."</td>
+                <td>".$prodotto->marca."</td>
+                <td>".$prodotto->tipo."</a></td>
+                <td>".$prodotto->quantita."</a></td>
+            </tr>";
         
         $tf = "</tbody></table>";
         $to_print = $th . $tb . $tf;

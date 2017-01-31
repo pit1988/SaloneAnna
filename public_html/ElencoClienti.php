@@ -25,6 +25,10 @@ else
 	echo "<h2>Elenco Clienti</h2>";
 
 	$ris=listaClienti();
+
+	$num_rows=count($ris);
+
+
 	if($ris){
 		$str_to_print='<table id="clientiTab" summary="Elenco clienti">
             <caption class="nascosto">Elenco clienti</caption>
