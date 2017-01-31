@@ -150,7 +150,7 @@ function content_begin() {
 <div id="content">
 <p class="nascosto">
     <a title="saltare-contenuto-testuale" href="#footer" tabindex="30" accesskey="b">Salta il contenuto testuale</a>
-</p>
+</p>\n
 END;
 };
 
@@ -201,8 +201,8 @@ function table_end() {
 
 /*funzione per la generazione di form*/
     function form_start($type, $dest){
-      echo"<form method='$type' action='$dest' border='0'>";
-      echo"<fieldset style='border:none'>";
+      echo"<form method='$type' action='$dest'>";
+      echo"<fieldset>";
     };
     
    //funzione per la chiusura d'una form 

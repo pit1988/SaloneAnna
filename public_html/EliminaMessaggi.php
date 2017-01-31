@@ -45,8 +45,11 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Gestione Messaggi</h2>";
     $ris = listamessaggi();
     if ($ris) {
-        $str_to_print = '<form action="EliminaMessaggi.php" method="post"><table id="messaggi" summary="Messaggi">
-            <fieldset><legend>Seleziona un messaggio da eliminare</legend>
+        $str_to_print = '
+    <form action="EliminaMessaggi.php" method="post">
+        <fieldset>
+        <legend>Seleziona un messaggio da eliminare</legend>
+            <table id="messaggi" summary="Messaggi">
             <caption>Tabella messaggi</caption>
             <thead>
                 <tr>
@@ -63,10 +66,22 @@ if (!isset($_SESSION['username'])) {
             if ($messaggio->daLeggere == true)
                 $str_to_print .= "
 				<tr>
-					<td><strong>" . $messaggio->nome . "</strong></td><td><strong>" . $messaggio->cognome . "</strong></td><td><strong><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></strong></td><td>" . $messaggio->data . "</td><td>" . $messaggio->ora . "</td><td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"\/></td>
+					<td><strong>" . $messaggio->nome . "</strong></td><td><strong>" . $messaggio->cognome . "</strong></td>
+                    <td><strong><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></strong></td>
+                    <td>" . $messaggio->data . "</td>
+                    <td>" . $messaggio->ora . "</td>
+                    <td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"\/></td>
 				</tr>";
             else
-                $str_to_print .= "<tr><td>" . $messaggio->nome . "</td><td>" . $messaggio->cognome . "</td><td><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></td><td>" . $messaggio->data . "</td><td>" . $messaggio->ora . "</td><td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"\/></td></tr>";
+                $str_to_print .= "
+                <tr>
+                    <td>" . $messaggio->nome . "</td>
+                    <td>" . $messaggio->cognome . "</td>
+                    <td><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></td>
+                    <td>" . $messaggio->data . "</td>
+                    <td>" . $messaggio->ora . "</td>
+                    <td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"\/></td>
+                </tr>";
         }
         $str_to_print .= "</tbody></table>
 		<input type='submit' name='submit' value='Procedi'>

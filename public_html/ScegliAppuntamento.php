@@ -20,7 +20,7 @@
       $result = listaAppuntamenti();
       
       
-      echo "<b><h2>Lista degli appuntamenti da oggi in poi</h2></b>";
+      echo "<h2>Lista degli appuntamenti da oggi in poi</h2>";
       
       if (!$result)
           echo "<p>Non ci sono appuntamenti da mostrare</p>";
@@ -31,21 +31,21 @@
           $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
       <caption>Appuntamenti successivi alla data corrente</caption>
       <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Nome</th>
-        <th scope="col">Cognome</th>
-        <th scope="col">Data</th>
-        <th scope="col">Ora</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Prezzo</th>
-        <th scope="col">Seleziona</th>
-      </tr></thead></tbody>';
+        <tr>
+          <th scope="col">Id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Cognome</th>
+          <th scope="col">Data</th>
+          <th scope="col">Ora</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Prezzo</th>
+          <th scope="col">Seleziona</th>
+        </tr>
+      </thead>
+      <tbody>';
           
           foreach ($result as $appuntamento) {
-              $str_to_print .= "<tr>\n";
               $str_to_print.= "<tr><td>".$appuntamento->codice."</td><td>".$appuntamento->nome."</td><td>".$appuntamento->cognome."</td><td>".$appuntamento->data."</td><td>".$appuntamento->ora."</td><td>".$appuntamento->tipo."</td><td>".$appuntamento->prezzo."</td><td><input type=\"radio\" name=\"codapp\" value= \"" . $appuntamento->codice . "\"/></td></tr>";
-              $str_to_print .= "</tr>\n";
           }
           
           $str_to_print .= "</tbody></table>";

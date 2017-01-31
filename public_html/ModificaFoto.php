@@ -26,7 +26,6 @@ if (!isset($_SESSION['username'])) {
     
     if (isset($_POST['submit']) && isset($_POST['codImg'])) {
         $codice = $_POST['codImg'];
-        echo $codice;
         
         $result   = mostraImmagine($codice);
         

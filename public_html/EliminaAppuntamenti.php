@@ -51,30 +51,45 @@ if (!isset($_SESSION['username'])) {
         echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>";
     else {
         form_start("post", "EliminaAppuntamenti.php");
-        echo '<fieldset><legend>Seleziona gli appuntamenti che vuoi eliminare</legend>';
-        $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
-	<caption>Appuntamenti successivi alla data corrente</caption>
-	<thead>
-	<tr>
-	<th scope="col">Id</th>
-	<th scope="col">Nome</th>
-	<th scope="col">Cognome</th>
-	<th scope="col">Data</th>
-	<th scope="col">Ora</th>
-	<th scope="col">Tipo</th>
-	<th scope="col">Prezzo</th>
-	<th scope="col">Seleziona</th>
-	</tr></thead></tbody>';
+        echo '<fieldset>
+            <legend>Seleziona gli appuntamenti che vuoi eliminare</legend>';
+        $str_to_print = '
+            <table id="topProd" summary="Appuntamenti successivi alla data corrente">
+            	<caption>Appuntamenti successivi alla data corrente</caption>
+            	<thead>
+                	<tr>
+                	<th scope="col">Id</th>
+                	<th scope="col">Nome</th>
+                	<th scope="col">Cognome</th>
+                	<th scope="col">Data</th>
+                	<th scope="col">Ora</th>
+                	<th scope="col">Tipo</th>
+                	<th scope="col">Prezzo</th>
+                	<th scope="col">Seleziona</th>
+                	</tr>
+                </thead>
+                <tbody>
+                ';
         
         foreach ($result as $appuntamento) {
-            $str_to_print .= "<tr>\n";
-            $str_to_print .= "<tr><td>" . $appuntamento->codice . "</td><td>" . $appuntamento->nome . "</td><td>" . $appuntamento->cognome . "</td><td>" . $appuntamento->data . "</td><td>" . $appuntamento->ora . "</td><td>" . $appuntamento->tipo . "</td><td>" . $appuntamento->prezzo . "</td><td><input type=\"checkbox\" name=\"codApp[]\" value= \"" . $appuntamento->codice . "\"/></td></tr>";
-            $str_to_print .= "</tr>\n";
+            $str_to_print .= "
+            <tr>
+                <td>" . $appuntamento->codice . "</td>
+                <td>" . $appuntamento->nome . "</td>
+                <td>" . $appuntamento->cognome . "</td>
+                <td>" . $appuntamento->data . "</td>
+                <td>" . $appuntamento->ora . "</td>
+                <td>" . $appuntamento->tipo . "</td>
+                <td>" . $appuntamento->prezzo . "</td>
+                <td><input type=\"checkbox\" name=\"codApp[]\" value= \"" . $appuntamento->codice . "\" /></td>
+            </tr>
+            ";
         }
         
         $str_to_print .= "</tbody></table>";
         $str_to_print .= "<input type=submit name=\"submit\" value=\"Conferma\">
-	</td>
+    	</td>
+        </fieldset>
 	</form>";
     }
     if (isset($msg))
