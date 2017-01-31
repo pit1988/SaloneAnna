@@ -11,30 +11,25 @@ if (!isset($_SESSION['username'])) {
     require 'library.php';
     include 'utils/DBlibrary.php';
     if (!$_GET["codmsg"]) {
-        $err = "Non è stato selezionato alcun messaggio, torna a <a href=\"Messaggi.php\" e riprova";
+        $err = "<p class=\"errorSuggestion\">Non è stato selezionato alcun messaggio, torna a <a href=\"Messaggi.php\" e riprova</p>";
     } else {
         $cmsg = $_GET["codmsg"];
         
         $result = mostraMessaggio($cmsg);
         
         if (is_null($result)) {
-            echo "<p>Non è presente il messaggio richiesto</p>";
+            echo "<p class=\"info\">Non è presente il messaggio richiesto</p>";
         } else {
-            /*$to_print = '
-                <ul>
-                    <li><p><em>Messaggio inviato da:</em>' . $result->nome . ' ' . $result->cognome . '</p></li>
-                    <li><p><em>Ricevuto: </em>' . $result->data . ' ' . $result->ora . '</p></li>
-                    <li><p><em>Telefono cliente: </em><a href="tel: ' . $result->telefono . '"">' . $result->telefono . '</a> ; <em xml:lang="en">email:</em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
-                    <li><p><em>Contentuto: </em></p><p>' . $result->contenuto . '</p></li>
-                </ul>
-                ';*/
             $to_print = '
+            <div id="messaggio">
                 <ul>
-                    <li><p><em>Messaggio inviato da:</em>' . $result->nome . ' ' . $result->cognome . '</p></li>
-                    <li><p><em>Ricevuto: </em>' . $result->data . ' ' . $result->ora . '</p></li>
-                    <li><p><em xml:lang="en">email:</em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
-                    <li><p><em>Contentuto: </em></p><p>' . $result->contenuto . '</p></li>
+                    <li><p id="nomecognome"><em>Messaggio inviato da:</em>' . $result->nome . ' ' . $result->cognome . '</p></li>
+                    <li><p id="dataora"><em>Ricevuto: </em>' . $result->data . ' ' . $result->ora . '</p></li>
+                    <li><p id="telefono"><em>Telefono cliente: </em><a href="tel: ' . $result->telefono . '"">' . $result->telefono . '</a></p>
+                        <p id="mail"><em xml:lang="en">email:</em> <a href="mailto:' . $result->email . '"">' . $result->email . '</a></p></li>
+                    <li><p id="contenuto"><em>Contentuto: </em></p><p>' . $result->contenuto . '</p></li>
                 </ul>
+            </div>
                 ';
         }
     }
