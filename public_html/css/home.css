@@ -305,13 +305,13 @@ h2{
    text-transform:uppercase;
 }
 
-#thprima{
+.thprima{
   border-top-left-radius:3px;
   font-size:1.4em;
 
 }
 
-#thseconda{
+.thseconda{
   border-top-right-radius:3px;
   border-right:none;
   font-size:1.4em;
