@@ -438,6 +438,28 @@ function mostraAppuntamento($codice) {
 	}
 }
 
+function listaAppuntamentiCliente($codCliente) {
+	$result = eseguiQuery("SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
+	FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente
+	WHERE Appuntamenti.CodCliente='$codCliente'
+	ORDER BY DataOra DESC");
+	if(!$result) {$appuntamenti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$appuntamenti = array();
+		while($appuntamento = mysqli_fetch_assoc($result)) {
+			if($appuntamento['DataOra'] !== NULL) {
+				$time = strtotime($appuntamento['DataOra']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+				$ora = date("H:i", $time); //formato del tipo 23:46
+			}
+			else {$data = NULL; $ora = NULL;}
+			$prezzo = round($appuntamento['Costo'] * ((100-$appuntamento['Sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
+			array_push($appuntamenti, new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']));
+		}
+	}
+	return $appuntamenti; //è un array di Appuntamenti, non viene garantito che $appuntamenti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
 /**********************TIPO PRODOTTI*********************/
 
 class Prodotto {
@@ -523,6 +545,21 @@ class ProdottoAppuntamento {
 		$this->tipo = $tipo;
 		$this->utilizzo = $utilizzo;
 	}
+}
+
+function listaTotaleProdottiAppuntamento($codAppuntamento) {
+	$result = eseguiQuery("
+		SELECT Prodotti.CodProdotto as CodProdotto, Nome, Marca, Tipo, coalesce(Utilizzo,0) as Utilizzo, $codAppuntamento as CodAppuntamento
+		FROM Prodotti LEFT JOIN (select * from ProdApp pa WHERE pa.CodAppuntamento=$codAppuntamento) AS pa 
+		ON Prodotti.CodProdotto=pa.CodProdotto");
+	if(!$result) {$prodottiApp = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$prodottiApp = array();
+		while($prodottoApp = mysqli_fetch_assoc($result)) {
+			array_push($prodottiApp, new ProdottoAppuntamento($prodottoApp['CodProdotto'], $prodottoApp['CodAppuntamento'], $prodottoApp['Nome'], $prodottoApp['Marca'], $prodottoApp['Tipo'], $prodottoApp['Utilizzo']));
+		}
+	}
+	return $prodottiApp; //è un array di ProdottoAppuntamento, non viene garantito che $prodottiApp sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
 function listaProdottiAppuntamento($codAppuntamento) {
