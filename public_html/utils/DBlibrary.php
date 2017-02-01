@@ -15,12 +15,12 @@ function authenticate() {
 function dbconnect() {
 	$host = "localhost";
 
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";
-	/*$user = "agrenden";
+	$db = "pgabelli";*/
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";*/
+	$db = "agrenden";
 	/*$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
@@ -870,7 +870,7 @@ class ProdottoAppuntamentoDatato extends ProdottoAppuntamento {
 }
 
 function listaProdottiAppuntamentoDatato($codCliente) {
-	$prodottiAppDat = eseguiQuery("SELECT p.CodProdotto as CodProdotto, Nome, Marca, Tipo, coalesce(Utilizzo,0) as Utilizzo, pa.CodAppuntamento AS CodAppuntamento, DataOra
+	$result = eseguiQuery("SELECT p.CodProdotto as CodProdotto, Nome, Marca, Tipo, coalesce(Utilizzo,0) as Utilizzo, pa.CodAppuntamento AS CodAppuntamento, DataOra
 	FROM Prodotti p JOIN ProdApp pa ON p.CodProdotto=pa.CodProdotto JOIN Appuntamenti a ON a.CodAppuntamento=pa.CodAppuntamento
 	WHERE CodCliente = '$codCliente'");
 	if(!$result) {$prodottiAppDat = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
