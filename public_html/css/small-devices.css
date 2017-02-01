@@ -573,7 +573,7 @@ td:before {
 }
 
 /* Seleziona prodotto da eliminare diverso */
-#ProdottiMagazzino td:last-child {
+#ProdottiMagazzino td:last-child, #clientiTab td:last-child {
     color: #ffffff;
     background: #4e4b3b;
     vertical-align:center;

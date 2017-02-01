@@ -23,18 +23,18 @@ if (!isset($_SESSION['username'])) {
             $telefono = $_POST['phone'];
             $date=$_POST['data'];
             if(strlen($nome)==0 OR strlen($cognome)==0) // OR strlen($email)==0 OR strlen($telefono)==0 OR strlen($date)==0)
-                $err= "Almeno uno dei parametri non è stato inserito correttamente";
+                $err= "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else{
                 $result = checkCliente($nome, $cognome, $telefono, $email, $date);
                 if(is_null($result) OR count($result)==0){
                     $ris = aggiungiCliente($nome, $cognome, $telefono, $email, $date);
                     if (!$ris) {
-                        $err= "<p>Non è stato possibile inserire il nuovo cliente</p>";
+                        $err= "<p class=\"errorSuggestion\">Non è stato possibile inserire il nuovo cliente</p>";
                     } else
-                        $esito= "<p>Operazione eseguita con successo</p>";
+                        $esito= "<p class=\"inforesult\">Operazione eseguita con successo</p>";
                 }
                 else{ //uno o più
-                    $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
+                    $err= "<p class=\"errorSuggestion\">Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
                 }
                 unset($result);
             }
