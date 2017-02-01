@@ -29,8 +29,8 @@ if (!isset($_SESSION['username'])) {
         if (!$result)
             echo "<p>Non ci sono appuntamenti da mostrare</p>";
         else {
-            form_start("post", "SelezionaProdottiAppuntamento.php");
-            echo '<fieldset>';
+            echo '<form method="post" action="SelezionaProdottiAppuntamento.php">
+            <fieldset>';
             $str_to_print = '<table id="tabApp" summary="Appuntamenti successivi alla data corrente">
         <caption>Appuntamenti successivi alla data corrente</caption>
         <thead>
@@ -63,7 +63,7 @@ if (!isset($_SESSION['username'])) {
             
             $str_to_print .= "</tbody></table>";
             echo $str_to_print;
-            echo "<input type=\"submit\" name=\"submit\" value=\"Conferma\">
+            echo "<input type=\"submit\" name=\"submit\" value=\"Conferma\"/>
           </fieldset>
           </form>";
         }

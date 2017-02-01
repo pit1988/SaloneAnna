@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
                     echo "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
                 }
                 $th = '
-                  <form method=post action="SelezionaAppuntamentoCliente.php">
+                  <form method="post" action="SelezionaAppuntamentoCliente.php">
                   <fieldset>
                   <legend>Seleziona il cliente dalla lista</legend>
                   <table id="ProdottiMagazzino" summary="Elenco clienti">
@@ -70,10 +70,10 @@ if (!isset($_SESSION['username'])) {
                       <tr>
                           <td>" . $cliente->codice . "</td><td>" . $cliente->nome . "</td>
                           <td>" . $cliente->cognome . "</td>
-                          <td>" . $cliente->telefono . "</a></td>
+                          <td>" . $cliente->telefono . "</td>
                           <td>" . $cliente->email . "</td>
                           <td>" . $cliente->dataNascita . "</td>
-                          <td><input type='radio' name='CodCliente' value=$cliente->codice></td>
+                          <td><input type='radio' name='CodCliente' value='$cliente->codice'/></td>
                       </tr>
                       ";
                 }
@@ -81,8 +81,8 @@ if (!isset($_SESSION['username'])) {
                 $to_print = $th . $tb . $tf;
                 echo $to_print;
                 
-                echo "<input type='submit' name='submit' value='Procedi'>";
-                echo "<input type='reset' value='Cancella'>";
+                echo "<input type='submit' name='submit' value='Procedi' />";
+                echo "<input type='reset' value='Cancella' />";
                 echo "</fieldset>";
                 echo "</form>";
                 unset($result);
@@ -91,8 +91,8 @@ if (!isset($_SESSION['username'])) {
     } //è stato fatto il controllo.
     $form = '
       <p class="info">Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
-      <p>
-        <form method=post action="ProdottiClienteAppuntamento.php">
+      
+        <form method="post" action="ProdottiClienteAppuntamento.php">
           <fieldset>
             <legend>Ricerca prodotti</legend>
             <ul>
@@ -107,9 +107,8 @@ if (!isset($_SESSION['username'])) {
               </li>
               <li><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
             </ul>
-          <fieldset>
+          </fieldset>
         </form>
-      </p>
         ';
     if (!$trovati)
         echo $form;

@@ -98,7 +98,7 @@ else {
                     echo "<p>Non ci sono entry nella tabella Prodotti</p>";
                 else {
                     $th = '
-                    <form method="POST" action="SelezionaProdottiAppuntamento.php">
+                    <form method="post" action="SelezionaProdottiAppuntamento.php">
                     <fieldset>
                     <table id="ProdottiMagazzino" summary="Prodotti in magazzino">
                         <caption class="nascosto">Elenco prodotti utilizzabili</caption>
@@ -131,15 +131,17 @@ else {
                                 <td>".$prodotto->codProdotto."</td>
                                 <td>".$prodotto->nome."</td>
                                 <td>".$prodotto->marca."</td>
-                                <td>".$prodotto->tipo."</a></td>
-                                <td><input type=\"text\" name=\"qtprod[]\" value=\"$prodotto->utilizzo\" /></td>
-                                <input type=\"hidden\" name=\"codprod[]\" value=\"$prodotto->codProdotto\" />
-                                <input type=\"hidden\" name=\"qtprod_old[]\" value=\"$prodotto->utilizzo\" />
-                                <input type=\"hidden\" name=\"codApt\" value=\"$codice\" />
+                                <td>".$prodotto->tipo."</td>
+                                <td><input type=\"text\" name=\"qtprod[]\" value=\"$prodotto->utilizzo\" />
+                                    <input type=\"hidden\" name=\"codprod[]\" value=\"$prodotto->codProdotto\" />
+                                    <input type=\"hidden\" name=\"qtprod_old[]\" value=\"$prodotto->utilizzo\" />
+                                    <input type=\"hidden\" name=\"codApt\" value=\"$codice\" />
+                                </td>
+                                
                             </tr>";
                     $tf= "</tbody></table>
-                        <input type='submit' name='submit' value='Procedi'>
-                        <input type='reset' value='Cancella'>
+                        <input type='submit' name='submit' value='Procedi'/>
+                        <input type='reset' value='Cancella'/>
                         </fieldset>
                         </form>";
                     $to_print = $th . $tb . $tf;
