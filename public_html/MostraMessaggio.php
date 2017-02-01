@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
         $result = mostraMessaggio($cmsg);
         
         if (is_null($result)) {
-            echo "<p class=\"info\">Non è presente il messaggio richiesto</p>";
+            $err "<p class=\"info\">Non è presente il messaggio richiesto</p>";
         } 
         else {
             $to_print = '
