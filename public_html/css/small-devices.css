@@ -355,10 +355,6 @@ input[type="button"], input[type="submit"]{
 
 /* Realizzazioni */
 
-.photo {
-    width: 90%;
-}
-
 .contentfigura {
     text-align: center;
 }
@@ -607,23 +603,6 @@ td input[type="text"] {
 /*Listino Prezzi*/
 
 
-#listino{
-    margin: 1em auto;
-    width:100%;
-
-    background: white;
-    border-radius:3px;
-    border-collapse: collapse;
-    height: 320px;
-    margin: auto;
-    max-width: 600px;
-    padding:5px;
-    width: 100%;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-    animation: float 5s infinite;
-}
-
-
 h2{
    font-size: 1.9em;
    font-weight: 400;
@@ -635,7 +614,7 @@ h2{
    margin: 1em;
 }
 
-.rtipo{
+#listino .rtipo{
    font-size: 1em;
    font-weight: 600;
    font-style: oblique;
@@ -645,20 +624,7 @@ h2{
    text-transform:uppercase;
 }
 
-.thprima{
-  border-top-left-radius:3px;
-  font-size:1.4em;
-
-}
-
-.thseconda{
-  border-top-right-radius:3px;
-  border-right:none;
-  font-size:1.4em;
-
-}
-
-tr {
+#listino tr {
   border-top: 1px solid #C1C3D1;
   border-bottom-: 1px solid #C1C3D1;
   color:#3e4150;
@@ -667,19 +633,19 @@ tr {
   text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
 
-thead tr{
+#listino thead tr{
   border-top:none;
 }
 
-tr:last-child {
+#listino tr:last-child {
   border-bottom:none;
 }
 
-.cintervento{
+#listino .cintervento{
     background:#EBEBEB;
 }
 
-td {
+#listino td {
   background:#FFFFFF;
   padding:10px;
   text-align: center;
@@ -688,11 +654,10 @@ td {
   font-size:0.9em;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
-  /* float: right; */
 }
 
 
-th {
+#listino th {
   color:#FFFFFF;
   background:#4e4b3b;
   border-bottom:4px solid #9ea7af;
