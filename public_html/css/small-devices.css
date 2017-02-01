@@ -626,7 +626,7 @@ h2{
 
 #listino tr {
   border-top: 1px solid #C1C3D1;
-  border-bottom-: 1px solid #C1C3D1;
+  border-bottom: 1px solid #C1C3D1;
   color:#3e4150;
   font-size:1em;
   font-weight:normal;
@@ -676,6 +676,12 @@ caption {
     margin: 1em;
     font-style: italic;
     display: block;
+}
+
+td {
+  background:#FFFFFF;
+  padding:0.3em;
+  text-align: center;
 }
 
 .mobile{
