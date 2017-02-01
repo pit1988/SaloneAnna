@@ -10,7 +10,7 @@ if (!isset($_SESSION['username'])) {
 } else {
     require 'library.php';
     include 'utils/DBlibrary.php';
-    if (!$_GET["codmsg"]) {
+    if (!isset($_GET["codmsg"])) {
         $err = "<p class=\"errorSuggestion\">Non è stato selezionato alcun messaggio, torna a <a href=\"Messaggi.php\" e riprova</p>";
     } else {
         $cmsg = $_GET["codmsg"];
