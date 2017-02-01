@@ -184,9 +184,6 @@ h1{
 
 
 /* BreadCrumbs Part*/
-fieldset{
-    width: 99%;
-}
 
 #breadcrumbs{
     border: 1px dotted #4e4b3b;
@@ -476,6 +473,7 @@ form small {
     text-align: center;
     font-style: oblique;
     width: 100%;
+    display: block;
 }
 
 #frameMappa {
@@ -490,9 +488,9 @@ form small {
     width:1px;
     height:1px;
     overflow:hidden;
-    
+
     display: none;
-    
+
 }
 
 .errorSuggestion{
@@ -544,25 +542,25 @@ table, thead, tbody, th, td, tr {
 }
 
 /* Hide table headers (but not display: none;, for accessibility) */
-thead tr {
+thead tr, tfoot tr  {
     position: absolute;
     top: -9999px;
     left: -9999px;
-    display: none;
 }
 
 tr { border: 1px solid #ccc; }
 
-td {
+#ProdottiMagazzino td {
     /* Behave  like a "row" */
     border: none;
     border-bottom: 1px solid #eee;
     position: relative;
     padding-left: 50%;
+    text-align: right;
 }
 
 td:before {
-    /* Now like a table header */
+    /* Qui uguale all'header */
     position: absolute;
     /* Top/left values mimic padding */
     top: 6px;
@@ -572,18 +570,39 @@ td:before {
     white-space: nowrap;
 }
 
+#ProdottiMagazzino form input {
+    margin: 0em auto;
+    display: block;
+
+}
+
+/* Seleziona prodotto da eliminare diverso */
+#ProdottiMagazzino td:last-child {
+    color: #ffffff;
+    background: #4e4b3b;
+    vertical-align:center;
+    margin-bottom: 1em;
+}
+
 /*
 Label the data
 */
-td:nth-of-type(1):before { content: "CodProdotto"; }
-td:nth-of-type(2):before { content: "Nome"; }
-td:nth-of-type(3):before { content: "Marca"; }
-td:nth-of-type(4):before { content: "Tipo"; }
-td:nth-of-type(5):before { content: "Quantit&agrave;"; }
-td:nth-of-type(6):before { content: "PVendita"; }
-td:nth-of-type(7):before { content: "PRivendita"; }
-td:nth-of-type(8):before { content: "Seleziona"; }
 
+#ProdottiMagazzino td:nth-of-type(1):before { content: "CodProdotto"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(2):before { content: "Nome"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(3):before { content: "Marca"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(4):before { content: "Tipo"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(5):before { content: "Quantità"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(6):before { content: "PVendita"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(7):before { content: "PRivendita"; font-weight: bold; }
+#ProdottiMagazzino td:nth-of-type(8):before { content: "Seleziona"; font-weight: bold; }
+
+/* Inventario */
+td input[type="text"] {
+    width: 3em;
+    margin: 0.2em auto;
+    text-align: right;
+}
 
 /*Listino Prezzi*/
 
@@ -626,13 +645,13 @@ h2{
    text-transform:uppercase;
 }
 
-#thprima{
+.thprima{
   border-top-left-radius:3px;
   font-size:1.4em;
 
 }
 
-#thseconda{
+.thseconda{
   border-top-right-radius:3px;
   border-right:none;
   font-size:1.4em;
@@ -663,12 +682,13 @@ tr:last-child {
 td {
   background:#FFFFFF;
   padding:10px;
-  text-align:center;
+  text-align: center;
   vertical-align:middle;
   font-weight:300;
   font-size:0.9em;
   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
+  /* float: right; */
 }
 
 
@@ -690,6 +710,7 @@ th {
 caption {
     margin: 1em;
     font-style: italic;
+    display: block;
 }
 
 .mobile{
