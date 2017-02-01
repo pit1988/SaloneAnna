@@ -54,7 +54,7 @@ if (!isset($_SESSION['username'])) {
                 echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>\n";
             else {
                 $str_to_print = '
-                    <table id="topProd" summary="Appuntamenti successivi alla data corrente">
+                    <table id="tabApp" summary="Appuntamenti successivi alla data corrente">
                         <caption>Appuntamenti successivi alla data corrente</caption>
                         <thead>
                             <tr>
