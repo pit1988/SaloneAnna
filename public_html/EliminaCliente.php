@@ -49,7 +49,7 @@ else
 		<form action="EliminaCliente.php" method="post">
 		<fieldset>
 		<legend>Selezione i clienti che vuoi eliminare</legend>
-		<table id="clientiTab" summary="Rimozione clienti">
+		<table id="clientiTabSelect" summary="Rimozione clienti">
             <caption class="nascosto">Rimozione clienti</caption>
             <thead>
                 <tr>

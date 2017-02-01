@@ -31,7 +31,7 @@ if (!isset($_SESSION['username'])) {
         else {
             form_start("post", "SelezionaProdottiAppuntamento.php");
             echo '<fieldset>';
-            $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
+            $str_to_print = '<table id="tabApp" summary="Appuntamenti successivi alla data corrente">
         <caption>Appuntamenti successivi alla data corrente</caption>
         <thead>
           <tr>

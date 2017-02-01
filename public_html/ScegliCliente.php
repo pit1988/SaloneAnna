@@ -30,7 +30,7 @@ else
 		<form action="ModificaCliente.php" method="post">
         <fieldset>
         <legend>Seleziona il cliente per poterlo modificare</legend>
-		<table id="clientiTab" summary="Elenco clienti">
+		<table id="clientiTabSelect" summary="Elenco clienti">
             <caption class="inforesult">Elenco clienti</caption>
             <thead>
                 <tr>
