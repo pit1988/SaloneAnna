@@ -92,15 +92,15 @@ if (!isset($_SESSION['username'])) {
                         
                         $tf       = "</tbody></table>";
                         $to_print = $th . $tb . $tf;
-                        echo $to_print;
-                        echo "<input type='hidden' name='TipoAppuntamento' value='$tipo'>";
-                        echo "<input type='hidden' name='data' value='$data'>";
-                        echo "<input type='hidden' name='CodAppuntamento' value='$cod'>";
-                        echo "<input type='hidden' name='orario' value='$ora'>";
-                        echo "<input type='submit' name='submit' value='Procedi'>";
-                        echo "<input type='reset' value='Cancella'>";
-                        echo"</fieldset>";
-                        echo "</form>";
+                        $fr_end= "<input type='hidden' name='TipoAppuntamento' value='$tipo'>
+                        <input type='hidden' name='data' value='$data'>
+                        <input type='hidden' name='CodAppuntamento' value='$cod'>
+                        <input type='hidden' name='orario' value='$ora'>
+                        <input type='submit' name='submit' value='Procedi'>
+                        <input type='reset' value='Cancella'>
+                        </fieldset>
+                        </form>";
+                        echo $to_print."\n".$fr_end;
                     } else {
                         //una riga
                         $CodCliente = $result[0]->codice;
