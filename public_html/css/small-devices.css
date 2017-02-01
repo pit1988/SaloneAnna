@@ -506,8 +506,6 @@ form small {
    margin-bottom: 2em;
 }
 
-
-
 /* PRODOTTI */
 
 
@@ -693,6 +691,37 @@ td {
     height: inherit;
     font-size: 0.7em;
     text-align: center;
+}
+
+/*APPUNTAMENTI*/
+
+.datiAppun {
+    clear: both;
+    width: 100%;
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.tipiAppun {
+    clear: both;
+    width: 100%;
+}
+
+.tipoAppun{
+    float: left;
+    width: 45%;
+    border-bottom: 1px outset;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.confermAppun{
+    clear: both;
+    text-align: center;
+}
+
+.tipoAppun label {
+    margin-bottom: 0.5em;
 }
 
 /* Footer */
