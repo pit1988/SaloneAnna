@@ -85,8 +85,8 @@ if (!isset($_SESSION['username'])) {
                     </p>
                 </li>
             </ul>
-            <input type="submit" name="submit" value="Procedi">
-            <input type="reset" value="Cancella">
+            <input type="submit" name="submit" value="Procedi"/>
+            <input type="reset" value="Cancella"/>
         </fieldset>
         </form>
 
