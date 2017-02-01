@@ -66,8 +66,8 @@ if (!isset($_SESSION['username'])) {
                         $th = '
                             <fieldset>
                             <legend>Seleziona il cliente dalla lista</legend>
-                            <table id="ProdottiMagazzino" summary="Prodotti in magazzino">
-                                <caption>Prodotti modificabili</caption>
+                            <table id="ElencoClienti" summary="Elenco clienti">
+                                <caption>Clienti che si chiamano '.$nome.' '.$cognome.'</caption>
                                 <thead>
                                 <tr>
                                     <th scope="col">Codice</th>
@@ -104,7 +104,7 @@ if (!isset($_SESSION['username'])) {
                             <input type="hidden" name="TipoAppuntamento" id="TipoAppuntamento" value="'.$codTipo.'" />';
                         echo "<input type='submit' name='submit' value='Procedi'>";
                         echo "<input type='reset' value='Cancella'>";
-                        // echo"</fieldset>";
+                        echo"</fieldset>";
                         echo "</form>";
                     } //fine n_righe>1
                     else{ //unico risultato
