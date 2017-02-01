@@ -380,6 +380,10 @@ input#img_desc {
     width: 80%;
 }
 
+input#uploadedfile {
+    width: 100%;
+}
+
 
 /*Parte per la form di contattaci*/
 
@@ -469,8 +473,8 @@ form small {
     color: #31456b;
     clear: both;
     padding-bottom: 1em;
-    float: left;
-    font-style : oblique;
+    text-align: center;
+    font-style: oblique;
     width: 100%;
 }
 
@@ -495,7 +499,10 @@ form small {
     font-size: 0.8em;
     font-style: oblique;
     color: #8c001f;
-    width: 50%;
+    clear: both;
+    padding-bottom: 1em;
+    text-align: center;
+    width: 100%;
 }
 
 .messaggio{
@@ -507,63 +514,8 @@ form small {
 
 
 
-/* VENDITA */
+/* PRODOTTI */
 
-.maintitle{
-    text-align: center;
-    color: white;
-    font-size: 30px;
-    border: solid 1px #585346;
-    background: #585346;
-    margin-bottom: 1em;
-}
-
-.cnome{
-    text-align: center;
-    color: #003e30;
-    font-size: 1.2em;
-}
-
-.nome_scientifico{
-    font-size: 0.8em;  
-}
-
-.tipo{
-    font-size: 0.8em;
-}
-
-.id{
-    font-size: 0.8em;
-}
-
-h4{
-    text-align: left;
-    color: #003e30;
-    font-size: 0.9em;
-}
-
-.prodotto .id{
-    float: right;
-}
-
-.prodotto .desc{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 96%;
-    font-size: 0.8em;
-}
-
-
-.dati{
-    color: #3e000e;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.contenuto{
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
 
 .goFast {
     text-align: center;
@@ -571,42 +523,6 @@ h4{
     font-style: oblique;
 }
 
-
-.prodotto .nome_scientifico{
-    font-style: oblique;
-}
-
-.prodotto .tipo{
-    font-weight: bold;
-}
-
-.img{
-    text-align: center;
-    margin: 0 auto;
-}
-
-img {
-    max-width: 600px;
-}
-
-.dati{
-}
-
-.riquadro_prezzi{
-    width: 96%;
-}
-
-.radio{
-    float:right;
-}
-
-.prezzo{
-    color: #232323;
-    font-style: oblique;
-    text-align: right;
-    font-size: 0.8em;
-
-}
 
 .subbutton{
     padding-right: 10px;
@@ -621,8 +537,52 @@ img {
     display: block;
 }
 
-hr{
+
+/* Force table to not be like tables anymore */
+table, thead, tbody, th, td, tr {
+    display: block;
 }
+
+/* Hide table headers (but not display: none;, for accessibility) */
+thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+    display: none;
+}
+
+tr { border: 1px solid #ccc; }
+
+td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+}
+
+td:before {
+    /* Now like a table header */
+    position: absolute;
+    /* Top/left values mimic padding */
+    top: 6px;
+    left: 6px;
+    width: 45%;
+    padding-right: 10px;
+    white-space: nowrap;
+}
+
+/*
+Label the data
+*/
+td:nth-of-type(1):before { content: "CodProdotto"; }
+td:nth-of-type(2):before { content: "Nome"; }
+td:nth-of-type(3):before { content: "Marca"; }
+td:nth-of-type(4):before { content: "Tipo"; }
+td:nth-of-type(5):before { content: "Quantit&agrave;"; }
+td:nth-of-type(6):before { content: "PVendita"; }
+td:nth-of-type(7):before { content: "PRivendita"; }
+td:nth-of-type(8):before { content: "Seleziona"; }
 
 
 /*Listino Prezzi*/
