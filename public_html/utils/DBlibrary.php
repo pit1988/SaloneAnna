@@ -15,12 +15,12 @@ function authenticate() {
 function dbconnect() {
 	$host = "localhost";
 
-	/*$user = "pgabelli";
+	$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";*/
-	$user = "agrenden";
+	$db = "pgabelli";
+	/*$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";
+	$db = "agrenden";*/
 	/*$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
@@ -43,6 +43,11 @@ function checkCommaSet(&$set) { //metodo di supporto usato durante l'aggiornamen
 
 function checkAndWhere(&$where) { //metodo di supporto usato durante i check
 	if($where != "") {$where = $where." AND ";}
+}
+
+function cleanString(&$stringa) {
+	$stringa = htmlentities($stringa);
+	$stringa = trim($stringa);
 }
 
 /*******************MESSAGGI************************/
@@ -887,5 +892,14 @@ function listaProdottiAppuntamentoDatato($codCliente) {
 		}
 	}
 	return $prodottiAppDat; //è un array di ProdottoAppuntamentoDatato, non viene garantito che $prodottiAppDat sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
+
+function cambiaPassword($codAccount, $nuovaPassword) {
+	cleanString($nuovaPassword);
+	if(strlen($nuovaPassword) >= 8) {
+		$nuovaPassword = md5($nuovaPassword);
+		return eseguiQuery("UPDATE Account SET password='$nuovaPassword' WHERE CodAccount=$codAccount");
+	}
+	return FALSE;
 }
 ?>
