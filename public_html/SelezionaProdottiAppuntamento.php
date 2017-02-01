@@ -59,7 +59,7 @@ else {
             }
             else{
                 // mostra l'appuntamento
-                $str_to_print='<table id="topProd" summary="Dati appuntamento">
+                $str_to_print='<table id="tabApp" summary="Dati appuntamento">
                 <caption>Riepilogo appuntamento selezionato</caption>
                 <thead>
                     <tr>

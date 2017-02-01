@@ -82,6 +82,5 @@ else{
     unset($result);
     content_end();
     page_end();
-    mysqli_close($conn);
 }
 ?>

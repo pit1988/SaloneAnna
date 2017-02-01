@@ -183,7 +183,7 @@ legend{
     background-color: #C4B49D;
 }
 
-li {
+.menu li {
     float: left;
 }
 
@@ -245,8 +245,6 @@ li a:hover {
     font-style: oblique;
 }
 
-/*  info vecchia non so se tocca
-
 .info {
     display: block;
     margin: 0 0 0.5em 0;
@@ -256,7 +254,6 @@ li a:hover {
     font-style: oblique;
     width: 100%;
 }
-*/
 
 .inforesult {
     font-weight: bold;
@@ -661,12 +658,12 @@ input[type="button"], input[type="submit"]{
     width: 49%;
 }
 
-.tipoAppun {
+.tipiAppun {
     float: right;
     width: 49%;
 }
 
-.tipoAppun p {
+.tipoAppun{
     float: left;
     width: 30%;
     border-bottom: 1px outset;
@@ -677,6 +674,10 @@ input[type="button"], input[type="submit"]{
 .confermAppun{
     clear: both;
     text-align: center;
+}
+
+.tipoAppun label {
+    margin-bottom: 0.5em;
 }
 
 /* Footer */

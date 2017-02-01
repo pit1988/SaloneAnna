@@ -41,7 +41,9 @@ if (!isset($_SESSION['username'])) {
     if(count($result)>0){
         //ciclo
             //ciclo interno uguale ad elimina
-        echo "<div><ul>";
+        echo "<div>
+            <ul>
+            ";
         for($i=0; $i<count($result); $i++){
             $appuntamenti=$result[$i];
         //foreach ($result as $appuntamenti) {
@@ -52,7 +54,7 @@ if (!isset($_SESSION['username'])) {
                 echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>\n";
             else {
                 $str_to_print = '
-                    <table id="topProd" summary="Appuntamenti successivi alla data corrente">
+                    <table id="tabApp" summary="Appuntamenti successivi alla data corrente">
                         <caption>Appuntamenti successivi alla data corrente</caption>
                         <thead>
                             <tr>
@@ -94,11 +96,11 @@ if (!isset($_SESSION['username'])) {
         echo "<p class=\"info\">Ci sono stati problemi nel reperire i risultati</p>\n";
     //Inserisci collegamenti a settimana precenente, odierna e successiva con la data presa in precedenza
     $collegamenti="
-    <p><ul>
+    <ul>
         <li><a href=\"AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.'-1 week'))."\">Precenente</a></li>
         <li><a href=\"AppuntamentiSettimana.php\">Settimana odierna</a></li>
         <li><a href=\"AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.' + 1 week'))."\">Successiva</a></li>
-    </ul></p>";
+    </ul>";
     echo $collegamenti;
 
     unset($result);

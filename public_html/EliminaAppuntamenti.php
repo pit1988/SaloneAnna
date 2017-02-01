@@ -54,7 +54,7 @@ if (!isset($_SESSION['username'])) {
         echo '<fieldset>
             <legend>Seleziona gli appuntamenti che vuoi eliminare</legend>';
         $str_to_print = '
-            <table id="topProd" summary="Appuntamenti successivi alla data corrente">
+            <table id="tabApp" summary="Appuntamenti successivi alla data corrente">
             	<caption>Appuntamenti successivi alla data corrente</caption>
             	<thead>
                 	<tr>

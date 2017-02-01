@@ -27,53 +27,43 @@ if (!isset($_SESSION['username'])) {
     $str1 = '<form action="ConfermaNuovoAppuntamento.php" onsubmit="return true;" method="post">
              <fieldset>
                 <legend>Compila le informazioni richieste per inserire un appuntamento</legend>
-                    <ul>
-                        <li class="tipoAppun">
-                            <p>Tipo appuntamento:</p>
-                            <p>
-';
-    
+                    <div class="tipiAppun">
+                        <p class="info">Tipo appuntamento:</p>
+    ';
+
     $str2        = "";
     $result= listaTipoAppuntamenti();
     if($result){
         foreach ($result as $tipoApp){
-            $str2 .= '<input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label>\n";
+            $str2 .= '<p class="tipoAppun"><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
         }
     }
-    unset($result);
-    $str3 = '       
-                        </p>
-                    </li>
-                    <li class="datiAppun">
-                        <p>
-                            <label for="first_name">Nome</label>
-                            <input type="text" name="first_name" id="first_name" tabindex="100"/>
-                        </p>
-                        <p>
-                            <label for="last_name">Cognome</label>
-                            <input type="text" name="last_name" id="last_name" tabindex="101" />
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <label for="data">Data</label>
-                        <input type="text" name="data" id="data" tabindex="104" />
-                        </p>
-                    </li>
-                    <li>
-                        <p>
-                            <label for="orario">Orario</label>
-                            <input type="text" name="orario" id="orario" tabindex="102" />
-                        </p>
-                    </li>
-                    <li class="confermAppun">
-                        <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
-                        <input type="reset" value="cancella" />
-                        <span id="errors"></span>
-                    </li>
-                </ul>
-            </fieldset>
-            </form>
+    $str3 = '</div>
+            <div class="datiAppun">
+                <p>
+                    <label for="first_name">Nome</label>
+                    <input type="text" name="first_name" id="first_name" tabindex="100"/>
+                </p>
+                <p>
+                    <label for="last_name">Cognome</label>
+                    <input type="text" name="last_name" id="last_name" tabindex="101" />
+                </p>
+                <p>
+                    <label for="data">Data</label>
+                <input type="text" name="data" id="data" tabindex="102" />
+                </p>
+                <p>
+                    <label for="orario">Orario</label>
+                    <input type="text" name="orario" id="orario" tabindex="103" />
+                </p>
+            </div>
+            <div class="confermAppun">
+                <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
+                <input type="reset" value="cancella" />
+                <span id="errors"></span>
+            </div>
+        </fieldset>
+        </form>
 ';
     echo $str1 . $str2 . $str3;
     content_end();

@@ -60,7 +60,6 @@ if (!isset($_SESSION['username'])) {
         echo $err;
     content_end();
     page_end();
-    mysqli_close($conn);
 }
 
 ?>

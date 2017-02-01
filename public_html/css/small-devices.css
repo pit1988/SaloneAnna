@@ -506,8 +506,6 @@ form small {
    margin-bottom: 2em;
 }
 
-
-
 /* PRODOTTI */
 
 
@@ -573,7 +571,7 @@ td:before {
 }
 
 /* Seleziona prodotto da eliminare diverso */
-#ProdottiMagazzino td:last-child, #clientiTab td:last-child {
+#ProdottiMagazzino td:last-child, #clientiTabSelect td:last-child, #tabApp td:last-child, #messaggi td:last-child {
     color: #ffffff;
     background: #4e4b3b;
     vertical-align:center;
@@ -592,6 +590,15 @@ Label the data
 #ProdottiMagazzino td:nth-of-type(6):before { content: "PVendita"; font-weight: bold; }
 #ProdottiMagazzino td:nth-of-type(7):before { content: "PRivendita"; font-weight: bold; }
 #ProdottiMagazzino td:nth-of-type(8):before { content: "Seleziona"; font-weight: bold; }
+
+#tabApp td:nth-of-type(1):before { content: "Appuntamento"; font-weight: bold; }
+#tabApp td:nth-of-type(2):before { content: "Nome"; font-weight: bold; }
+#tabApp td:nth-of-type(3):before { content: "Cognome"; font-weight: bold; }
+#tabApp td:nth-of-type(4):before { content: "Data"; font-weight: bold; }
+#tabApp td:nth-of-type(5):before { content: "Ora"; font-weight: bold; }
+#tabApp td:nth-of-type(6):before { content: "Tipo"; font-weight: bold; }
+#tabApp td:nth-of-type(7):before { content: "Costo"; font-weight: bold; }
+#tabApp td:nth-of-type(8):before { content: "Seleziona"; font-weight: bold; }
 
 /* Inventario */
 td input[type="text"] {
@@ -676,6 +683,7 @@ caption {
     margin: 1em;
     font-style: italic;
     display: block;
+    clear: both;
 }
 
 td {
@@ -693,6 +701,37 @@ td {
     height: inherit;
     font-size: 0.7em;
     text-align: center;
+}
+
+/*APPUNTAMENTI*/
+
+.datiAppun {
+    clear: both;
+    width: 100%;
+    margin-top: 1em;
+    display: inline-block;
+}
+
+.tipiAppun {
+    clear: both;
+    width: 100%;
+}
+
+.tipoAppun{
+    float: left;
+    width: 45%;
+    border-bottom: 1px outset;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.confermAppun{
+    clear: both;
+    text-align: center;
+}
+
+.tipoAppun label {
+    margin-bottom: 0.5em;
 }
 
 /* Footer */
