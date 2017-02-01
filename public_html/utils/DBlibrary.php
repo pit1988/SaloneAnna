@@ -479,7 +479,7 @@ function aggiungiProdotto($nome, $marca, $tipo, $quantita, $prezzo=0, $prezzoRiv
 	else {$marca = htmlentities($marca);}
 	if($tipo === "") {return FALSE;}
 	else {$tipo = htmlentities($tipo);}
-	if($quantita === "" || quantita <= 0) {return FALSE;}
+	if($quantita === "" || $quantita <= 0) {return FALSE;}
 	if($prezzo === "") {$prezzo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
 	if($prezzoRiv === "") {$prezzoRiv=0;}
 	$prezzo = round($prezzo, 2); //approssimo le cifre decimali ad un massimo di due

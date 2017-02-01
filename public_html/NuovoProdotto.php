@@ -17,13 +17,11 @@ if (!isset($_SESSION['username'])) {
         $quantita  = $_POST['quantita'];
         $pvendita  = $_POST['pvendita'];
         $rivendita = $_POST['rivendita'];
-        $codprod   = $_POST['codprod'];
-        $ris       = inserisciProdotto($nome, $marca, $tipo, $quanita, $pvendita, $rivendita);
+        $ris       = aggiungiProdotto($nome, $marca, $tipo, $quantita, $pvendita, $rivendita);
         if ($ris)
             $msg = "<p class=\"inforesut\">Il prodotto è stato creato correttamente</p>";
         else
             $msg = "<p class=\"inforesut\">Non è stato possibile creare il prodotto</p>";
-        echo $msg;
         unset($ris);
     }
     
@@ -36,11 +34,17 @@ if (!isset($_SESSION['username'])) {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Nuovo Prodotto</strong>';
     insert_header($rif, 4, true);
     content_begin();
+
+    if (isset($msg))
+        echo ($msg);
+    if (isset($err))
+        echo ($err);
+
     echo "<h2>Inserisci nuovo prodotto</h2>";
 
     
     $to_print = '
-    <form method="post" action="esito_modifica.php">
+    <form method="post" action="NuovoProdotto.php">
     <fieldset>
     <legend>Completa le informazioni per inserire un nuovo prodotto</legend>
         <ul>
@@ -76,8 +80,8 @@ if (!isset($_SESSION['username'])) {
                 </li>
                 <li>
                     <p>
-                        <label for="privendita">Prezzo di rivendita</label>
-                        <input type="text" name="privendita" id="privendita" tabindex="105" />
+                        <label for="rivendita">Prezzo di rivendita</label>
+                        <input type="text" name="rivendita" id="rivendita" tabindex="105" />
                     </p>
                 </li>
             </ul>
@@ -88,10 +92,7 @@ if (!isset($_SESSION['username'])) {
 
         // hyperlink("Torna alla home", "index.php");
     ';
-    if (isset($msg))
-        echo ($msg);
-    if (isset($err))
-        echo ($err);
+
     
     echo $to_print;
     content_end();
