@@ -88,6 +88,7 @@ if (!isset($_SESSION['username'])) {
                             $tb .= "<tr>
                             <td>" . $cliente->codice . "</td><td>" . $cliente->nome . "</td><td>" . $cliente->cognome . "</td><td>" . $cliente->telefono . "</a></td><td>" . $cliente->email . "</td><td>" . $cliente->dataNascita . "</td><td><input type='radio' name='CodCliente' value=$cliente->codice></td>
                             </tr>";
+                            
                         }
                         
                         $tf       = "</tbody></table>";
@@ -112,7 +113,6 @@ if (!isset($_SESSION['username'])) {
                         else
                             echo "<p class=\"errorSuggestion\">Non è stato possibile modificare l'appuntamento selezionato</p>";
                     }
-                    $result->free();
                 } //fine n_righe>1
             }
             

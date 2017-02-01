@@ -54,7 +54,7 @@ if (!isset($_SESSION['username'])) {
         $to_print = $th . $tb . $tf;
     } else
         $str_to_print = "<p class=\"inforesult\">Non sono presenti clienti che compiono gli anni nei prossimi 31 giorni</p>";
-    $result->free();
+    unset($result);
     echo $str_to_print;
     if (isset($err))
         echo $err;

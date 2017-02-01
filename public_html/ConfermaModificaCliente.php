@@ -48,7 +48,7 @@ if (!isset($_SESSION['username'])) {
 
             }
         }
-        $result->free();
+        unset($result);
     }
     if (isset($msg))
         echo ($msg);

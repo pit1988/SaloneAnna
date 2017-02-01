@@ -51,7 +51,7 @@ if (!isset($_SESSION['username'])) {
             </div>
                 ';
         }
-        $result->free();
+        unset($result);
     }
     
     $title      = "Messaggi: Salone Anna";

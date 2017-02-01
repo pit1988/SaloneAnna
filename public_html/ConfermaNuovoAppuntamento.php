@@ -118,7 +118,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     
                 }
-                $result->free();
+                unset($result);
             }
         } //è stato inserito o si sono verificati errori
 

@@ -40,7 +40,7 @@ if (!isset($_SESSION['username'])) {
             $str2 .= '<input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label>\n";
         }
     }
-    $result->free();
+    unset($result);
     $str3 = '       
                         </p>
                     </li>

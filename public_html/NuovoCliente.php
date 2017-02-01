@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
                 else{ //uno o più
                     $err= "<p>Il cliente " . $nome . " " . $cognome . " è già presente nel database</p>";
                 }
-                $result->free();
+                unset($result);
             }
         }
     }

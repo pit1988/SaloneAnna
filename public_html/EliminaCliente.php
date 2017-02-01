@@ -23,7 +23,7 @@ else
 		    $ris=eliminaCliente($d);
 		      if($ris)
 		      	++$num;
-		    $ris->free();
+		    unset($ris);
 		    }
 		}
 	    if($num==0)
@@ -79,7 +79,7 @@ else
 	else 
 		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti da poter cancellare</p>";
 	
-	$ris->free();
+	unset($ris);
 
 	if(isset($msg))
 		echo $msg;

@@ -105,7 +105,7 @@ if (!isset($_SESSION['username'])) {
         // echo"</fieldset>";
         echo"</form>";
     }
-    $result->free();
+    unset($result);
     content_end();
     page_end();
 }

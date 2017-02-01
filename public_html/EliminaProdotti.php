@@ -31,7 +31,7 @@ if (!isset($_SESSION['username'])) {
             $ris=eliminaProdotto($d);
             if($ris) ++$n_el;
             else ++$n_err;
-            $ris->free();
+            unset($ris);
         }
 
         if($n_el>0)
@@ -103,7 +103,7 @@ if (!isset($_SESSION['username'])) {
         echo "<input type='reset' value='Cancella'>";
         echo "</fieldset></form>";
     }
-    $result->free();
+    unset($result);
     content_end();
     page_end();
     mysqli_close($conn);

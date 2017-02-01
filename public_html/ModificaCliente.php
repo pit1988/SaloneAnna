@@ -75,7 +75,7 @@ if (!isset($_SESSION['username'])) {
             </form>
 ';
         }
-        $result->free();
+        unset($result);
     }
     if (isset($err))
         echo $err;

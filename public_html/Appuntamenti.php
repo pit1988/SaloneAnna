@@ -24,6 +24,7 @@ else
 	content_begin();
     echo "<h2>Men&ugrave; Appuntamenti</h2>";
 		hyperlink("Tipo Appuntamento Frequente", "Toptype.php");
+		hyperlink("Vista Appuntamenti settimana", "AppuntamentiSettimana.php");
 		hyperlink("Ricerca Appuntamenti", "RicercaAppuntamenti.php");
 		hyperlink("Nuovo Appuntamento", "NuovoAppuntamento.php");
 		hyperlink("Modifica Appuntamento", "ScegliAppuntamento.php");

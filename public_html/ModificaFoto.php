@@ -65,7 +65,7 @@ if (!isset($_SESSION['username'])) {
         } 
         else
             $to_print = "<p class=\"errorSuggestion\">Errore, non è stata selezionata alcuna foto o la foto non è più presente nel <span lang=\"en\">database</span></p>";
-        $result->free();
+        unset($result);
     }
     
     elseif (isset($_POST['invia']) && isset($_POST['img_desc']) && isset($_POST['img_old_file']) && isset($_POST['codImg_old'])) {

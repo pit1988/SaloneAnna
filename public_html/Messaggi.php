@@ -48,7 +48,7 @@ else
 	}
 	else 
 		$str_to_print="<p class=\"inforesult\">Non sono presenti messaggi</p>";
-	$ris->free();
+	unset($ris);
 	echo $str_to_print;
 	content_end();
 	page_end();

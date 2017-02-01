@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
                 ++$n_el;
             else
                 ++$n_err;
-            $result->free();
+            unset($result);
         }
         
         if ($n_el > 0)
@@ -97,7 +97,7 @@ if (!isset($_SESSION['username'])) {
         echo "</form>";
     }
 
-    $result->free();
+    unset($result);
     content_end();
     page_end();
     mysqli_close($conn);

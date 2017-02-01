@@ -30,7 +30,7 @@ if (!isset($_SESSION['username'])) {
         else {
             echo "<p class=\"inforesult\">È stato aggiunto un file nel <span lang=\"en\">database</span></p>";
         }
-        $ris->free();
+        unset($ris);
     }
     
     

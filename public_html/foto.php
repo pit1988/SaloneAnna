@@ -48,7 +48,7 @@ if ($num_rows>0){
 else
     echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
 
-$result->free();
+unset($result);
 
 content_end();
 page_end();

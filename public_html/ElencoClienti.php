@@ -55,7 +55,7 @@ if (!isset($_SESSION['username'])) {
         unset($cliente); //fortemente consigliato perché altrimenti l'oggetto $cliente rimane in memoria
     } else
         $str_to_print = "<p class=\"inforesult\">Non sono presenti clienti nel database</p>";
-    $ris->free();
+    unset($ris);
     echo $str_to_print;
     content_end();
     page_end();

@@ -80,7 +80,7 @@ if (!isset($_POST['submit']) OR !isset($_POST['codprod'])) {
     	';
         echo $to_print;
     }
-    $result->free();
+    unset($result);
 }
     if(isset($err))
         echo($err);

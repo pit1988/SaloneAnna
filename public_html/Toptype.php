@@ -48,7 +48,7 @@ if (!isset($_SESSION['username'])) {
         $tf = "</tbody></table>";
         $str_to_print = $th . $tb . $tf;
     }
-    $result->free();
+    unset($result);
     echo $str_to_print;
     content_end();
     page_end();

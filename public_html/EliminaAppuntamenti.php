@@ -92,7 +92,7 @@ if (!isset($_SESSION['username'])) {
         </fieldset>
 	</form>";
     }
-    $result->free();
+    unset($result);
     if (isset($msg))
         echo $msg;
     if (isset($str_to_print))

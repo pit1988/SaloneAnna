@@ -62,7 +62,7 @@
         </fieldset>
         </form>";
       }
-      $result->free();
+      unset($result);
       content_end();
       page_end();
   }

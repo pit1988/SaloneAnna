@@ -22,7 +22,7 @@ if (!isset($_SESSION['username'])) {
                 ++$n_el;
             else
                 ++$n_err;
-            $ris->free();
+            unset($ris);
         }
         
         if ($n_el > 0)
@@ -93,7 +93,7 @@ if (!isset($_SESSION['username'])) {
     } 
     else
         $str_to_print = "<p class=\"inforesult\">Non sono presenti messaggi</p>";
-    $ris->free();
+    unset($ris);
     if (isset($msg))
         echo $msg;
     echo $str_to_print;

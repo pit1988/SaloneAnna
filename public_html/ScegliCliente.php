@@ -60,7 +60,7 @@ else
 	else 
 		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti nell'elenco</p>";
 
-	$ris->free();
+	unset($ris);
 	
 	if(isset($msg))
 		echo $msg;
