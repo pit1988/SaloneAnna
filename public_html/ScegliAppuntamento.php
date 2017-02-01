@@ -26,7 +26,7 @@
       else {
           form_start("post", "ModificaAppuntamento.php");
           echo '<fieldset>';
-          $str_to_print = '<table id="topProd" summary="Appuntamenti successivi alla data corrente">
+          $str_to_print = '<table id="tabAppSelect" summary="Appuntamenti successivi alla data corrente">
       <caption>Appuntamenti successivi alla data corrente</caption>
       <thead>
         <tr>
