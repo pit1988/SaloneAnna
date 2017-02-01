@@ -40,7 +40,7 @@ if (!isset($_SESSION['username'])) {
     $keywords   = "Messaggi, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Messaggi.php">Messaggi</a> / <strong>Elimina Messaggi</strong>';
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <a href="Messaggi.php">Messaggi</a> / <strong>Elimina Messaggi</strong>';
     insert_header($rif, 7, true);
     content_begin();
     echo "<h2>Gestione Messaggi</h2>";

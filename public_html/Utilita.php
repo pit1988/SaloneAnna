@@ -19,7 +19,7 @@ else
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Utilit&agrave;</strong>';
-	insert_header($rif, 6, true);
+	insert_header($rif, 7, true);
 	content_begin();
     echo "<h2>Men&ugrave; Utilit&agrave;</h2>";
 		hyperlink("Leggi i Messaggi", "Messaggi.php");
