@@ -698,7 +698,8 @@ function aggiungiImmagine($img_desc, $userfile) { //dovrebbe bastarmi sapere la 
 	// }
 	if (($userfile["type"] == "image/gif" || $userfile["type"] == "image/jpeg" || $userfile["type"] == "image/jpg" || $userfile["type"] == "image/pjpeg"|| $userfile["type"] == "image/png" && $userfile["size"] < 20000)) {
             if ($userfile["error"] > 0) {
-                echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $userfile["error"] . "</span></p>";
+                //echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $userfile["error"] . "</span></p>";
+                return FALSE;
             } else {
 
                 $conn         = dbconnect();

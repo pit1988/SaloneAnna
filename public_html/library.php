@@ -7,25 +7,24 @@
 /* Funzione per iniziare la pagina. In input il titolo */
 // inserire variabili per keywords e descrizione, titolo
 function page_start($title, $title_meta, $descr, $keywords, $fun) {
-    $str1='
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+    $str1='<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
 <head>
 <title>'.trim($title).'</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"\/>
-<meta name="title" content="'.trim($title_meta).'"\/>
-<meta name="description" content="'.trim($descr).'"\/>
-<meta name="keywords" content="'.trim($keywords).'"\/>
-<meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini"\/>
-<meta name="language" content="italian it"\/>
-<meta name="viewport" content="width=device-width"\/>
-<meta http-equiv="Content-Script-Type" content="application/javascript"\/>
-<link rel="stylesheet" href="css/home.css" type="text/css" media="screen and (min-width: 650px)"\/>
-<link rel="stylesheet" type="text/css" href="css/print.css" media="print"\/>
-<link rel="stylesheet" type="text/css" href="css/small-devices.css" media="screen and (max-width: 650px)"\/>
-<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer.css"\/><![endif]-->
-<link rel="icon" href="img/logo2.png" type="image/png" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="title" content="'.trim($title_meta).'"/>
+<meta name="description" content="'.trim($descr).'"/>
+<meta name="keywords" content="'.trim($keywords).'"/>
+<meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini"/>
+<meta name="language" content="italian it"/>
+<meta name="viewport" content="width=device-width"/>
+<meta http-equiv="Content-Script-Type" content="application/javascript"/>
+<link rel="stylesheet" href="css/home.css" type="text/css" media="screen and (min-width: 650px)"/>
+<link rel="stylesheet" type="text/css" href="css/print.css" media="print"/>
+<link rel="stylesheet" type="text/css" href="css/small-devices.css" media="screen and (max-width: 650px)"/>
+<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer.css"/><![endif]-->
+<link rel="icon" href="img/logo2.png" type="image/png"/>
 <script type="text/javascript" src="script/script.js"></script>
 </head>
 ';
@@ -91,7 +90,7 @@ $str2='';
 if($is_admin == false)
     $str2= '<div class="contentLogButton"><a id="login" href="login.php" accesskey="w", tabindex="5">Area Riservata</a></div>';
 else
-    $str2= '<div class="contentLogButton"><a id="logout" href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
+    $str2= '<div class="contentLogButton"><a id="logout" href="utils/logout.php" accesskey="w" tabindex="5">logout</a></div>';
 $str3='
 <div id="breadcrumbs">
 <span id="rifnav" >Ti trovi in: '.trim($pth).'</span>
@@ -112,11 +111,11 @@ function contenitore_menu($num) {
 <a href="#content" title="salta al contenuto principale">Salta menu navigazione</a>
 </p>
 <ul class="menu">
-<li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
-<li><a href="foto.php" id="foto" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="p" tabindex="11">Foto</a></li>
-<li><a href="chi_siamo.php" id="chsia" class='.(($num == 2) ? ("vnav"):("nav")).' accesskey="c" tabindex="11">Chi Siamo</a></li>
-<li><a href="listino.php" id="list" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="l" tabindex="12">Prezzi</a></li>
-<li><a href="contattaci.php" id="cont" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="m" tabindex="13">Contattaci</a></li>
+<li><a href="index.php" id="home" class="'.(($num == 0) ? ("vnav"):("nav")).'" xml:lang="en" accesskey="h" tabindex="10">Home </a></li>
+<li><a href="foto.php" id="foto" class="'.(($num == 1) ? ("vnav"):("nav")).'" accesskey="p" tabindex="11">Foto</a></li>
+<li><a href="chi_siamo.php" id="chsia" class="'.(($num == 2) ? ("vnav"):("nav")).'" accesskey="c" tabindex="11">Chi Siamo</a></li>
+<li><a href="listino.php" id="list" class="'.(($num == 3) ? ("vnav"):("nav")).'" accesskey="l" tabindex="12">Prezzi</a></li>
+<li><a href="contattaci.php" id="cont" class="'.(($num == 4) ? ("vnav"):("nav")).'" accesskey="m" tabindex="13">Contattaci</a></li>
 </ul>
 </div>
 ';
@@ -131,13 +130,13 @@ function contenitore_menu_admin($num) { /*TOTO: Cambiare ordine elementi menu; s
 <a href="#content" title="salta al contenuto principale">Salta menu navigazione</a>
 </p>
 <ul class="menu">
-<li><a href="index.php" id="home" class='.(($num == 0) ? ("vnav"):("nav")).' xml:lang="en" accesskey="h" tabindex="10">Home </a><li>
-<li><a href="listino.php" id="list" class='.(($num == 3) ? ("vnav"):("nav")).' accesskey="l" tabindex="12">Prezzi</a></li>
-<li><a href="Immagini.php" id="insf" class='.(($num == 1) ? ("vnav"):("nav")).' accesskey="c" tabindex="13">Immagini</a></li>
-<li><a href="Prodotti.php" id="prod" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="p" tabindex="15">Prodotti </a></li>
-<li><a href="Clienti.php" id="clie" class='.(($num == 5) ? ("vnav"):("nav")).' accesskey="c" tabindex="14">Clienti</a></li>
-<li><a href="Appuntamenti.php" id="apps" class='.(($num == 6) ? ("vnav"):("nav")).' accesskey="a" tabindex="16">Appuntamenti</a></li>
-<li><a href="Utilita.php" id="msgs" class='.(($num == 7) ? ("vnav"):("nav")).' accesskey="a" tabindex="17">Utilità</a></li>
+<li><a href="index.php" id="home" class="'.(($num == 0) ? ("vnav"):("nav")).'" xml:lang="en" accesskey="h" tabindex="10">Home </a></li>
+<li><a href="listino.php" id="list" class="'.(($num == 3) ? ("vnav"):("nav")).'" accesskey="l" tabindex="12">Prezzi</a></li>
+<li><a href="Immagini.php" id="insf" class="'.(($num == 1) ? ("vnav"):("nav")).'" accesskey="c" tabindex="13">Immagini</a></li>
+<li><a href="Prodotti.php" id="prod" class="'.(($num == 4) ? ("vnav"):("nav")).'" accesskey="p" tabindex="15">Prodotti </a></li>
+<li><a href="Clienti.php" id="clie" class="'.(($num == 5) ? ("vnav"):("nav")).'" accesskey="c" tabindex="14">Clienti</a></li>
+<li><a href="Appuntamenti.php" id="apps" class="'.(($num == 6) ? ("vnav"):("nav")).'" accesskey="a" tabindex="16">Appuntamenti</a></li>
+<li><a href="Utilita.php" id="msgs" class="'.(($num == 7) ? ("vnav"):("nav")).'" accesskey="a" tabindex="17">Utilità</a></li>
 </ul>
 </div>
 ';

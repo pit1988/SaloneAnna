@@ -37,7 +37,7 @@ if ($num_rows>0){
         echo "
 	    	<dd class=\"photo\">
 		    	<figure>
-		    		<p class=\"contentfigura\"><img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/></p>
+		    		<img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/>
 		    		<figcaption>" . $foto->descrizione. "</figcaption>
 		    	</figure>
 	    	</dd>
