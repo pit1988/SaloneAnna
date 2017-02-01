@@ -50,11 +50,11 @@ if (!isset($_SESSION['username'])) {
                 </p>
                 <p>
                     <label for="data">Data</label>
-                <input type="text" name="data" id="data" tabindex="104" />
+                <input type="text" name="data" id="data" tabindex="102" />
                 </p>
                 <p>
                     <label for="orario">Orario</label>
-                    <input type="text" name="orario" id="orario" tabindex="102" />
+                    <input type="text" name="orario" id="orario" tabindex="103" />
                 </p>
             </div>
             <div class="confermAppun">
