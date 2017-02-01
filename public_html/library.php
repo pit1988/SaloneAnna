@@ -12,11 +12,11 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it" lang="it">
 <head>
-<title>'.$title.'</title>
+<title>'.trim($title).'</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"\/>
-<meta name="title" content="'.$title_meta.'"\/>
-<meta name="description" content="'.$descr.'"\/>
-<meta name="keywords" content="'.$keywords.'"\/>
+<meta name="title" content="'.trim($title_meta).'"\/>
+<meta name="description" content="'.trim($descr).'"\/>
+<meta name="keywords" content="'.trim($keywords).'"\/>
 <meta name="author" content="Andrea Grendene, Pietro Gabelli, Sebastiano Marchesini"\/>
 <meta name="language" content="italian it"\/>
 <meta name="viewport" content="width=device-width"\/>
@@ -31,7 +31,7 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 ';
 $str2='<body>';
 if($fun!='')
-    $str2='<body onload="'. $fun . '">';
+    $str2='<body onload="'. trim($fun) . '">';
 $str3='
 <p class="nascosto">
 <a title="salta header" href="#contenitore-menu" tabindex="1" accesskey="a">Salta l&apos;intestazione</a>
@@ -94,7 +94,7 @@ else
     $str2= '<div><a id="logout" href="utils/logout.php" accesskey="w", tabindex="5">logout</a></div>';
 $str3='
 <div id="breadcrumbs">
-<span id="rifnav" >Ti trovi in: '.$pth.'</span>
+<span id="rifnav" >Ti trovi in: '.trim($pth).'</span>
 </div>';
 echo $str1.$str2.$str3;
 if($is_admin == true)
@@ -213,13 +213,12 @@ function table_end() {
       echo"</form>";
     };
 
-//NOTA CENZE: per la connessione al database ho già copiato il file originario in cgi-bin, quindi non mi serve la funzione qua (anche perché non ha senso mantenerla in public_html, fa confusione e basta). Probabilmente in quel file inserirò anche altre funzioni se serviranno
 
 /***************************************/
 /* FUNZIONI PER AUTENTICAZIONE         */
 /***************************************/
 
-function checkSessionLifetime() { //TODO: da verificare se e come funziona
+function checkSessionLifetime() { 
     if (isset($_SESSION['creazione']) && (time() - $_SESSION['creazione'] > 3600)) {
         //la sessione è stata creata almeno un'ora fa
 		$sname=session_name();
@@ -241,7 +240,7 @@ function checkLog() {
     }
 };
 
-function new_user($login, $password) { //NOTA CENZE: probabilmente queste funzioni resteranno inutilizzate, anche perché ad esempio se faccio il check del login controllo direttamente lo usarname e la password, quindi il controllo della singola password non dovrebbe servire. Confermerò quando avrò terminato di implementare le sessioni
+function new_user($login, $password) { 
     /* si connette e seleziona il database da usare */
     $dbname="login-ES";
     $conn = dbConnect($dbname);
