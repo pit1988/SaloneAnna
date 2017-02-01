@@ -23,7 +23,7 @@ if (!isset($_SESSION['username'])) {
         $str_to_print = "<p class=\"inforesult\">Non sono presenti appuntamenti nel database</p>";
     }
     else{
-        $th = '<table id="topProd" summary="Classifica degli appuntamenti, divisi per tipo">
+        $th = '<table id="topApp" summary="Classifica degli appuntamenti, divisi per tipo">
         <caption class="inforesult">Classifica degli appuntamenti, divisi per tipo</caption>
         <thead>
             <tr>
