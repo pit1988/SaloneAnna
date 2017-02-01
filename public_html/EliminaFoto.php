@@ -52,8 +52,8 @@ if (!isset($_SESSION['username'])) {
     if ($num_rows==0)
         echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
     else {
-        form_start("post", "EliminaFoto.php");
-        echo "<fieldset><legend>Seleziona la/le immagine/i che vuoi eliminare</legend>";
+        echo "<form method=\"post\" action=\"EliminaFoto.php\">
+            <fieldset><legend>Seleziona la/le immagine/i che vuoi eliminare</legend>\n";
         $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
             <caption class="nascosto">Tabella di immagini</caption>
             <thead>
@@ -91,8 +91,8 @@ if (!isset($_SESSION['username'])) {
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
-        echo "<input type='submit' name='submit' value='Procedi'>";
-        echo "<input type='reset' value='Cancella'>";
+        echo "<input type='submit' name='submit' value='Procedi' />";
+        echo "<input type='reset' value='Cancella' />";
         echo"</fieldset>";
         echo "</form>";
     }
@@ -100,6 +100,5 @@ if (!isset($_SESSION['username'])) {
     unset($result);
     content_end();
     page_end();
-    mysqli_close($conn);
 }
 ?>

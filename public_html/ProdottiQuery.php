@@ -48,6 +48,7 @@ if (!isset($_SESSION['username'])) {
                     <th scope="col">Marca</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Quantità</th>
+                </tr>
             </tfoot>
 
             <tbody>
@@ -71,5 +72,4 @@ if (!isset($_SESSION['username'])) {
     content_end();
     page_end();
 }
-mysqli_close($conn);
 ?>
