@@ -856,4 +856,35 @@ function listaAppuntamentiPerTipo() {
 	}
 	return $tipi; //è un array di StatisticaTipoAppuntamento, non viene garantito che $tipi sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
+
+class ProdottoAppuntamentoDatato extends ProdottoAppuntamento {
+	public $data;
+	public $ora;
+	
+	function __construct($codProdotto, $codAppuntamento, $nome, $marca, $tipo, $utilizzo, $data, $ora) {
+		parent::__construct($codProdotto, $codAppuntamento, $nome, $marca, $tipo, $utilizzo);
+		$this->data = $data;
+		$this->ora = $ora;
+	}
+}
+
+function listaProdottiAppuntamentoDatato($codCliente) {
+	$prodottiAppDat = eseguiQuery("SELECT p.CodProdotto as CodProdotto, Nome, Marca, Tipo, coalesce(Utilizzo,0) as Utilizzo, pa.CodAppuntamento AS CodAppuntamento, DataOra
+	FROM Prodotti p JOIN ProdApp pa ON p.CodProdotto=pa.CodProdotto JOIN Appuntamenti a ON a.CodAppuntamento=pa.CodAppuntamento
+	WHERE CodCliente = '$codCliente'");
+	if(!$result) {$prodottiAppDat = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$prodottiAppDat = array();
+		while($prodottoAppDat = mysqli_fetch_assoc($result)) {
+			if($prodottoAppDat['DataOra'] !== NULL) {
+				$time = strtotime($prodottoAppDat['DataOra']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+				$ora = date("H:i", $time); //formato del tipo 23:46
+			}
+			else {$data = NULL; $ora = NULL;}
+			array_push($prodottiAppDat, new ProdottoAppuntamentoDatato($prodottoAppDat['CodProdotto'], $prodottoAppDat['CodAppuntamento'], $prodottoAppDat['Nome'], $prodottoAppDat['Marca'], $prodottoAppDat['Tipo'], $prodottoAppDat['Utilizzo'], $data, $ora));
+		}
+	}
+	return $prodottiAppDat; //è un array di ProdottoAppuntamentoDatato, non viene garantito che $prodottiAppDat sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
 ?>
