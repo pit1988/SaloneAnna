@@ -22,6 +22,7 @@ if (!isset($_SESSION['username'])) {
                 ++$n_el;
             else
                 ++$n_err;
+            $result->free();
         }
         
         if ($n_el > 0)
@@ -32,6 +33,7 @@ if (!isset($_SESSION['username'])) {
         if ($n_err > 0)
             $msg = "<p class=\"errorSuggestion\>Durante la cancellazione si sono verificati $n_err errori</p>";
     }
+
     $title      = "Salone Anna: Inserisci foto";
     $title_meta = "Salone Anna, parrucchiere a Vicenza";
     $descr      = "Pagina per inserire fotografie all'interno del sito";
@@ -85,6 +87,7 @@ if (!isset($_SESSION['username'])) {
             </tr>';
         }
 
+
         $tf       = "</tbody></table>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
@@ -93,6 +96,8 @@ if (!isset($_SESSION['username'])) {
         echo"</fieldset>";
         echo "</form>";
     }
+
+    $result->free();
     content_end();
     page_end();
     mysqli_close($conn);

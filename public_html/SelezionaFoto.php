@@ -79,6 +79,7 @@ else{
         echo"</fieldset>";
         echo "</form>";
     }
+    $result->free();
     content_end();
     page_end();
     mysqli_close($conn);

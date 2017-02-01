@@ -118,6 +118,7 @@ if (!isset($_SESSION['username'])) {
                     }
                     
                 }
+                $result->free();
             }
         } //è stato inserito o si sono verificati errori
 

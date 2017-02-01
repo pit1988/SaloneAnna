@@ -59,6 +59,9 @@ else
 	}
 	else 
 		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti nell'elenco</p>";
+
+	$ris->free();
+	
 	if(isset($msg))
 		echo $msg;
 	echo $str_to_print;

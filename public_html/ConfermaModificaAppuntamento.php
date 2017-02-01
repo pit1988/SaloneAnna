@@ -112,6 +112,7 @@ if (!isset($_SESSION['username'])) {
                         else
                             echo "<p class=\"errorSuggestion\">Non è stato possibile modificare l'appuntamento selezionato</p>";
                     }
+                    $result->free();
                 } //fine n_righe>1
             }
             

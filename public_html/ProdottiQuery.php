@@ -67,6 +67,7 @@ if (!isset($_SESSION['username'])) {
         $to_print = $th . $tb . $tf;
         echo $to_print;
     }
+    $result->free();
     content_end();
     page_end();
 }

@@ -24,6 +24,7 @@ if (!isset($_SESSION['username'])) {
         else
             $msg = "<p class=\"inforesut\">Non è stato possibile creare il prodotto</p>";
         echo $msg;
+        $ris->free();
     }
     
     $title      = "Nuovo Prodotto: Salone Anna";

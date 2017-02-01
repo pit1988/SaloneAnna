@@ -24,33 +24,32 @@ insert_header($rif, 1, $is_admin);
 content_begin();
 
 
-	// collegarsi al DB, leggere le immagini ed inserirle.
-	$result = listaImmagini();
-    
-    $num_rows = count($result);
+// collegarsi al DB, leggere le immagini ed inserirle.
+$result = listaImmagini();
 
-	echo "<h2>Image Gallery</h2>\n";
+$num_rows = count($result);
 
-    if ($num_rows>0){
-    	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
+echo "<h2>Image Gallery</h2>\n";
 
-    	foreach ($result as $foto) {
-            echo "
-    	    	<dd class=\"photo\">
-    		    	<figure>
-    		    		<p class=\"contentfigura\"><img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/></p>
-    		    		<figcaption>" . $foto->descrizione. "</figcaption>
-    		    	</figure>
-    	    	</dd>
-    	    	";
-        }
-	echo "</dl>";
+if ($num_rows>0){
+	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
+	foreach ($result as $foto) {
+        echo "
+	    	<dd class=\"photo\">
+		    	<figure>
+		    		<p class=\"contentfigura\"><img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/></p>
+		    		<figcaption>" . $foto->descrizione. "</figcaption>
+		    	</figure>
+	    	</dd>
+	    	";
     }
-    else
-        echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
+    echo "</dl>";
+}
+else
+    echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
 
+$result->free();
 
-	
 content_end();
 page_end();
 ?>

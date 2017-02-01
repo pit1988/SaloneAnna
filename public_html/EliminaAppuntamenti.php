@@ -92,6 +92,7 @@ if (!isset($_SESSION['username'])) {
         </fieldset>
 	</form>";
     }
+    $result->free();
     if (isset($msg))
         echo $msg;
     if (isset($str_to_print))

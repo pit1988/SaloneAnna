@@ -19,7 +19,8 @@ if (!isset($_SESSION['username'])) {
         
         if (is_null($result)) {
             echo "<p class=\"info\">Non è presente il messaggio richiesto</p>";
-        } else {
+        } 
+        else {
             $to_print = '
             <div id="messaggio">
                 <ul>
@@ -50,6 +51,7 @@ if (!isset($_SESSION['username'])) {
             </div>
                 ';
         }
+        $result->free();
     }
     
     $title      = "Messaggi: Salone Anna";

@@ -20,9 +20,10 @@ else
 	    if(isset($_POST['Ids'])) {
 		    $ids=$_POST['Ids'];
 		    foreach($ids as $d){
-		      $ris=eliminaCliente($d);
+		    $ris=eliminaCliente($d);
 		      if($ris)
 		      	++$num;
+		    $ris->free();
 		    }
 		}
 	    if($num==0)
@@ -77,6 +78,9 @@ else
 	}
 	else 
 		$str_to_print="<p class=\"inforesult\">Non sono presenti clienti da poter cancellare</p>";
+	
+	$ris->free();
+
 	if(isset($msg))
 		echo $msg;
 	echo $str_to_print;

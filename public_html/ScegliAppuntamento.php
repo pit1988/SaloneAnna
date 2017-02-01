@@ -19,7 +19,6 @@
       
       $result = listaAppuntamenti();
       
-      
       echo "<h2>Lista degli appuntamenti da oggi in poi</h2>";
       
       if (!$result)
@@ -63,7 +62,7 @@
         </fieldset>
         </form>";
       }
-      
+      $result->free();
       content_end();
       page_end();
   }

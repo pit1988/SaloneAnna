@@ -83,6 +83,7 @@ if (!isset($_SESSION['username'])) {
         echo"</fieldset>";
         echo"</form>";
     }
+    $result->free();
     content_end();
     page_end();
 }

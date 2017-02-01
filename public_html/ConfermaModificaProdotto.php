@@ -46,6 +46,7 @@ if (!isset($_SESSION['username'])) {
                 $msg = "<p class=\"errorSuggestion\">Non è stato possibile modificare il prodotto selezionato</p>";
             echo $msg;
         }
+        $result->free();
     }
     if (isset($msg))
         echo ($msg);
