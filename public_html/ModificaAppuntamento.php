@@ -39,7 +39,7 @@ if (!isset($_SESSION['username'])) {
                 <ul>
                     <p class="tipoAppun">
                         <li>
-                            <label for="TipoAppuntamento">Tipo appuntamento:</label>
+                             <label for="TipoAppuntamento">Tipo appuntamento:</label>
 ';
             
             $str2 = "";
@@ -47,7 +47,7 @@ if (!isset($_SESSION['username'])) {
             if(!is_null($res)){
                 foreach ($res as $tipoApp){
                     if(($tipoApp->nome)  == ($result->tipo))
-                        $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . ' checked="checked" " /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
+                        $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" checked="checked" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
                     else
                         $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
                 }

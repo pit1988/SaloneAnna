@@ -105,6 +105,8 @@ if (!isset($_SESSION['username'])) {
                         //una riga
                         $CodCliente = $result[0]->codice;
                         $ok = aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo);
+
+                        echo "aggiornaAppuntamento($cod, $CodCliente, $data, $ora, $tipo)";
                         if ($ok)
                             echo "<p class=\"inforesult\">L'appuntamento di $nome è stato modificato correttamente ed è il $data alle $ora</p>";
                         else

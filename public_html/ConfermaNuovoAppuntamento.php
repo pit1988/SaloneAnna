@@ -36,7 +36,7 @@ if (!isset($_SESSION['username'])) {
             $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo);
 
             if (!($ok==false))
-                echo "<p class=\"inforesult\">Appuntamento di nomeCognome inserito correttamente il $data alle $ora</p>";
+                echo "<p class=\"inforesult\">Appuntamento di $nomeCognome inserito correttamente il $data alle $ora</p>";
         }
         elseif (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
             $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
@@ -59,7 +59,7 @@ if (!isset($_SESSION['username'])) {
                 }
                 else{ //uno o più
                     $number_rows = count($result);
-                    echo $number_rows;
+                    
                     if ($number_rows > 1) {
                         echo "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
                         form_start("post", "conferma_appuntamento.php");
@@ -111,17 +111,15 @@ if (!isset($_SESSION['username'])) {
                         // prendi il codice cliente dall'unica riga
                         $codCliente=$result[0]->codice;
                         $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo); //ricontrollare paramen
-                        if ($ok)
+                        if (!($ok==false))
                             echo "<p class=\"inforesult\">Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
                         else
-                            echo "<p class=\"inforesult\">Appuntamento di $nome inserito correttamente il $data alle $ora</p>";
+                            echo "<p class=\"inforesult\">Non è stato possibile inserire l'appuntamento di $nome</p>";
                     }
                     
                 }
             }
         } //è stato inserito o si sono verificati errori
-
-
 
         content_end();
         page_end();
