@@ -26,7 +26,7 @@ function dbconnect() {
 	$db = "smarches";*/
 	$conn=new mysqli($host, $user, $pass, $db);
 	if($conn -> connect_errno)
-		echo "Connessione fallita(".$conn -> connect_errno."): ".$conn -> connect_error;
+		header("404.php");
 	return $conn;
 };
 

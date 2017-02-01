@@ -99,15 +99,6 @@ CREATE TABLE ProdApp(
 	CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
 
-CREATE TABLE Eccezioni(
-	Id_Eccezione INT PRIMARY KEY,
-	Descrizione VARCHAR(100)
-)Engine=InnoDB;
-
-INSERT INTO Eccezioni(Id_Eccezione, Descrizione) VALUES
-('1', 'Errore 1: Errore di Inserimento, e presente un appuntamento speciale'),
-('2', 'Errore 2: Errore di Inserimento, il prodotto che si vuole inserire e gia inserito');
-
 CREATE TABLE Account(
 	CodAccount SMALLINT PRIMARY KEY AUTO_INCREMENT,
 	username VARCHAR(20), 
