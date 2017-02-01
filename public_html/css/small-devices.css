@@ -74,7 +74,7 @@ html, body{
 
 /*Login*/
 
-.contentLogin {
+.contentLogButton {
     text-align: center;
 }
 
@@ -347,13 +347,13 @@ input[type="button"], input[type="submit"]{
     text-decoration: none;
     font-weight: bold;
     padding: 0.5em 1em 0.5em 1em;
-    margin: 0.4em;
+    margin: 0.4em 2em 0.4em 2em;
     color: white;
     border: solid 1px #4e4b3b;
     background: #4e4b3b;
     float: left;
     text-align: center;
-    width: 85%;
+    width: 70%;
 }
 
 /* Realizzazioni */
@@ -374,6 +374,10 @@ input[type="button"], input[type="submit"]{
 
 figcaption {
     text-align: center;
+}
+
+input#img_desc {
+    width: 80%;
 }
 
 
@@ -432,9 +436,12 @@ form label {
     margin: 0.5em 0 0.5em 0;
     color: #4f6fad;
     font-size: 0.8em;
+    text-align: center;
 }
+
 form input {
-    margin: 0 0 0.5em 0;
+    margin: 0.8em auto;
+    display: block;
     border: 1px solid #ccc;
     padding: 0.3em 0.6em;
     color: #555;
