@@ -30,9 +30,7 @@ function appuntamentiSettimana($date) {
 	if(preg_match("#^[0-9]{2}[-]{1}[0-9]{2}[-]{1}[0-9]{4}$#", $data)){
 		$ts = strtotime($date);
 		$start = strtotime('last monday', $ts);
-		echo "Lunedì: ".date('d-m-Y',$start);
 		$end=strtotime('next sunday', $start);
-		echo "Domenica: ".date('d-m-Y',$end);
 		$result= array();
 		//start date
 		$date = date('Y-m-d',$start);
@@ -41,7 +39,6 @@ function appuntamentiSettimana($date) {
 
 		while (strtotime($date) <= strtotime($end_date)) {
 	        $i=date('d-m-Y',strtotime($date));
-	        echo " $i ";
 	        $app_date=getAppuntamentiData($i);
 	        $p_date=date('l d-m-Y',strtotime($date));
 	        array_push($result, array($p_date, $app_date ));

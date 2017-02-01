@@ -11,13 +11,13 @@ if (!isset($_SESSION['username'])) {
     require 'library.php';
     include 'utils/DBlibrary.php';
     
-    $title      = "Elimina appuntamenti: Salone Anna";
-    $title_meta = "Elimina appuntamenti: Salone Anna";
+    $title      = "Appuntamenti Settimana: Salone Anna";
+    $title_meta = "Appuntamenti Settimana: Salone Anna";
     $descr      = "";
-    $keywords   = "Elimina, Appuntamenti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $keywords   = "Settimana, Appuntamenti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Elimina Appuntamenti</strong>';
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Appuntamenti Settimana</strong>';
     insert_header($rif, 6, true);
     content_begin();
     
@@ -36,68 +36,70 @@ if (!isset($_SESSION['username'])) {
     //chiama la funzione
     $result=appuntamentiSettimana($date);
 
+    
     //leggi array, se presente cicla sugli elementi e costruisci le tabelle
-    //ciclo
-        //ciclo interno uguale ad elimina
-    echo "<ul>";
-    for($i=0; $i<7; $i++){
-        $appuntamenti=$result[$i];
-    //foreach ($result as $appuntamenti) {
-        echo "<li>\n";
-        echo "<p class=\"info\">".$result[$i][0]."</p>\n";
-        $elenco=$appuntamenti[1];
-        if (!$elenco)
-            echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>\n";
-        else {
-            $str_to_print = '
-                <table id="topProd" summary="Appuntamenti successivi alla data corrente">
-                    <caption>Appuntamenti successivi alla data corrente</caption>
-                    <thead>
-                        <tr>
-                        <th scope="col">Id</th>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Cognome</th>
-                        <th scope="col">Data</th>
-                        <th scope="col">Ora</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Prezzo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    ';
-            
-            foreach ($elenco as $appuntamento) {
-                $str_to_print .= "
-                <tr>
-                    <td>" . $appuntamento->codice . "</td>
-                    <td>" . $appuntamento->nome . "</td>
-                    <td>" . $appuntamento->cognome . "</td>
-                    <td>" . $appuntamento->data . "</td>
-                    <td>" . $appuntamento->ora . "</td>
-                    <td>" . $appuntamento->tipo . "</td>
-                    <td>" . $appuntamento->prezzo . "</td>
-                </tr>
+    if(count($result)>0){
+        //ciclo
+            //ciclo interno uguale ad elimina
+        echo "<div><ul>";
+        for($i=0; $i<count($result); $i++){
+            $appuntamenti=$result[$i];
+        //foreach ($result as $appuntamenti) {
+            echo "<li>\n";
+            echo "<p class=\"info\">".$result[$i][0]."</p>\n";
+            $elenco=$appuntamenti[1];
+            if (!$elenco)
+                echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>\n";
+            else {
+                $str_to_print = '
+                    <table id="topProd" summary="Appuntamenti successivi alla data corrente">
+                        <caption>Appuntamenti successivi alla data corrente</caption>
+                        <thead>
+                            <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Cognome</th>
+                            <th scope="col">Data</th>
+                            <th scope="col">Ora</th>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Prezzo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        ';
+                
+                foreach ($elenco as $appuntamento) {
+                    $str_to_print .= "
+                    <tr>
+                        <td>" . $appuntamento->codice . "</td>
+                        <td>" . $appuntamento->nome . "</td>
+                        <td>" . $appuntamento->cognome . "</td>
+                        <td>" . $appuntamento->data . "</td>
+                        <td>" . $appuntamento->ora . "</td>
+                        <td>" . $appuntamento->tipo . "</td>
+                        <td>" . $appuntamento->prezzo . "</td>
+                    </tr>
+                    ";
+                }
+                
+                $str_to_print .= "</tbody></table>
                 ";
             }
-            
-            $str_to_print .= "</tbody></table>
-            ";
+            echo "</li>";
+            // to here
         }
-        echo "</li>";
-        // to here
+        echo "</ul></div>";
     }
-
+    else
+        echo "<p class=\"info\">Ci sono stati problemi nel reperire i risultati</p>\n";
     //Inserisci collegamenti a settimana precenente, odierna e successiva con la data presa in precedenza
-    $prec=date('d-m-Y',strtotime($date.'-1 week'));
-    echo $prec;
     $collegamenti="
-    <ul>
+    <p><ul>
         <li><a href=\"AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.'-1 week'))."\">Precenente</a></li>
         <li><a href=\"AppuntamentiSettimana.php\">Settimana odierna</a></li>
         <li><a href=\"AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.' + 1 week'))."\">Successiva</a></li>
-    </ul>";
+    </ul></p>";
     echo $collegamenti;
-
 
     unset($result);
     if (isset($msg))

@@ -137,7 +137,7 @@ function contenitore_menu_admin($num) { /*TOTO: Cambiare ordine elementi menu; s
 <li><a href="Prodotti.php" id="prod" class='.(($num == 4) ? ("vnav"):("nav")).' accesskey="p" tabindex="15">Prodotti </a></li>
 <li><a href="Clienti.php" id="clie" class='.(($num == 5) ? ("vnav"):("nav")).' accesskey="c" tabindex="14">Clienti</a></li>
 <li><a href="Appuntamenti.php" id="apps" class='.(($num == 6) ? ("vnav"):("nav")).' accesskey="a" tabindex="16">Appuntamenti</a></li>
-<li><a href="Messaggi.php" id="msgs" class='.(($num == 7) ? ("vnav"):("nav")).' accesskey="a" tabindex="17">Messaggi</a></li>
+<li><a href="Utilita.php" id="msgs" class='.(($num == 7) ? ("vnav"):("nav")).' accesskey="a" tabindex="17">Utilità</a></li>
 </ul>
 </div>
 ';

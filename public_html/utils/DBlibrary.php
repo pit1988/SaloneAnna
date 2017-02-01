@@ -569,7 +569,6 @@ function cambiaUtilizzoProdottiAppuntamento($codAppuntamento, $codProdotto, $uti
 
 function getAppuntamentiData($date){
 	if(preg_match("/([0-9]{1,2})[-]([0-9]{2})[-]([0-9]{4})/", $date)){
-		echo "start $date end";
 		$ts = date_format(date_create_from_format("d-m-Y", $date), "Y-m-d");
 		$result = eseguiQuery("SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
 		FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente
@@ -598,9 +597,7 @@ function appuntamentiSettimana($date) {
 	if(preg_match("/([0-9]{1,2})[-]([0-9]{2})[-]([0-9]{4})/", $date)){
 		$ts = strtotime($date);
 		$start = strtotime('last monday', $ts);
-		echo "Lunedì: ".date('d-m-Y',$start);
 		$end=strtotime('next sunday', $start);
-		echo "Domenica: ".date('d-m-Y',$end);
 		$result= array();
 		//start date
 		$date = date('Y-m-d',$start);
@@ -609,7 +606,6 @@ function appuntamentiSettimana($date) {
 
 		while (strtotime($date) <= strtotime($end_date)) {
 	        $i=date('d-m-Y',strtotime($date));
-	        echo " $i ";
 	        $app_date=getAppuntamentiData($i);
 	        $p_date=date('l d-m-Y',strtotime($date));
 	        array_push($result, array($p_date, $app_date ));
