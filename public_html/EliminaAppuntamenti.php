@@ -88,7 +88,6 @@ if (!isset($_SESSION['username'])) {
         
         $str_to_print .= "</tbody></table>";
         $str_to_print .= "<input type=\"submit\" name=\"submit\" value=\"Conferma\">
-    	</td>
         </fieldset>
 	</form>";
     }
