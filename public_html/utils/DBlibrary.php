@@ -929,7 +929,6 @@ function AppuntamentiDataCliente($codCliente="", $data="", $ora="") {
 		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
 		checkAndWhere($where);
 		$where .= "DATE(DataOra)='$data' ";
-		if(!preg_match("/[0-9]{1,2}[:][0-9]{2}/", $ora))echo "rexef fallita";
 		if($ora!="" AND preg_match("/[0-9]{1,2}[:][0-9]{2}/", $ora)) {
 			$hh = substr($ora, 0, 2);
 			$where .= "AND HOUR(DataOra)>='$hh'";
