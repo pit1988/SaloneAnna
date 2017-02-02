@@ -635,6 +635,18 @@ function getAppuntamentiData($date){
 	else return false;
 }
 
+function giorno($day)
+{
+	$giorni = array(0=>'Domenica',
+	'Lunedì',
+	'Martedì',
+	'Mercoledì',
+	'Giovedì',
+	'Venerdì',
+	'Sabato');
+	return $giorni[$day];
+}
+
 function appuntamentiSettimana($date) {
 	if(preg_match("/([0-9]{1,2})[-]([0-9]{2})[-]([0-9]{4})/", $date)){
 		$ts = strtotime($date);
@@ -649,7 +661,7 @@ function appuntamentiSettimana($date) {
 		while (strtotime($date) <= strtotime($end_date)) {
 	        $i=date('d-m-Y',strtotime($date));
 	        $app_date=getAppuntamentiData($i);
-	        $p_date=date('l d-m-Y',strtotime($date));
+	        $p_date=giorno(date('w', strtotime($date))) . " ". date('d/m/Y',strtotime($date));
 	        array_push($result, array($p_date, $app_date ));
 	        $date = date ("Y-m-d", strtotime("+1 day", strtotime($date)));
 		}

@@ -32,10 +32,14 @@ if (!isset($_SESSION['username'])) {
         // leggi la data e settala
         $date=date('j-m-Y',strtotime($_GET["date"]));
     }
-    echo $date;
+    // echo $date;
+    $ts = strtotime($date);
+    $start = strtotime('last monday', $ts);
+    $end=strtotime('next sunday', $start);
+    echo "<h2>Appuntamenti dal ".date('d/m/Y', $start)." al ".date('d/m/Y', $end)."</h2>\n";
+
     //chiama la funzione
     $result=appuntamentiSettimana($date);
-
     
     //leggi array, se presente cicla sugli elementi e costruisci le tabelle
     if(count($result)>0){
@@ -46,16 +50,15 @@ if (!isset($_SESSION['username'])) {
             ";
         for($i=0; $i<count($result); $i++){
             $appuntamenti=$result[$i];
-        //foreach ($result as $appuntamenti) {
             echo "<li>\n";
             echo "<p class=\"info\">".$result[$i][0]."</p>\n";
             $elenco=$appuntamenti[1];
-            if (!$elenco)
+            if (count($elenco)==0)
                 echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>\n";
             else {
                 $str_to_print = '
-                    <table id="tabApp" summary="Appuntamenti successivi alla data corrente">
-                        <caption>Appuntamenti successivi alla data corrente</caption>
+                    <table class="tabApp" summary="tabella appuntamenti">
+                        <caption class="nascosto">Appuntamenti relativi al $result[$i][0]</caption>
                         <thead>
                             <tr>
                             <th scope="col">Id</th>
@@ -86,6 +89,7 @@ if (!isset($_SESSION['username'])) {
                 
                 $str_to_print .= "</tbody></table>
                 ";
+                echo $str_to_print;
             }
             echo "</li>";
             // to here
@@ -95,19 +99,15 @@ if (!isset($_SESSION['username'])) {
     else
         echo "<p class=\"info\">Ci sono stati problemi nel reperire i risultati</p>\n";
     //Inserisci collegamenti a settimana precenente, odierna e successiva con la data presa in precedenza
-    $collegamenti="
-    <ul>
-        <li><a href=\"AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.'-1 week'))."\">Precenente</a></li>
-        <li><a href=\"AppuntamentiSettimana.php\">Settimana odierna</a></li>
-        <li><a href=\"AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.' + 1 week'))."\">Successiva</a></li>
-    </ul>";
-    echo $collegamenti;
+    hyperlink("Precenente" , "AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.'-1 week')));
+    hyperlink("Settimana odierna", "AppuntamentiSettimana.php");
+    hyperlink("Successiva", "AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.' + 1 week')));
 
     unset($result);
     if (isset($msg))
         echo $msg;
-    if (isset($str_to_print))
-    echo $str_to_print;
+/*    if (isset($str_to_print))
+    echo $str_to_print;*/
     content_end();
     page_end();
 }

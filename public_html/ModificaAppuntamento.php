@@ -52,7 +52,7 @@ if (!isset($_SESSION['username'])) {
                         $str2 .= '<p><input type="radio" name="TipoAppuntamento" id="t'.$tipoApp->codice.'" value="' . $tipoApp->codice . '" /><label for="t'.$tipoApp->codice.'">'.$tipoApp->nome."</label></p>";
                 }
             }
-            $res->free();
+            unset($res);
             $str3 = '</li></p>
                     <p class="datiAppun">
                         <li>
@@ -90,7 +90,7 @@ if (!isset($_SESSION['username'])) {
             </fieldset>
             </form>
 ';
-            $result->free();
+            unset($result);
             echo $str1 . $str2 . $str3;
         }
     }
