@@ -24,7 +24,6 @@ $title="Contattaci: Salone Anna";
 $title_meta="Contattaci: Salone Anna";
 $descr="Pagina con le modalità di contatto di Salone Anna. Ci puoi trovare a Montecchio Maggiore, via L.Ariosto 2";
 $keywords="Salone, Anna, telefono, email, mail, indirizzo, dove trovarci, dove siamo, Vicenza, Montecchio, Maggiore, sede, via Ariosto, e-mail, mappa";
-require 'library.php';
 $onload="caricamentoContattaci(); replaceMap();";
 page_start($title, $title_meta, $descr, $keywords, $onload);
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
