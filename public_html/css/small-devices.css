@@ -414,9 +414,7 @@ form ul li {
     display: inline-block;
     width: 100%;
 }
-form ul li:last-child {
-    margin: 0;
-}
+
 
 form ul li p.right {
     float: right;
@@ -581,7 +579,7 @@ td:before {
 }
 
 /* Seleziona prodotto da eliminare diverso */
-#ProdottiMagazzino td:last-child, #clientiTabSelect td:last-child, #tabApp td:last-child, #messaggi td:last-child {
+.tdin {
     color: #ffffff;
     background: #4e4b3b;
     vertical-align:center;
@@ -654,9 +652,6 @@ h2{
   border-top:none;
 }
 
-#listino tr:last-child {
-  border-bottom:none;
-}
 
 #listino .cintervento{
     background:#EBEBEB;
