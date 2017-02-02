@@ -31,7 +31,7 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 ';
 $str2='<body onload="scroll()">';
 if($fun!='')
-    $str2='<body onload="'. trim($fun) . ', scroll()">';
+    $str2='<body onload="'. trim(rtrim(trim($fun),";")) . '; scroll()">';
 
 $str3='
 <p class="nascosto">

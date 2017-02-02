@@ -1,8 +1,8 @@
 <?php
-  
-    require_once 'library.php';
-    require_once 'utils/DBlibrary.php';
+require_once 'library.php';
+require_once 'utils/DBlibrary.php';
 $login=authenticate();
+
 // Controllo accesso
 if (!$login) {
     header('location:index.php');
@@ -11,6 +11,9 @@ if (!$login) {
     if (!isset($_POST['submit']) OR (!isset($_POST['cli']) AND !isset($_POST['data']))) {
         $err = "<p class=\"errorSuggestion\">Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } else {
+        $codCliente=0;
+        $data=""; 
+        $ora="")
         $s_client = (isset($_POST['cli']) && ($_POST["cli"] == "cli")) ? true : false;
         $s_data   = (isset($_POST['data']) && ($_POST["date"] == "date")) ? true : false;
         

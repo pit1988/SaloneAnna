@@ -33,7 +33,6 @@ $pg_start='
 
     <div class="titolo_contattaci">
         <h2>Contattaci</h2>
-        <h3>Qualsiasi informazione in modo semplice</h3>
     </div>
     <div class="body_contattaci">
     ';
