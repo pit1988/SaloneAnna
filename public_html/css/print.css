@@ -53,7 +53,7 @@ h1{
     margin-top: 20px;
 }
 
-#login, #ricerca, #logout, #accedi, #conferma{
+#login, #ricerca, #logout, #conferma{
     display: none;
 }
 

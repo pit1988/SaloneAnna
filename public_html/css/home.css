@@ -106,20 +106,6 @@ legend{
     text-align: center;
 }
 
-
-#accedi{
-    float: right;
-    margin: 5px;
-    color: white;
-    border: solid 1px #2b2821;
-    background: #4e4b3b;
-}
-
-#accedi{
-    float:right;
-    padding: 0 15px 0 15px;
-}
-
 #contenitore-login label{
     color: #31456b;
     font-size: 1.2em;
@@ -224,13 +210,9 @@ li a:hover {
 .titolo_contattaci{
     color: #fff3f6;
     padding: 20px;
-    font-size:1.2em;
+    font-size:1.4em;
     text-align: center;
     background: #4e4b3b;
-}
-
-.titolo_contattaci h2{
-    font-size:1.4em;
 }
 
 .SaloneAnna .info{

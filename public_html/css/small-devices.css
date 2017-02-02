@@ -112,21 +112,8 @@ legend{
     text-align: center;
 }
 
-
-#accedi{
-    color: white;
-    border: solid 1px #2b2821;
-    background: #4e4b3b;
-}
-
 #legend{
     margin: 1em;
-}
-
-#accedi{
-    margin-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
 }
 
 #contenitore-login label{
@@ -139,13 +126,6 @@ legend{
     width:30%;
 }
 
-#updateOk{
-   font-size: 1em;
-   color: #8c001f; 
-   margin-right: 1em;  
-}
-
-
 /*Logo*/
 h1{
     text-align:center;
@@ -155,13 +135,6 @@ h1{
     background-position: 0px 0px;
     width: 99%;
     height: 100px;
-}
-
-#accedi{
-    margin-top: 10px;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-left: 30%;
 }
 
 #contenitore-login label{
@@ -278,10 +251,6 @@ h2{
     clear: both;
 }
 
-.informazioni{
-    display:block;
-}
-
 .center {
     display: block;
     margin: 1em 2em 1em 2em;
@@ -293,11 +262,12 @@ h2{
     height:10em;
 }
 
-
 .titolo_contattaci{
     color: #ffffff;
     padding: 20px;
     background: #4e4b3b;
+    font-size: 1.2em;
+    text-align: center;
 }
 
 .SaloneAnna .info{
@@ -388,14 +358,6 @@ input#uploadedfile {
 
 
 /*Parte per la form di contattaci*/
-
-.titolo_contattaci h2{
-    font-size: 1.2em;
-}
-
-.titolo_contattaci{
-    text-align: center;
-}
 
 .body_contattaci{
     text-align: center;
@@ -489,9 +451,7 @@ form small {
     width:1px;
     height:1px;
     overflow:hidden;
-
     display: none;
-
 }
 
 .errorSuggestion{
