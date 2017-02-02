@@ -29,7 +29,7 @@ if (!isset($_SESSION['username'])) {
                             <em>Messaggio inviato da:  </em>' . $result->nome . ' ' . $result->cognome . '
                         </p>
                     </li>
-                    <li><
+                    <li>
                         <p id="dataora">
                             <em>Ricevuto:  </em>' . $result->data . ' ' . $result->ora . '
                         </p>
