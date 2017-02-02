@@ -35,8 +35,8 @@ if ($num_rows>0){
 	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
 	foreach ($result as $foto) {
         echo "
-	    	<dd class=\"photo\">
-		    	<figure>
+	    	<dd>
+		    	<figure class=\"photo\">
 		    		<img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/>
 		    		<figcaption>" . $foto->descrizione. "</figcaption>
 		    	</figure>

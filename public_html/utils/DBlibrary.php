@@ -710,11 +710,11 @@ function aggiungiImmagine($img_desc, $userfile) { //dovrebbe bastarmi sapere la 
                 $conn         = dbconnect();
                 $i            = 1;
                 $success      = false;
-                $new_img_name = $userfile['name'];
+                $new_img_name = str_replace(' ', '', $userfile['name']);
                 while (!$success) {
                     if (file_exists("uploads/" . $new_img_name)) {
                         $i++;
-                        $new_img_name = "$i" . $img_name;
+                        $new_img_name = "$i" . $new_img_name;
                     } else {
                         $success = true;
                     }

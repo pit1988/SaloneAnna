@@ -24,8 +24,8 @@ if (!isset($_SESSION['username'])) {
     
     $result   = elencoClientiCompleanni();
     $num_rows = count($result);
-    $tb       = "";
-    if ($result) {
+    $tb = "";
+    if ($num_rows>0) {
         $tb = '<table id="clientiTab" summary="Elenco clienti">
             <caption class="nascosto">Elenco clienti</caption>
             <thead>
