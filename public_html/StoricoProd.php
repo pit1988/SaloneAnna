@@ -49,7 +49,7 @@ if (!isset($_SESSION['username'])) {
                       <th scope="col">Data e Ora</th>
                       <th scope="col">Codice Prodotto</th>
                       <th scope="col">Utilizzo</th>
-                      <th scope="col">Nome Prodotto</th>
+                      <th scope="col">Nome Prodotto (ml)</th>
                   </tr>
               </thead>
 
@@ -58,14 +58,14 @@ if (!isset($_SESSION['username'])) {
                       <th scope="col">Codice Appuntamento</th>
                       <th scope="col">Data e Ora</th>
                       <th scope="col">Codice Prodotto</th>
-                      <th scope="col">Utilizzo</th>
+                      <th scope="col">Utilizzo (ml)</th>
                       <th scope="col">Nome Prodotto</th>
                   </tr>
               </tfoot>
 
               <tbody>
               ';
-                //corpo tabella
+                //corpo tabella - Inserire ml su cella utilizzo
                 $tb = "";
                 while ($row = mysqli_fetch_row($result)) {
                     $tb .= "<tr>\n";
