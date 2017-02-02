@@ -90,7 +90,7 @@ $str2='';
 if($is_admin == false)
     $str2= '<div class="contentLogButton"><a id="login" href="login.php" accesskey="w" tabindex="5">Area Riservata</a></div>';
 else
-    $str2= '<div class="contentLogButton"><a id="logout" href="utils/logout.php" accesskey="w" tabindex="5">logout</a></div>';
+    $str2= '<div class="contentLogButton"><a id="logout" href="utils/logout.php" accesskey="w" tabindex="5">Logout</a></div>';
 $str3='
 <div id="breadcrumbs">
 <span id="rifnav" >Ti trovi in: '.trim($pth).'</span>
@@ -231,25 +231,15 @@ function checkSessionLifetime() {
     return true;
 };
 
-function checkLog() {
-    if(isset($_SESSION['username']) && checkSessionLifetime()) { //la prima funzione controlla se è stata creata una sessione, se ci sono errori ho qualche altra variante da poter provare, la seconda invece fa il controllo del tempo di vita della sessione, non ho usato altri metodi più semplici per vari motivi che spiego a voce
-        return true;
+/* inizia la sessione e verifica che l'utente sia autenticato */
+function authenticate() {
+    session_start();
+    session_regenerate_id(TRUE); //cambia l'ID della sessione, è una tecnica di sicurezza
+    if (isset($_SESSION['username']) && checkSessionLifetime()) {
+        return TRUE;
     } else {
-        return false;
+        return FALSE;
     }
-};
-
-function new_user($login, $password) { 
-    /* si connette e seleziona il database da usare */
-    $dbname="login-ES";
-    $conn = dbConnect($dbname);
-    /* preparazione dello statement */
-    $query= sprintf("INSERT INTO Eser5Users VALUES (\"%s\", \"%s\")", 
-                    $login, SHA1($password));
-    /* Stampa la query a video ... utile per debug */
-    /* echo "<B>Query</B>: $query <BR />"; */
-    mysqli_query($conn, $query)
-        or die("Query fallita" . mysqli_error($conn));
 };
 
 ?>

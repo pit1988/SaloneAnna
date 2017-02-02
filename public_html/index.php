@@ -11,12 +11,12 @@ $descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone te
 $keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 page_start($title, $title_meta, $descr, $keywords, '');
 $rif="<strong xml:lang=\"en\">Home</strong>";
-$name="visitatore"; 
+//$name="visitatore"; 
 $is_admin=false;
 
-if (checkLog() ) {
+if ($login) {
 	$is_admin=true;
-	$name = $login;
+	//$name = $login;
 }
 
 insert_header($rif, 0, $is_admin,'');

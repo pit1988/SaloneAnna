@@ -1,16 +1,5 @@
 <?php
 
-/* inizia la sessione e verifica che l'utente sia autenticato */
-function authenticate() {
-    session_start();
-    session_regenerate_id(TRUE);
-    if (! isset($_SESSION['username'])) {
-        return FALSE;
-    } else {
-        return $_SESSION['username'];
-    }
-};
-
 function dbconnect() {
 	$host = "localhost";
 

@@ -1,6 +1,7 @@
 <?php
 // così funziona
 require_once 'DBlibrary.php';
+require_once '../library.php';
 
 $login=authenticate(); //per sicurezza controllo che ci sia una sessione attiva, questa condizione dovrebbe essere sempre vera quando viene eseguito questo codice
 

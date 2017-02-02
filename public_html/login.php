@@ -2,7 +2,7 @@
 require_once "library.php";
 include "utils/DBlibrary.php";
 
-if (checkLog())
+if (authenticate())
   {
     header('location:index.php');
     exit;
@@ -30,12 +30,9 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 	$result = $conn->query($query);
 	
 	if ($result->num_rows > 0) { //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
-		session_start(); //inizia la sessione
-		session_regenerate_id(TRUE); //cambia l'ID della sessione, è una tecnica di sicurezza da inserire dopo la creazione dell'ID
 		$_SESSION['username'] = $username; //salvo i dati
 		$_SESSION['password'] = $password;
 		$_SESSION['creazione'] = time(); //salvo l'ultima attività
-		// header('location:index.php'); //carica la pagina index.php, inoltre se ci sono errori di header questo comando li aggira
 		$msg="<p class=\"inforesult\">Accesso eseguito con successo</p>";
 		
 		$is_logged=true;
