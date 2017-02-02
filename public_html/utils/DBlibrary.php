@@ -835,7 +835,11 @@ function prodottiInEsaurimento() {
 }
 
 function elencoClientiCompleanni() {
-	$result = eseguiQuery("SELECT * FROM Clienti WHERE DataNascita BETWEEN CURDATE() AND (ADDDATE(CURDATE(), INTERVAL 31 DAY))");
+	$result = eseguiQuery("
+		SELECT *
+		FROM Clienti 
+		WHERE MONTH(DataNascita)*100+DAY(DataNascita) BETWEEN MONTH(CURDATE())*100+DAY(CURDATE()) AND MONTH(ADDDATE(CURDATE(), INTERVAL 31 DAY))*100+DAY(ADDDATE(CURDATE(), INTERVAL 31 DAY))
+		");
 	if(!$result) {$clienti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$clienti = array();
