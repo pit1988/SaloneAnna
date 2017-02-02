@@ -355,18 +355,31 @@ input[type="button"], input[type="submit"]{
 
 /* Realizzazioni */
 
-.contentfigura {
+.photo {
+    width: 100%;
     text-align: center;
+    margin-bottom: 2em;
+    margin-top: 1em;
+}
+
+.photo a{
+    text-decoration:none;
+}
+
+.desc {
+    text-align: center;
+    color: black;
+    font-style: italic;
+    padding: 1em;
 }
 
 #content img {
-    border: 0.3em solid;
-    margin-top: 2em;
-    max-width: 95%;
+    border: 0.3em solid black;
+    max-width: 90%;
 }
 
-figcaption {
-    text-align: center;
+#content img:hover {
+    border: 0.3em solid #fff3f6;
 }
 
 input#img_desc {
