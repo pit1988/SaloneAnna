@@ -39,8 +39,7 @@ if (!isset($_SESSION['username'])) {
                 $err .= "<p class=\"inforesult\">Non sono presenti prodotti per il cliente selezionato</p>";
             else {
                 $number_cols = mysqli_num_fields($result);
-                
-                echo "<b>Storico:</b>";
+                // echo "<h2>Storico Prodotti:</h2>";
                 
                 $th = '<table class="storicoApp" summary="Storico Appuntamenti cliente">
               <caption>Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
@@ -61,6 +60,7 @@ if (!isset($_SESSION['username'])) {
                       <th scope="col">Codice Prodotto</th>
                       <th scope="col">Utilizzo</th>
                       <th scope="col">Nome Prodotto</th>
+                  </tr>
               </tfoot>
 
               <tbody>
@@ -79,7 +79,7 @@ if (!isset($_SESSION['username'])) {
                         }
                         $tb .= "</td>\n";
                     }
-                    $tb .= "</td>\n";
+                    $tb .= "</tr>\n";
                 }
                 $tf = "</tbody></table>";
                 $to_print = $th . $tb . $tf;
@@ -90,25 +90,23 @@ if (!isset($_SESSION['username'])) {
 }
 $form = '
 <p class="info">Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
-<p>
-  <form method="post" action="StoricoProd.php">
-    <fieldset>
-      <legend>Ricerca prodotti</legend>
-      <ul>
-        <li>
-            <p>
-                <label for="first_name">Nome</label>
-                <input type="text" name="first_name" id="first_name" tabindex="100"/>
-            
-                <label for="last_name">Cognome</label>
-                <input type="text" name="last_name" id="last_name" tabindex="101" />
-            </p>
-        </li>
-        <li><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
-      </ul>
-    <fieldset>
-  </form>
-</p>
+<form method="post" action="StoricoProd.php">
+  <fieldset>
+    <legend>Ricerca prodotti</legend>
+    <ul>
+      <li>
+          <p>
+              <label for="first_name">Nome</label>
+              <input type="text" name="first_name" id="first_name" tabindex="100"/>
+          
+              <label for="last_name">Cognome</label>
+              <input type="text" name="last_name" id="last_name" tabindex="101" />
+          </p>
+      </li>
+      <li><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
+    </ul>
+  </fieldset>
+</form>
   ';
 
 

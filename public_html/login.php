@@ -62,13 +62,13 @@ if(!$is_logged) {
 			<li>
 				<p>
 					<label for="username">Nome utente</label>
-					<input type="text" name="username" id="username" tabindex="100">
+					<input type="text" name="username" id="username" tabindex="100" />
 				</p>
 			</li>
 			<li>
 				<p>
 					<label for="password" xml:lang="en">Password</label>
-					<input type="password" id="password" name="password" tabindex="101">
+					<input type="password" id="password" name="password" tabindex="101" />
 				</p>
 			</li>
 			<li>
@@ -76,7 +76,7 @@ if(!$is_logged) {
 					<input class="btn btn-submit" type="submit" name="submit" value="Accedi" tabindex="105"/>
                     <span id="errors"></span>
                 </p>
-            <li>
+            </li>
         </ul>
 	</fieldset>
 </form>

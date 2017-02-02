@@ -53,8 +53,9 @@ if (!isset($_SESSION['username'])) {
     if (!$num_rows)
         echo "<p>Non ci sono entry nella tabella Prodotti</p>";
     else {
-        form_start("post", "Inventario.php");
-        $th = '<table id="ProdottiMagazzino" summary="Prodotti in magazzino">
+        $th = '<form method="post" action="Inventario.php">
+            <fieldset>
+        <table id="ProdottiMagazzino" summary="Prodotti in magazzino">
             <caption class="nascosto">Prodotti modificabili</caption>
             <thead>
                 <tr>
@@ -89,21 +90,22 @@ if (!isset($_SESSION['username'])) {
                     <td>".$prodotto->codice."</td>
                     <td>".$prodotto->nome."</td>
                     <td>".$prodotto->marca."</td>
-                    <td>".$prodotto->tipo."</a></td>
-                    <td><input type=\"text\" name=\"qtprod[]\" value=\"$prodotto->quantita\" /></td>
+                    <td>".$prodotto->tipo."</td>
+                    <td><input type=\"text\" name=\"qtprod[]\" value=\"$prodotto->quantita\" />
+                        <input type=\"hidden\" name=\"qtprod_old[]\" value=\"$prodotto->quantita\" />
+                        <input type=\"hidden\" name=\"codprod[]\" value=\"$prodotto->codice\" />
+                    </td>
                     <td>".$prodotto->prezzo."</td>
                     <td>".$prodotto->prezzoRiv."</td>
-                    <input type=\"hidden\" name=\"qtprod_old[]\" value=\"$prodotto->quantita\" />
-                    <input type=\"hidden\" name=\"codprod[]\" value=\"$prodotto->codice\" />
                 </tr>";
 
-        $tf= "</tbody></table>";
+        $tf= "</tbody></table>
+            <input type='submit' name='submit' value='Procedi'/>
+            <input type='reset' value='Cancella'/>
+            </fieldset>
+            </form>";
         $to_print = $th . $tb . $tf;
         echo $to_print;
-        echo"<input type='submit' name='submit' value='Procedi'>";
-        echo"<input type='reset' value='Cancella'>";
-        // echo"</fieldset>";
-        echo"</form>";
     }
     unset($result);
     content_end();
