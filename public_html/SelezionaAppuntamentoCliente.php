@@ -57,7 +57,7 @@ else {
                     <td>" . $appuntamento->ora . "</td>
                     <td>" . $appuntamento->tipo . "</td>
                     <td>" . $appuntamento->prezzo . "</td>
-                    <td><input type=\"radio\" name=\"codapp\" value= \"" . $appuntamento->codice . "\"/></td>
+                    <td class=\"tdin\"><input type=\"radio\" name=\"codapp\" value= \"" . $appuntamento->codice . "\"/></td>
                   </tr>";
             }
             

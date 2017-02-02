@@ -88,7 +88,7 @@ if (!checkLog()) {
                                     <td>".$cliente->telefono."</a></td>
                                     <td>".$cliente->email."</td>
                                     <td>".$cliente->dataNascita."</td>
-                                    <td><input type='radio' name='CodCliente' value=$cliente->codice></td>
+                                    <td class=\"tdin\"><input type='radio' name='CodCliente' value=$cliente->codice></td>
                                 </tr>
                                 ";
                         }

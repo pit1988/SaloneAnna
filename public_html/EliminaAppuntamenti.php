@@ -79,7 +79,7 @@ if (!checkLog()) {
                 <td>" . $appuntamento->ora . "</td>
                 <td>" . $appuntamento->tipo . "</td>
                 <td>" . $appuntamento->prezzo . "</td>
-                <td><input type=\"checkbox\" name=\"codApp[]\" value= \"" . $appuntamento->codice . "\" /></td>
+                <td class=\"tdin\"><input type=\"checkbox\" name=\"codApp[]\" value= \"" . $appuntamento->codice . "\" /></td>
             </tr>
             ";
         }
