@@ -1,7 +1,7 @@
 <?php
-$login=authenticate();
 require 'library.php';
-include("utils/DBlibrary.php");
+require 'utils/DBlibrary.php';
+$login=authenticate();
 
 $to_print = "";
 $err = "";
