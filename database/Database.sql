@@ -56,9 +56,9 @@ CREATE TABLE Appuntamenti (
 )Engine=InnoDB;
 
 INSERT INTO Appuntamenti (CodAppuntamento, CodCliente, DataOra, CodTipoAppuntamento) VALUES
-('1', '1', '2017-02-13 10:30:00', '2'),
-('2', '2', '2017-02-13 14:00:00', '5'),
-('3', '2', '2017-02-14 10:30:00', '6'),
+('1', '1', '2017-02-5 10:30:00', '2'),
+('2', '2', '2017-02-10 14:00:00', '5'),
+('3', '2', '2017-02-10 10:30:00', '6'),
 ('4', '3', '2017-02-15 14:00:00', '6'),
 ('5', '4', '2017-02-15 10:30:00', '9'),
 ('6', '3', '2017-02-18 14:00:00', '2');
@@ -115,10 +115,10 @@ CREATE TABLE Messaggi (
 )Engine=InnoDB;
 
 INSERT INTO Messaggi(CodMessaggi, CodCliente, Contenuto, DataOra, ToRead) VALUES
-(1, 1, "Ciao! Hai un buco per il 13 febbraio? Possibilmente al mattino? Perche&#769; ho bisogno di una spuntatina veloce", "2017-02-07 15:13:34", 0),
-(2, 2, "E&#768; possibile per la settimana prossima prendere un appuntamento? Ho bisogno del solito, senza colore", "2017-02-07 21:03:15", 0),
+(1, 1, "Ciao! Hai un buco per il 5 febbraio? Possibilmente al mattino? Perche&#769; ho bisogno di una spuntatina veloce", "2017-02-01 15:13:34", 0),
+(2, 2, "E&#768; possibile per la settimana prossima prendere un appuntamento? Ho bisogno del solito, senza colore", "2017-02-01 21:03:15", 0),
 (3, 4, "Riesci a fissarmi un appuntamento per il 15 mattina? Che cosi&#768; passo prima o dopo aver fatto la spesa", "2017-02-09 22:19:45", 0),
-(4, 2, "Ho cambiato idea, riesci a farmi anche il colore? Va bene anche se mi dai un altro appuntamento, scusa per il disturbo", "2017-02-11 11:35:19", 0),
+(4, 2, "Ho cambiato idea, riesci a farmi anche il colore? Va bene anche se mi dai un altro appuntamento, scusa per il disturbo", "2017-02-09 11:35:19", 0),
 (5, 4, "Mi spiace ma ho avuto un contrattempo, domani non riesco a venire. Ti dico appena trovo un momento libero per fissare un appuntamento", "2017-02-14 20:11:28", 1);
 
 CREATE TABLE Images (
