@@ -219,11 +219,13 @@ h1{
 #contenitore-menu {
     width: 310px;
     margin: 0 auto;
+    font-size: 88%;
 }
 
 #contenitore-menu-admin {
-    width: 310px;
+    width: 320px;
     margin: 0 auto;
+    font-size: 116%;
 }
 
 .vnav{
@@ -238,8 +240,6 @@ h1{
     padding: 0;
     overflow: hidden;
     background-color: #C4B49D;
-
-    font-size: 89%;
 }
 
 li {
@@ -649,6 +649,7 @@ h2{
   color:#3e4150;
   font-size:1em;
   font-weight:normal;
+  margin-bottom: 0em;
 }
 
 #listino thead tr{
@@ -732,9 +733,9 @@ td {
 /*VISUALIZZA APPUNTAMENITI */
 
 .ggApp {
-    padding: 1em;
+    padding: 1.7em;
     border-top: 1px dashed #4e4b3b;
-    width: 100%;
+    width: 85%;
 }
 
 p.ggCalendario {
