@@ -88,8 +88,6 @@ else {
             <input type="reset" value="Cancella"/>
         </fieldset>
         </form>
-
-        // hyperlink("Torna alla home", "index.php");
     ';
 
     
