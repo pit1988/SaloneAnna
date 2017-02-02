@@ -34,12 +34,12 @@ ol, ul {
 blockquote, q {
     quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
+blockquote:before, blockquote:after,q:before, q:after {
     content: '';
-content: none;
+    content: none;
 }
 table {
+    margin: 0 auto;
     border-collapse: collapse;
     border-spacing: 0;
 }
@@ -58,7 +58,6 @@ html, body{padding:0px;
 #headheader{
     padding: 0;
     margin: 30px auto; /*per Firefox, Opera, Safari, etc...*/
-    
 }
 
 /*Elementi nascosti di lettura per lo screenR e non visibili*/
@@ -69,7 +68,6 @@ html, body{padding:0px;
     width:1px;
     height:1px;
     overflow:hidden;
-    
     display: none;
 
 }
@@ -80,7 +78,6 @@ h1{
     margin: 0;
     padding: 0px 0px 10px 10px;
     text-align:left;
-    float:left;
     background-image:url(../img/logo.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
@@ -89,17 +86,14 @@ h1{
 }
 
 /*Login*/
-
 legend{
-
    font-size:1.4em;
-   padding: 1em 0em 1em 0em;	
+   padding: 1em 0em 1em 0em;
 }
 
 #logError{      /*Compare dinamicamente a errore di inserimento*/
-   float:right;
    font-size: 1.2em;
-   color: #8c001f; 
+   color: #8c001f;
    margin-right: 1em;
 }
 
@@ -111,18 +105,18 @@ legend{
 
 
 #accedi{
+    float: right;
     margin: 5px;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
-    
+
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
+
 }
 
 #accedi{
-    vertical-align: text-bottom;  
-    padding-left: 20px;
-    padding-right: 20px;
-    float: left;
+    float:right;
+    padding: 0 15px 0 15px;
 }
 
 #contenitore-login label{
@@ -132,19 +126,17 @@ legend{
 }
 
 #inputUsername, #inputPassword{
-    width:30%;
-    padding: 0.5em;
+    width: 30%;
 }
 
 #logout, #login{
-    vertical-align: text-bottom;  
-    margin: 0.5em;
-    float: right;
-    padding: 0 1.5em 0 1.5em;
+    margin: 5px;
+    float: left;
+    text-decoration: none;
+    padding: 1.5px 15px 1.5px 15px;
     color: white;
-    border: solid 1px #a30025;
-    background: #b40029;
-
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
 }
 
 /* BreadCrumbs Part*/
@@ -152,6 +144,7 @@ legend{
     border-top: 1px dotted #4e4b3b;
     border-bottom: 1px dotted #4e4b3b;
     clear: both;
+    display:inline-block;
 }
 
 #rifnav {
@@ -163,8 +156,12 @@ legend{
 }
 
 /*Menu*/
-#contenitore-menu {
-    width: 29em;
+#contenitore-menu{
+    width: 35em;
+    margin: 0 auto;
+}
+#contenitore-menu-admin{
+    width: 742px;
     margin: 0 auto;
 }
 
@@ -183,7 +180,7 @@ legend{
     background-color: #C4B49D;
 }
 
-li {
+.menu li {
     float: left;
 }
 
@@ -215,7 +212,7 @@ h2{
 }
 
 #content{
-    background-color:#b0fcb0;
+    background-color:#c4b49d;
     margin:0 auto;
     padding: 1em;
     width:80%;
@@ -226,28 +223,19 @@ h2{
 .informazioni{
     display:block;
 }
-.SaloneAnna .info{
-    margin: 0 0 0.5em 0;
-    color: #31456b;
-    clear: both;
-    text-align: center;
-    font-style: oblique;
+
+#immagine {
+    background-image: url(../img/home1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 27em;
 }
-
-
-#immagine{
-    background-image:url("../img/prato.jpg");
-    background-repeat:no-repeat;
-    background-position:center;
-    width:100%;
-    height:27em;
-}
-
 
 .titolo_contattaci{
     color: #fff3f6;
     padding: 20px;
-    font-size:1.4em;
+    font-size:1.2em;
     text-align: center;
     border-radius: 0px 0px 20px 20px;
     background: #4e4b3b;
@@ -257,33 +245,159 @@ h2{
     font-size:1.4em;
 }
 
+.SaloneAnna .info{
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    text-align: center;
+    font-style: oblique;
+}
+
+.info {
+    display: block;
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    text-align-last: center;
+    font-style: oblique;
+    width: 100%;
+}
+
 .inforesult {
     font-weight: bold;
     text-align: center;
     margin: 1em;
 }
 
+#email{
+    width: 40%;
+}
+
+/*Listino Prezzi*/
+
+
+#listino{
+    margin: 1em auto;
+    width:100%;
+
+    background: white;
+    border-radius:3px;
+    border-collapse: collapse;
+    height: 320px;
+    margin: auto;
+    max-width: 600px;
+    padding:5px;
+    width: 100%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    animation: float 5s infinite;
+}
+
+
+.rtipo{
+   font-size: 1em;
+   font-weight: 600;
+   font-style: oblique;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+   text-transform:uppercase;
+}
+
+.thprima{
+  border-top-left-radius:3px;
+  font-size:1.4em;
+
+}
+
+.thseconda{
+  border-top-right-radius:3px;
+  border-right:none;
+  font-size:1.4em;
+
+}
+
+tr {
+  border-top: 1px solid #C1C3D1;
+  border-bottom-: 1px solid #C1C3D1;
+  color:#3e4150;
+  font-size:1em;
+  font-weight:normal;
+  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
+}
+
+thead tr{
+  border-top:none;
+}
+
+tr:last-child {
+  border-bottom:none;
+}
+
+.cintervento{
+    background:#EBEBEB;
+}
+
+td {
+  background:#FFFFFF;
+  padding:20px;
+  text-align:left;
+  vertical-align:middle;
+  font-weight:300;
+  font-size:0.9em;
+  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
+  border-right: 1px solid #C1C3D1;
+}
+
+
+th {
+  color:#FFFFFF;
+  background:#4e4b3b;
+  border-bottom:4px solid #9ea7af;
+  border-right: 1px solid #343a45;
+  font-size:1em;
+  font-weight: 100;
+  padding:24px;
+  text-align:left;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  vertical-align:middle;
+}
+
+/* Tabelle */
+
+caption {
+    padding: 1em;
+    font-style: italic;
+}
+
 /* Realizzazioni */
 
 .photo {
     float: left;
-    width: 33%;
+    width: 32%;
+    margin: 0.2em;
+    text-align: center;
 }
 
-.contentfigura {
+.photo a{
+    text-decoration:none;
+}
+
+.desc {
     text-align: center;
+    color: black;
+    font-style: italic;
+    padding: 1em;
 }
 
 #content img {
-    border: 0.3em solid;
+    border: 0.3em solid black;
     margin: 1em;
-    max-height: 300px;
 }
 
-figcaption {
-    text-align: center;
+#content img:hover {
+    border: 0.3em solid #fff3f6;
+    margin: 1em;
 }
-
 
 /*Parte per la form di contattaci*/
 
@@ -330,22 +444,21 @@ form ul li .req {
 }
 form label {
     display: block;
-    margin: 0 0 0.5em 0;
     color: #31456b;
     font-size: 0.8em;
 }
 form input {
-    margin: 1em 2em 1em 2#inem;
+    margin: 1em 2em 1em 2em;
     border: 1px solid #ccc;
     padding: 0.3em 0.6em;
     color: #555;
     font-size: 1em;
 }
 form textarea {
-    margin: 1em 0.5em 1em 0.5em;
+    margin: 1em 2em 1em 3em;
     border: 1px solid #ccc;
     padding: 6px 10px;
-    width: 80%;
+    width: 70%;
     color: #555;
 }
 form small {
@@ -353,20 +466,6 @@ form small {
     margin: 0 0 0 0.5em;
 }
 
-#email{
-    width: 40%;
-}
-
-.info {
-    display: block;
-    margin: 0 0 0.5em 0;
-    color: #31456b;
-    clear: both;
-    padding: 0px 2em 2em 0px;
-    text-align-last: center;
-    font-style: oblique;
-    width: 100%;
-}
 
 #frameMappa {
     width: 100%;
@@ -385,10 +484,6 @@ form small {
     vertical-align: text-top;
 }
 
-#dato_contenuto, #prezzo_formato{
-    float: right;
-}
-
 .messaggio{
    font-size: 1.2em;
    font-style: oblique;
@@ -396,6 +491,74 @@ form small {
    margin-bottom: 2em;
 }
 
+.dati{
+    color: #3e000e;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.contenuto{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.goFast {
+    float: right;
+    text-align: right;
+    display: flex;
+    font-style: oblique;
+}
+
+.prodotto .nome_scientifico{
+    font-style: oblique;
+}
+
+.prodotto .tipo{
+    font-weight: bold;
+}
+
+.img{
+    text-align: center;
+    margin: 0 auto;
+}
+
+img {
+    max-width: 93%;
+}
+
+.dati{
+}
+
+.riquadro_prezzi{
+    width: 96%;
+}
+
+.radio{
+    float:right;
+}
+
+.prezzo{
+    color: #232323;
+    font-style: oblique;
+    text-align: right;
+    margin: 10px;
+    clear: both;
+}
+
+.subbutton{
+    padding-right: 10px;
+    color: white;
+    float: right;
+
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
+
+}
+
+.check{
+    padding-bottom: 1em;
+    display: block;
+}
 
 /* Messaggio */
 
@@ -429,9 +592,40 @@ form small {
     margin: 1em;
     font-style: italic;
     font-size: 0.9em;
-    color: #31456b;''
 }
 
+/* Parte Admin e form */
+
+
+.createButton{
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 2em auto;
+    color: white;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
+    display: block;
+    width: 50%;
+    text-align: center;
+
+}
+
+.productButtons{
+    padding: 2em;
+    width: 96%;
+    clear: both;
+}
+
+.productButton{
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 1em;
+    color: white;
+    border: solid 1px #4e4b3b;
+    background: #4e4b3b;
+}
 
 input[type="button"], input[type="submit"]{
     outline: none;
@@ -442,7 +636,6 @@ input[type="button"], input[type="submit"]{
     border: solid 1px #4e4b3b;
     background: #4e4b3b;
 }
-
 
 .inputsL{
    float: left;
@@ -456,17 +649,21 @@ input[type="button"], input[type="submit"]{
     margin-bottom: 1em;
 }
 
+.inputsL input {
+    text-align: right;
+}
+
 .datiAppun {
     float: left;
     width: 49%;
 }
 
-.tipoAppun {
+.tipiAppun {
     float: right;
     width: 49%;
 }
 
-.tipoAppun p {
+.tipoAppun{
     float: left;
     width: 30%;
     border-bottom: 1px outset;
@@ -477,6 +674,10 @@ input[type="button"], input[type="submit"]{
 .confermAppun{
     clear: both;
     text-align: center;
+}
+
+.tipoAppun label {
+    margin-bottom: 0.5em;
 }
 
 /* Footer */
@@ -490,7 +691,6 @@ input[type="button"], input[type="submit"]{
     bottom:0;
     margin-left: 1em;
     margin-right: 1em;
-     
 }
 
 .footer .footer-left,
@@ -503,16 +703,16 @@ input[type="button"], input[type="submit"]{
 
 .footer .footer-left{
     width: 30%;
-    float:left;
+    float: left;
 }
 
 
 #logo_mini{
-    font-size: 0em ;
+    font-size:0em;
     background-image: url(../img/logo_mini.png);
     background-repeat: no-repeat;
     margin: 0;
-    color:black;  
+    color:black;
     width: 200px;
     height: 50px;
 }
@@ -521,6 +721,11 @@ input[type="button"], input[type="submit"]{
     display:block;
     height:0;
     overflow:hidden;
+}
+
+.footer .footer-left a{
+    padding-left: 2px;
+    padding-right: 2px;
 }
 
 .footer .footer-nome-azienda{
@@ -532,7 +737,6 @@ input[type="button"], input[type="submit"]{
 
 .footer .footer-center{
     width: 38%;
-    float: left;
 }
 
 .footer .footer-center i{
@@ -567,7 +771,8 @@ input[type="button"], input[type="submit"]{
 
 
 .footer .footer-right{
-    float:left;
+    float: left;
+    color: black;
     width: 30%;
 }
 
