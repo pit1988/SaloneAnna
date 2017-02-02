@@ -735,8 +735,18 @@ p.ggCalendario {
 
 
 #back_to_top {
+    background-image: url("../img/back_to_top.png");
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 80px;
     position: fixed;
     bottom: 15px;
     right: 15px;
     cursor: pointer;
+}
+
+.back_to_top{
+    display: block;
+    height: 0;
+    overflow: hidden;
 }

@@ -44,7 +44,7 @@ $to_print=$str1.$str2.$str3;
 /* Funzione per terminare una pagina */
 function page_end() {
     $to_print='
-<div id="back_to_top"><img href="#content" src="img/back_to_top.png" alt="torna su"></div>
+<div id="back_to_top"><a href="#content" class="back_to_top">Torna su</a></div>
 <p><a href="#header" class="nascosto" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a></p>
 <p><a href="#finePagina" class="nascosto" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a></p>
 <div id="footer" class="footer">
