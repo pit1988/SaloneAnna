@@ -252,18 +252,5 @@ function new_user($login, $password) {
         or die("Query fallita" . mysqli_error($conn));
 };
 
-function giorno()
-{
-$giorni = array(0=>'Domenica',
-'Lunedì',
-'Martedì',
-'Mercoledì',
-'Giovedì',
-'Venerdì',
-'Sabato');
-return $giorni[date('w')];
-}
-
-
 ?>
 
