@@ -1,4 +1,3 @@
-
 <?php
 
 session_start();
@@ -50,8 +49,8 @@ if (!isset($_SESSION['username'])) {
     if (!$result)
         echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>";
     else {
-        form_start("post", "EliminaAppuntamenti.php");
-        echo '<fieldset>
+        echo '<form method="post" action="EliminaAppuntamenti.php">
+        <fieldset>
             <legend>Seleziona gli appuntamenti che vuoi eliminare</legend>';
         $str_to_print = '
             <table id="tabApp" summary="Appuntamenti successivi alla data corrente">
@@ -87,7 +86,7 @@ if (!isset($_SESSION['username'])) {
         }
         
         $str_to_print .= "</tbody></table>";
-        $str_to_print .= "<input type=\"submit\" name=\"submit\" value=\"Conferma\">
+        $str_to_print .= "<input type=\"submit\" name=\"submit\" value=\"Conferma\"/>
         </fieldset>
 	</form>";
     }

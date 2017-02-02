@@ -24,9 +24,9 @@
       if (!$result)
           echo "<p>Non ci sono appuntamenti da mostrare</p>";
       else {
-          form_start("post", "ModificaAppuntamento.php");
-          echo '<fieldset>';
-          $str_to_print = '<table id="tabAppSelect" summary="Appuntamenti successivi alla data corrente">
+          echo '<form method="post" action="ModificaAppuntamento.php">
+          <fieldset>';
+          $str_to_print = '<table id="tabAppSelect" summary="Elenco Appuntamenti">
       <caption>Appuntamenti successivi alla data corrente</caption>
       <thead>
         <tr>
@@ -58,8 +58,8 @@
           
           $str_to_print .= "</tbody></table>";
           echo $str_to_print;
-          echo "<input type=\"submit\" name=\"submit\" value=\"Conferma\">
-        </fieldset>
+          echo "<input type=\"submit\" name=\"submit\" value=\"Conferma\" />
+          </fieldset>
         </form>";
       }
       unset($result);
