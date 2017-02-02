@@ -131,7 +131,7 @@ legend{
 
 #logout, #login{
     margin: 5px;
-    float: left;
+    float: right;
     text-decoration: none;
     padding: 1.5px 15px 1.5px 15px;
     color: white;
