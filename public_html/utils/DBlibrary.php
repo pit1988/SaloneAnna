@@ -3,12 +3,12 @@
 function dbconnect() {
 	$host = "localhost";
 
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";
-	/*$user = "agrenden";
+	$db = "pgabelli";*/
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";*/
+	$db = "agrenden";
 	/*$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
@@ -87,6 +87,7 @@ function listaMessaggi() { //i messaggi verranno già ordinati dal più recente 
 function aggiungiMessaggio($email, $nome, $cognome, $contenuto) { //se ci sono errori in qualche query la funzione restituisce FALSE, altrimenti TRUE
 	$conn = dbconnect();
 	$errore = FALSE;
+	cleanString($email);
 	$checkChiocciola = strpos($email, '@');
 	$checkPunto = strrpos($email, '.');
 	if($email == "" || ($checkChiocciola === FALSE || $checkPunto === FALSE || $checkChiocciola>$checkPunto) || $nome=="" || $cognome=="") {$errore = TRUE;}
@@ -99,9 +100,9 @@ function aggiungiMessaggio($email, $nome, $cognome, $contenuto) { //se ci sono e
 			else {$cliente=FALSE;} //se ci sono stati problemi di connessione li segnalo
 		}
 		if($cliente) {
-			$nome = htmlentities($nome);
-			$cognome = htmlentities($cognome);
-			$contenuto = htmlentities($contenuto);
+			cleanString($nome);
+			cleanString($cognome);
+			cleanString($contenuto);
 			$dataora = date("Y-m-d H:i:s", time());
 			$codcliente = $cliente->fetch_assoc();
 			$codcliente = $codcliente['CodCliente'];
@@ -177,11 +178,14 @@ function listaClienti() {
 function aggiungiCliente($nome, $cognome, $telefono = "", $email = "", $dataNascita = "") {
 	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $dataNascita)) {$data = "'".date_format(date_create_from_format("d/m/Y", $dataNascita), "Y-m-d")."'";}
 	else {$data = "NULL";}
-	$nome = htmlentities($nome);
-	$cognome = htmlentities($cognome);
+	cleanString($nome);
+	cleanString($cognome);
+	cleanString($telefono);
+	$telefono = str_replace(' ', '', $telefono); //elimino gli eventuali spazi in mezzo alla stringa, ad esempio per dividere le prime 3 cifre dal resto
+	cleanString($email);
 	$checkChiocciola = strpos($email, '@');
 	$checkPunto = strrpos($email, '.');
-	if($telefono == "") {$telefono="NULL";}
+	if(!preg_match("#^[0-9]{9,10}$#", $telefono)) {$telefono="NULL";}
 	if($email == "" || ($checkChiocciola === FALSE || $checkPunto === FALSE || $checkChiocciola>$checkPunto)) {$email="NULL";}
 	return eseguiQuery("INSERT Clienti(Nome, Cognome, Telefono, Email, DataNascita) VALUES('$nome', '$cognome', '$telefono', '$email', $data)");
 }
@@ -192,9 +196,17 @@ function eliminaCliente($codice) {
 
 function aggiornaCliente($codice, $nome = "", $cognome = "", $telefono = "", $email = "", $dataNascita = "") {
 	$set = "";
-	if($nome != "") {$nome = htmlentities($nome); $set = $set."Nome='$nome'";}
-	if($cognome != "") {$cognome = htmlentities($cognome); checkCommaSet($set); $set = $set."Cognome='$cognome'";}
-	if($telefono != "") {checkCommaSet($set); $set = $set."Telefono='$telefono'";}
+	cleanString($nome);
+	cleanString($cognome);
+	cleanString($telefono);
+	cleanString($email);
+	if($nome != "") {$set = $set."Nome='$nome'";}
+	if($cognome != "") {checkCommaSet($set); $set = $set."Cognome='$cognome'";}
+	if(preg_match("#^[0-9]{9,10}$#", $telefono)) {
+		$telefono = str_replace(' ', '', $telefono); //elimino gli eventuali spazi in mezzo alla stringa, ad esempio per dividere le prime 3 cifre dal resto
+		checkCommaSet($set);
+		$set = $set."Telefono='$telefono'";
+	}
 	$checkChiocciola = strpos($email, '@');
 	$checkPunto = strrpos($email, '.');
 	if($checkChiocciola !== FALSE && $checkPunto !== FALSE && $checkChiocciola<$checkPunto) {checkCommaSet($set); $set = $set."Email='$email'";}
@@ -278,7 +290,7 @@ function listaTipoAppuntamenti() {
 }
 
 function aggiungiTipoAppuntamento($nome, $costo=0, $sconto=0) {
-	$nome = htmlentities($nome);
+	cleanString($nome);
 	if($nome === "") {return FALSE;} //un TipoAppuntamento senza nome non ha senso
 	if($costo === "") {$costo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
 	if($sconto === "") {$sconto=0;}
@@ -291,7 +303,8 @@ function eliminaTipoAppuntamento($codice) {
 
 function aggiornaTipoAppuntamento($codice, $nome = "", $costo = -1, $sconto = -1) {
 	$set = "";
-	if($nome != "") {$nome = htmlentities($nome); $set = $set."NomeTipo='$nome'";}
+	cleanString($nome);
+	if($nome != "") {$set = $set."NomeTipo='$nome'";}
 	if($costo > -1) {checkCommaSet($set); $set = $set."Costo=$costo";} //uso -1 come valore nullo perché 0 potrebbe essere un numero valido, soprattutto per sconto
 	if($sconto > -1) {checkCommaSet($set); $set = $set."Sconto=$sconto";}
 	return eseguiQuery("UPDATE TipoAppuntamento
@@ -488,12 +501,12 @@ function listaProdotti() {
 }
 
 function aggiungiProdotto($nome, $marca, $tipo, $quantita, $prezzo=0, $prezzoRiv=0) { //marca e tipo possono eventualmente essere lasciati vuoti, quantita, prezzo e prezzoRiv di base sono 0
+	cleanString($nome);
 	if($nome === "") {return FALSE;} //un Prodotto senza nome, marca e tipo non ha senso
-	else {$nome = htmlentities($nome);}
+	cleanString($marca);
 	if($marca === "") {return FALSE;}
-	else {$marca = htmlentities($marca);}
+	cleanString($tipo);
 	if($tipo === "") {return FALSE;}
-	else {$tipo = htmlentities($tipo);}
 	if($quantita === "" || $quantita <= 0) {return FALSE;}
 	if($prezzo === "") {$prezzo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
 	if($prezzoRiv === "") {$prezzoRiv=0;}
@@ -698,9 +711,6 @@ function listaImmagini() {
 }
 
 function aggiungiImmagine($img_desc, $userfile) { //dovrebbe bastarmi sapere la descrizione e il nome HTML
-	// if (!is_uploaded_file($userfile["tmp_name"])) { //controllo che non siano avvenuti errori
-	// 	return FALSE;
-	// }
 	if (($userfile["type"] == "image/gif" || $userfile["type"] == "image/jpeg" || $userfile["type"] == "image/jpg" || $userfile["type"] == "image/pjpeg"|| $userfile["type"] == "image/png" && $userfile["size"] < 20000)) {
             if ($userfile["error"] > 0) {
                 //echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $userfile["error"] . "</span></p>";
@@ -724,6 +734,7 @@ function aggiungiImmagine($img_desc, $userfile) { //dovrebbe bastarmi sapere la 
                 	$conn->close();
                 	return false;
                 }
+				cleanString($img_desc);
                 $qry = "INSERT INTO Images(Img_desc,Img_filename) VALUES('$img_desc','$new_img_name')";
                 if (!mysqli_query($conn, $qry)) {
                 	$conn->close();
@@ -769,7 +780,6 @@ function modificaImmagine($codice, $descrizione, $userfile="") {
 		}
 		if (($userfile["type"] == "image/gif" || $userfile["type"] == "image/jpeg" || $userfile["type"] == "image/jpg" || $userfile["type"] == "image/pjpeg"|| $userfile["type"] == "image/png" && $userfile["size"] < 20000)) {
             if ($userfile["error"] > 0) {
-                //echo "<p class=\"inforesult\">Un errore si è presentato durante il caricamento: <span lang=\"en\">" . $userfile["error"] . "</span></p>";
                 return false;
             } else {
                 $conn = dbconnect();
@@ -794,6 +804,7 @@ function modificaImmagine($codice, $descrizione, $userfile="") {
                     	$conn->close();
                     	return false;
                     }
+					cleanString($descrizione);
                     $qry = "INSERT INTO Images(Img_title, Img_desc, Img_filename) VALUES('$codice', '$descrizione','$new_img_name')";
                     return eseguiQuery($qry);
                 }
@@ -802,7 +813,7 @@ function modificaImmagine($codice, $descrizione, $userfile="") {
 
 	} 
 	else {
-		$descrizione = htmlentities($descrizione);
+		cleanString($descrizione);
 		return eseguiQuery("UPDATE Images SET Img_desc='$descrizione' WHERE Img_title='$codice'");
 	}
 
