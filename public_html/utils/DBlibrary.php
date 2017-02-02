@@ -925,7 +925,7 @@ function AppuntamentiDataCliente($codCliente="", $data="", $ora="") {
 	if($codCliente != "") {
 		$where.= "Appuntamenti.CodCliente=$codCliente";
 	}
-	if($data!="" AND preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
+	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
 		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
 		checkAndWhere($where);
 		$where .= "DATE(DataOra)='$data' ";
