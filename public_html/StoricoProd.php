@@ -6,32 +6,30 @@ $login = authenticate();
 $to_print  = "";
 $err       = "";
 $to_insert = true;
-$trovato=false;
+$trovato   = false;
 // Controllo accesso
 if (!$login) {
     header('location:index.php');
     exit;
-} 
-elseif (isset($_POST['submit'])){
-        if (isset($_POST['first_name']) && isset($_POST['last_name'])) {
-            $submit  = $_POST["submit"];
-            $nome    = $_POST["first_name"];
-            $cognome = $_POST["last_name"];
-            //modificare pulendo i dati in ingresso
-            if (strlen($nome) == 0 OR strlen($cognome) == 0) //
-                $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
-            else {
-                $result    = checkCliente($nome, $cognome);
-                if (is_null($result) OR count($result) == 0) { //nessuno
-                    $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
-                    hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
-                } 
-                else { //uno o più
-                    $number_rows = count($result);
-                    
-                    if ($number_rows > 1) {
-                        $err= "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
-                        $th = '<form method="post" action="StoricoProd.php">
+} elseif (isset($_POST['submit'])) {
+    if (isset($_POST['first_name']) && isset($_POST['last_name'])) {
+        $submit  = $_POST["submit"];
+        $nome    = $_POST["first_name"];
+        $cognome = $_POST["last_name"];
+        //modificare pulendo i dati in ingresso
+        if (strlen($nome) == 0 OR strlen($cognome) == 0) //
+            $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
+        else {
+            $result = checkCliente($nome, $cognome);
+            if (is_null($result) OR count($result) == 0) { //nessuno
+                $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
+                hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
+            } else { //uno o più
+                $number_rows = count($result);
+                $to_insert=false;
+                if ($number_rows > 1) {
+                    $err = "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
+                    $th  = '<form method="post" action="StoricoProd.php">
                           <fieldset>
                           <legend>Seleziona il cliente dalla lista</legend>
                           <table id="ElencoClienti" summary="Elenco clienti">
@@ -48,9 +46,9 @@ elseif (isset($_POST['submit'])){
                               </tr>
                           </thead>
                           <tbody>';
-                        $tb = "";
-                        foreach ($result as $cliente) {
-                            $tb .= "
+                    $tb  = "";
+                    foreach ($result as $cliente) {
+                        $tb .= "
                               <tr>
                                   <td>" . $cliente->codice . "</td>
                                   <td>" . $cliente->nome . "</td>
@@ -61,42 +59,43 @@ elseif (isset($_POST['submit'])){
                                   <td class=\"tdin\"><input type='radio' name='CodCliente' value='$cliente->codice'/></td>
                               </tr>
                               ";
-                        }
-                        $tf       = "</tbody></table>";
-                        $to_print.= $th . $tb . $tf;
-                        $to_print.= "<input type='submit' name='submit' value='Procedi' />";
-                        $to_print.= "<input type='reset' value='Cancella' />";
-                        $to_print.= "</fieldset>";
-                        $to_print.= "</form>";
-                    } //fine n_righe>1
-                    
-                    else { //unico risultato
-                        // prendi il codice cliente dall'unica riga
-                        $codCliente = $result[0]->codice;
-                        $nome       = $result[0]->nome;
-                        $cognome    = $result[0]->cognome;
-                        $trovato=true;
                     }
-                    unset($result);
+                    $tf = "</tbody></table>";
+                    $to_print .= $th . $tb . $tf;
+                    $to_print .= "<input type='submit' name='submit' value='Procedi' />";
+                    $to_print .= "<input type='reset' value='Cancella' />";
+                    $to_print .= "</fieldset>";
+                    $to_print .= "</form>";
+                } //fine n_righe>1
+                
+                else { //unico risultato
+                    // prendi il codice cliente dall'unica riga
+                    $codCliente = $result[0]->codice;
+                    $nome       = $result[0]->nome;
+                    $cognome    = $result[0]->cognome;
+                    $trovato    = true;
                 }
+                unset($result);
             }
         }
-
-        if(isset($_POST['CodCliente'])){
-            $codCliente=$_POST['CodCliente'];
-            $cliente=mostraCliente($codCliente);
-            $nome=$cliente->nome;
-            $cognome=$cliente->cognome;
-            $trovato=true;
-        }
-
-        if($trovato==true){
-            // USA IL CODICE CLIENTE
-            $ris = listaProdottiAppuntamentoDatato($codCliente);
-            if (count($ris) > 0) {
-                
-                $th = '<table class="storicoApp" summary="Storico Prodotti cliente">
-                    <caption>Di seguito i prodotti usati negli appunamenti di ' . $nome ." ". $cognome . '</caption>
+    }
+    
+    if (isset($_POST['CodCliente'])) {
+        $to_insert  = false;
+        $codCliente = $_POST['CodCliente'];
+        $cliente    = mostraCliente($codCliente);
+        $nome       = $cliente->nome;
+        $cognome    = $cliente->cognome;
+        $trovato    = true;
+    }
+    
+    if ($trovato == true) {
+        // USA IL CODICE CLIENTE
+        $ris = listaProdottiAppuntamentoDatato($codCliente);
+        if (count($ris) > 0) {
+            
+            $th = '<table class="storicoApp" summary="Storico Prodotti cliente">
+                    <caption>Di seguito i prodotti usati negli appunamenti di ' . $nome . " " . $cognome . '</caption>
                     <thead>
                         <tr>
                             <th scope="col">Codice Appuntamento</th>
@@ -119,10 +118,10 @@ elseif (isset($_POST['submit'])){
 
                     <tbody>
                     ';
-                //corpo tabella - Inserire ml su cella utilizzo
-                $tb = "";
-                foreach ($ris as $appuntamentoDatato) {
-                    $tb .= "<tr>
+            //corpo tabella - Inserire ml su cella utilizzo
+            $tb = "";
+            foreach ($ris as $appuntamentoDatato) {
+                $tb .= "<tr>
                       <td>" . $appuntamentoDatato->codAppuntamento . "</td>
                       <td>" . $appuntamentoDatato->data . " " . $appuntamentoDatato->ora . "</td>
                       <td>" . $appuntamentoDatato->codProdotto . "</td>
@@ -130,19 +129,18 @@ elseif (isset($_POST['submit'])){
                       <td>" . $appuntamentoDatato->nome . "</td>
                     </tr>
                     ";
-                    $tf       = "</tbody></table>";
-                    $to_print = $th . $tb . $tf;
-                }
+                $tf       = "</tbody></table>";
+                $to_print = $th . $tb . $tf;
             }
-            else{
-                $err = "<p class=\"inforesult\">Non sono presenti prodotti per il cliente selezionato</p>";
-            }
-            unset($ris);
+        } else {
+            $err = "<p class=\"inforesult\">Non sono presenti prodotti per il cliente selezionato</p>";
         }
-        if(!isset($_POST['CodCliente']) && (!isset($_POST['first_name']) OR !isset($_POST['last_name']))){
-            $err = "<p class=\"errorSuggestion\">Problemi di connessione</p>";
-        } //almeno uno dei due è settato)
+        unset($ris);
     }
+    if (!isset($_POST['CodCliente']) && (!isset($_POST['first_name']) OR !isset($_POST['last_name']))) {
+        $err = "<p class=\"errorSuggestion\">Problemi di connessione</p>";
+    } //almeno uno dei due è settato)
+}
 
 
 $form = '
@@ -176,12 +174,13 @@ page_start($title, $title_meta, $descr, $keywords, '');
 $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a>  / <strong>Storico Prodotti</strong>';
 insert_header($rif, 4, true);
 content_begin();
-echo "<h2>Storico prodotto</h2>";
-if (!$trovato){
-    echo $form;
-    hyperlink("Cerca un altro cliente", "StoricoProd.php");
-}
 echo $err;
+echo "<h2>Storico prodotto</h2>";
+if ($to_insert) {
+    echo $form;
+}
+if ($trovato)
+    hyperlink("Cerca un altro cliente", "StoricoProd.php");
 echo $to_print;
 
 content_end();
