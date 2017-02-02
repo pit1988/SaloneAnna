@@ -85,7 +85,7 @@ if (!$login) {
                                 <tr>
                                     <td>".$cliente->codice."</td><td>".$cliente->nome."</td>
                                     <td>".$cliente->cognome."</td>
-                                    <td>".$cliente->telefono."</a></td>
+                                    <td>".$cliente->telefono."</td>
                                     <td>".$cliente->email."</td>
                                     <td>".$cliente->dataNascita."</td>
                                     <td class=\"tdin\"><input type='radio' name='CodCliente' value=$cliente->codice></td>
@@ -101,8 +101,8 @@ if (!$login) {
                             <input type="hidden" name="data" id="data" value="'.$data.'" />
                             <input type="hidden" name="orario" id="orario" value="'.$ora.'" />
                             <input type="hidden" name="TipoAppuntamento" id="TipoAppuntamento" value="'.$codTipo.'" />';
-                        echo "<input type='submit' name='submit' value='Procedi'>";
-                        echo "<input type='reset' value='Cancella'>";
+                        echo "<input type='submit' name='submit' value='Procedi' />";
+                        echo "<input type='reset' value='Cancella' />";
                         echo"</fieldset>";
                         echo "</form>";
                     } //fine n_righe>1

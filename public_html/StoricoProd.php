@@ -1,94 +1,152 @@
 <?php
 require 'library.php';
 require 'utils/DBlibrary.php';
-$login=authenticate();
+$login = authenticate();
 
-$to_print = "";
-$err = "";
+$to_print  = "";
+$err       = "";
+$to_insert = true;
+$trovato=false;
 // Controllo accesso
 if (!$login) {
     header('location:index.php');
     exit;
-} elseif (!isset($_POST['first_name']) XOR !isset($_POST['last_name'])) {
-    $err = "<p>Problemi di connessione</p>";
-} elseif (isset($_POST['first_name']) && isset($_POST['last_name'])) {
-    $submit = $_POST["submit"];
-    $nome = $_POST["first_name"];
-    $cognome = $_POST["last_name"];
-    //modificare pulendo i dati in ingresso
-    if (isset($_POST["submit"])) {
-        $conn = dbconnect();
-        $qry  = "SELECT CodCliente FROM Clienti WHERE Nome='$nome' AND Cognome='$cognome'";
-        
-        $CodClienteA = mysqli_query($conn, $qry);
-
-        $num_rows = mysqli_num_rows($CodClienteA);
-        if (!$num_rows)
-            $err .= "<p class=\"inforesult\">Non è presente il cliente richiesto</p>";
-        else {
-            // vedere se fare lo stesso lavoro per gli altri clienti omonimi
-            $CodCliente = mysqli_fetch_row($CodClienteA);
-            
-            $query = "SELECT s.Codappuntamento, s.DataOra, pa.CodProdotto, pa.Utilizzo, p.Nome FROM Appuntamenti s JOIN ProdApp pa ON s.Codappuntamento=pa.Codappuntamento JOIN Prodotti p ON pa.CodProdotto=p.CodProdotto WHERE CodCliente = '$CodCliente[0]'";
-            
-            $result = mysqli_query($conn, $query);
-            
-            $num_rows = mysqli_num_rows($result);
-            if (!$num_rows)
-                $err .= "<p class=\"inforesult\">Non sono presenti prodotti per il cliente selezionato</p>";
+} 
+elseif (isset($_POST['submit'])){
+        if (isset($_POST['first_name']) && isset($_POST['last_name'])) {
+            $submit  = $_POST["submit"];
+            $nome    = $_POST["first_name"];
+            $cognome = $_POST["last_name"];
+            //modificare pulendo i dati in ingresso
+            if (strlen($nome) == 0 OR strlen($cognome) == 0) //
+                $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else {
-                $number_cols = mysqli_num_fields($result);
-                // echo "<h2>Storico Prodotti:</h2>";
-                
-                $th = '<table class="storicoApp" summary="Storico Appuntamenti cliente">
-              <caption>Di seguito gli appuntamenti di ' . $nome . $cognome . '</caption>
-              <thead>
-                  <tr>
-                      <th scope="col">Codice Appuntamento</th>
-                      <th scope="col">Data e Ora</th>
-                      <th scope="col">Codice Prodotto</th>
-                      <th scope="col">Utilizzo</th>
-                      <th scope="col">Nome Prodotto (ml)</th>
-                  </tr>
-              </thead>
-
-              <tfoot>
-                  <tr>
-                      <th scope="col">Codice Appuntamento</th>
-                      <th scope="col">Data e Ora</th>
-                      <th scope="col">Codice Prodotto</th>
-                      <th scope="col">Utilizzo (ml)</th>
-                      <th scope="col">Nome Prodotto</th>
-                  </tr>
-              </tfoot>
-
-              <tbody>
-              ';
-                //corpo tabella - Inserire ml su cella utilizzo
-                $tb = "";
-                while ($row = mysqli_fetch_row($result)) {
-                    $tb .= "<tr>\n";
+                $result    = checkCliente($nome, $cognome);
+                if (is_null($result) OR count($result) == 0) { //nessuno
+                    $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
+                    hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
+                } 
+                else { //uno o più
+                    $number_rows = count($result);
                     
-                    for ($i = 0; $i < $number_cols; $i++) {
-                        $tb .= "<td>";
-                        if (!isset($row[$i])) {
-                            $tb .= "NULL";
-                        } else {
-                            $tb .= $row[$i];
+                    if ($number_rows > 1) {
+                        $err= "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
+                        $th = '<form method="post" action="StoricoProd.php">
+                          <fieldset>
+                          <legend>Seleziona il cliente dalla lista</legend>
+                          <table id="ElencoClienti" summary="Elenco clienti">
+                              <caption>Clienti che si chiamano ' . $nome . ' ' . $cognome . '</caption>
+                              <thead>
+                              <tr>
+                                  <th scope="col">Codice</th>
+                                  <th scope="col">Nome</th>
+                                  <th scope="col">Cognome</th>
+                                  <th scope="col">Telefono</th>
+                                  <th scope="col" xml:lang="en">E-mail</th>
+                                  <th scope="col">Data nascita</th>
+                                  <th scope="col">Selezione</th>
+                              </tr>
+                          </thead>
+                          <tbody>';
+                        $tb = "";
+                        foreach ($result as $cliente) {
+                            $tb .= "
+                              <tr>
+                                  <td>" . $cliente->codice . "</td>
+                                  <td>" . $cliente->nome . "</td>
+                                  <td>" . $cliente->cognome . "</td>
+                                  <td>" . $cliente->telefono . "</td>
+                                  <td>" . $cliente->email . "</td>
+                                  <td>" . $cliente->dataNascita . "</td>
+                                  <td class=\"tdin\"><input type='radio' name='CodCliente' value='$cliente->codice'/></td>
+                              </tr>
+                              ";
                         }
-                        $tb .= "</td>\n";
+                        $tf       = "</tbody></table>";
+                        $to_print.= $th . $tb . $tf;
+                        $to_print.= "<input type='submit' name='submit' value='Procedi' />";
+                        $to_print.= "<input type='reset' value='Cancella' />";
+                        $to_print.= "</fieldset>";
+                        $to_print.= "</form>";
+                    } //fine n_righe>1
+                    
+                    else { //unico risultato
+                        // prendi il codice cliente dall'unica riga
+                        $codCliente = $result[0]->codice;
+                        $nome       = $result[0]->nome;
+                        $cognome    = $result[0]->cognome;
+                        $trovato=true;
                     }
-                    $tb .= "</tr>\n";
+                    unset($result);
                 }
-                $tf = "</tbody></table>";
-                $to_print = $th . $tb . $tf;
             }
         }
-        
+
+        if(isset($_POST['CodCliente'])){
+            $codCliente=$_POST['CodCliente'];
+            $cliente=mostraCliente($codCliente);
+            $nome=$cliente->nome;
+            $cognome=$cliente->cognome;
+            $trovato=true;
+        }
+
+        if($trovato==true){
+            // USA IL CODICE CLIENTE
+            $ris = listaProdottiAppuntamentoDatato($codCliente);
+            if (count($ris) > 0) {
+                
+                $th = '<table class="storicoApp" summary="Storico Prodotti cliente">
+                    <caption>Di seguito i prodotti usati negli appunamenti di ' . $nome ." ". $cognome . '</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Codice Appuntamento</th>
+                            <th scope="col">Data e Ora</th>
+                            <th scope="col">Codice Prodotto</th>
+                            <th scope="col">Utilizzo</th>
+                            <th scope="col">Nome Prodotto (ml)</th>
+                        </tr>
+                    </thead>
+
+                    <tfoot>
+                        <tr>
+                            <th scope="col">Codice Appuntamento</th>
+                            <th scope="col">Data e Ora</th>
+                            <th scope="col">Codice Prodotto</th>
+                            <th scope="col">Utilizzo (ml)</th>
+                            <th scope="col">Nome Prodotto</th>
+                        </tr>
+                    </tfoot>
+
+                    <tbody>
+                    ';
+                //corpo tabella - Inserire ml su cella utilizzo
+                $tb = "";
+                foreach ($ris as $appuntamentoDatato) {
+                    $tb .= "<tr>
+                      <td>" . $appuntamentoDatato->codAppuntamento . "</td>
+                      <td>" . $appuntamentoDatato->data . " " . $appuntamentoDatato->ora . "</td>
+                      <td>" . $appuntamentoDatato->codProdotto . "</td>
+                      <td>" . $appuntamentoDatato->utilizzo . " (ml)</td>
+                      <td>" . $appuntamentoDatato->nome . "</td>
+                    </tr>
+                    ";
+                    $tf       = "</tbody></table>";
+                    $to_print = $th . $tb . $tf;
+                }
+            }
+            else{
+                $err = "<p class=\"inforesult\">Non sono presenti prodotti per il cliente selezionato</p>";
+            }
+            unset($ris);
+        }
+        if(!isset($_POST['CodCliente']) && (!isset($_POST['first_name']) OR !isset($_POST['last_name']))){
+            $err = "<p class=\"errorSuggestion\">Problemi di connessione</p>";
+        } //almeno uno dei due è settato)
     }
-}
+
+
 $form = '
-<p class="info">Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
+<p class="info">Riporta il cliente di cui vuoi visualizare i prodotti utilizzati</p>
 <form method="post" action="StoricoProd.php">
   <fieldset>
     <legend>Cerca prodotti utilizzati dal cliente:</legend>
@@ -102,7 +160,7 @@ $form = '
               <input type="text" name="last_name" id="last_name" tabindex="101" />
           </p>
       </li>
-      <li><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
+      <li><p><input type="submit" name="submit" value="Invia"/></p></li>
     </ul>
   </fieldset>
 </form>
@@ -119,7 +177,10 @@ $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prod
 insert_header($rif, 4, true);
 content_begin();
 echo "<h2>Storico prodotto</h2>";
-echo $form;
+if (!$trovato){
+    echo $form;
+    hyperlink("Cerca un altro cliente", "StoricoProd.php");
+}
 echo $err;
 echo $to_print;
 
