@@ -354,8 +354,7 @@ function scroll(){
 
            $("#back_to_top").click(function() {
            //Se clicco sul box torno su (scrollTop:0) con un timing di animazione.
-           $('body,html').animate({scrollTop:0},500);
+           $('html,body').scrollTop(0);
             });//Click
-
    });//DOM
 }

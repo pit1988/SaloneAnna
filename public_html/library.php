@@ -26,6 +26,7 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 <!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="css/explorer.css"/><![endif]-->
 <link rel="icon" href="img/logo2.png" type="image/png"/>
 <script type="text/javascript" src="script/script.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 ';
 $str2='<body onload="scroll()">';
