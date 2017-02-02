@@ -28,9 +28,10 @@ function page_start($title, $title_meta, $descr, $keywords, $fun) {
 <script type="text/javascript" src="script/script.js"></script>
 </head>
 ';
-$str2='<body>';
+$str2='<body onload="scroll()">';
 if($fun!='')
-    $str2='<body onload="'. trim($fun) . '">';
+    $str2='<body onload="'. trim($fun) . ', scroll()">';
+
 $str3='
 <p class="nascosto">
 <a title="salta header" href="#contenitore-menu" tabindex="1" accesskey="a">Salta l&apos;intestazione</a>
@@ -42,8 +43,8 @@ $to_print=$str1.$str2.$str3;
 /* Funzione per terminare una pagina */
 function page_end() {
     $to_print='
-<a href="#header" class="goFast" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a>
-<a href="#finePagina" class="nascosto" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a>
+<p><a href="#header" class="nascosto" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a></p>
+<p><a href="#finePagina" class="nascosto" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a></p>
 <div id="footer" class="footer">
 <div class="footer-left">
 <h3 id="logo_mini"><span>Salone Anna</span></h3>
