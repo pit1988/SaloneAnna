@@ -84,7 +84,7 @@ html, body{
     text-decoration: none;
     padding: 1.5px 15px 1.5px 15px;
     color: white;
-    border: solid 1px #4e4b3b;
+    border: solid 1px #2b2821;
     background: #4e4b3b;
 }
 
@@ -115,10 +115,8 @@ legend{
 
 #accedi{
     color: white;
-    
-    border: solid 1px #4e4b3b;
+    border: solid 1px #2b2821;
     background: #4e4b3b;
-    
 }
 
 #legend{
@@ -129,11 +127,10 @@ legend{
     margin-top: 10px;
     padding-left: 20px;
     padding-right: 20px;
-
 }
 
 #contenitore-login label{
-    color: #0808c1;
+    color: #31456b;
     font-size: 1em;
     margin-top: 1em;
 }
@@ -156,7 +153,6 @@ h1{
     background-image:url(../img/logo.png);
     background-repeat: no-repeat;
     background-position: 0px 0px;
-    background-size: 99% auto;
     width: 99%;
     height: 100px;
 }
@@ -169,7 +165,7 @@ h1{
 }
 
 #contenitore-login label{
-    color: #0808c1;
+    color: #31456b;
 }
 
 #inputUsername{
@@ -209,7 +205,7 @@ h1{
     text-align: center;
     font: bold 1em Arial, Helvetica, sans-serif;
     color: #fff;
-    border: solid 1px #4e4b3b;
+    border: solid 1px #2b2821;
     background: #4e4b3b;
 }
 
@@ -272,7 +268,6 @@ h2{
    font-style:normal;
    text-align:center;
    font-family: "Roboto", helvetica, arial, sans-serif;
-   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
    text-transform:uppercase;
    margin: 1em;
 }
@@ -294,7 +289,6 @@ h2{
 
 #immagine{
     background-image:url("../img/home1.png");
-    background-size: 100% auto;
     background-repeat:no-repeat;
     height:10em;
 }
@@ -303,7 +297,6 @@ h2{
 .titolo_contattaci{
     color: #ffffff;
     padding: 20px;
-    border-radius: 0px 0px 20px 20px;
     background: #4e4b3b;
 }
 
@@ -326,7 +319,7 @@ input[type="button"], input[type="submit"]{
     text-align: center;
     text-decoration: none;
     color: #fff;
-    border: solid 1px #4e4b3b;
+    border: solid 1px #2b2821;
     background: #4e4b3b;
     font-size: 0.75em;
     display: block;
@@ -345,7 +338,7 @@ input[type="button"], input[type="submit"]{
     padding: 0.5em 1em 0.5em 1em;
     margin: 0.4em 2em 0.4em 2em;
     color: white;
-    border: solid 1px #4e4b3b;
+    border: solid 1px #2b2821;
     background: #4e4b3b;
     float: left;
     text-align: center;
@@ -435,7 +428,6 @@ form ul li .divider {
     width: 100%;
     display: block;
     background-color: #4f6fad;
-    background-image: linear-gradient(to right, #ee9cb4, #4f6fad);
 }
 form ul li .req {
     color: #ee9cb4;
@@ -457,7 +449,6 @@ form input {
     font-size: 1em;
 }
 form textarea {
-    resize: none;
     border: 1px solid #ccc;
     padding: 0.5em 0.8em;
     width: 95%;
@@ -523,8 +514,15 @@ form small {
 
 .goFast {
     text-align: center;
-    display: flex;
+    text-decoration: none;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 2em 1em;
+    color: white;
+    border: solid 1px #2b2821;
+    background: #4e4b3b;
+    display: block;
     font-style: oblique;
+    clear: both;
 }
 
 
@@ -532,7 +530,7 @@ form small {
     padding-right: 10px;
     color: white;
     float: right;
-    border: solid 1px #4e4b3b;
+    border: solid 1px #2b2821;
     background: #4e4b3b;
 }
 
@@ -592,6 +590,9 @@ td:before {
 
 /*
 Label the data
+
+Questa parte non valida nel caso di css 3.0 ma è rende accessibili le tabelle in versione mobile . È stata
+scelta di tenerla in quanto i dispositivi mobili non sono soggetti a vecchie versione di browser come lo sono i desktop
 */
 
 #ProdottiMagazzino td:nth-of-type(1):before { content: "CodProdotto"; font-weight: bold; }
@@ -628,7 +629,6 @@ h2{
    font-style:normal;
    text-align:center;
    font-family: "Roboto", helvetica, arial, sans-serif;
-   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
    text-transform:uppercase;
    margin: 1em;
 }
@@ -639,7 +639,6 @@ h2{
    font-style: oblique;
    text-align:center;
    font-family: "Roboto", helvetica, arial, sans-serif;
-   text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
    text-transform:uppercase;
 }
 
@@ -649,7 +648,6 @@ h2{
   color:#3e4150;
   font-size:1em;
   font-weight:normal;
-  text-shadow: 0 1px 1px rgba(256, 256, 256, 0.1);
 }
 
 #listino thead tr{
@@ -671,7 +669,6 @@ h2{
   vertical-align:middle;
   font-weight:300;
   font-size:0.9em;
-  text-shadow: -1px -1px 1px rgba(0, 0, 0, 0.1);
   border-right: 1px solid #C1C3D1;
 }
 
@@ -685,7 +682,6 @@ h2{
   font-weight: 100;
   padding:24px;
   text-align:left;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
   vertical-align:middle;
 }
 
@@ -702,17 +698,6 @@ td {
   background:#FFFFFF;
   padding:0.3em;
   text-align: center;
-}
-
-.mobile{
-    position: static;
-    left: inherit;
-    top: initial;
-    width: 100%;
-    clear: both;
-    height: inherit;
-    font-size: 0.7em;
-    text-align: center;
 }
 
 /*APPUNTAMENTI*/
@@ -750,8 +735,6 @@ td {
 
 
 .footer{
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
-    box-sizing: border-box;
     background-repeat: no-repeat;
     text-align: center;
     font: bold 1em sans-serif;
@@ -809,7 +792,6 @@ td {
     font-size: 2em;
     width: 38px;
     height: 38px;
-    border-radius: 50%;
     text-align: center;
     line-height: 42px;
     margin: 10px 15px;
