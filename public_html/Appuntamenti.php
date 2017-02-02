@@ -5,7 +5,7 @@ require 'utils/DBlibrary.php';
 $login=authenticate();
 
 // Controllo accesso
-if (!login )
+if (!$login )
 {
 	header('location:index.php');
 	exit;
