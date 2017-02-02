@@ -62,7 +62,7 @@ html, body{padding:0px;
 }
 
 /*Elementi nascosti di lettura per lo screenR e non visibili*/
-.nascosto{
+.nascosto, .goFast{
     position:absolute;
     left:0px;
     top:-500px;
@@ -113,7 +113,6 @@ legend{
     color: white;
     border: solid 1px #2b2821;
     background: #4e4b3b;
-    
 }
 
 #accedi{
@@ -479,18 +478,7 @@ form small {
     margin-bottom: 20px;
 }
 
-.goFast {
-    float: right;
-    clear: both;
-    font-style: oblique;
-    text-decoration: none;
-    padding: 0.5em 1em 0.5em 1em;
-    margin: 2em 1em;
-    color: white;
-    border: solid 1px #2b2821;
-    background: #4e4b3b;
-    display: block;
-}
+
 
 .prodotto .nome_scientifico{
     font-style: oblique;

@@ -61,7 +61,7 @@ html, body{padding:0px;
 }
 
 /*Elementi nascosti di lettura per lo screenR e non visibili*/
-.nascosto{
+.nascosto, .goFast{
     position:absolute;
     left:0px;
     top:-500px;
@@ -69,7 +69,6 @@ html, body{padding:0px;
     height:1px;
     overflow:hidden;
     display: none;
-
 }
 
 
