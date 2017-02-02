@@ -71,7 +71,7 @@ if (!isset($_SESSION['username'])) {
                     <td><strong><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></strong></td>
                     <td>" . $messaggio->data . "</td>
                     <td>" . $messaggio->ora . "</td>
-                    <td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"\/></td>
+                    <td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"/></td>
 				</tr>";
             else
                 $str_to_print .= "
@@ -81,12 +81,12 @@ if (!isset($_SESSION['username'])) {
                     <td><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></td>
                     <td>" . $messaggio->data . "</td>
                     <td>" . $messaggio->ora . "</td>
-                    <td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"\/></td>
+                    <td><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"/></td>
                 </tr>";
         }
         $str_to_print .= "</tbody></table>
-		<input type='submit' name='submit' value='Procedi'>
-		<input type='reset' value='Cancella'>
+		<input type='submit' name='submit' value='Procedi'/>
+		<input type='reset' value='Cancella'/>
 		</fieldset>
 		</form>";
         unset($messaggio); //fortemente consigliato perché altrimenti l'oggetto $messaggio rimane in memoria
