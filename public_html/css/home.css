@@ -257,6 +257,10 @@ li a:hover {
     margin: 1em;
 }
 
+#divMappa {
+    text-align: center;
+}
+
 /*Listino Prezzi*/
 
 
@@ -678,20 +682,35 @@ p.ggCalendario {
     text-align: left;
     font: bold 16px sans-serif;
     clear:both;
-    padding: 25px 20px;
-    margin-top: 20px;
 }
 
 .footer .footer-left,
-.footer .footer-center,
 .footer .footer-right{
     display: inline-block;
     vertical-align: top;
 }
 
+.footer-left{
+    margin: 4em;
+    width: 33%;
+    float: left;
+}
 
-.footer .footer-left{
-    width: 30%;
+.testo-footer{
+    border-bottom: 1px dotted;
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+.testo-footer a {
+    text-decoration: none;
+    color: #31456b;
+}
+
+.footer-right{
+    width: 25%;
+    float: left;
+    margin-top: 3em;
 }
 
 
@@ -700,85 +719,18 @@ p.ggCalendario {
     background-image: url(../img/logo_mini.png);
     background-repeat: no-repeat;
     margin: 0;
-    color:black;  
+    color:black;
     width: 200px;
     height: 50px;
 }
 
-.footer .footerlogo span {
-    display:block;
-    height:0;
-    overflow:hidden;
+.w3c {
+    float: left;
+    margin-top: 1em;
 }
 
-.footer .footer-left a{
-    padding-left: 2px;
-    padding-right: 2px;
-}
-
-.footer .footer-nome-azienda{
-    color:  #333333;
-    font-size: 0.9em;
-    font-weight: normal;
-    margin: 0;
-}
-
-.footer .footer-center{
-    width: 38%;
-}
-
-.footer .footer-center i{
-    color: #333333;
-    font-size: 2em;
-    width: 38px;
-    height: 38px;
-    text-align: center;
-    line-height: 42px;
-    vertical-align: middle;
-}
-
-.footer .footer-center i.fa-mail{
-    font-size: 1em;
-    line-height: 38px;
-}
-
-.footer .footer-center p{
-    display: inline-block;
-    color: #333333;
-    vertical-align: middle;
-    margin:0;
-}
-
-.footer .footer-center p span{
-    display:block;
-    font-weight: normal;
-    font-size:0.9em;
-    line-height:2;
-}
-
-
-.footer .footer-right{
-    color: black;
-    width: 30%;
-}
-
-.footer .footer-nome-azienda{
-    line-height: 20px;
-    font-size: 0.85em;
-    font-weight: normal;
-    margin: 0;
-}
-
-.footer .footer-company-info span{
-    display: block;
-    color:  #333333;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.testo-footer{
-    color: #333333;
+.w3c p {
+    display: inline;
 }
 
 
