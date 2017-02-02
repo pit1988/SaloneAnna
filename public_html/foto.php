@@ -32,18 +32,18 @@ $num_rows = count($result);
 echo "<h2>Image Gallery</h2>\n";
 
 if ($num_rows>0){
-	echo "<dl id=\"galleria\">\n<dt class=\"nascosto\">Galleria</dt>";
+	echo "<div id=\"galleria\">";
 	foreach ($result as $foto) {
         echo "
-	    	<dd>
-		    	<figure class=\"photo\">
-		    		<img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/>
-		    		<figcaption>" . $foto->descrizione. "</figcaption>
-		    	</figure>
-	    	</dd>
+	    	<div class=\"photo\">
+	    	    <a href=\"uploads/".$foto->nome."\">
+                <img src=\"uploads/".$foto->nome."\" alt=\"". trim($foto->descrizione)." \"/>
+                <span class=\"desc\">" . $foto->descrizione. "</span>
+                </a>
+	    	</div>
 	    	";
     }
-    echo "</dl>";
+    echo "</div>";
 }
 else
     echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
