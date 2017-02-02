@@ -252,10 +252,5 @@ function new_user($login, $password) {
         or die("Query fallita" . mysqli_error($conn));
 };
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/master
 ?>
 
