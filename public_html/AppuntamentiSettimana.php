@@ -50,11 +50,11 @@ if (!isset($_SESSION['username'])) {
             ";
         for($i=0; $i<count($result); $i++){
             $appuntamenti=$result[$i];
-            echo "<li>\n";
-            echo "<p class=\"info\">".$result[$i][0]."</p>\n";
+            echo "<li class=\"ggApp\">\n";
+            echo "<p class=\"ggCalendario\">".$result[$i][0]."</p>\n";
             $elenco=$appuntamenti[1];
             if (count($elenco)==0)
-                echo "<p class=\"info\">Non ci sono appuntamenti da mostrare</p>\n";
+                echo "<p class=\"inforesult\">Non ci sono appuntamenti da mostrare</p>\n";
             else {
                 $str_to_print = '
                     <table class="tabApp" summary="tabella appuntamenti">

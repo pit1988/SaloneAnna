@@ -681,6 +681,25 @@ input[type="button"], input[type="submit"]{
     margin-bottom: 0.5em;
 }
 
+/*VISUALIZZA APPUNTAMENITI */
+
+.ggApp {
+    padding: 1em;
+    border-top: 1px dashed #4e4b3b;
+}
+
+p.ggCalendario {
+    padding: 1em;
+}
+
+.ggCalendario {
+    padding: 1em;
+    margin: 6px auto;
+    text-align: center;
+    color: #31456b;
+    font-size: 1.4em;
+}
+
 /* Footer */
 
 
