@@ -42,11 +42,9 @@ $to_print=$str1.$str2.$str3;
 /* Funzione per terminare una pagina */
 function page_end() {
     $to_print='
+<a href="#header" class="goFast" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a>
+<a href="#finePagina" class="nascosto" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a>
 <div id="footer" class="footer">
-<ul class="nascosto">
-<li><a href="#header" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a></li>
-<li><a href="#finePagina" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a></li>
-</ul>
 <div class="footer-left">
 <h3 id="logo_mini"><span>Salone Anna</span></h3>
 <p class="footer-nome-azienda">Salone Anna &copy; 2017</p>
