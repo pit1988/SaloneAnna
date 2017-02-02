@@ -9,9 +9,10 @@ if (!$login) {
     exit;
 } else {
     $dati_ok=false;
-    if(isset($_POST['CodCliente']) && isset($_POST['data'] && isset($_POST['ora']))){
-        $date = $_POST['date'];
-        $ora=$_POST['orario'];
+    if(isset($_POST['CodCliente']) && isset($_POST['date']) && isset($_POST['ora'])) {
+        echo "ho i tre parametri\n";
+        $data = $_POST['date'];
+        $ora=$_POST['ora'];
         $codCliente=$_POST['CodCliente'];
         $dati_ok=true;
     }
@@ -19,27 +20,25 @@ if (!$login) {
     if (!isset($_POST['submit']) OR (!isset($_POST['cli']) AND !isset($_POST['data']))) {
         $err = "<p class=\"errorSuggestion\">Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } 
-    else {
-        $codCliente=0;
+    elseif(isset($_POST['submit']) AND (isset($_POST['cli']) OR isset($_POST['data']))) {
+        echo "Sono nel ramo else\n";
+        $codCliente="";
         $data=""; 
         $ora="";
         $s_client = (isset($_POST['cli']) && ($_POST["cli"] == "cli")) ? true : false;
-        $s_data   = (isset($_POST['data']) && ($_POST["date"] == "date")) ? true : false;
+        $s_data   = (isset($_POST['data']) && ($_POST["data"] == "data")) ? true : false;
         
         if (($s_client == true && (empty($_POST['first_name']) OR (empty($_POST['last_name'])))) OR ($s_data == true && (empty($_POST['date'])))) {
             $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             
-        } else {
-            if (empty($_POST['date']))
-                $sub = $_POST['submit'];
-            
-            $query = "SELECT c.Nome, c.Cognome, a.DataOra   FROM Clienti c JOIN Appuntamenti a";
-            
+        } 
+        else {
             if ($s_data == true) {
-                $date = $_POST['date'];
+                $data = $_POST['date'];
                 if (!empty($_POST['orario'])) {
                     $ora=$_POST['orario'];
                 }
+                $dati_ok=true;
             }
 
             if ($s_client == true) {
@@ -49,6 +48,7 @@ if (!$login) {
                 // inserire parte controllo cliente
                 $result = checkCliente($nome, $cognome);
                 if (is_null($result) OR count($result) == 0) { //nessuno
+                    $dati_ok=false;
                     $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
                     hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
                 } 
@@ -56,8 +56,9 @@ if (!$login) {
                     $number_rows = count($result);
                     
                     if ($number_rows > 1) {
+                        $dati_ok=false;
                         $err= "<p class=\"inforesult\">Più clienti hanno si chiamano " . $nome . " " . $cognome . ", scegline uno:</p>";
-                        $th = '<form method="post" action="StoricoProd.php">
+                        $th = '<form method="post" action="AppClienteGiorno.php">
                           <fieldset>
                           <legend>Seleziona il cliente dalla lista</legend>
                           <table id="ElencoClienti" summary="Elenco clienti">
@@ -85,22 +86,24 @@ if (!$login) {
                                     <td>" . $cliente->email . "</td>
                                     <td>" . $cliente->dataNascita . "</td>
                                     <td class=\"tdin\"><input type='radio' name='CodCliente' value='$cliente->codice'/>
-                                    <input type='hidden' name='data' value='$data'/>
-                                    <input type='hidden' name='data' value='$ora'/>
+                                    <input type='hidden' name='date' value='$data'/>
+                                    <input type='hidden' name='ora' value='$ora'/>
                                     </td>
                                 </tr>
-";
+                                ";
                         }
                         $tf       = "</tbody></table>";
-                        $to_print.= $th . $tb . $tf;
-                        $to_print.= "<input type='submit' name='submit' value='Procedi' />";
-                        $to_print.= "<input type='reset' value='Cancella' />";
-                        $to_print.= "</fieldset>";
-                        $to_print.= "</form>";
+                        $ris = $th . $tb . $tf;
+                        $ris.= "
+                            <input type='submit' name='submit' value='Procedi' />
+                            <input type='reset' value='Cancella' />
+                            </fieldset>
+                        </form>";
                     } //fine n_righe>1
                     
                     else { //unico risultato
                         // prendi il codice cliente dall'unica riga
+                        echo "Ho i dati del cliente\n";
                         $codCliente = $result[0]->codice;
                         $nome       = $result[0]->nome;
                         $cognome    = $result[0]->cognome;
@@ -108,50 +111,49 @@ if (!$login) {
                     }
                     unset($result);
                 }
-                // TO HERE
             }
         }
     }    
 
 //*******************************HA TUTTI I DATI **************************//
     if($dati_ok)  {
+        echo "sono dentro la funzione coi dati\n";
         // inserire funzione Andrea
-        $result = $conn->query($query);
+        echo "AppuntamentiDataCliente($codCliente, $data, $ora)";
+        $res = AppuntamentiDataCliente($codCliente, $data, $ora);
         
-        $num_rows = mysqli_num_rows($result);
+        $num_rows = count($res);
         $ris      = "";
-        if (!$num_rows)
+        if ($num_rows==0)
             $ris = "<p class=\"inforesult\">La ricerca non ha prodotto risultati</p>";
         else {
-            
-            $number_cols = mysqli_num_fields($result);
             
             $ris .= "<p class=\"inforesult\"><strong>Storico:</strong></p>";
             $ris .= '<table id="ListaAppuntamenti" summary="Lista degli appuntamenti">
         <caption class="nasconsto">Lista degli appuntamenti</caption>
         <thead>
-            <tr>' . "\n";
-            for ($i = 0; $i < $number_cols; $i++) {
-                // echo "<th scope=\"col\">" . mysql_field_name ($result, $i). "</th>\n";
-                $ris .= "<th scope=\"col\">" . (mysqli_fetch_field_direct($result, $i)->name) . "</th>\n";
-            }
-            $ris .= "</tr>\n</thead>\n<tbody>\n";
+            <tr>
+                <th scope="col">Nome</th>
+                <th scope="col">Cognome</th>
+                <th scope="col">Data Ora</th>
+                <th scope="col">Tipo</th>
+            </tr>
+        </thead>
+        <tbody>';
             
-            while ($row = mysqli_fetch_row($result)) {
-                $ris .= "<tr>\n";
-                for ($i = 0; $i < $number_cols; $i++) {
-                    $ris .= "<td>";
-                    if (!isset($row[$i])) {
-                        $ris .= "NULL";
-                    } else {
-                        $ris .= $row[$i];
-                    }
-                    $ris .= "</td>\n";
-                }
-                $ris .= "</tr>\n";
+            foreach ($res as $appuntamento) {
+                $ris.="
+                    <tr>
+                        <td>".$appuntamento->nome."</td>
+                        <td>".$appuntamento->cognome."</td>
+                        <td>".$appuntamento->data." ".$appuntamento->ora."</td>
+                        <td>".$appuntamento->tipo."</td>
+                    </tr>
+                ";
             }
             $ris .= "</tbody></table>";
         }
+        unset($result);
     }    
 
     $title      = "Ricerca Appuntamento: Salone Anna";
@@ -160,7 +162,7 @@ if (!$login) {
     $keywords   = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="RicercaAppuntamenti.php">Ricerca Appuntamento</a> / <strong>Risultati</strong>';
-    insert_header($rif, 4, true);
+    insert_header($rif, 6, true);
     content_begin();
     if (isset($err))
         echo $err;
@@ -171,9 +173,3 @@ if (!$login) {
     page_end();
 }
 ?>
-
-
-
-            else {
-                
-            }

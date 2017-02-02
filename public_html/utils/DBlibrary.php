@@ -918,18 +918,24 @@ function cambiaPassword($codAccount, $nuovaPassword) {
 	return FALSE;
 }
 
-function AppuntamentiDataCliente($codCliente=0, $data="", $ora="") {
+function AppuntamentiDataCliente($codCliente="", $data="", $ora="") {
+	$query = "SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
+		FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente";
 	$where = "";
-	if($codCliente > 0) {$where = $where."Appuntamenti.CodCliente=$codCliente";}
-	$ora = strtotime($ora);
-	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) && $ora !== FALSE) {
+	if($codCliente != "") {
+		$where.= "Appuntamenti.CodCliente=$codCliente";
+	}
+	if($data!="" AND preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data)) {
 		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
 		checkAndWhere($where);
-		$where = $where."DataOra='$data ".date("H:i:s", $ora)."'";
+		$where .= "DATE(DataOra)='$data' ";
+		if(!preg_match("/[0-9]{1,2}[:][0-9]{2}/", $ora))echo "rexef fallita";
+		if($ora!="" AND preg_match("/[0-9]{1,2}[:][0-9]{2}/", $ora)) {
+			$hh = substr($ora, 0, 2);
+			$where .= "AND HOUR(DataOra)>='$hh'";
+		}
 	}
-	$result = eseguiQuery("SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
-	FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente
-	WHERE $where ORDER BY DataOra DESC");
+	$result = eseguiQuery("$query WHERE $where ORDER BY DataOra DESC");
 	if(!$result) {$appuntamenti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$appuntamenti = array();

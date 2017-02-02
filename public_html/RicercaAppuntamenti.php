@@ -45,7 +45,7 @@ if (!$login) {
 			<li>
 				<p>
 					<label for="date">Data</label>
-					<input type="text" name="date" id="date" value="date" tabindex="104" />
+					<input type="text" name="date" id="date" tabindex="104" />
 				</p>
 			</li>
 			<li>
