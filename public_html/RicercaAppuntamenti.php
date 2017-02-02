@@ -19,7 +19,7 @@ if (!isset($_SESSION['username'])) {
     echo "<h2>Ricerca Appuntamento</h2>";
 
     $str_to_print = '
-<form action="AppClienteGiorno.php" method=POST>
+<form action="AppClienteGiorno.php" method="post">
 	<fieldset class="inputsL">
 		<legend>Ricerca tramite dati cliente:</legend>
 		<ul>
@@ -35,7 +35,7 @@ if (!isset($_SESSION['username'])) {
 			</li>
 			<li>
 				<p>
-					<input type=checkbox name="cli" value="cli" /> Per Cliente
+					<input type="checkbox" name="cli" value="cli" /> Per Cliente
 				</p>
 			</li>
 		</ul>
@@ -46,7 +46,7 @@ if (!isset($_SESSION['username'])) {
 			<li>
 				<p>
 					<label for="date">Data</label>
-					<input type="text" name="date" id="date" tabindex="104" />
+					<input type="text" name="date" id="date" value="date" tabindex="104" />
 				</p>
 			</li>
 			<li>
@@ -57,12 +57,12 @@ if (!isset($_SESSION['username'])) {
 			</li>
 			<li>
 				<p>
-					<input type="checkbox" name="data" value="data"> Per Data
+					<input type="checkbox" name="data" value="data" /> Per Data
 				</p>
 			</li>
 		</ul>
+	<input type="submit" name="submit" value="Invia" />
 	</fieldset>
-	<p><input type="submit" name="submit" value="Invia"></p>
 </form>
 	';
     echo $str_to_print;

@@ -65,13 +65,19 @@ else
             <tbody>';
 		foreach ($ris as $cliente) {
 				$str_to_print.= "<tr>
-				<td>".$cliente->codice."</td><td>".$cliente->nome."</td><td>".$cliente->cognome."</td><td>".$cliente->telefono."</a></td><td>".$cliente->email."</td><td>".$cliente->dataNascita."</td><td><input type='checkbox' name='Ids[]' value=$cliente->codice></td>
+					<td>".$cliente->codice."</td>
+					<td>".$cliente->nome."</td>
+					<td>".$cliente->cognome."</td>
+					<td>".$cliente->telefono."</td>
+					<td>".$cliente->email."</td>
+					<td>".$cliente->dataNascita."</td>
+					<td><input type='checkbox' name='Ids[]' value=\"".$cliente->codice."\"/></td>
 				</tr>";
 		}
 		$str_to_print.="
 		</tbody></table>
-		<input type='submit' name='submit' value='Procedi'>
-		<input type='reset' value='Cancella'>
+		<input type='submit' name='submit' value='Procedi'/>
+		<input type='reset' value='Cancella'/>
 		</fieldset></form>
 		";
 		unset($cliente); //fortemente consigliato perché altrimenti l'oggetto $cliente rimane in memoria

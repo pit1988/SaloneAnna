@@ -11,18 +11,17 @@ if (!isset($_SESSION['username'])) {
     if (!isset($_POST['submit']) OR (!isset($_POST['cli']) AND !isset($_POST['data']))) {
         $err = "<p class=\"errorSuggestion\">Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } else {
-        $s_client = isset($_POST["cli"]) ? true : false;
-        $s_data   = isset($_POST["date"]) ? true : false;
+        $s_client = (isset($_POST['cli']) && ($_POST["cli"] == "cli")) ? true : false;
+        $s_data   = (isset($_POST['data']) && ($_POST["date"] == "date")) ? true : false;
         
-        if (($s_client == true && (empty($_POST['first_name']) OR (empty($_POST['last_name']) ))) OR ($s_data == true && (empty($_POST['date'])) )) { 
+        if (($s_client == true && (empty($_POST['first_name']) OR (empty($_POST['last_name'])))) OR ($s_data == true && (empty($_POST['date'])))) {
             $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
-
+            
         } else {
-            if(empty($_POST['date']))
-            echo "lunghezza stringa data=";
+            if (empty($_POST['date']))
             $sub = $_POST['submit'];
             
-            $query = "SELECT c.Nome, c.Cognome, a.DataOra	FROM Clienti c JOIN Appuntamenti a";
+            $query = "SELECT c.Nome, c.Cognome, a.DataOra   FROM Clienti c JOIN Appuntamenti a";
             
             if ($s_client == true) {
                 $nome    = $_POST['first_name'];
@@ -46,7 +45,7 @@ if (!isset($_SESSION['username'])) {
             
             $conn  = dbConnect();
             $query = $query;
-            echo $query;
+
             $result = $conn->query($query);
             
             $num_rows = mysqli_num_rows($result);
@@ -80,7 +79,7 @@ if (!isset($_SESSION['username'])) {
                         }
                         $ris .= "</td>\n";
                     }
-                    $ris .= "</td>\n";
+                    $ris .= "</tr>\n";
                 }
                 
                 $ris .= "</tbody></table>";

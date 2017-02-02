@@ -18,7 +18,7 @@ if (!isset($_SESSION['username'])) {
         $result = mostraMessaggio($cmsg);
         
         if (is_null($result)) {
-            $err "<p class=\"info\">Non è presente il messaggio richiesto</p>";
+            $err= "<p class=\"info\">Non è presente il messaggio richiesto</p>";
         } 
         else {
             $to_print = '
@@ -29,7 +29,7 @@ if (!isset($_SESSION['username'])) {
                             <em>Messaggio inviato da:  </em>' . $result->nome . ' ' . $result->cognome . '
                         </p>
                     </li>
-                    <li>
+                    <li><
                         <p id="dataora">
                             <em>Ricevuto:  </em>' . $result->data . ' ' . $result->ora . '
                         </p>
