@@ -339,27 +339,23 @@ function Show(obj) {
 }
 
 function scroll(){
-    // Nascondo l'icona al caricamento della pagina
-    $("#back_to_top").hide();
+   $(function() {
+        //se in cima alla pagina nascondi il box
+        $("#back_to_top").hide();
+        $(window).scroll(function() {
+            if($(this).scrollTop() != 0) {
+                //se non siamo in cima alla pagina
+               $("#back_to_top").fadeIn(); //faccio apparire il box
+           } else {
+                   //altrimenti (il visitatore è in cima alla pagina scrollTop = 0)
+                   $("#back_to_top").fadeOut();//Il box scompare
+           }
+        });//Allo scroll function
 
-    // Intercetto lo scroll di pagina
-    $(window).scroll(function()
-    {
-        // Se l'evento scroll si verifica, mostro l'icona (invisibile) con effetto dissolvenza
-        if ($("#back_to_top").is(":hidden")) {
-            $("#back_to_top").fadeIn(500);
-        }
+           $("#back_to_top").click(function() {
+           //Se clicco sul box torno su (scrollTop:0) con un timing di animazione.
+           $('body,html').animate({scrollTop:0},500);
+            });//Click
 
-        // Se si verifica il ritorno ad inizio pagina, nascondo l'icona con effetto dissolvenza
-         if ($("body").scrollTop() == 0 && !$("#back_to_top").is(":hidden"))
-         {
-             $("#back_to_top").fadeOut(500);
-         }
-    });
-
-    // Al click sull'icona, torno ad inizio pagina con movenza fluida
-    $("#back_to_top").click(function()
-    {
-        $("html,body").animate({scrollTop: 0}, 500, function(){});
-    });
+   });//DOM
 }

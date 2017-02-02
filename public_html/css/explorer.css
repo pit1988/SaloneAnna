@@ -798,3 +798,10 @@ p.ggCalendario {
 .testo-footer{
     color: #333333;
 }
+
+/* Tasto torna su */
+#back_to_top{
+    position: absolute;
+    top: expression(((0-(back_to_top.offsetHeight)+(document.documentElement.clientHeight ? document.documentElement.clientHeight : document.body.clientHeight)+(ignoreMe = document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop)) - 15) + "px");
+    right: 15px;
+}

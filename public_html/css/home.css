@@ -781,3 +781,10 @@ p.ggCalendario {
     color: #333333;
 }
 
+
+#back_to_top {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    cursor: pointer;
+}

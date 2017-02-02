@@ -43,35 +43,30 @@ $to_print=$str1.$str2.$str3;
 /* Funzione per terminare una pagina */
 function page_end() {
     $to_print='
+<div id="back_to_top"><img src="img/back_to_top.png"></div>
 <p><a href="#header" class="nascosto" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a></p>
 <p><a href="#finePagina" class="nascosto" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a></p>
 <div id="footer" class="footer">
-<div class="footer-left">
+    <div class="footer-left">
+        <div>
+            <address class="testo-footer">Via Ludovico Ariosto, 36075 Montecchio Maggiore VI, Italy</address>
+        </div>
+        <div>
+            <p class="testo-footer">tell: <a href="tel:+390444697939">+39 0444 697939</a></p>
+        </div>
+        <div>
+            <p xml:lang="en">E-Mail <a href="mailto:salone_anna@gmail.com" accesskey="e" tabindex="104">salone_anna@gmail.com</a></p>
+        </div>
+        </div>
+<div class="footer-right">
 <h3 id="logo_mini"><span>Salone Anna</span></h3>
 <p class="footer-nome-azienda">Salone Anna &copy; 2017</p>
-</div>
-<div class="footer-center">
-<div>
-<address class="testo-footer">Via Ludovico Ariosto, 36075 Montecchio Maggiore VI, Italy</address>
-</div>
-<div>
-    <p class="testo-footer">tell: <a href="tel:+390444697939">+39 0444 697939</a></p>
-</div>
-<div>
-<p xml:lang="en">E-Mail <a href="mailto:salone_anna@gmail.com" accesskey="e" tabindex="104">salone_anna@gmail.com</a></p>
-</div>
-<div class="testo-footer, center">
+<div class="testo-footer, right">
 <p class="imgW3C">
 <a href="http://validator.w3.org/check?uri=referer">Documento XHTML 1.0 Valido!</a>
 <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS Valido</a>
 </p>
 </div>
-</div>
-<div class="footer-right">
-<p class="footer-company-info" title="motto">
-<span class="testo-footer">Salone Anna</span>
-<span class="testo-footer">Lascia una firma professionale e di stile sul tuo capello. Salone Anna &egrave; al tuo servizio</span>
-</p>
 </div>
 </div>
 <p id="finePagina"></p>
