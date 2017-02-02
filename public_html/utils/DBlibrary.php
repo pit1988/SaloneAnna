@@ -906,4 +906,31 @@ function cambiaPassword($codAccount, $nuovaPassword) {
 	}
 	return FALSE;
 }
+
+function AppuntamentiDataCliente($codCliente=0, $data="", $ora="") {
+	$where = "";
+	if($codCliente > 0) {$where = $where."CodCliente=$codCliente";}
+	$ora = strtotime($ora);
+	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) && $ora !== FALSE) {
+		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
+		checkAndWhere($where);
+		$where = $where."DataOra='$data ".date("H:i:s", $ora)."'";
+	}
+	$result = eseguiQuery("SELECT * FROM Appuntamenti WHERE $where ORDER BY DataOra DESC");
+	if(!$result) {$appuntamenti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
+	else {
+		$appuntamenti = array();
+		while($appuntamento = mysqli_fetch_assoc($result)) {
+			if($appuntamento['DataOra'] !== NULL) {
+				$time = strtotime($appuntamento['DataOra']);
+				$data = date("d/m/Y", $time); //formato del tipo 05/01/2017
+				$ora = date("H:i", $time); //formato del tipo 23:46
+			}
+			else {$data = NULL; $ora = NULL;}
+			$prezzo = round($appuntamento['Costo'] * ((100-$appuntamento['Sconto'])/100), 2); //round arrotonda il numero alla seconda cifra decimale
+			array_push($appuntamenti, new Appuntamento($appuntamento['CodAppuntamento'], $data, $ora, $appuntamento['NomeTipo'], $prezzo, $appuntamento['Nome'], $appuntamento['Cognome'], $appuntamento['Telefono'], $appuntamento['Email']));
+		}
+	}
+	return $appuntamenti; //è un array di Appuntamenti, non viene garantito che $appuntamenti sia stato effettivamente istanziato perché potrebbero esserci stato un errore
+}
 ?>
