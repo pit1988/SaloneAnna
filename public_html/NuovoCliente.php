@@ -1,15 +1,16 @@
 
 <?php
-
-$login=authenticate();
 require 'library.php';
 require 'utils/DBlibrary.php';
 
+$login=authenticate();
+
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
-} else{ 
+} 
+else{ 
     if(isset($_POST['submit'])) {
         if (!isset($_POST['first_name']) OR !isset($_POST['last_name'])) {// OR !isset($_POST['email']) OR !isset($_POST['phone']) OR !isset($_POST['data'])) {
             $err= "Almeno uno dei parametri non è stato inserito correttamente";

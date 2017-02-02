@@ -1,13 +1,13 @@
 <?php
+require 'library.php';
+require 'utils/DBlibrary.php';
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
-    require 'library.php';
-    include("utils/DBlibrary.php");
     $title = "Prodotti in esaurimento: Salone Anna";
     $title_meta = "Prodotti in esaurimento: Salone Anna";
     $descr = "";

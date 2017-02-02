@@ -1,10 +1,9 @@
 <?php
 require 'library.php';
+require 'utils/DBlibrary.php';
 
 /* se l'utente non si è gia` autenticato, mostra nel menù le pagine accessibili al pubblico*/
-session_start();
-
-session_regenerate_id(TRUE);
+$login=authenticate();
 
 $title="Listino prezzi Salone Anna";
 $title_meta="Listino prezziSalone Anna, parrucchiere a Vicenza";
@@ -14,7 +13,7 @@ page_start($title, $title_meta, $descr, $keywords, '');
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prezzi</strong>';
 $is_admin=false;
 
-if (isset($_SESSION['username'] ) ) {
+if (checkLog() ) {
 	$is_admin=true;
 }
 

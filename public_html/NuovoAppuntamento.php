@@ -1,5 +1,6 @@
-
 <?php
+require 'library.php';
+require 'utils/DBlibrary.php';
 
 $login=authenticate();
 
@@ -7,10 +8,8 @@ $login=authenticate();
 if (!checkLog()) {
     header('location:index.php');
     exit;
-} else {
-    require 'library.php';
-    require 'utils/DBlibrary.php';
-    
+} 
+else {    
     $title      = "Nuovo appuntamento: Salone Anna";
     $title_meta = "Nuovo appuntamento: Salone Anna";
     $descr      = "";

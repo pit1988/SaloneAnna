@@ -1,14 +1,14 @@
 <?php
+require 'library.php';
+require 'utils/DBlibrary.php';
 
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
-    require 'library.php';
-    include 'utils/DBlibrary.php';
     if (!isset($_GET["codmsg"])) {
         $err = "<p class=\"errorSuggestion\">Non è stato selezionato alcun messaggio, torna a <a href=\"Messaggi.php\" e riprova</p>";
     } else {

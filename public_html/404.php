@@ -1,5 +1,6 @@
 <?php
 require 'library.php';
+require 'utils/DBlibrary.php';
 
 
 $title="Salone Anna: tariffe, orari, indirizzo";
@@ -11,7 +12,7 @@ $rif="<strong>404: pagina non trovata</strong>";
 $name="visitatore"; 
 $is_admin=false;
 
-if (isset($_SESSION['username'] ) ) {
+if (checkLog() ) {
 	$is_admin=true;
 	$name = $_SESSION['username'];
 }

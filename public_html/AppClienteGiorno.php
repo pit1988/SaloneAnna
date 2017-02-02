@@ -1,12 +1,13 @@
 <?php
+  
+    require_once 'library.php';
+    require_once 'utils/DBlibrary.php';
 $login=authenticate();
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
-    require_once 'library.php';
-    require_once 'utils/DBlibrary.php';
     if (!isset($_POST['submit']) OR (!isset($_POST['cli']) AND !isset($_POST['data']))) {
         $err = "<p class=\"errorSuggestion\">Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } else {

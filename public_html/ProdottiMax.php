@@ -1,12 +1,13 @@
 <?php
+require 'library.php';
+require 'utils/DBlibrary.php';
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
-    require 'library.php';
     $title = "Prodotti Max: Salone Anna";
     $title_meta = "Prodotti Max: Salone Anna";
     $descr = "";
@@ -17,8 +18,6 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 4, true);
     content_begin();
     
-    include("utils/DBlibrary.php");
-
     $result = listaProdottiAppuntamentoMax();
     
     echo "<h2>Prodotti pi&ugrave; usati</h2>";

@@ -1,13 +1,13 @@
 <?php
-
+require 'library.php';
+require 'utils/DBlibrary.php';
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
-    require 'library.php';
     $title      = "Compleanni: Salone Anna";
     $title_meta = "Compleanni: Salone Anna";
     $descr      = "";
@@ -18,9 +18,7 @@ if (!isset($_SESSION['username'])) {
     insert_header($rif, 5, true);
     content_begin();
     echo "<h2>Compleanni questo mese</h2>";
-    
-    include("utils/DBlibrary.php");
-    
+        
     $result   = elencoClientiCompleanni();
     $num_rows = count($result);
     if($num_rows>1)

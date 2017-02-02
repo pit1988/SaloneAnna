@@ -1,16 +1,16 @@
 <?php
-  session_start();
-  session_regenerate_id(TRUE);
+  require 'library.php';
+  require 'utils/DBlibrary.php';
+  $login=authenticate();
 
   // Controllo accesso
-  if (!isset($_SESSION['username'] ) )
+  if (!checkLog() )
   {
     header('location:index.php');
     exit;
   }
   else
   {
-    require 'library.php';
     $title="Prodotti: Salone Anna";
     $title_meta="Prodotti: Salone Anna";
     $descr="";

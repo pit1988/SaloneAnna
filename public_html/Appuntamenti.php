@@ -1,16 +1,17 @@
 <?php
+require 'library.php';
+require 'utils/DBlibrary.php';
 
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'] ) )
+if (!checkLog() )
 {
 	header('location:index.php');
 	exit;
 }
 else
 {
-	require 'library.php';
 	$title="Appuntamenti: Salone Anna";
 	$title_meta="Appuntamenti: Salone Anna";
 	$descr="";

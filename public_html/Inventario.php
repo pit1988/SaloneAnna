@@ -1,14 +1,15 @@
 <?php
+require 'library.php';
+include 'utils/DBlibrary.php';
+
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
-} else {
-    require 'library.php';
-    include("utils/DBlibrary.php");
-
+} 
+else {
     $title = "Inventario Prodotti: Salone Anna";
     $title_meta = "Inventario Prodotti: Salone Anna";
     $descr = "";

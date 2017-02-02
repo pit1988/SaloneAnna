@@ -1,10 +1,12 @@
 
 <?php
+require 'library.php';
+include 'utils/DBlibrary.php';
 
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
@@ -12,8 +14,6 @@ if (!isset($_SESSION['username'])) {
         header('loation:NuovoAppuntamento.php');
     } 
     else {
-        require 'library.php';
-        include 'utils/DBlibrary.php';
         
         $title = "Nuovo appuntamento: Salone Anna";
         $title_meta = "Nuovo appuntamento: Salone Anna";

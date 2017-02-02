@@ -1,12 +1,11 @@
-
 <?php
-
-$login=authenticate();
 require 'library.php';
 require 'utils/DBlibrary.php';
 
+$login=authenticate();
+
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {

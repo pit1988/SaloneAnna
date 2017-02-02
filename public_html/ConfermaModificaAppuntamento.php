@@ -1,18 +1,17 @@
-
 <?php
+require 'library.php';
+include 'utils/DBlibrary.php';
 
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
     if (!isset($_POST['submit'])) {
         header('loation:ScegliAppuntamento.php');
     } else {
-        require 'library.php';
-        include 'utils/DBlibrary.php';
         
         $title      = "Modifica appuntamento: Salone Anna";
         $title_meta = "Modifica appuntamento: Salone Anna";

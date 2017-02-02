@@ -1,12 +1,12 @@
 <?php
+require 'library.php';
+require 'utils/DBlibrary.php';
 $login=authenticate();
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } else {
-    require 'library.php';
-    require 'utils/DBlibrary.php';
     $title      = "Ricerca Appuntamento: Salone Anna";
     $title_meta = "Ricerca Appuntamento: Salone Anna";
     $descr      = "";

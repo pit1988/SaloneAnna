@@ -6,7 +6,7 @@ include("utils/DBlibrary.php");
 $to_print = "";
 $err = "";
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
 } elseif (!isset($_POST['first_name']) XOR !isset($_POST['last_name'])) {

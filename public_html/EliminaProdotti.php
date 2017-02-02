@@ -1,16 +1,15 @@
 <?php
+require 'library.php';
+include 'utils/DBlibrary.php';
+
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
-} else {
-    require 'library.php';    
-    include("utils/DBlibrary.php");
-
-    $conn = dbconnect();
-
+} 
+else {
     $title      = "Elimina Prodotti: Salone Anna";
     $title_meta = "Elimina Prodotti: Salone Anna";
     $descr      = "";
@@ -105,6 +104,5 @@ if (!isset($_SESSION['username'])) {
     unset($result);
     content_end();
     page_end();
-    mysqli_close($conn);
 }
 ?>

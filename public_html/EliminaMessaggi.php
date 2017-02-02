@@ -1,16 +1,16 @@
 
 <?php
+require 'library.php';
+include 'utils/DBlibrary.php';
 
 $login=authenticate();
 
 // Controllo accesso
-if (!isset($_SESSION['username'])) {
+if (!checkLog()) {
     header('location:index.php');
     exit;
-} else {
-    require 'library.php';
-    include 'utils/DBlibrary.php';
-    
+} 
+else {
     if (isset($_POST['submit']) && isset($_POST['codMsg'])) {
         $ids   = $_POST['codMsg'];
         $n_el  = 0;
