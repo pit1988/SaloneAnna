@@ -550,7 +550,10 @@ thead tr, tfoot tr  {
     left: -9999px;
 }
 
-tr { border: 1px solid #ccc; }
+tr {
+    border: 1px solid #ccc;
+    margin-bottom: 0.5em;
+}
 
 #ProdottiMagazzino td {
     /* Behave  like a "row" */
@@ -724,6 +727,26 @@ td {
 
 .tipoAppun label {
     margin-bottom: 0.5em;
+}
+
+/*VISUALIZZA APPUNTAMENITI */
+
+.ggApp {
+    padding: 1em;
+    border-top: 1px dashed #4e4b3b;
+    width: 100%;
+}
+
+p.ggCalendario {
+    padding: 1em;
+}
+
+.ggCalendario {
+    padding: 1em;
+    margin: 6px auto;
+    text-align: center;
+    color: #31456b;
+    font-size: 1.4em;
 }
 
 /* Footer */
