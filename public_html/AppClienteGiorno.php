@@ -9,8 +9,8 @@ if (!$login) {
     exit;
 } else {
     $dati_ok=false;
+    $no_client=false;
     if(isset($_POST['CodCliente']) && isset($_POST['date']) && isset($_POST['ora'])) {
-        echo "ho i tre parametri\n";
         $data = $_POST['date'];
         $ora=$_POST['ora'];
         $codCliente=$_POST['CodCliente'];
@@ -21,7 +21,6 @@ if (!$login) {
         $err = "<p class=\"errorSuggestion\">Potresti non aver selezionato alcuna casella di ricerca.</p>";
     } 
     elseif(isset($_POST['submit']) AND (isset($_POST['cli']) OR isset($_POST['data']))) {
-        echo "Sono nel ramo else\n";
         $codCliente="";
         $data=""; 
         $ora="";
@@ -50,7 +49,7 @@ if (!$login) {
                 if (is_null($result) OR count($result) == 0) { //nessuno
                     $dati_ok=false;
                     $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
-                    hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
+                    $no_client=true;
                 } 
                 else { //uno o più
                     $number_rows = count($result);
@@ -103,7 +102,6 @@ if (!$login) {
                     
                     else { //unico risultato
                         // prendi il codice cliente dall'unica riga
-                        echo "Ho i dati del cliente\n";
                         $codCliente = $result[0]->codice;
                         $nome       = $result[0]->nome;
                         $cognome    = $result[0]->cognome;
@@ -117,9 +115,6 @@ if (!$login) {
 
 //*******************************HA TUTTI I DATI **************************//
     if($dati_ok)  {
-        echo "sono dentro la funzione coi dati\n";
-        // inserire funzione Andrea
-        echo "AppuntamentiDataCliente($codCliente, $data, $ora)";
         $res = AppuntamentiDataCliente($codCliente, $data, $ora);
         
         $num_rows = count($res);
@@ -168,6 +163,8 @@ if (!$login) {
         echo $err;
     if (isset($ris))
         echo $ris;
+    if($no_client)
+        hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
     echo "<p>Segui il link per tornare alla <a href=\"RicercaAppuntamenti.php\">pagina di ricerca</a></p>";
     content_end();
     page_end();
