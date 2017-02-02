@@ -216,12 +216,13 @@ li a:hover {
     display:block;
 }
 
-#immagine{
-    background-image:url(../img/home1.png);
-    background-repeat:no-repeat;
+#immagine {
+    background-image: url(../img/home1.png);
+    background-repeat: no-repeat;
     background-size: contain;
-    background-position:center;
-    width:100%;
+    background-position: center;
+    width: 100%;
+    height: 640px;
 }
 
 .titolo_contattaci{
