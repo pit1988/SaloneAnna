@@ -909,14 +909,16 @@ function cambiaPassword($codAccount, $nuovaPassword) {
 
 function AppuntamentiDataCliente($codCliente=0, $data="", $ora="") {
 	$where = "";
-	if($codCliente > 0) {$where = $where."CodCliente=$codCliente";}
+	if($codCliente > 0) {$where = $where."Appuntamenti.CodCliente=$codCliente";}
 	$ora = strtotime($ora);
 	if(preg_match("#^[0-9]{2}[/]{1}[0-9]{2}[/]{1}[0-9]{4}$#", $data) && $ora !== FALSE) {
 		$data = date_format(date_create_from_format("d/m/Y", $data), "Y-m-d");
 		checkAndWhere($where);
 		$where = $where."DataOra='$data ".date("H:i:s", $ora)."'";
 	}
-	$result = eseguiQuery("SELECT * FROM Appuntamenti WHERE $where ORDER BY DataOra DESC");
+	$result = eseguiQuery("SELECT CodAppuntamento, DataOra, NomeTipo, Costo, Sconto, Nome, Cognome, Telefono, Email
+	FROM Appuntamenti JOIN TipoAppuntamento ON Appuntamenti.CodTipoAppuntamento=TipoAppuntamento.CodTipoAppuntamento JOIN Clienti ON Appuntamenti.CodCliente=Clienti.CodCliente
+	WHERE $where ORDER BY DataOra DESC");
 	if(!$result) {$appuntamenti = NULL;} //il valore NULL segnala che c'è stato un errore nella connessione o nell'esecuzione della query
 	else {
 		$appuntamenti = array();
