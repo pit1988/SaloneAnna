@@ -24,13 +24,16 @@ if (!isset($_SESSION['username'])) {
     
     $result   = elencoClientiCompleanni();
     $num_rows = count($result);
+    if($num_rows>1)
+        echo "<p class=\"inforesult\">Ci sono $num_rows persone che compiono gli anni nei prossimi 31 giorni</p>\n";
+    if($num_rows==1)
+        echo "<p class=\"inforesult\">C'è un cliente che compie gli anni entro i prossimi 31 giorni</p>\n";
     $tb = "";
     if ($num_rows>0) {
-        $tb = '<table id="clientiTab" summary="Elenco clienti">
-            <caption class="nascosto">Elenco clienti</caption>
+        $th = '<table id="clientiTab" summary="Elenco clienti">
+            <caption class="nascosto">Elenco clienti che compiono gli anni nei prossimi 31 giorni</caption>
             <thead>
                 <tr>
-                  <th scope="col">Codice</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Cognome</th>
                     <th scope="col">Telefono</th>
@@ -40,9 +43,8 @@ if (!isset($_SESSION['username'])) {
             </thead>
             <tbody>';
         foreach ($result as $cliente) {
-            $str_to_print .= "
+            $tb .= "
               <tr>
-                <td>" . $cliente->codice . "</td>
                 <td>" . $cliente->nome . "</td>
                 <td>" . $cliente->cognome . "</td>
                 <td>" . $cliente->telefono . "</td>
@@ -51,11 +53,12 @@ if (!isset($_SESSION['username'])) {
               </tr>";
         }
         $tf       = "</tbody></table>";
-        $to_print = $th . $tb . $tf;
+        $str_to_print = $th . $tb . $tf;
     } else
         $str_to_print = "<p class=\"inforesult\">Non sono presenti clienti che compiono gli anni nei prossimi 31 giorni</p>";
     unset($result);
-    echo $str_to_print;
+    if(isset($str_to_print))
+        echo $str_to_print;
     if (isset($err))
         echo $err;
     content_end();
