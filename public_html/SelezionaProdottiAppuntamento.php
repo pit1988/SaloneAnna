@@ -130,7 +130,7 @@ else {
                                 <td>".$prodotto->nome."</td>
                                 <td>".$prodotto->marca."</td>
                                 <td>".$prodotto->tipo."</td>
-                                <td><input type=\"text\" name=\"qtprod[]\" value=\"$prodotto->utilizzo\" />
+                                <td class=\"tdin\"><input type=\"text\" name=\"qtprod[]\" value=\"$prodotto->utilizzo\" />
                                     <input type=\"hidden\" name=\"codprod[]\" value=\"$prodotto->codProdotto\" />
                                     <input type=\"hidden\" name=\"qtprod_old[]\" value=\"$prodotto->utilizzo\" />
                                     <input type=\"hidden\" name=\"codApt\" value=\"$codice\" />

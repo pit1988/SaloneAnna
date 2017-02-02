@@ -70,7 +70,7 @@ if (!$login) {
                     <td>".$prodotto->tipo."</a></td>
                     <td>".$prodotto->quantita."</td>
                     <td>".$prodotto->prezzo."</td><td>".$prodotto->prezzoRiv."</td>
-                    <td><input type=\"radio\" name=\"codprod\" value= \"" . $prodotto->codice . "\"\/></td>
+                    <td class=\"tdin\"><input type=\"radio\" name=\"codprod\" value= \"" . $prodotto->codice . "\"\/></td>
                 </tr>";
 
         $tf= "</tbody></table>";

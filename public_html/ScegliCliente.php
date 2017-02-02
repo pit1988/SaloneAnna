@@ -50,7 +50,7 @@ else
 				<td>".$cliente->telefono."</td>
 				<td>".$cliente->email."</td>
 				<td>".$cliente->dataNascita."</td>
-				<td><input type=\"radio\" name=\"codCliente\" value=\"".$cliente->codice."\"/></td>
+				<td class=\"tdin\"><input type=\"radio\" name=\"codCliente\" value=\"".$cliente->codice."\"/></td>
 				</tr>";
 		}
 		$str_to_print.="

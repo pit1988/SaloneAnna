@@ -90,7 +90,7 @@ else {
                     <td>".$prodotto->quantita."</td>
                     <td>".$prodotto->prezzo."</td>
                     <td>".$prodotto->prezzoRiv."</td>
-                    <td><input type=\"checkbox\" name=\"codprod[]\" value= \"" . $prodotto->codice . "\"/></td>
+                    <td class=\"tdin\"><input type=\"checkbox\" name=\"codprod[]\" value= \"" . $prodotto->codice . "\"/></td>
                 </tr>
             ";
         
