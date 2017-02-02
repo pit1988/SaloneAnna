@@ -6,7 +6,7 @@ $login=authenticate();
 $to_print = "";
 $err = "";
 // Controllo accesso
-if (!checkLog()) {
+if (!$login) {
     header('location:index.php');
     exit;
 } elseif (!isset($_POST['first_name']) XOR !isset($_POST['last_name'])) {

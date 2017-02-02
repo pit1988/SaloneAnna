@@ -14,10 +14,9 @@ $rif      = '<a href="index.php" xml:lang="en">Home</a> / <strong>Chi Siamo</str
 $is_admin = false;
 $name     = "visitatore";
 
-if (checkLog()) {
+if ($login) {
     $is_admin = true;
     content_begin();
-    $name = $_SESSION['username'];
     $rif  = '<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Foto</strong>';
 }
 

@@ -4,7 +4,7 @@
   $login=authenticate();
 
   // Controllo accesso
-  if (!checkLog() )
+  if (!$login )
   {
     header('location:index.php');
     exit;

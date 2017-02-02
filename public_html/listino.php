@@ -13,7 +13,7 @@ page_start($title, $title_meta, $descr, $keywords, '');
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prezzi</strong>';
 $is_admin=false;
 
-if (checkLog() ) {
+if ($login ) {
 	$is_admin=true;
 }
 

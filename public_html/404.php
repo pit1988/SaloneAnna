@@ -12,9 +12,8 @@ $rif="<strong>404: pagina non trovata</strong>";
 $name="visitatore"; 
 $is_admin=false;
 
-if (checkLog() ) {
+if (authenticate() ) {
 	$is_admin=true;
-	$name = $_SESSION['username'];
 }
 
 insert_header($rif, 0, $is_admin,'');
