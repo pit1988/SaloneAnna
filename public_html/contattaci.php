@@ -24,7 +24,7 @@ $title="Contattaci: Salone Anna";
 $title_meta="Contattaci: Salone Anna";
 $descr="Pagina con le modalità di contatto di Salone Anna. Ci puoi trovare a Montecchio Maggiore, via L.Ariosto 2";
 $keywords="Salone, Anna, telefono, email, mail, indirizzo, dove trovarci, dove siamo, Vicenza, Montecchio, Maggiore, sede, via Ariosto, e-mail, mappa";
-$onload="caricamentoContattaci(); replaceMap();";
+$onload="replaceMap();";
 page_start($title, $title_meta, $descr, $keywords, $onload);
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
 insert_header($rif, 4, false);
@@ -66,12 +66,10 @@ $to_print='
                     <label for="contenuto">Messaggio</label>
                     <textarea cols="46" rows="3" name="contenuto" id="contenuto" tabindex="103"></textarea>
                 </li>
-                <?php
-                /* <li>
+                <li>
                     <label for="data">Data per appuntamento</label>
-                    <input type="date" name="data" id="data" tabindex="104" />
-                <li> */
-                ?>
+                    <input type="text" name="data" id="data" tabindex="104" />
+                <li> 
                 <li>
                     <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                     <span id="errors"></span>
@@ -94,7 +92,7 @@ $to_print='
     </div>
     <div id="divMappa">
         <div id="visualizzaMappa">
-            <a href="https://www.google.it/maps/place/Parrucchiera+Anna+Cortivo/@45.496225,11.4236863,17z/data=!3m1!4b1!4m5!3m4!1s0x477f379bcb0739f5:0x5a67551b2fe8938a!8m2!3d45.496225!4d11.425875?hl=it" tabindex="105"><img id="fotoMappa" src="img/mappa.png" alt="Mappa della sede di Salone Anna" /></a>
+            <a href="https://www.google.it/maps/place/Parrucchiera+Anna+Cortivo/@45.496225,11.4236863,17z/data=!3m1!4b1!4m5!3m4!1s0x477f379bcb0739f5:0x5a67551b2fe8938a!8m2!3d45.496225!4d11.425875?hl=it" tabindex="105"><img id="fotoMappa" src="img/mappa.jpg" alt="Mappa della sede di Salone Anna" /></a>
         </div>
     </div>
     ';
