@@ -44,31 +44,39 @@ $to_print=$str1.$str2.$str3;
 /* Funzione per terminare una pagina */
 function page_end() {
     $to_print='
-<div id="back_to_top"><img src="img/back_to_top.png"></div>
+<div id="back_to_top"><img href="#content" src="img/back_to_top.png" alt="torna su"></div>
 <p><a href="#header" class="nascosto" title="vai-a-inizio-pagina" tabindex="1000" accesskey="i">Torna all&apos;inizio pagina</a></p>
 <p><a href="#finePagina" class="nascosto" title="vai-a-fine-pagina" tabindex="1001" accesskey="f">Vai a fine pagina</a></p>
 <div id="footer" class="footer">
     <div class="footer-left">
-        <div>
+        <div class="testo-footer">
             <address class="testo-footer">Via Ludovico Ariosto, 36075 Montecchio Maggiore VI, Italy</address>
         </div>
-        <div>
-            <p class="testo-footer">tell: <a href="tel:+390444697939">+39 0444 697939</a></p>
+        <div class="testo-footer">
+            <p>tell: <a href="tel:+390444697939">+39 0444 697939</a></p>
         </div>
-        <div>
+        <div class="testo-footer">
             <p xml:lang="en">E-Mail <a href="mailto:salone_anna@gmail.com" accesskey="e" tabindex="104">salone_anna@gmail.com</a></p>
         </div>
+    </div>
+    <div class="footer-right">
+        <h3 id="logo_mini"><span>Salone Anna</span></h3>
+        <p class="footer-nome-azienda">Salone Anna &copy; 2017</p>
+        <div class="w3c">
+            <p>
+                <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px"
+                        src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                        alt="CSS Valido!" />
+                </a>
+            </p>
+            <p>
+                <a href="http://validator.w3.org/check?uri=referer"><img
+                src="http://www.w3.org/Icons/valid-xhtml10-blue"
+                alt="Valid XHTML 1.0 Strict" height="31" width="88" /></a>
+            </p>
         </div>
-<div class="footer-right">
-<h3 id="logo_mini"><span>Salone Anna</span></h3>
-<p class="footer-nome-azienda">Salone Anna &copy; 2017</p>
-<div class="testo-footer, right">
-<p class="imgW3C">
-<a href="http://validator.w3.org/check?uri=referer">Documento XHTML 1.0 Valido!</a>
-<a href="http://jigsaw.w3.org/css-validator/check/referer">CSS Valido</a>
-</p>
-</div>
-</div>
+    </div>
 </div>
 <p id="finePagina"></p>
 </body>
