@@ -3,12 +3,11 @@
 /* inizia la sessione e verifica che l'utente sia autenticato */
 function authenticate() {
     session_start();
-    // session_regenerate_id(TRUE);
-    $login=$_SESSION['username'];
-    if (! $login) {
+    session_regenerate_id(TRUE);
+    if (! isset($_SESSION['username'])) {
         return FALSE;
     } else {
-        return $login;
+        return $_SESSION['username'];
     }
 };
 

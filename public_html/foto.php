@@ -2,8 +2,7 @@
 require 'library.php';
 include 'utils/DBlibrary.php';
 /* se l'utente non si è gia` autenticato, va alla pagina da cui fare il login*/
-session_start();
-session_regenerate_id(TRUE);
+$login=authenticate();
 
 $title="Foto Salone Anna";
 $title_meta="Foto Salone Anna, parrucchiere a Vicenza";

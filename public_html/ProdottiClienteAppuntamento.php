@@ -1,6 +1,5 @@
 <?php
-session_start();
-session_regenerate_id(TRUE);
+$login=authenticate();
 require 'library.php';
 include("utils/DBlibrary.php");
 

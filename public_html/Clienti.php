@@ -1,8 +1,7 @@
 
 <?php
 
-session_start();
-session_regenerate_id(TRUE);
+$login=authenticate();
 
 // Controllo accesso
 if (!isset($_SESSION['username'] ) )

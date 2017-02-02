@@ -1,10 +1,9 @@
 <?php
 require 'library.php';
+include 'utils/DBlibrary.php';
 
 /* se l'utente non si è gia` autenticato, mostra nel menù le pagine accessibili al pubblico*/
-session_start();
-
-session_regenerate_id(TRUE);
+$login=authenticate();
 
 $title="Salone Anna: tariffe, orari, indirizzo";
 $title_meta="Salone Anna, parrucchiere a Vicenza";
@@ -15,9 +14,9 @@ $rif="<strong xml:lang=\"en\">Home</strong>";
 $name="visitatore"; 
 $is_admin=false;
 
-if (isset($_SESSION['username'] ) ) {
+if (checkLog() ) {
 	$is_admin=true;
-	$name = $_SESSION['username'];
+	$name = $login;
 }
 
 insert_header($rif, 0, $is_admin,'');

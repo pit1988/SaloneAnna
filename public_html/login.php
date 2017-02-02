@@ -2,7 +2,7 @@
 require_once "library.php";
 include "utils/DBlibrary.php";
 
-if (isset($_SESSION['username'] ) )
+if (checkLog())
   {
     header('location:index.php');
     exit;
