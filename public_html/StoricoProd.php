@@ -92,7 +92,7 @@ $form = '
 <p class="info">Inserisci i dettagli del cliente per visualizzarne il registro dei prodotti utilizzati</p>
 <form method="post" action="StoricoProd.php">
   <fieldset>
-    <legend>Ricerca prodotti</legend>
+    <legend>Cerca prodotti utilizzati dal cliente:</legend>
     <ul>
       <li>
           <p>
