@@ -12,10 +12,10 @@ if (!$login )
 }
 else
 {
-	$title="Utilit&agrave;: Salone Anna";
-	$title_meta="Utilit&agrave;: Salone Anna";
-	$descr="";
-	$keywords="Utilita, Utilit&agrave;, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	$title="Menù Utilità | Salone Anna";
+	$title_meta="Menù Utilità | Salone Anna";
+	$descr="Menù di utilità per il Salone Anna";
+	$keywords="Utilita, Utilità, Messaggi, Amministratore, Password, Admin, Leggi, Cambio";
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Utilit&agrave;</strong>';

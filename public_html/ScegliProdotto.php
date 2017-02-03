@@ -8,10 +8,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title = "Gestione Prodotti: Salone Anna";
-    $title_meta = "Gestione Prodotti: Salone Anna";
-    $descr = "";
-    $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title = "Seleziona Prodotto | Salone Anna";
+    $title_meta = "Seleziona Prodotto | Salone Anna";
+    $descr = "Pagina di selezione prodotto visualizzato tra varie scelte";
+    $keywords = "Seleziona, Prodotto, Nome, Marca, Tipo, Quantità, Prezzo, Vendita, Rivendita";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Gestione Prodotti</strong>';

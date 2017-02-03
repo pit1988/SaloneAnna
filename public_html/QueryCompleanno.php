@@ -8,10 +8,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title      = "Compleanni: Salone Anna";
-    $title_meta = "Compleanni: Salone Anna";
-    $descr      = "";
-    $keywords   = "Compleanni, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Compleanni Mensili | Salone Anna";
+    $title_meta = "Compleanni Mensili | Salone Anna";
+    $descr      = "Pagina che mostra i compleanni da qui a 30 giorni per organizzare promozioni";
+    $keywords   = "Compleanni, Clienti, Nome, Cognome, Telefono, email, Data, Nascita, Regalo";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Compleanni nel mese</strong>';

@@ -12,8 +12,8 @@ if (!$login) {
     exit;
 } else {
     
-    $title      = "Inserisci prodotti Appuntamento Cliente: Salone Anna";
-    $title_meta = "Inserisci prodotti Appuntamento Cliente: Salone Anna";
+    $title      = "Inserisci Prodotti Appuntamento Cliente | Salone Anna";
+    $title_meta = "Inserisci prodotti Appuntamento Cliente | Salone Anna";
     $descr      = "";
     $keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     
