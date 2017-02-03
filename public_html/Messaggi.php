@@ -12,10 +12,10 @@ if (!$login )
 }
 else
 {
-	$title="Messaggi: Salone Anna";
-	$title_meta="Messaggi: Salone Anna";
-	$descr="";
-	$keywords="Messaggi, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	$title="Visualizza Messaggi | Salone Anna";
+	$title_meta="Visualizza Messaggi | Salone Anna";
+	$descr="Visualizza tutti i messaggi ricevuti dal Salone Anna";
+	$keywords="Messaggi, Nome, Messaggio, Mittente, Ricevuto, Data, Leggere, Nuovo";
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <strong>Messaggi</strong>';

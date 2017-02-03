@@ -3,12 +3,12 @@ require 'library.php';
 require 'utils/DBlibrary.php';
 
 
-$title="Salone Anna: tariffe, orari, indirizzo";
-$title_meta="Salone Anna, parrucchiere a Vicenza";
-$descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
-$keywords="Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+$title="Salone Anna | errore 404 - pagina non trovata";
+$title_meta="Salone Anna | errore 404 - pagina non trovata";
+$descr="Salone Anna | Pagina di errore 404 - pagina non trovata";
+$keywords="Pagina, errore, 404, Parrucchiere, Montecchio, Vicenza, Taglio, Donna";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif="<strong>404: pagina non trovata</strong>";
+$rif="<strong id="logError">404: pagina non trovata</strong>";
 $name="visitatore"; 
 $is_admin=false;
 

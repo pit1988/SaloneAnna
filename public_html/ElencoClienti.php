@@ -10,10 +10,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title      = "Elenco clienti: Salone Anna";
-    $title_meta = "Elenco clienti: Salone Anna";
-    $descr      = "";
-    $keywords   = "Elenco, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Elenco Clienti | Salone Anna";
+    $title_meta = "Elenco Clienti | Salone Anna";
+    $descr      = "Elenco di tutti i clienti del Salone Anna";
+    $keywords   = "Elenco, Clienti, Nome, Cognome, Telefono, Email, Mail, Data, Nascita, Compleanno";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Elenco clienti</strong>';
     insert_header($rif, 5, true);

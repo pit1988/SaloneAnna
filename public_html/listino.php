@@ -5,10 +5,10 @@ require 'utils/DBlibrary.php';
 /* se l'utente non si è gia` autenticato, mostra nel menù le pagine accessibili al pubblico*/
 $login=authenticate();
 
-$title="Listino prezzi Salone Anna";
-$title_meta="Listino prezziSalone Anna, parrucchiere a Vicenza";
-$descr="";
-$keywords="Listino, Prezzi, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, Storia";
+$title="Listino prezzi | Salone Anna";
+$title_meta="Listino prezzi | Salone Anna, parrucchiere a Vicenza";
+$descr="Listino dei prezzi per i vari trattamenti alla cute e ai capelli del Salone Anna di Montecchio Maggiore";
+$keywords="Listino, Prezzi, Parrucchiere, Montecchio, Trattamento, Taglio, Colorazioni, Colore, Piega, Stiratura";
 page_start($title, $title_meta, $descr, $keywords, '');
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prezzi</strong>';
 $is_admin=false;

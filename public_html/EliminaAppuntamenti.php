@@ -31,10 +31,10 @@ if (!$login) {
             $msg = "<p class=\"errorSuggestion\">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     
-    $title      = "Elimina appuntamenti: Salone Anna";
-    $title_meta = "Elimina appuntamenti: Salone Anna";
-    $descr      = "";
-    $keywords   = "Elimina, Appuntamenti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Elimina Appuntamenti | Salone Anna";
+    $title_meta = "Elimina appuntamenti | Salone Anna";
+    $descr      = "Elimina l'appuntamento e verrà segnalato il successo o il fallimento in questa pagina";
+    $keywords   = "Elimina, Appuntamenti, Nome, Cognome, Data, Ora, Tipo, Prezzo, Seleziona";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Elimina Appuntamenti</strong>';

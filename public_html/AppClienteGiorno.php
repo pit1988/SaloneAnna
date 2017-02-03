@@ -151,9 +151,9 @@ if (!$login) {
         unset($result);
     }    
 
-    $title      = "Ricerca Appuntamento: Salone Anna";
-    $title_meta = "Ricerca Appuntamento: Salone Anna";
-    $descr      = "";
+    $title      = "Ricerca Appuntamento | Salone Anna";
+    $title_meta = "Ricerca Appuntamento | Salone Anna";
+    $descr      = "Pagina di ricerca appuntamento del Salone Anna";
     $keywords   = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="RicercaAppuntamenti.php">Ricerca Appuntamento</a> / <strong>Risultati</strong>';

@@ -53,10 +53,10 @@ if (!$login) {
         unset($result);
     }
     
-    $title      = "Messaggi: Salone Anna";
-    $title_meta = "Messaggi: Salone Anna";
-    $descr      = "";
-    $keywords   = "Messaggi, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Mostra Messaggio | Salone Anna";
+    $title_meta = "Mostra Messaggio | Salone Anna";
+    $descr      = "Pagina di visualizzaizione del messaggio selezionato";
+    $keywords   = "Messaggi, Nome, Messaggio, Mittente, Ricevuto, Data, Leggere, Info, Email, Telefono";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <a href="Messaggi.php">Messaggi</a> / <strong>Leggi Messaggio</strong>';

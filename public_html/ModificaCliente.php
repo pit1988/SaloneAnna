@@ -9,10 +9,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title      = "Modifica cliente: Salone Anna";
-    $title_meta = "Modifica cliente: Salone Anna";
-    $descr      = "";
-    $keywords   = "Modifica, Clienti, Nuovo, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Modifica Cliente | Salone Anna";
+    $title_meta = "Modifica Cliente | Salone Anna";
+    $descr      = "Pagina che permette di modificare i dati del cliente per correggere le sue informazioni";
+    $keywords   = "Modifica, Cliente, Informazioni, Dati, Nome, Cognome, Mail, Telefono, Data, Nascita, Compleanno";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Modifica Cliente</strong>';

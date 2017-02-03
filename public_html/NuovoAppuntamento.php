@@ -10,10 +10,10 @@ if (!$login) {
     exit;
 } 
 else {    
-    $title      = "Nuovo appuntamento: Salone Anna";
-    $title_meta = "Nuovo appuntamento: Salone Anna";
-    $descr      = "";
-    $keywords   = "Nuovo, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Nuovo appuntamento | Salone Anna";
+    $title_meta = "Nuovo appuntamento | Salone Anna";
+    $descr      = "Pagina per inserire un nuovo appuntamento all'interno del sito";
+    $keywords   = "Nuovo, Appuntamento, Nome, Cognome, Data, Ora, Tipo, Prezzo, Inserisci";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';

@@ -11,10 +11,10 @@
   }
   else
   {
-    $title="Prodotti: Salone Anna";
-    $title_meta="Prodotti: Salone Anna";
-    $descr="";
-    $keywords="Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title="Menù Prodotti | Salone Anna";
+    $title_meta="Menù Prodotti | Salone Anna";
+    $descr="Menù per gestire i prodotti del Salone Anna";
+    $keywords="Prodotti, Esaurimento, Classifica, Modifica, Elimina, Inserisci, Storico, Inventario";
     
     page_start($title, $title_meta, $descr, $keywords,'');
     $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Prodotti</strong>';

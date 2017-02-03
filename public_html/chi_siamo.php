@@ -5,10 +5,10 @@ include 'utils/DBlibrary.php';
 /* se l'utente non si è gia` autenticato, mostra nel menù le pagine accessibili al pubblico*/
 $login=authenticate();
 
-$title      = "Salone Anna: tariffe, orari, indirizzo";
-$title_meta = "Salone Anna, parrucchiere a Vicenza";
-$descr      = "Chi è Anna Cortivo, descrizione delle esperienze, lavori e storia.";
-$keywords   = "Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, Storia";
+$title      = "Salone Anna | Chi è Anna Rosa Cortivo";
+$title_meta = "Salone Anna | Chi Siamo";
+$descr      = "Chi è Anna Rosa Cortivo, descrizione delle esperienze, lavori e storia.";
+$keywords   = "Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, Storia, Anna, Cortivo";
 page_start($title, $title_meta, $descr, $keywords, '');
 $rif      = '<a href="index.php" xml:lang="en">Home</a> / <strong>Chi Siamo</strong>';
 $is_admin = false;

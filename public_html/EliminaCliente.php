@@ -32,10 +32,10 @@ else
 	    	$msg="<p>Sono stati cancellati $num clienti </p>";
 	}
 	
-	$title="Elimina clienti: Salone Anna";
-	$title_meta="Elimina clienti: Salone Anna";
-	$descr="";
-	$keywords="Elimina, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	$title="Elimina Clienti | Salone Anna";
+	$title_meta="Elimina Clienti | Salone Anna";
+	$descr="Elimina il cliente e verrà segnalato il successo o il fallimento in questa pagina";
+	$keywords="Elimina, Clienti, Nome, Cognome, Telefono, Email, Mail, Data";
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Elimina clienti</strong>';
 	insert_header($rif, 5, true);

@@ -13,10 +13,10 @@ if (!$login )
 }
 else
 {
-	$title="Clienti: Salone Anna";
-	$title_meta="Clienti: Salone Anna";
-	$descr="";
-	$keywords="Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	$title="Menù Clienti | Salone Anna";
+	$title_meta="Menù Clienti | Salone Anna";
+	$descr="Menù per gestire i clienti del Salone Anna";
+	$keywords="Menù, Clienti, Parrucchiere, Montecchio, Vicenza, Colorazioni, Donna, Compleanni, Storico";
 	
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Clienti</strong>';

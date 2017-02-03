@@ -40,10 +40,10 @@ else{
             }
         }
     }
-    $title = "Nuovo cliente: Salone Anna";
-    $title_meta = "Nuovo cliente: Salone Anna";
-    $descr = "";
-    $keywords = "Nuovo, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title = "Nuovo Cliente | Salone Anna";
+    $title_meta = "Nuovo Cliente | Salone Anna";
+    $descr = "Pagina per inserire un nuovo appuntamento all'interno del sito";
+    $keywords = "Nuovo, Cliente, Nome, Cognome, Telefono, Email, Mail, Data, Inserisci";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Nuovo Cliente</strong>';

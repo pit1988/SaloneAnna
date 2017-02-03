@@ -10,10 +10,10 @@ if (!$login) {
     exit;
 } 
 else {
-    $title = "Inventario Prodotti: Salone Anna";
-    $title_meta = "Inventario Prodotti: Salone Anna";
-    $descr = "";
-    $keywords = "Inventario, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title = "Inventario Prodotti | Salone Anna";
+    $title_meta = "Inventario Prodotti | Salone Anna";
+    $descr = "Inventario dei prodotti nel magazzino del Salone Anna con possibilità di modifica quantità";
+    $keywords = "Inventario, Prodotti, Quantità, Tipo, Marca, Prezzo, Vendita, Rivendita";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Inventario</strong>';

@@ -33,10 +33,10 @@ if (!$login) {
             $msg = "<p class=\"errorSuggestion\>Durante la cancellazione si sono verificati $n_err errori</p>";
     }
 
-    $title      = "Salone Anna: Inserisci foto";
-    $title_meta = "Salone Anna, parrucchiere a Vicenza";
-    $descr      = "Pagina per inserire fotografie all'interno del sito";
-    $keywords   = "Fotografie, Immagini, Foto, Anna, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna ";
+    $title      = "Elimina Foto | Salone Anna";
+    $title_meta = "Elimina Foto | Salone Anna";
+    $descr      = "Pagina per eliminare le fotografie all'interno del sito";
+    $keywords   = "Fotografie, Immagini, Foto, Descrizioni, Nome, File, Seleziona, Mostrare, Galleria, Tagli ";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Elimina Foto</strong>';
     $is_admin = true;
@@ -52,7 +52,7 @@ if (!$login) {
         echo "<p class=\"info\">Non ci sono immagini da mostrare</p>";
     else {
         echo "<form method=\"post\" action=\"EliminaFoto.php\">
-            <fieldset><legend>Seleziona la/le immagine/i che vuoi eliminare</legend>\n";
+            <fieldset><legend>Seleziona le foto che vuoi eliminare</legend>\n";
         $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
             <caption class="nascosto">Tabella di immagini</caption>
             <thead>

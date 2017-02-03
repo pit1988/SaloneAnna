@@ -13,10 +13,10 @@ if (!$login) {
         header('loation:ScegliAppuntamento.php');
     } else {
         
-        $title      = "Modifica appuntamento: Salone Anna";
-        $title_meta = "Modifica appuntamento: Salone Anna";
-        $descr      = "";
-        $keywords   = "Modifica, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+        $title      = "Conferma Modifca Appuntamento | Salone Anna";
+        $title_meta = "Conferma Modifca Appuntamento | Salone Anna";
+        $descr      = "Modifica i tuoi appuntamenti e verrà segnalato il successo o il fallimento in questa pagina";
+        $keywords   = "Modifica, Appuntamento, Parrucchiere, Tipo, Nome, Cognome, Data, Ora";
         
         page_start($title, $title_meta, $descr, $keywords, '');
         $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';

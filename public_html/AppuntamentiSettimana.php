@@ -10,10 +10,10 @@ if (!$login) {
     exit;
 } else {
     
-    $title      = "Appuntamenti Settimana: Salone Anna";
-    $title_meta = "Appuntamenti Settimana: Salone Anna";
-    $descr      = "";
-    $keywords   = "Settimana, Appuntamenti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Agenda | Appuntamenti Settimana | Salone Anna";
+    $title_meta = "Agenda | Appuntamenti Settimana | Salone Anna";
+    $descr      = "Agenda settimanale degli appuntamenti";
+    $keywords   = "settimana, appuntamenti, parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna, agenda, giorni";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Appuntamenti Settimana</strong>';

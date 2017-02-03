@@ -24,10 +24,10 @@ else {
         unset($ris);
     }
     
-    $title      = "Nuovo Prodotto: Salone Anna";
-    $title_meta = "Nuovo Prodotto: Salone Anna";
-    $descr      = "";
-    $keywords   = "Nuovo, Prodotto, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Nuovo Prodotto | Salone Anna";
+    $title_meta = "Nuovo Prodotto | Salone Anna";
+    $descr      = "Pagina per inserire un nuovo prodoot all'interno del sito";
+    $keywords   = "Nuovo, Prodotto, Nome, Marca, Tipo, Quatità, Prezzo, Vendita, Rivendita, Inserisci";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Nuovo Prodotto</strong>';

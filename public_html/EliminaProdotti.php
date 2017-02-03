@@ -10,10 +10,10 @@ if (!$login) {
     exit;
 } 
 else {
-    $title      = "Elimina Prodotti: Salone Anna";
-    $title_meta = "Elimina Prodotti: Salone Anna";
-    $descr      = "";
-    $keywords   = "Elimina, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Elimina Prodotti | Salone Anna";
+    $title_meta = "Elimina Prodotti | Salone Anna";
+    $descr      = "Elimina ii prodotti e verrà segnalato il successo o il fallimento in questa pagina";
+    $keywords   = "Elimina, Prodotti, Nome, Marca, Tipo, Quatità, Prezzo, Vendita, Rivendita";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Elimina Prodotti</strong>';

@@ -4,10 +4,10 @@ include 'utils/DBlibrary.php';
 /* se l'utente non si è gia` autenticato, va alla pagina da cui fare il login*/
 $login=authenticate();
 
-$title="Foto Salone Anna";
-$title_meta="Foto Salone Anna, parrucchiere a Vicenza";
-$descr="Fotografie di clienti del Salone Anna";
-$keywords="Foto, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+$title="Galleria Foto | Salone Anna";
+$title_meta="Galleria Foto | Salone Anna, parrucchiere a Vicenza";
+$descr="Galleria di fotografie di clienti o modelli realizzati dal Salone Anna";
+$keywords="Foto, Modelle, Relizzazioni, Clienti, Taglio, Colore, Capelli, Uomo, Donna";
 page_start($title, $title_meta, $descr, $keywords, '');
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Foto</strong>';
 $is_admin=false;

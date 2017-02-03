@@ -33,10 +33,10 @@ else {
             $msg = "<p class=\"errorSuggestion\">Durante la cancellazione si sono verificati $n_err errori</p>";
     }
     
-    $title      = "Messaggi: Salone Anna";
-    $title_meta = "Messaggi: Salone Anna";
-    $descr      = "";
-    $keywords   = "Messaggi, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Elimina Messaggi | Salone Anna";
+    $title_meta = "Elimina Messaggi | Salone Anna";
+    $descr      = "Elimina i messaggi e verrà segnalato il successo o il fallimento in questa pagina";
+    $keywords   = "Messaggi, Elimina, Nome, Cognome, Messaggio, Data, Ora";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <a href="Messaggi.php">Messaggi</a> / <strong>Elimina Messaggi</strong>';

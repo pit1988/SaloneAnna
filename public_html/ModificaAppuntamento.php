@@ -9,10 +9,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title      = "Modifica appuntamento: Salone Anna";
-    $title_meta = "Modifica appuntamento: Salone Anna";
-    $descr      = "";
-    $keywords   = "Modifica, Appuntamento, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Modifica Appuntamento | Salone Anna";
+    $title_meta = "Modifica Appuntamento | Salone Anna";
+    $descr      = "Pagina che permette di modificare i dati per correggere un appuntamento inserito";
+    $keywords   = "Modifica, Appuntamento, Tipo, Nome, Cognome, Data, Ora, Conferma, Correggi";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';
