@@ -58,7 +58,7 @@ else {
             <div class="confermAppun">
                 <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                 <input type="reset" value="cancella" />
-                <span id="errors"></span>
+                <span id="logError"></span>
             </div>
         </fieldset>
         </form>

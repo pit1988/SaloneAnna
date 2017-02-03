@@ -12,21 +12,6 @@ var dettagli_form_contattaci = {
     "email": ["Inserire e-mail", /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Inserisci un indirizzo email valido"],
     "contenuto": ["Scrivi qui la tua domanda", /.+/, "Inserisci la domanda"]
 };
-// togliere
-var dettagli_form_plant = {
-    "name": ["Nome pianta", /^[a-zA-ZÀ-ÿ0-9 -]+$/, "Inserisci il nome della pianta"],
-    "scientificName": ["Nome scientifico", /[A-Za-z- ]*/, ""],
-    "type": ["Tipo", /.*/, ""],
-    "dataName": ["Nome del dato", /.*/, ""],
-    "dataContent": ["valore", /.*/, ""]
-};
-// togliere
-var dettagli_form_tool = {
-    "name": ["Nome attrezzo", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il nome dell'attrezzo"],
-    "type": ["Tipo", /.*/, ""],
-    "dataName": ["Nome del dato", /.*/, ""],
-    "dataContent": ["valore", /.*/, ""]
-};
 
 var dettagli_form_login = {
     "username": ["Username", /.*/, ""],
@@ -67,12 +52,20 @@ var dettagli_form_cliente = {
 
 var dettagli_form_prodotto = {
     "nome" : ["Nome prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il nome"],
-    "marca" : ["Marca attrezzo", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la marca"],
-    "tipo" : ["Tipo attrezzo", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il tipo"],
-    "quantita" : ["", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la quantità"],
-    "pvendita" : ["", /[0-9]+([.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00 "],
-    "rivendita" : ["", /[0-9]+([.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00"]
+    "marca" : ["Marca prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la marca"],
+    "tipo" : ["Tipo prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il tipo"],
+    "quantita" : ["0", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la quantità"],
+    "pvendita" : ["0.00", /[0-9]+([\.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00 "],
+    "rivendita" : ["0.00", /[0-9]+([\.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00"]
 };
+
+var dettagli_form_appuntamenti = {
+    "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "last_name": ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
+    "date" : ["" , /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
+    "orario" : ["" , /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
+
+}
 
 var dettagli_dynamic_data = {};
 
