@@ -58,11 +58,20 @@ var dettagli_form_orarioAppuntamenti = {
 };
 
 var dettagli_form_cliente = {
-    "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "first_name": ["", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il nome del cliente"],
     "last_name": ["", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il cognome del cliente"],
     "email": ["", /(^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)?/, "Inserisci un indirizzo email valido"],
     "phone": ["", /(((\+)?[0-9]{0,4})?[0-9]{8,11}$)?/, "Inserisci un numero telefonico valido"],
     "data" : ["" , /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/ , "Inserisci una data nel formato gg/mm/AA"]
+};
+
+var dettagli_form_prodotto = {
+    "nome" : ["Nome prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il nome"],
+    "marca" : ["Marca attrezzo", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la marca"],
+    "tipo" : ["Tipo attrezzo", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il tipo"],
+    "quantita" : ["", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la quantità"],
+    "pvendita" : ["", /[0-9]+([.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00 "],
+    "rivendita" : ["", /[0-9]+([.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00"]
 };
 
 var dettagli_dynamic_data = {};
@@ -71,15 +80,6 @@ var dettagli_dynamic_price = {
     "price": ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto", "format"]
     //"price": ["", /^\d+[\.]?(\d{2})$/, "Inserisci il prezzo separato da un punto", "format"]
 };
-
-// togliere
-function caricamentoPianta() {
-    return caricamento(dettagli_form_plant, true);
-}
-// togliere
-function caricamentoAttrezzi() {
-    return caricamento(dettagli_form_tool, true);
-}
 
 function caricamentoContattaci() {
     return caricamento(dettagli_form_contattaci, false);
@@ -108,6 +108,10 @@ function caricamentoRicercaAppuntamento() {
 
 function caricamentoCliente() {
     caricamento(dettagli_form_cliente);
+}
+
+function caricamentoProdotto() {
+    caricamento(dettagli_form_prodotto);
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
@@ -334,6 +338,13 @@ function validazioneFormRicercaAppuntamenti() {
 
 function validazioneFormCliente() {
     var ris = validazioneForm(dettagli_form_cliente, true);
+    if (ris === false)
+        document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
+    return ris;
+}
+
+function validazioneFormProdotto() {
+    var ris = validazioneForm(dettagli_form_prodotto, true);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;

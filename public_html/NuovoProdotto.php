@@ -29,7 +29,7 @@ else {
     $descr      = "Pagina per inserire un nuovo prodoot all'interno del sito";
     $keywords   = "Nuovo, Prodotto, Nome, Marca, Tipo, Quatità, Prezzo, Vendita, Rivendita, Inserisci";
     
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoProdotto()');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Nuovo Prodotto</strong>';
     insert_header($rif, 4, true);
     content_begin();
@@ -43,7 +43,7 @@ else {
 
     
     $to_print = '
-    <form method="post" action="NuovoProdotto.php">
+    <form method="post" onsubmit="return validazioneFormCliente();" action="NuovoProdotto.php">
     <fieldset>
     <legend>Completa le informazioni per inserire un nuovo prodotto</legend>
         <ul>
@@ -86,6 +86,7 @@ else {
             </ul>
             <input type="submit" name="submit" value="Procedi"/>
             <input type="reset" value="Cancella"/>
+            <span id="logError"></span>
         </fieldset>
         </form>
     ';
