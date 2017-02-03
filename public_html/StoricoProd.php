@@ -145,7 +145,7 @@ if (!$login) {
 
 $form = '
 <p class="info">Riporta il cliente di cui vuoi visualizare i prodotti utilizzati</p>
-<form method="post" action="StoricoProd.php">
+<form method="post" onsubmit="return validazioneFormStorico();" action="StoricoProd.php">
   <fieldset>
     <legend>Cerca prodotti utilizzati dal cliente:</legend>
     <ul>
@@ -159,7 +159,9 @@ $form = '
           </p>
       </li>
       <li class="noPrint">
-        <p><input type="submit" name="submit" value="Invia"/></p></li>
+        <p><input type="submit" name="submit" value="Invia"/></p>
+        <span id="logError"></span>
+      </li>
     </ul>
   </fieldset>
 </form>
@@ -171,12 +173,17 @@ $title_meta = "Storico Prodotti | Salone Anna";
 $descr      = "Pagina in cui inserendo Nome e Cognome del Cliente ti dà la possibilità di vedere i vari prodotti usati nel tempo in tabella";
 $keywords   = "Storico, Prodotti, Nome, Cognome, Cliente, Quantità, Utilizzo, Codice, Prodotto, Appuntamento";
 
-page_start($title, $title_meta, $descr, $keywords, '');
+if ($to_insert){
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoStorico()');
+}
+else{
+    page_start($title, $title_meta, $descr, $keywords, '');
+}
 $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a>  / <strong>Storico Prodotti</strong>';
 insert_header($rif, 4, true);
 content_begin();
+echo "<h2>Storico prodotti</h2>";
 echo $err;
-echo "<h2>Storico prodotto</h2>";
 if ($to_insert) {
     echo $form;
 }

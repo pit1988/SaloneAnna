@@ -7,7 +7,7 @@ chiave: nome dell'input da controllare
 */
 // Campi dati per le varie form
 var dettagli_form_contattaci = {
-    "first_name": ["Mario", /^[A-Za-z]+/, "Inserisci il tuo nome"],
+    "first_name": ["Mario", /^[A-Za-z ]+/, "Inserisci il tuo nome"],
     "last_name": ["Rossi", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il tuo cognome"],
     "email": ["Inserire e-mail", /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Inserisci un indirizzo email valido"],
     "contenuto": ["Scrivi qui la tua domanda", /.+/, "Inserisci la domanda"]
@@ -42,6 +42,11 @@ var dettagli_form_immagine = {
     "img_desc": ["Descrizione", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci una breve descrizione dell'immagine"]
 };
 
+var dettagli_form_storicoProdotti = {
+    "first_name": ["Mario", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "last_name": ["Rossi", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il cognome del cliente"],
+}
+
 var dettagli_dynamic_data = {};
 
 var dettagli_dynamic_price = {
@@ -73,6 +78,10 @@ function caricamentoImmagine() {
     return caricamento(dettagli_form_immagine, true);
 }
 
+function caricamentoStorico() {
+    return caricamento(dettagli_form_storicoProdotti, false);
+}
+
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
 function caricamento(matrix, checkImg) //carica i dati nei campi
 {
@@ -95,11 +104,11 @@ function caricamento(matrix, checkImg) //carica i dati nei campi
         }; //fa la validazione del campo
     }
 }
-
+// togliere
 function controlloImmagine() {
     return controllo(dettagli_form_immagine, true);
 }
-
+// togliere
 function controllo(matrix, checkImg) {
     if (checkImg === true) {
         var img = document.getElementById("uploadedfile");
@@ -262,6 +271,13 @@ function validazioneFormImmagine() {
     if (valRes !== true)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return valRes;
+}
+
+function validazioneFormStorico() {
+    var ris = validazioneForm(dettagli_form_storicoProdotti, true);
+    if (ris === false)
+        document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
+    return ris;
 }
 
 function validazioneForm(matrix, Mstatica) {
