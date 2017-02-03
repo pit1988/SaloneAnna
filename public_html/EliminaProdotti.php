@@ -59,7 +59,7 @@ else {
                     <th scope="col">Quantità</th>
                     <th scope="col">PVendita</th>
                     <th scope="col">PRivendita</th>
-                    <th scope="col">Seleziona</th>
+                    <th scope="col" class="noPrint">Seleziona</th>
                 </tr>
             </thead>
 
@@ -72,7 +72,7 @@ else {
                     <th scope="col">Quantità</th>
                     <th scope="col">PVendita</th>
                     <th scope="col">PRivendita</th>
-                    <th scope="col">Seleziona</th>
+                    <th scope="col" class="noPrint">Seleziona</th>
                 </tr>
             </tfoot>
 

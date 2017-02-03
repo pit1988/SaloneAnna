@@ -36,7 +36,7 @@ require 'utils/DBlibrary.php';
           <th scope="col">Ora</th>
           <th scope="col">Tipo</th>
           <th scope="col">Prezzo</th>
-          <th scope="col">Seleziona</th>
+          <th scope="col" class="noPrint">Seleziona</th>
         </tr>
       </thead>
       <tbody>';

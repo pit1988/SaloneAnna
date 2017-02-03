@@ -42,7 +42,7 @@ if (!$login) {
                                   <th scope="col">Telefono</th>
                                   <th scope="col" xml:lang="en">E-mail</th>
                                   <th scope="col">Data nascita</th>
-                                  <th scope="col">Selezione</th>
+                                  <th scope="col" class="noPrint">Selezione</th>
                               </tr>
                           </thead>
                           <tbody>';

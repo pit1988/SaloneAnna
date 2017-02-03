@@ -60,7 +60,7 @@ if (!$login) {
                     <th scope="col">Img_title</th>
                     <th scope="col">Img_desc</th>
                     <th scope="col">Img_filename</th>
-                    <th scope="col">Seleziona</th>
+                    <th scope="col" class="noPrint">Seleziona</th>
                 </tr>
             </thead>
 
@@ -69,7 +69,7 @@ if (!$login) {
                     <th scope="col">Img_title</th>
                     <th scope="col">Img_desc</th>
                     <th scope="col">Img_filename</th>
-                    <th scope="col">Seleziona</th>
+                    <th scope="col" class="noPrint">Seleziona</th>
                 </tr>
             </tfoot>
 
@@ -82,7 +82,7 @@ if (!$login) {
             <td>$foto->codice</td>
             <td>$foto->descrizione</td>
             <td><a href=\"uploads/$foto->nome\">$foto->nome</a></td>
-            <td>".'<input type="checkbox" name="codImg[]" value= "' . $foto->codice . '" /></td>
+            <td class=\"tdin\">".'<input type="checkbox" name="codImg[]" value= "' . $foto->codice . '" /></td>
             </tr>';
         }
 
