@@ -48,6 +48,27 @@ function checkPrezzo(&$prezzo) {
 	return FALSE;
 }
 
+function standardPrezzo(&$prezzo) { //funzione che aggiunge gli 0 al prezzo quando occorre
+	$lunghezzaDec = strrpos($prezzo, '.');
+	if($lunghezzaDec === FALSE) //se il punto non c'è allora non ci sono cifre dopo la virgola
+		$prezzo = $prezzo.'.00';
+	else if($lunghezzaDec == strlen($prezzo)-2) //strrpos parte da 0, invece strlen parte da 1, quindi la differenza di valore è 2 se c'è solo una cifra dopo la virgola
+		$prezzo = $prezzo.'0';
+}
+
+function checkPercentuale(&$percentuale) {
+	if(preg_match("/^[0-9]{1,2}([.,][0-9]+)?$/", $percentuale)) {
+		if(strpos($percentuale, ',') !== FALSE) {
+			$percentuale = str_replace(',', '.', $percentuale);
+		}
+		$punto = strpos($percentuale, '.');
+		while($punto < strlen($percentuale)-3)
+			$percentuale = mb_substr($percentuale, 0, -1); //rimuovo l'ultimo carattere
+		return TRUE;
+	}
+	return FALSE;
+}
+
 /*******************MESSAGGI************************/
 
 class Messaggio { //classe che rappresenta un messaggio
@@ -280,6 +301,9 @@ class TipoAppuntamento {
 	public $sconto;
 	
 	function __construct($codice, $nome, $costo, $sconto) {
+		standardPrezzo($costo);
+		standardPrezzo($sconto);
+		
 		$this->codice = $codice;
 		$this->nome = $nome;
 		$this->costo = $costo;
@@ -302,8 +326,8 @@ function listaTipoAppuntamenti() {
 function aggiungiTipoAppuntamento($nome, $costo=0, $sconto=0) {
 	cleanString($nome);
 	if($nome === "") {return FALSE;} //un TipoAppuntamento senza nome non ha senso
-	if($costo === "") {$costo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
-	if($sconto === "") {$sconto=0;}
+	if(!checkPrezzo($costo)) {$costo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
+	if(!checkPercentuale($sconto)) {$sconto=0;}
 	return eseguiQuery("INSERT TipoAppuntamento(NomeTipo, Costo, Sconto) VALUES('$nome', $costo, $sconto)");
 }
 
@@ -336,6 +360,8 @@ class Appuntamento {
 	public $email;
 	
 	function __construct($codice, $data, $ora, $tipo, $prezzo, $nome, $cognome, $telefono, $email) {
+		standardPrezzo($prezzo);
+		
 		$this->codice = $codice;
 		$this->data = $data;
 		$this->ora = $ora;
@@ -488,6 +514,9 @@ class Prodotto {
 	public $prezzoRiv;
 	
 	function __construct($codice, $nome, $marca, $tipo, $quantita, $prezzo, $prezzoRiv) {
+		standardPrezzo($prezzo);
+		standardPrezzo($prezzoRiv);
+		
 		$this->codice = $codice;
 		$this->nome = $nome;
 		$this->marca = $marca;
