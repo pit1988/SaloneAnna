@@ -909,13 +909,11 @@ function listaProdottiAppuntamentoDatato($codCliente) {
 	return $prodottiAppDat; //è un array di ProdottoAppuntamentoDatato, non viene garantito che $prodottiAppDat sia stato effettivamente istanziato perché potrebbero esserci stato un errore
 }
 
-function cambiaPassword($codAccount, $nuovaPassword) {
+function cambiaPassword($username, $nuovaPassword) {
+	cleanString($username);
 	cleanString($nuovaPassword);
-	if(strlen($nuovaPassword) >= 8) {
-		$nuovaPassword = md5($nuovaPassword);
-		return eseguiQuery("UPDATE Account SET password='$nuovaPassword' WHERE CodAccount=$codAccount");
-	}
-	return FALSE;
+	$nuovaPassword = md5($nuovaPassword);
+	return eseguiQuery("UPDATE Account SET password='$nuovaPassword' WHERE username=$username");
 }
 
 function AppuntamentiDataCliente($codCliente="", $data="", $ora="") {
