@@ -63,7 +63,7 @@ var dettagli_form_appuntamenti = {
     "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
     "last_name": ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
     "date" : ["" , /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
-    "orario" : ["" , /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
+    "orario" : ["" , /[0-9]{1,2}[:][0-9]{2}/, "Inserisci un orario nel formato hh:mm"]
 
 }
 
@@ -105,6 +105,10 @@ function caricamentoCliente() {
 
 function caricamentoProdotto() {
     caricamento(dettagli_form_prodotto);
+}
+
+function caricamentoAppuntamento() {
+    caricamento(dettagli_form_appuntamenti);
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
@@ -241,30 +245,6 @@ function checkImage() {
         }
     }
 }
-//togliere
-function validazioneFormPlant() {
-    var rImg = checkImage();
-    var rFrm = validazioneForm(dettagli_form_plant, true);
-    var vDynPrc = validazioneForm(dettagli_dynamic_price, false);
-    var vDynDt = validazioneForm(dettagli_dynamic_data, true);
-    var valRes = (rImg && rFrm && vDynPrc && vDynDt);
-    if (valRes === true)
-        dettagli_dynamic_price = {};
-    else document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
-    return valRes;
-}
-//togliere
-function validazioneFormTool() {
-    var rImg = checkImage();
-    var rFrm = validazioneForm(dettagli_form_tool, true);
-    var vDynPrc = validazioneForm(dettagli_dynamic_price, false);
-    var vDynDt = validazioneForm(dettagli_dynamic_data, true);
-    var valRes = (rImg && rFrm && vDynPrc && vDynDt);
-    if (valRes === true)
-        dettagli_dynamic_price = {};
-    else document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
-    return valRes;
-}
 
 function validazioneFormContattaci() {
     var ris = validazioneForm(dettagli_form_contattaci, true);
@@ -343,6 +323,13 @@ function validazioneFormProdotto() {
     return ris;
 }
 
+function validazioneFormAppuntamento() {
+    var ris = validazioneForm(dettagli_form_appuntamenti, true);
+    if (ris === false)
+        document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
+    return ris;
+}
+
 
 function validazioneForm(matrix, Mstatica) {
     var corretto = true;
@@ -376,7 +363,7 @@ function errImg(fuData) {
     p.appendChild(e);
 }
 
-// Funzioni per aumentare dinamicamente il numero di campi dati della form
+// Funzioni per aumentare dinamicamente il numero di campi dati della form. Togliere
 
 var counter_prezzo = 0;
 var counter_valore = 0;

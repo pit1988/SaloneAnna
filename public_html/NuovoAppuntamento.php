@@ -15,14 +15,14 @@ else {
     $descr      = "Pagina per inserire un nuovo appuntamento all'interno del sito";
     $keywords   = "Nuovo, Appuntamento, Nome, Cognome, Data, Ora, Tipo, Prezzo, Inserisci";
     
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoRicercaAppuntamento()');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Nuovo Appuntamento</strong>';
     insert_header($rif, 6, true);
     content_begin();
     echo "<h2>Nuovo Appuntamento</h2>";
 
     //aggiungere tabindex;
-    $str1 = '<form action="ConfermaNuovoAppuntamento.php" onsubmit="return true;" method="post">
+    $str1 = '<form action="ConfermaNuovoAppuntamento.php" onsubmit="return " method="post">
              <fieldset>
                 <legend>Compila le informazioni richieste per inserire un appuntamento</legend>
                     <div class="tipiAppun">
