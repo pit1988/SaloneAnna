@@ -31,8 +31,7 @@ else {
                 $n_err=0;
                 for ($i=0; $i<count($ids); $i++) { 
                     if ($qt_new[$i] != $qt_old[$i]){
-                        if($qt_old[$i]==0)
-                            $ris=cambiaUtilizzoProdottiAppuntamento($codice, $ids[$i], $qt_new[$i]);
+                        $ris=cambiaUtilizzoProdottiAppuntamento($codice, $ids[$i], $qt_new[$i]);
                         if($ris) ++$n_el;
                         else ++$n_err;
                     }
