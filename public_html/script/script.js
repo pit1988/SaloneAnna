@@ -1,20 +1,3 @@
-function logform() {
-    // if(document.getElementById('log').clicked{
-    // prompt(“Inserisci la login:”,“guest”);
-    // }
-}
-
-// funzione per rendere a scomparsa il login dell'amministratore
-function nascondi() {
-    //salvo sulla variabile nasc, lo style dell'elemento passato
-
-    var e = document.getElementById("login");
-    if (e.style.display != "block")
-        e.style.display = "block";
-    else
-        e.style.display = "none";
-}
-
 // Funzioni per la form delle pagine
 /*
 chiave: nome dell'input da controllare
@@ -28,9 +11,9 @@ var dettagli_form_contattaci = {
     "first_name": ["Mario", /^[A-Za-z]+/, "Inserisci il tuo nome"],
     "last_name": ["Rossi", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il tuo cognome"],
     "email": ["Inserire e-mail", /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "Inserisci un indirizzo email valido"],
-    "comments": ["Scrivi qui la tua domanda", /.+/, "Inserisci la domanda"]
+    "contenuto": ["Scrivi qui la tua domanda", /.+/, "Inserisci la domanda"]
 };
-
+// togliere
 var dettagli_form_plant = {
     "name": ["Nome pianta", /^[a-zA-ZÀ-ÿ0-9 -]+$/, "Inserisci il nome della pianta"],
     "scientificName": ["Nome scientifico", /[A-Za-z- ]*/, ""],
@@ -38,7 +21,7 @@ var dettagli_form_plant = {
     "dataName": ["Nome del dato", /.*/, ""],
     "dataContent": ["valore", /.*/, ""]
 };
-
+// togliere
 var dettagli_form_tool = {
     "name": ["Nome attrezzo", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il nome dell'attrezzo"],
     "type": ["Tipo", /.*/, ""],
@@ -46,9 +29,9 @@ var dettagli_form_tool = {
     "dataContent": ["valore", /.*/, ""]
 };
 
-var dettagli_form_admin = {
-    "inputUsername": ["Username", /.*/, ""],
-    "inputPassword": ["Password", /.*/, ""]
+var dettagli_form_login = {
+    "username": ["Username", /.*/, ""],
+    "password": ["Password", /.*/, ""]
 };
 
 var dettagli_dynamic_data = {};
@@ -57,11 +40,11 @@ var dettagli_dynamic_price = {
     "price": ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto", "format"]
     //"price": ["", /^\d+[\.]?(\d{2})$/, "Inserisci il prezzo separato da un punto", "format"]
 };
-
+// togliere
 function caricamentoPianta() {
     return caricamento(dettagli_form_plant, true);
 }
-
+// togliere
 function caricamentoAttrezzi() {
     return caricamento(dettagli_form_tool, true);
 }
@@ -70,10 +53,8 @@ function caricamentoContattaci() {
     return caricamento(dettagli_form_contattaci, false);
 }
 
-function caricamentoPannelloAdmin() {
-    var e = document.getElementById('login');
-    e.style.display = 'none';
-    return caricamento(dettagli_form_admin, false);
+function caricamentoLogin() {
+    return caricamento(dettagli_form_login, false);
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
@@ -203,7 +184,7 @@ function validazioneFormPlant() {
     var valRes= (rImg && rFrm && vDynPrc && vDynDt);
     if (valRes === true)
         dettagli_dynamic_price={};
-    else document.getElementById('errors').innerHTML="Sono presenti errori, potresti ricontrollare?";
+    else document.getElementById('logError').innerHTML="Sono presenti errori, potresti ricontrollare?";
     return valRes;
 }
 
@@ -215,14 +196,14 @@ function validazioneFormTool() {
     var valRes= (rImg && rFrm && vDynPrc && vDynDt);
     if (valRes === true)
         dettagli_dynamic_price={};
-    else document.getElementById('errors').innerHTML="Sono presenti errori, potresti ricontrollare?";
+    else document.getElementById('logError').innerHTML="Sono presenti errori, potresti ricontrollare?";
     return valRes;
 }
 
 function validazioneFormContattaci(){
     var ris= validazioneForm(dettagli_form_contattaci, true);
-    if(ris===false)
-        document.getElementById('errors').innerHTML="Sono presenti errori, potresti ricontrollare?";
+    if(ris==false)
+        document.getElementById('logError').innerHTML="Sono presenti errori, potresti ricontrollare?";
     return ris;
 }
 
@@ -318,26 +299,7 @@ function replaceMap() {
 }
 // fine
 
-// Funzioni per la pagina Realizzazioni
-function loadPics() {
-    if (!document.getElementById || !document.getElementsByTagName) return;
-    var links = document.getElementById("minipics").getElementsByTagName("a");
-    for (var i = 0; i < links.length; i++)
-        links[i].onclick = function() {
-            Show(this);
-            return (false);
-        };
-}
-
-function Show(obj) {
-    var bigimg = document.getElementById("bigimage");
-    bigimg.src = obj.getAttribute("href");
-    var smallimg = obj.getElementsByTagName("img")[0];
-    var t = document.getElementById("titolo");
-    t.removeChild(t.lastChild);
-    t.appendChild(document.createTextNode(smallimg.title));
-}
-
+// Funzione jQuery per il pulsante dello scroll ad inizio pagina
 function scroll(){
    $(function() {
         //se in cima alla pagina nascondi il box

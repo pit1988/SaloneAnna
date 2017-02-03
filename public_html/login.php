@@ -12,7 +12,7 @@ $title="Accesso Amministratore | Salone Anna";
 $title_meta="Accesso Amministratore | Salone Anna";
 $descr="Pagina di Accesso del Salone Anna da parte dell'Amministratore";
 $keywords="Accesso, Amministratore, Salone, Anna, Login, Menù, Montecchio, Vicenza, Parrucchiera";
-page_start($title, $title_meta, $descr, $keywords, '');
+page_start($title, $title_meta, $descr, $keywords, 'caricamentoLogin()');
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Accesso</strong>';
 
 

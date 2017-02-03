@@ -3,7 +3,7 @@ require 'library.php';
 require 'utils/DBlibrary.php';
 if (isset($_POST['submit'])) {
     if (!isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['contenuto'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
-        $err = "Almeno uno dei parametri non è stato inserito correttamente";
+        $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
     } else {
         $sub = $_POST['submit'];
         $email=$_POST['email'];
@@ -12,10 +12,9 @@ if (isset($_POST['submit'])) {
         $contenuto = $_POST['contenuto'];
     $ris=aggiungiMessaggio($email, $nome, $cognome, $contenuto);
     if($ris)
-        $msg="Messaggio inserito con successo";
+        $msg="<p class=\"inforesult\">Messaggio inserito con successo</p>";
     else{
-        $err=true;
-        $msg="Sono presenti errori; riprova per favore";
+        $err="<p class=\"errorSuggestion\">Sono presenti errori; riprova per favore</p>";
     }
 
   }  
@@ -24,13 +23,12 @@ $title="Contattaci | Salone Anna";
 $title_meta="Contattaci | Salone Anna";
 $descr="Pagina con le modalità di contatto di Salone Anna. Ci puoi trovare a Montecchio Maggiore, via L.Ariosto 2";
 $keywords="Salone, Anna, telefono, email, mail, indirizzo, dove trovarci, dove siamo, Vicenza, Montecchio, Maggiore, sede, via Ariosto, e-mail, mappa";
-$onload="replaceMap();";
+$onload="replaceMap(); caricamentoContattaci()";
 page_start($title, $title_meta, $descr, $keywords, $onload);
 $rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Contattaci</strong>';
 insert_header($rif, 4, false);
 content_begin();
 $pg_start='
-
     <div class="titolo_contattaci">
         <h2>Contattaci</h2>
     </div>
@@ -38,12 +36,12 @@ $pg_start='
     ';
 echo $pg_start;
 if(isset($msg))
-    echo "<p>".$msg."</p>";
+    echo $msg;
 if(isset($err))
-    echo "<p>".$err."</p>";
+    echo $err;
 $to_print='
         <noscript><p>Compila tutti i campi dati; inserisci un indirizzo <span xml:lang="en">e-mail</span> valido</p></noscript>
-        <form action="contattaci.php" onsubmit="return validazioneformcontattaci();" method="post">
+        <form action="contattaci.php" onsubmit="return validazioneFormContattaci();" method="post">
             <ul>
                 <li>
                     <p>
@@ -67,7 +65,7 @@ $to_print='
                 </li>
                 <li>
                     <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
-                    <span id="errors"></span>
+                    <span id="logError"></span>
                 </li>
                 <li>
                     <div class="divider"></div>

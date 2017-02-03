@@ -39,7 +39,7 @@ $str3='
 </p>
 ';
 $to_print=$str1.$str2.$str3;
-    echo  $to_print;
+    echo $to_print;
 }
 /* Funzione per terminare una pagina */
 function page_end() {
