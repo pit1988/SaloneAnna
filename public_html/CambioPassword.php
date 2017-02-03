@@ -32,17 +32,17 @@ else {
 	$form='
 	<form id="contenitore-cambio" action="CambioPassword.php" method="post">
 		<fieldset>
-			<legend>Cambio <span xml:lang=\"en\">Password</span> </legend>
+			<legend>Cambio <span xml:lang="en">Password</span> </legend>
 			<ul>
 				<li>
 					<p>
-						<label for="pwd">Nuova <span lang=\"en\">Password</span></label>
+						<label for="pwd">Nuova <span lang="en">Password</span></label>
 						<input type="password" name="pwd" id="pwd" tabindex="100" />
 					</p>
 				</li>
 				<li>
 					<p>
-						<label for="conf" xml:lang="en">Ripeti <span lang=\"en\">password</span></label>
+						<label for="conf" xml:lang="en">Ripeti <span lang="en">password</span></label>
 						<input type="password" id="conf" name="conf" tabindex="101" />
 					</p>
 				</li>
