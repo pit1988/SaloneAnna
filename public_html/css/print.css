@@ -36,13 +36,49 @@ h1{
 }
 
 
+/* Errori e Info */
+
+.inforesult {
+    font-weight: bold;
+    text-align: center;
+    margin: 1em;
+}
+
+.errorSuggestion{
+    font-size: 1em;
+    font-style: oblique;
+    color: #8c001f;
+    margin: 1em;
+}
+
+#logError{      /*Compare dinamicamente a errore di inserimento*/
+   font-size: 1.2em;
+   color: #8c001f;
+   margin-right: 1em;
+}
+
+.info {
+    display: block;
+    margin: 0 0 0.5em 0;
+    color: #31456b;
+    clear: both;
+    text-align: center;
+    font-style: oblique;
+    width: 100%;
+}
+
+/* Generale */
+
+input[type="submit"], input[type="reset"]{
+    display: none;
+}
 
 /* BreadCrumbs Part*/
 #breadcrumbs{
     width: 100%;
     background-color:#b0fcb0;
     clear: both;
-    
+    font-size: 2em;
 }
 
 #rifnav {
@@ -64,12 +100,22 @@ h1{
 
 
 /*Menu*/
-#contenitore-menu {
+#contenitore-menu , #contenitore-menu-admin {
     display:none;
 }
 
 
 /*Contenuto-Body-Centro*/
+
+h2{
+   font-size: 1.9em;
+   font-weight: 400;
+   font-style:normal;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   text-transform:uppercase;
+   margin: 1em;
+}
 
 #content{
     background-color:#b0fcb0;
@@ -78,6 +124,15 @@ h1{
     width:auto;
     color: black;
     clear: both;
+}
+
+#immagine {
+    background-image: url(../img/home1.png);
+    content:url(../img/home1.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 200mm;
+    height: auto;
 }
 
 .body_contattaci{
@@ -91,106 +146,101 @@ h1{
 
 /* Realizzazioni */
 
-#gallery{
-    width: 100%;
-}
-
-#titolo{
-    font-size: 0.8cm;
-}
-
-#content img{
-    border:0;
-}
-
-#content div #container{
-    width:auto;
-}
-
-#content div #header img{
-    float:left;
-}
-
-#content div #header h2{
-    float:left;
-    margin:24px 0 0 0;
-    font-size:100%;
-}
-
-#content div #zoom{
-    text-align:center;
-    margin:0 0 5px 0;
-    padding: 5px;
-    border:1px solid;
-}
-
-#content div #zoom h3{
-    margin:0;
-    font-size:100%;
-    text-align:center;
-}
-
-#content div #zoom img{
-    width:auto;
-    height:13cm;
-}
-
-#content div #minipics{
-    float: left;
-    width: 100%;
-}
-
-#content div #minipics ul{
-    margin: 0;
-    list-style: none;
-    
-}
-
-#content div #minipics li{
-    height: auto;
-    display: inline;
-    float: left;
-    list-style: none;
-    margin: 1em 2em 1em 2em;
-}
-
-/* Vendita */
-
-.maintitle{
-    display:none;
-}
-
-.cnome{
-    font-size:2em;     	
-}
-
-#piante{
-    font-size: 1em;
-}
-
-#attrezzi{
-    font-size: 1em;
-}
-
-.prodotto{
+.photo {
+    margin: 0.2em;
+    text-align: center;
     page-break-inside: avoid;
-    page-break-after: always;
 }
 
-.dati .info{
-    width:100%;
-    float: left;
+.photo a{
+    text-decoration:none;
 }
 
-.img img{
-    width: 150px;
-    height: 150px;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.desc {
+    text-align: center;
+    color: black;
+    font-style: italic;
+    page-break-after: avoid;
+    display:block;
+    font-size: 2em;
+    clear: both;
+}
+
+#content img {
+    margin: 1em;
+    max-height: 200mm;
 }
 
 
+/* Listino */
+
+#listino{
+    font-size: 70%;
+    text-align: center;
+    background: white;
+    max-width: 150mm;
+    padding:5px;
+    width: 70%;
+}
+
+.rtipo{
+   font-size: 1em;
+   font-weight: bold;
+   font-style: oblique;
+   text-align:center;
+   font-family: "Roboto", helvetica, arial, sans-serif;
+   page-break-after: avoid;
+}
+
+.thprima{
+  font-size:1.4em;
+  font-weight: bold;
+
+}
+
+.thseconda{
+  border-right:none;
+  font-size:1.4em;
+  font-weight: bold;
+
+}
+
+tr {
+  border: 1px solid #C1C3D1;
+  font-size:1.4em;
+  font-weight:normal;
+}
+
+thead tr{
+  border-top:none;
+}
+.cintervento{
+    background:#EBEBEB;
+}
+
+td {
+  background:#FFFFFF;
+  text-align:left;
+  vertical-align:middle;
+  font-size:1.4em;
+  border: 1px solid #C1C3D1;
+}
+
+
+th {
+  color:#FFFFFF;
+  background:#4e4b3b;
+  border-bottom:1px solid #9ea7af;
+  font-size:1.4em;
+  text-align:left;
+  vertical-align:middle;
+}
+
+/* Tabelle Varie */
+
+.tdin, legend{
+    display : none;
+}
 
 /*Parte per la form di contattaci*/
 
@@ -208,7 +258,9 @@ h1{
 }
 
 .print {
-    display: none;
+    width: 180mm;
+    height: auto;
+    display: block;
 }
 
 .errorSuggestion{
@@ -220,63 +272,60 @@ h1{
 
 /* Footer */
 
-
 .footer{
     width: 100%;
     text-align: left;
-    font: bold 8px sans-serif;
+    font: bold 16px sans-serif;
+    clear:both;
+    border: 1px dotted #4e4b3b;
+    page-break-inside: avoid;
 }
 
-.footer h3{
-    margin: 0;
-    content:url(../img/logo_mini.png);
-    width: 100px;
-    height: auto;
+.footer .footer-left,
+.footer .footer-right{
+    display: inline-block;
+    vertical-align: top;
 }
 
-.footer .footer-nome-azienda{
-    font-size: 10px;
-    font-weight: normal;
-    margin: 0;
+.footer-left{
+    margin: 1em 4em;
+    width: 33%;
+    float: left;
 }
 
-.footer .footer-center{
-    float:left;
-}
-
-.footer .footer-center i{
-    font-size: 10px;
+.testo-footer{
+    border-bottom: 1px dotted;
+    margin-top: 0.5em;
     text-align: center;
 }
 
-.footer .footer-center i.fa-mail{
-    font-size: 10px;
+.testo-footer a {
+    text-decoration: none;
+    color: #31456b;
 }
 
-.footer .footer-center p{
-    display: inline-block;
-    vertical-align: middle;
-    margin:0;
-}
-
-.footer .footer-center p span{
-    display:block;
-    font-weight: normal;
-    line-height:2;
+.footer-right{
+    width: 25%;
+    float: left;
+    margin-top: 1em;
 }
 
 
-.footer .footer-right{
-    float:right;
-}
-
-.footer .footer-nome-azienda{
-    line-height: 20px;
-    font-weight: normal;
+#logo_mini{
+    font-size:0em;
+    background-image: url(../img/logo_mini.png);
+    content:url(../img/logo_mini.png);
+    background-repeat: no-repeat;
     margin: 0;
+    color:black;
+    width: 200px;
+    height: 50px;
 }
 
-.footer .footer-company-info span{
-    display: block;
-    font-weight: bold;
+
+#back_to_top, .back_to_top, .w3c {
+    font-size: 0px;
+    height: 0px;
+    display: none;
+    width: 0px;
 }
