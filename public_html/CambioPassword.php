@@ -30,7 +30,7 @@ else {
 		}
 	}
 	$form='
-	<form id="contenitore-cambio" action="CambioPassword.php" method="post">
+	<form id="contenitore-cambio" action="CambioPassword.php" onsubmit="return ;" method="post">
 		<fieldset>
 			<legend>Cambio <span xml:lang="en">Password</span> </legend>
 			<ul>
@@ -60,7 +60,7 @@ else {
 	$title_meta="Cambio password, Salone Anna, parrucchiere a Vicenza";
 	$descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
 	$keywords="Cambio, Password, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
-	page_start($title, $title_meta, $descr, $keywords, '');
+	page_start($title, $title_meta, $descr, $keywords, 'caricamentoCambioPassword()');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <strong>Cambio Password</strong>';
 
 	insert_header($rif, 0, true);

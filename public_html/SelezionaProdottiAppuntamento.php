@@ -18,13 +18,10 @@ else {
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Inventario</strong>';
     insert_header($rif, 4, true);
     content_begin();
-
-            echo "0potato\n";
     //seleziona l'appuntamento, mostra i dati dell'appuntamento, se non c'è segnala errore. 
     // se il submot non c'è segnala errore
 
     if (isset($_POST['submit'])) {
-        echo "1potato\n";
         if(isset($_POST['codApt']) && isset($_POST['qtprod'])) {
                 $codice=$_POST['codApt'];
                 $ids = $_POST['codprod'];
@@ -49,7 +46,6 @@ else {
                 if($n_err>0) echo "<p class=\"errorSuggestion\">Durante le modifiche si sono verificati $n_err errori</p>";
             }
         if(isset($_POST['codapp'])) {
-            echo "1potato\n";
             $codice = $_POST['codapp'];
             $appuntamento=mostraAppuntamento($codice);
             if(!$appuntamento){
