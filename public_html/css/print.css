@@ -73,12 +73,25 @@ input[type="submit"], input[type="reset"]{
     display: none;
 }
 
+.createButton{
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5em 1em 0.5em 1em;
+    margin: 2em auto;
+    color: white;
+    border: solid 1px #2b2821;
+    background: #4e4b3b;
+    display: block;
+    width: 50%;
+    text-align: center;
+}
+
 /* BreadCrumbs Part*/
 #breadcrumbs{
     width: 100%;
     background-color:#b0fcb0;
     clear: both;
-    font-size: 2em;
+    font-size: 1.5em;
 }
 
 #rifnav {
@@ -174,13 +187,14 @@ h2{
 
 /* Listino */
 
-#listino{
+table{
     font-size: 70%;
     text-align: center;
     background: white;
     max-width: 150mm;
     padding:5px;
     width: 70%;
+   page-break-after: avoid;
 }
 
 .rtipo{
@@ -238,8 +252,13 @@ th {
 
 /* Tabelle Varie */
 
-.tdin, legend{
+.tdin, legend, .noPrint{
     display : none;
+}
+
+caption {
+    margin: 1.2em;
+    font-style: italic;
 }
 
 /*Parte per la form di contattaci*/
@@ -268,7 +287,48 @@ th {
     
 }
 
+/* Appuntamenti */
 
+.ggApp {
+    list-style: none;
+   page-break-after: avoid;
+
+}
+
+p.ggCalendario {
+    padding: 1em;
+}
+
+.ggCalendario {
+    padding: 1em;
+    margin: 6px auto;
+    text-align: center;
+    color: #31456b;
+    font-size: 1.4em;
+}
+
+.tipiAppun{
+    float: right;
+    width: 49%;
+}
+
+.tipoAppun{
+    float: left;
+    width: 40%;
+    border-bottom: 1px outset;
+    text-align: center;
+    padding: 0.5em;
+}
+
+.datiAppun{
+    float: left;
+    width: 49%;
+    text-align: center;
+}
+
+.confermaAppun{
+    display: none;
+}
 
 /* Footer */
 
