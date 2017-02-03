@@ -337,6 +337,7 @@ input[type="button"], input[type="submit"]{
     color: black;
     font-style: italic;
     padding: 1em;
+    display:block;
 }
 
 #content img {
@@ -722,6 +723,7 @@ p.ggCalendario {
     text-align: center;
     font: bold 16px sans-serif;
     clear:both;
+    border: 1px dotted #4e4b3b;
 }
 
 .footer .footer-left,

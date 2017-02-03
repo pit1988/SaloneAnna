@@ -354,6 +354,7 @@ caption {
     color: black;
     font-style: italic;
     padding: 1em;
+    display:block;
 }
 
 #content img {
@@ -677,6 +678,7 @@ p.ggCalendario {
     text-align: left;
     font: bold 16px sans-serif;
     clear:both;
+    border: 1px dotted #4e4b3b;
 }
 
 .footer .footer-left,
@@ -686,8 +688,8 @@ p.ggCalendario {
 }
 
 .footer-left{
-    margin: 4em;
-    width: 33%;
+    margin: 1em 4em;
+    width: 36%;
     float: left;
 }
 
@@ -705,7 +707,7 @@ p.ggCalendario {
 .footer-right{
     width: 25%;
     float: left;
-    margin-top: 3em;
+    margin-top: 1em;
 }
 
 
