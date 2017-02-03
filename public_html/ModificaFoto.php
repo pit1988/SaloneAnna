@@ -14,7 +14,7 @@ if (!$login) {
     $title_meta = "Modifica Foto | Salone Anna";
     $descr      = "Pagina che permette di modificare i dati del'immagine per correggere le sue informazioni";
     $keywords   = "Modifica, Fotografie, Immagini, Foto, Descrizioni, Nome, Seleziona, Mostrare, Galleria, Tagli";
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoImmagine()');
     $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Modifica Foto</strong>';
     $is_admin = true;
     insert_header($rif, 1, $is_admin);
@@ -34,13 +34,13 @@ if (!$login) {
             $filename = $result->nome;
             $descr    = $result->descrizione;
             $to_print = '
-            <form enctype="multipart/form-data" action="ModificaFoto.php" method="post">
+            <form enctype="multipart/form-data" onsubmit="return validazioneFormImmagine();" action="ModificaFoto.php" method="post">
                 <fieldset><legend>Inserisci una nuova foto</legend>
                     <ul>
                         <li>
                             <p>
-                                <label for="uploadedfiled">Inserisci un\'immagine</label>
-                                <input name="uploadedfile" id="uploadedfiled" type="file" />
+                                <label for="uploadedfile">Inserisci un\'immagine</label>
+                                <input name="uploadedfile" id="uploadedfile" type="file" />
                             </p>
                             <p>
                                 <label for="img_desc">Descrizione</label>
@@ -50,7 +50,7 @@ if (!$login) {
                                 <input type="hidden" name="img_old_file" id="img_old_file" value="' . $filename . '" />
                                 <input type="hidden" name="codImg_old" id="codImg_old" value="' . $codice . '" />
                                 <input class="btn btn-submit" type="submit" name="invia" value="Invia" tabindex="105"/>
-                                <span id="errors"></span>
+                                <span id="logError"></span>
                             </p>
                             <p>
                                 <label for="oldfile">Immagine da modificare</label>
@@ -76,7 +76,7 @@ if (!$login) {
             $ris=modificaImmagine($codice, $img_desc, $_FILES["uploadedfile"]);
 
             if (!$ris) {
-                        $to_print = "<p class=\"errorSuggestion\">Modiifcare l'immagine selezionata</span></p>";
+                        $to_print = "<p class=\"errorSuggestion\">Impossibile modificare l'immagine selezionata: potresti non aver inserito alcuna descrizione</span></p>";
             } else {
                 $to_print = "<p class=\"inforesult\">L'immagine è stata modificata con successo</p>";
             }

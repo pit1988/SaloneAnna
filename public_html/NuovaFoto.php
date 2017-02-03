@@ -14,7 +14,7 @@ if (!$login) {
     $title_meta = "Inserisci Foto | Salone Anna";
     $descr      = "Pagina per inserire nuove fotografie all'interno del sito";
     $keywords   = "Nuova, Fotografia, Immagine, Foto, Descrizione, Nome, File, Seleziona, Galleria, Tagli";
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoImmagine()');
     $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Inserisci Foto</strong>';
     $is_admin = true;
     insert_header($rif, 1, $is_admin);
@@ -37,7 +37,7 @@ if (!$login) {
         echo "<p class=\"errorSuggestion\"><b>Errore: $err</b></p>";
     
     $to_print = '
-    <form enctype="multipart/form-data" action="NuovaFoto.php" method="post">
+    <form enctype="multipart/form-data" onsubmit="return validazioneFormImmagine();" action="NuovaFoto.php" method="post">
     <fieldset><legend>Carica un <span lang="en">file</span> e completa i campi per inserire una nuova immagine</legend>
         <ul>
             <li>
@@ -51,7 +51,7 @@ if (!$login) {
                 </p>
                 <p>
                     <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
-                    <span id="errors"></span>
+                    <span id="logError"></span>
                 </p>
             </li>
         </ul>
