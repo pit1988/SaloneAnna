@@ -12,10 +12,10 @@ if (!$login )
 }
 else
 {	
-	$title="Modifica cliente: Salone Anna";
-	$title_meta="Modifica cliente: Salone Anna";
-	$descr="";
-	$keywords="Modifica, Clienti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	$title="Seleziona Cliente | Salone Anna";
+	$title_meta="Seleziona Cliente | Salone Anna";
+	$descr="Pagina di selezione cliente visualizzato tra varie scelte";
+	$keywords="Seleziona, Clienti, Nome, Cognome, Telefono, Email, Data, Nascita";
 	page_start($title, $title_meta, $descr, $keywords,'');
 	$rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Modifica cliente</strong>';
 	insert_header($rif, 5, true);

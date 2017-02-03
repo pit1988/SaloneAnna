@@ -13,7 +13,7 @@ if (!$login) {
     $title      = "Inserisci Foto | Salone Anna";
     $title_meta = "Inserisci Foto | Salone Anna";
     $descr      = "Pagina per inserire nuove fotografie all'interno del sito";
-    $keywords   = "Nuova, Fotografia, Immagine, Foto, Descrizione, Nome, File, Seleziona, Galleria, Tagli ";
+    $keywords   = "Nuova, Fotografia, Immagine, Foto, Descrizione, Nome, File, Seleziona, Galleria, Tagli";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Immagini.php">Immagini</a> / <strong>Inserisci Foto</strong>';
     $is_admin = true;

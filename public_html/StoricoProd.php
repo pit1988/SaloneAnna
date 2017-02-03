@@ -165,8 +165,8 @@ $form = '
   ';
 
 
-$title      = "Storico prodotti: Salone Anna";
-$title_meta = "Storico prodotti: Salone Anna";
+$title      = "Storico Prodotti | Salone Anna";
+$title_meta = "Storico Prodotti | Salone Anna";
 $descr      = "";
 $keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
 

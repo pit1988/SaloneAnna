@@ -8,10 +8,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title = "Prodotti Max: Salone Anna";
-    $title_meta = "Prodotti Max: Salone Anna";
-    $descr = "";
-    $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title = "Classica Proddotti Maggiormente Usati | Salone Anna";
+    $title_meta = "Classica Proddotti Maggiormente Usati | Salone Anna";
+    $descr = "Classifica dei prodotti maggiormente usati per facilità di visualizzazione";
+    $keywords = "Classica, Prodotti, Maggiormente, Uso, CodProdotto, Nome, Tipo, Marca, Utilizzo";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Prodotti Max</strong>';

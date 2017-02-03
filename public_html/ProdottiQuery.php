@@ -8,10 +8,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title = "Prodotti in esaurimento: Salone Anna";
-    $title_meta = "Prodotti in esaurimento: Salone Anna";
-    $descr = "";
-    $keywords = "Gestione, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title = "Prodotti in Esaurimento | Salone Anna";
+    $title_meta = "Prodotti in Esaurimento | Salone Anna";
+    $descr = "Tabella dei prodotti esauriti o in esaurimento nell'inventario";
+    $keywords = "Gestione, Prodotti, Esaruimento, Nome, Marca, Tipo, Quantità, Scorte";
     
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Prodotti in esaurimento</strong>';

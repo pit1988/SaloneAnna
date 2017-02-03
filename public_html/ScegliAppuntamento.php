@@ -7,10 +7,10 @@ require 'utils/DBlibrary.php';
       header('location:index.php');
       exit;
   } else {
-      $title = "Ricerca Appuntamento: Salone Anna";
-      $title_meta = "Ricerca Appuntamento: Salone Anna";
-      $descr = "";
-      $keywords = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+      $title = "Seleziona Appuntamento | Salone Anna";
+      $title_meta = "Seleziona Appuntamento | Salone Anna";
+      $descr = "Pagina di selezione appuntamento visualizzato tra varie scelte";
+      $keywords = "Appuntamento, Ricerca, Nome, Cognome, Data, Ora, Tipo, Prezzo";
       page_start($title, $title_meta, $descr, $keywords, '');
       $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Gestione Appuntamenti</strong>';
       insert_header($rif, 6, true);

@@ -7,10 +7,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title      = "Appuntamento Frequente: Salone Anna";
-    $title_meta = "Appuntamento Frequente: Salone Anna";
-    $descr      = "";
-    $keywords   = "Appuntamento, Frequente, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Appuntamento Frequente | Salone Anna";
+    $title_meta = "Appuntamento Frequente | Salone Anna";
+    $descr      = "Pagina mostra la classifica dei tipi di appuntamenti più frequente";
+    $keywords   = "Appuntamento, Frequente, Classifica, Quantità, Numero, Percentuale, Tipo";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Tipo Appuntamento Frequente</strong>';
     insert_header($rif, 6, true);

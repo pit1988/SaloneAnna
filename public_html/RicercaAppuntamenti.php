@@ -7,10 +7,10 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    $title      = "Ricerca Appuntamento: Salone Anna";
-    $title_meta = "Ricerca Appuntamento: Salone Anna";
-    $descr      = "";
-    $keywords   = "Appuntamento, Ricerca, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+    $title      = "Ricerca Appuntamento | Salone Anna";
+    $title_meta = "Ricerca Appuntamento | Salone Anna";
+    $descr      = "Pagina in cui è possibile effettuare una ricarca dell'appuntamento per data o nome del cliente";
+    $keywords   = "Appuntamento, Ricerca, Nome, Cognome, Data, Ora, Dati, Appuntamento, Cliente";
     page_start($title, $title_meta, $descr, $keywords, '');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Ricerca Appuntamento</strong>';
     insert_header($rif, 6, true);
