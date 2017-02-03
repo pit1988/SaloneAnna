@@ -45,7 +45,7 @@ else{
     $descr = "Pagina per inserire un nuovo appuntamento all'interno del sito";
     $keywords = "Nuovo, Cliente, Nome, Cognome, Telefono, Email, Mail, Data, Inserisci";
     
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoCliente()');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Nuovo Cliente</strong>';
     insert_header($rif, 5, true);
     content_begin();
@@ -55,7 +55,7 @@ else{
         echo $esito;
 
     echo '<h2>Nuovo Cliente</h2>
-            <form action="NuovoCliente.php" onsubmit="return true;" method="post">
+            <form action="NuovoCliente.php" onsubmit="return validazioneFormCliente();" method="post">
                 <fieldset>
                 <legend>Dati nuovo cliente</legend>
                 <ul>
@@ -86,7 +86,7 @@ else{
                     <li class="noPrint" xml:lang="en">
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella" />
-                        <span id="errors"></span>
+                        <span id="logError"></span>
                     </li>
                     <li>
                         <div class="divider"></div>

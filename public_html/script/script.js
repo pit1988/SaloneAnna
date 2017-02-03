@@ -57,6 +57,14 @@ var dettagli_form_orarioAppuntamenti = {
     "orario" : ["" , /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
 };
 
+var dettagli_form_cliente = {
+    "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "last_name": ["", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il cognome del cliente"],
+    "email": ["", /(^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)?/, "Inserisci un indirizzo email valido"],
+    "phone": ["", /(((\+)?[0-9]{0,4})?[0-9]{8,11}$)?/, "Inserisci un numero telefonico valido"],
+    "data" : ["" , /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/ , "Inserisci una data nel formato gg/mm/AA"]
+};
+
 var dettagli_dynamic_data = {};
 
 var dettagli_dynamic_price = {
@@ -96,6 +104,10 @@ function caricamentoStorico() {
 function caricamentoRicercaAppuntamento() {
     caricamento(dettagli_form_orarioAppuntamenti, false);
     caricamento(dettagli_form_nomiAppuntamenti, false);
+}
+
+function caricamentoCliente() {
+    caricamento(dettagli_form_cliente);
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
@@ -319,17 +331,13 @@ function validazioneFormRicercaAppuntamenti() {
         return (rOrario && rNome);
     }
 }
-/*
-var dettagli_form_nomiAppuntamenti = {
-    "first_name": ["Mario", /(^[A-Za-z ]+)?/, "Inserisci il nome del cliente"],
-    "last_name": ["Rossi", /(^[A-Za-z ]+)?/, "Inserisci il cognome del cliente"]
-};
 
-var dettagli_form_orarioAppuntamenti = {
-    "date" : ["" , /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/ , "Inserisci una data nel formato gg/mm/AA"],
-    "orario" : ["" , /[[0-9]{1,2}[:][0-9]{2}]?/, "Inserisci un orario nel formato hh:mm"]
-};
-*/
+function validazioneFormCliente() {
+    var ris = validazioneForm(dettagli_form_cliente, true);
+    if (ris === false)
+        document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
+    return ris;
+}
 
 
 function validazioneForm(matrix, Mstatica) {

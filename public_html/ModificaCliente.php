@@ -14,7 +14,7 @@ if (!$login) {
     $descr      = "Pagina che permette di modificare i dati del cliente per correggere le sue informazioni";
     $keywords   = "Modifica, Cliente, Informazioni, Dati, Nome, Cognome, Mail, Telefono, Data, Nascita, Compleanno";
     
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoCliente()');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Clienti.php">Clienti</a> / <strong>Modifica Cliente</strong>';
     insert_header($rif, 5, true);
     content_begin();
@@ -33,7 +33,7 @@ if (!$login) {
         else {
             
             echo '<h2>Modifica Cliente</h2>
-            <form action="ConfermaModificaCliente.php" onsubmit="return true;" method="post">
+            <form action="ConfermaModificaCliente.php" onsubmit="return validazioneFormCliente();"  method="post">
             <fieldset><legend>Modifica le informazioni per cambiare le informazioni del cliente</legend>
                 <ul>
                     <li>
