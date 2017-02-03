@@ -11,14 +11,14 @@ if (!$login) {
     $title_meta = "Ricerca Appuntamento | Salone Anna";
     $descr      = "Pagina in cui è possibile effettuare una ricarca dell'appuntamento per data o nome del cliente";
     $keywords   = "Appuntamento, Ricerca, Nome, Cognome, Data, Ora, Dati, Appuntamento, Cliente";
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoRicercaAppuntamento()');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Ricerca Appuntamento</strong>';
     insert_header($rif, 6, true);
     content_begin();
     echo "<h2>Ricerca Appuntamento</h2>";
 
     $str_to_print = '
-<form action="AppClienteGiorno.php" method="post">
+<form action="AppClienteGiorno.php" onsubmit="return validazioneFormRicercaAppuntamenti();" method="post">
 	<fieldset class="inputsL">
 		<legend>Ricerca tramite dati cliente:</legend>
 		<ul>
@@ -61,6 +61,7 @@ if (!$login) {
 			</li>
 		</ul>
 	<input type="submit" name="submit" value="Invia" />
+	<span id="logError"></span>
 	</fieldset>
 </form>
 	';

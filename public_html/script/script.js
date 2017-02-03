@@ -45,7 +45,17 @@ var dettagli_form_immagine = {
 var dettagli_form_storicoProdotti = {
     "first_name": ["Mario", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
     "last_name": ["Rossi", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il cognome del cliente"],
-}
+};
+
+var dettagli_form_nomiAppuntamenti = {
+    "first_name": ["Mario", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "last_name": ["Rossi", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"]
+};
+
+var dettagli_form_orarioAppuntamenti = {
+    "date" : ["" , /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
+    "orario" : ["" , /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
+};
 
 var dettagli_dynamic_data = {};
 
@@ -53,6 +63,7 @@ var dettagli_dynamic_price = {
     "price": ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto", "format"]
     //"price": ["", /^\d+[\.]?(\d{2})$/, "Inserisci il prezzo separato da un punto", "format"]
 };
+
 // togliere
 function caricamentoPianta() {
     return caricamento(dettagli_form_plant, true);
@@ -80,6 +91,11 @@ function caricamentoImmagine() {
 
 function caricamentoStorico() {
     return caricamento(dettagli_form_storicoProdotti, false);
+}
+
+function caricamentoRicercaAppuntamento() {
+    caricamento(dettagli_form_orarioAppuntamenti, false);
+    caricamento(dettagli_form_nomiAppuntamenti, false);
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
@@ -250,7 +266,6 @@ function validazioneFormContattaci() {
 
 function validazioneFormCambioPassword() {
     var ris = validazioneForm(dettagli_form_cambio_password, true);
-    console.log(dettagli_form_cambio_password[0]);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     else {
@@ -279,6 +294,43 @@ function validazioneFormStorico() {
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;
 }
+
+function validazioneFormRicercaAppuntamenti() {
+    var selectedNome = document.getElementsByName('cli')[0].checked;
+    var selectedOrario = document.getElementsByName('data')[0].checked;
+    var ris=((selectedOrario===false) && (selectedNome===false));
+    if(ris){
+        document.getElementById('logError').innerHTML = "Non hai selezionato alcuna casella di ricerca";  
+        return false;
+    }
+    else{
+        var rNome= true;
+        var rOrario=true;
+        if(selectedNome === true){
+            rNome = validazioneForm(dettagli_form_nomiAppuntamenti, true);
+            if(rNome===false)
+                document.getElementById('logError').innerHTML = "Sono presenti errori nelle caselle del nome cliente, potresti ricontrollare?";
+        }
+        if(selectedOrario ===true){
+            rOrario = validazioneForm(dettagli_form_orarioAppuntamenti, true);
+            if(rOrario===false)
+                document.getElementById('logError').innerHTML = "Sono presenti errori nelle caselle dell'orario, potresti ricontrollare?";
+        }
+        return (rOrario && rNome);
+    }
+}
+/*
+var dettagli_form_nomiAppuntamenti = {
+    "first_name": ["Mario", /(^[A-Za-z ]+)?/, "Inserisci il nome del cliente"],
+    "last_name": ["Rossi", /(^[A-Za-z ]+)?/, "Inserisci il cognome del cliente"]
+};
+
+var dettagli_form_orarioAppuntamenti = {
+    "date" : ["" , /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/ , "Inserisci una data nel formato gg/mm/AA"],
+    "orario" : ["" , /[[0-9]{1,2}[:][0-9]{2}]?/, "Inserisci un orario nel formato hh:mm"]
+};
+*/
+
 
 function validazioneForm(matrix, Mstatica) {
     var corretto = true;
