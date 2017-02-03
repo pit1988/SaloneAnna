@@ -30,7 +30,7 @@ else {
 		}
 	}
 	$form='
-	<form id="contenitore-cambio" action="CambioPassword.php" onsubmit="return ;" method="post">
+	<form id="contenitore-cambio" onsubmit="return validazioneFormCambioPassword();" action="CambioPassword.php" method="post">
 		<fieldset>
 			<legend>Cambio <span xml:lang="en">Password</span> </legend>
 			<ul>
@@ -49,7 +49,7 @@ else {
 				<li>
 					<p>
 						<input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
-	                    <span id="errors"></span>
+	                    <span id="logError"></span>
 	                </p>
 	            </li>
 	        </ul>
@@ -63,7 +63,7 @@ else {
 	page_start($title, $title_meta, $descr, $keywords, 'caricamentoCambioPassword()');
 	$rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <strong>Cambio Password</strong>';
 
-	insert_header($rif, 0, true);
+	insert_header($rif, 7, true);
 	content_begin();
 
 	if(isset($msg))

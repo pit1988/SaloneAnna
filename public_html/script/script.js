@@ -34,6 +34,11 @@ var dettagli_form_login = {
     "password": ["Password", /.*/, ""]
 };
 
+var dettagli_form_cambio_password = {
+    "pwd": ["Password", /^[a-zA-Z0-9!@#$%^&*]{8,32}$/, "Deve avere una lunghezza di almeno 8 caratteri"],
+    "conf": ["Password", /^[a-zA-Z0-9!@#$%^&*]{8,32}$/, "Deve avere una lunghezza di almeno 8 caratteri"]
+};
+
 var dettagli_dynamic_data = {};
 
 var dettagli_dynamic_price = {
@@ -55,6 +60,10 @@ function caricamentoContattaci() {
 
 function caricamentoLogin() {
     return caricamento(dettagli_form_login, false);
+}
+
+function caricamentoCambioPassword() {
+    return caricamento(dettagli_form_cambio_password, false);
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
@@ -175,7 +184,7 @@ function checkImage() {
         }
     }
 }
-
+//togliere
 function validazioneFormPlant() {
     var rImg = checkImage(); 
     var rFrm = validazioneForm(dettagli_form_plant, true); 
@@ -187,7 +196,7 @@ function validazioneFormPlant() {
     else document.getElementById('logError').innerHTML="Sono presenti errori, potresti ricontrollare?";
     return valRes;
 }
-
+//togliere
 function validazioneFormTool() {
     var rImg = checkImage(); 
     var rFrm = validazioneForm(dettagli_form_tool, true); 
@@ -204,6 +213,22 @@ function validazioneFormContattaci(){
     var ris= validazioneForm(dettagli_form_contattaci, true);
     if(ris==false)
         document.getElementById('logError').innerHTML="Sono presenti errori, potresti ricontrollare?";
+    return ris;
+}
+
+function validazioneFormCambioPassword(){
+    var ris= validazioneForm(dettagli_form_cambio_password, true);
+    console.log(dettagli_form_cambio_password[0]);
+    if(ris===false)
+        document.getElementById('logError').innerHTML="Sono presenti errori, potresti ricontrollare?";
+    else{
+        var pw1=(document.getElementById('pwd')).value;
+        var pw2=(document.getElementById('conf')).value;
+        if(pw1!=pw2){
+            ris=false;
+            document.getElementById('logError').innerHTML="Le password non coincidono, ricontrolla, per favore";
+        }
+    }
     return ris;
 }
 
