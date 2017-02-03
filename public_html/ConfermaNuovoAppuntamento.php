@@ -14,7 +14,6 @@ if (!$login) {
         header('loation:NuovoAppuntamento.php');
     } 
     else {
-        
         $title = "Conferma Nuovo Appuntamento | Salone Anna";
         $title_meta = "Conferma Nuovo Appuntamento| Salone Anna";
         $descr = "L'appuntamenot è stato modificato e verrà segnalato il successo o il fallimento in questa pagina. Nel caso di clienti omonimi si potrà scegliere";
@@ -34,11 +33,13 @@ if (!$login) {
             $nomeCognome = $_POST['nomeCognome'];
             $ok = aggiungiAppuntamento($codCliente, $data, $ora, $codTipo);
 
-            if (!($ok==false))
+            if ($ok==false)
+                echo "<p class=\"inforesult\">Non è stato possibile inserire l'appuntamento di $nome</p>";
+            else
                 echo "<p class=\"inforesult\">Appuntamento di $nomeCognome inserito correttamente il $data alle $ora</p>";
         }
         elseif (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
-            $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
+            echo "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
         } 
         else {
             $sub = $_POST['submit'];
@@ -48,8 +49,8 @@ if (!$login) {
             $data = $_POST['data'];
             $ora = $_POST['orario'];
             
-            if (strlen($codTipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($data) == 0 OR strlen($ora) == 0) //
-                $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
+            if (strlen($codTipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($data) == 0 OR strlen($ora) == 0) 
+                echo "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else {
                 $result = checkCliente($nome, $cognome);
                 if(is_null($result) OR count($result)==0){

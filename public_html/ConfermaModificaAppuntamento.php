@@ -39,7 +39,7 @@ if (!$login) {
         }
         
         if (!isset($_POST['TipoAppuntamento']) OR !isset($_POST['first_name']) OR !isset($_POST['last_name']) OR !isset($_POST['data']) OR !isset($_POST['orario'])) { //OR !isset($_POST['costo']) OR !isset($_POST['sconto'])) {
-            $err = "Almeno uno dei parametri non è stato inserito correttamente";
+            echo "Almeno uno dei parametri non è stato inserito correttamente";
         } else {
             $sub     = $_POST['submit'];
             $tipo    = $_POST['TipoAppuntamento'];
@@ -50,7 +50,7 @@ if (!$login) {
             $cod     = $_POST['CodAppuntamento'];
             
             if (strlen($tipo) == 0 OR strlen($nome) == 0 OR strlen($cognome) == 0 OR strlen($data) == 0 OR strlen($ora) == 0 OR strlen($cod) == 0) //OR strlen($costo) == 0 OR strlen($sconto) == 0)
-                $err = "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
+                echo "<p class=\"errorSuggestion\">Almeno uno dei parametri non è stato inserito correttamente</p>";
             else {
                 
                 $result = checkCliente($nome, $cognome);

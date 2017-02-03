@@ -60,12 +60,11 @@ var dettagli_form_prodotto = {
 };
 
 var dettagli_form_appuntamenti = {
-    "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
-    "last_name": ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
-    "date" : ["" , /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
-    "orario" : ["" , /[0-9]{1,2}[:][0-9]{2}/, "Inserisci un orario nel formato hh:mm"]
-
-}
+    "first_name" : ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "last_name" : ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
+    "data": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
+    "orario" : ["", /[0-9]{1,2}[:][0-9]{2}/, "Inserisci un orario nel formato hh:mm"]
+};
 
 var dettagli_dynamic_data = {};
 
@@ -182,6 +181,7 @@ function validazioneCampo(matrix, input) {
     return true;
 }
 
+//togliere
 function validazioneCampoDinamico(matrix, input) {
     var p = input.parentNode; //prende lo span
     var errore = document.getElementById(input.id + "errore");

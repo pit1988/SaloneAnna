@@ -14,7 +14,7 @@ if (!$login) {
     $descr      = "Pagina che permette di modificare i dati per correggere un appuntamento inserito";
     $keywords   = "Modifica, Appuntamento, Tipo, Nome, Cognome, Data, Ora, Conferma, Correggi";
     
-    page_start($title, $title_meta, $descr, $keywords, '');
+    page_start($title, $title_meta, $descr, $keywords, 'caricamentoAppuntamento()');
     $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <a href="ScegliAppuntamento.php">Modifica Appuntamento</a> / <strong>Inserisci valori</strong>';
     insert_header($rif, 6, true);
     content_begin();
@@ -31,7 +31,7 @@ if (!$login) {
             echo "<p class=\"errorSuggestion\">L'appuntamento richiesto non è prensente nel database</p>";
         else {
             //aggiungere tabindex;
-            $str1 = '<form action="ConfermaModificaAppuntamento.php" onsubmit="return true;" method="post">
+            $str1 = '<form action="ConfermaModificaAppuntamento.php" onsubmit="return validazioneFormAppuntamento();" method="post">
             <fieldset><legend>Modifica i dati per correggere l\'appuntamento</legend>
                <div class="tipiAppun">
                         <p class="info">Tipo appuntamento:</p>
