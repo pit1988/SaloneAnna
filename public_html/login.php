@@ -13,7 +13,7 @@ $title_meta="Accesso Amministratore | Salone Anna";
 $descr="Pagina di Accesso del Salone Anna da parte dell'Amministratore";
 $keywords="Accesso, Amministratore, Salone, Anna, Login, Menù, Montecchio, Vicenza, Parrucchiera";
 page_start($title, $title_meta, $descr, $keywords, '');
-$rif="<strong xml:lang=\"en\">Home</strong>";
+$rif='<a href="index.php" xml:lang="en">Home</a> / <strong>Accesso</strong>';
 
 
 
@@ -43,8 +43,13 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 	mysqli_close($conn); //chiude la connessione con il db
 }
 
-insert_header($rif, 0, $is_logged);
+insert_header($rif, -1, $is_logged);
 content_begin();
+
+if(isset($err))
+    echo"<strong id=\"logError\">Errore: $err</strong>";
+if(isset($msg))
+	echo $msg;
 
 if(!$is_logged) { 
 	if(isset($_POST['submit']) && (!isset($_REQUEST['username']) || !isset($_REQUEST['password']))) {
@@ -81,10 +86,7 @@ END;
 }
 else
 	hyperlink("Vai alla <span lang=\"en\">home</span>","index.php");
-if(isset($err))
-    echo"<strong id=\"logError\">Errore: $err</strong>";
-if(isset($msg))
-	echo $msg;
+
 content_end();
 page_end();
 ?>

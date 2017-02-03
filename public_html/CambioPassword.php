@@ -8,35 +8,29 @@ if (!$login) {
     exit;
 }
 else {
-	if(isset($_POST['submit']) &&  isset($_POST['pwd']) && isset($_POST['conf'])) {
-		$nuovaPassword=SHA1($_POST['pwd']);
-		$l=strlen($_POST['pwd']);
-		$conferma=SHA1($_POST['conf']);
+	$successo=false;
+	if(isset($_REQUEST['pwd']) && isset($_REQUEST['conf'])) {
+		$username=$_SESSION['username'];
+		$nuovaPassword=md5($_REQUEST['pwd']);
+		$l=strlen($nuovaPassword);
+		$conferma=md5($_REQUEST['conf']);
 
-		$ris=cambiaPassword($username, $nuovaPassword);
-		if($pwd!=$conferma) 
+		if($nuovaPassword!=$conferma) 
 			$err="<p>La nuova password e la conferma devono essere uguali</p>";
 		elseif($l<8)
 		$err="<p>La password dev'essere di almeno 8 caratteri</p>";
 		else{
 			$ris=cambiaPassword($username, $nuovaPassword);
-			if($ris)
-				$msg="<p>Password cambiata correttamente</p>";
+			if($ris){
+				$successo=true;
+				$msg="<p class=\"inforesult\">Password cambiata correttamente</p>";
+			}
 			else
-				$err="<p>Non è stato possibile cambiare la <span xml:lan=\"en\">password</span></p>";
+				$err="<p id=\"logError\">Non è stato possibile cambiare la <span xml:lan=\"en\">password</span></p>";
 		}
 	}
-	$title="Cambio password, Salone Anna";
-	$title_meta="Cambio password, Salone Anna, parrucchiere a Vicenza";
-	$descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
-	$keywords="Cambio, Password, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
-	page_start($title, $title_meta, $descr, $keywords, '');
-	$rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <strong>Cambio Password</strong>';
-
-	insert_header($rif, 0, true);
-	content_begin();
-		echo<<<END
-	<form id="contenitore-login" action="login.php" method="post">
+	$form='
+	<form id="contenitore-cambio" action="CambioPassword.php" method="post">
 		<fieldset>
 			<legend>Cambio <span xml:lang=\"en\">Password</span> </legend>
 			<ul>
@@ -61,12 +55,26 @@ else {
 	        </ul>
 		</fieldset>
 	</form>
-END;
-		hyperlink("Vai alla <span lang=\"en\">home</span>","index.php");
-	if(isset($err))
-	    echo $err;
+	';
+	$title="Cambio password, Salone Anna";
+	$title_meta="Cambio password, Salone Anna, parrucchiere a Vicenza";
+	$descr="Pagina principale del Salone Anna, parrucchiere a Montecchio, propone tecniche di taglio, colorazioni e trattamenti per Uomo e Donna";
+	$keywords="Cambio, Password, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+	page_start($title, $title_meta, $descr, $keywords, '');
+	$rif='<a href="index.php" xml:lang="en">Home</a> / <a href="Utilita.php">Utilit&agrave;</a> / <strong>Cambio Password</strong>';
+
+	insert_header($rif, 0, true);
+	content_begin();
+
 	if(isset($msg))
 		echo $msg;
+	if(!$successo){
+		echo $form;
+		if(isset($err))
+	    	echo $err;
+	}
+
+	hyperlink("Torna alla <span lang=\"en\">home</span>","index.php");
 	content_end();
 	page_end();
 }

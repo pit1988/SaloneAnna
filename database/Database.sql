@@ -98,7 +98,7 @@ CREATE TABLE ProdApp(
 
 CREATE TABLE Account(
 	CodAccount SMALLINT PRIMARY KEY AUTO_INCREMENT,
-	username VARCHAR(20), 
+	username VARCHAR(20) UNIQUE, 
 	password VARCHAR(32)
 )Engine=InnoDB;
 
