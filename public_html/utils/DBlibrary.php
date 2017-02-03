@@ -3,12 +3,12 @@
 function dbconnect() {
 	$host = "localhost";
 
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
-	$db = "pgabelli";
-	/*$user = "agrenden";
+	$db = "pgabelli";*/
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
-	$db = "agrenden";*/
+	$db = "agrenden";
 	/*$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
@@ -36,6 +36,16 @@ function checkAndWhere(&$where) { //metodo di supporto usato durante i check
 function cleanString(&$stringa) {
 	$stringa = htmlentities($stringa);
 	$stringa = trim($stringa);
+}
+
+function checkPrezzo(&$prezzo) {
+	if(preg_match("/^[0-9]+([.,][0-9]{1,2})?$/", $prezzo)) {
+		if(strpos($prezzo, ',') !== FALSE) {
+			$prezzo = str_replace(',', '.', $prezzo);
+		}
+		return TRUE;
+	}
+	return FALSE;
 }
 
 /*******************MESSAGGI************************/
@@ -508,10 +518,8 @@ function aggiungiProdotto($nome, $marca, $tipo, $quantita, $prezzo=0, $prezzoRiv
 	cleanString($tipo);
 	if($tipo === "") {return FALSE;}
 	if($quantita === "" || $quantita <= 0) {return FALSE;}
-	if($prezzo === "") {$prezzo=0;} //per sicurezza faccio questi controlli, anche se non dovrebbero servire, non dovrebbe essere possibile immettere come valore una stringa vuota
-	if($prezzoRiv === "") {$prezzoRiv=0;}
-	$prezzo = round($prezzo, 2); //approssimo le cifre decimali ad un massimo di due
-	$prezzoRiv = round($prezzoRiv, 2);
+	if(!checkPrezzo($prezzo)) {$prezzo=0;}
+	if(!checkPrezzo($prezzoRiv)) {$prezzoRiv=0;}
 	return eseguiQuery("INSERT Prodotti(Nome, Marca, Tipo, Quantita, Prezzo, PRivendita) VALUES('$nome', '$marca', '$tipo', $quantita, $prezzo, $prezzoRiv)");
 }
 
