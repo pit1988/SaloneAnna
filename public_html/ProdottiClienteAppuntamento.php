@@ -104,7 +104,7 @@ if (!$login) {
                       <input type="text" name="last_name" id="last_name" tabindex="101" />
                   </p>
               </li>
-              <li><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
+              <li class="noPrint"><p><input type="submit" name="submit" value="Storico Prodotti"/></p></li>
             </ul>
           </fieldset>
         </form>

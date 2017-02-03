@@ -158,7 +158,8 @@ $form = '
               <input type="text" name="last_name" id="last_name" tabindex="101" />
           </p>
       </li>
-      <li><p><input type="submit" name="submit" value="Invia"/></p></li>
+      <li class="noPrint">
+        <p><input type="submit" name="submit" value="Invia"/></p></li>
     </ul>
   </fieldset>
 </form>
@@ -167,8 +168,8 @@ $form = '
 
 $title      = "Storico Prodotti | Salone Anna";
 $title_meta = "Storico Prodotti | Salone Anna";
-$descr      = "";
-$keywords   = "Storico, Prodotti, Parrucchiere, Montecchio, Vicenza, Taglio, Colorazioni, Donna";
+$descr      = "Pagina in cui inserendo Nome e Cognome del Cliente ti dà la possibilità di vedere i vari prodotti usati nel tempo in tabella";
+$keywords   = "Storico, Prodotti, Nome, Cognome, Cliente, Quantità, Utilizzo, Codice, Prodotto, Appuntamento";
 
 page_start($title, $title_meta, $descr, $keywords, '');
 $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a>  / <strong>Storico Prodotti</strong>';

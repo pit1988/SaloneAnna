@@ -83,7 +83,7 @@ else{
                         <label for="data">Data di nascita</label>
                         <input type="text" name="data" id="data" tabindex="104" />
                     </li>  
-                    <li xml:lang="en">
+                    <li class="noPrint" xml:lang="en">
                         <input class="btn btn-submit" type="submit" name="submit" value="Invia" tabindex="105"/>
                         <input type="reset" value="cancella" />
                         <span id="errors"></span>
