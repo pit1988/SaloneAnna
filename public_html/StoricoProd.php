@@ -101,8 +101,8 @@ if (!$login) {
                             <th scope="col">Codice Appuntamento</th>
                             <th scope="col">Data e Ora</th>
                             <th scope="col">Codice Prodotto</th>
-                            <th scope="col">Utilizzo</th>
-                            <th scope="col">Nome Prodotto (ml)</th>
+                            <th scope="col">Utilizzo (ml)</th>
+                            <th scope="col">Nome Prodotto</th>
                         </tr>
                     </thead>
 
@@ -125,7 +125,7 @@ if (!$login) {
                       <td>" . $appuntamentoDatato->codAppuntamento . "</td>
                       <td>" . $appuntamentoDatato->data . " " . $appuntamentoDatato->ora . "</td>
                       <td>" . $appuntamentoDatato->codProdotto . "</td>
-                      <td>" . $appuntamentoDatato->utilizzo . " (ml)</td>
+                      <td>" . $appuntamentoDatato->utilizzo . " ml</td>
                       <td>" . $appuntamentoDatato->nome . "</td>
                     </tr>
                     ";
