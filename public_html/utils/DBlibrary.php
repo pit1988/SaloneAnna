@@ -912,7 +912,6 @@ function listaProdottiAppuntamentoDatato($codCliente) {
 function cambiaPassword($username, $nuovaPassword) {
 	cleanString($username);
 	cleanString($nuovaPassword);
-	$nuovaPassword = md5($nuovaPassword);
 	return eseguiQuery("UPDATE Account SET password='$nuovaPassword' WHERE username=$username");
 }
 

@@ -6,14 +6,14 @@ $login=authenticate();
 if (!$login) {
     header('location:index.php');
     exit;
-} else {
-	if(isset($_POST['submit']) &&  ) {
-      
+}
+else {
+	if(isset($_POST['submit']) &&  isset($_POST['pwd']) && isset($_POST['conf'])) {
 		$nuovaPassword=SHA1($_POST['pwd']);
 		$l=strlen($_POST['pwd']);
 		$conferma=SHA1($_POST['conf']);
 
-		$ris=cambiaPassword($username, $nuovaPassword) 
+		$ris=cambiaPassword($username, $nuovaPassword);
 		if($pwd!=$conferma) 
 			$err="<p>La nuova password e la conferma devono essere uguali</p>";
 		elseif($l<8)
@@ -23,7 +23,7 @@ if (!$login) {
 			if($ris)
 				$msg="<p>Password cambiata correttamente</p>";
 			else
-				$err="<p>Non è stato possibile cambiare la <span xml:lan=\"en\">password</span></p>"
+				$err="<p>Non è stato possibile cambiare la <span xml:lan=\"en\">password</span></p>";
 		}
 	}
 	$title="Cambio password, Salone Anna";
@@ -38,7 +38,7 @@ if (!$login) {
 		echo<<<END
 	<form id="contenitore-login" action="login.php" method="post">
 		<fieldset>
-			<legend>Inserisci i dati per accedere alla parte amministratore</legend>
+			<legend>Cambio <span xml:lang=\"en\">Password</span> </legend>
 			<ul>
 				<li>
 					<p>
@@ -48,7 +48,7 @@ if (!$login) {
 				</li>
 				<li>
 					<p>
-						<label for="conf" xml:lang="en">Conferma <span lang=\"en\">password</span></label>
+						<label for="conf" xml:lang="en">Ripeti <span lang=\"en\">password</span></label>
 						<input type="password" id="conf" name="conf" tabindex="101" />
 					</p>
 				</li>
@@ -62,8 +62,6 @@ if (!$login) {
 		</fieldset>
 	</form>
 END;
-	}
-	else
 		hyperlink("Vai alla <span lang=\"en\">home</span>","index.php");
 	if(isset($err))
 	    echo $err;
@@ -72,16 +70,5 @@ END;
 	content_end();
 	page_end();
 }
-
-
-
-
-
-
-
-
-
-
-
 ?>
 
