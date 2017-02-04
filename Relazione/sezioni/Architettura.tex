@@ -1,13 +1,13 @@
 \section{Architettura}{
 	Il layout è stato strutturato allo scopo di rendere il sito fruibile indipendentemente dal dispositivo, definendo:
 	\begin{itemize}\itemsep1pt
-		\item layout per dispositivi desktop (suddiviso a seconda del browser)
-		\item layout per dispositivi mobili
-		\item layout di stampa
+		\item layout per dispositivi desktop;
+		\item layout per dispositivi mobili;
+		\item layout di stampa.
 	\end{itemize} 
 	
 	\subsection{Progettazione layout}{
-		Si è deciso di utilizzare un layout di tipo responsive a singola colonna principale, facendolo adattare alle dimensioni dello schermo, impostando un limite sulla larghezza dello schermo per passare al layout per dispositivi mobili.
+		Si è deciso di utilizzare un layout di tipo responsive a singola colonna principale, adattabile secondo la dimensione dello schermo, impostando un limite sulla larghezza per passare al layout per dispositivi mobili.
 	}
 	\subsection{Sviluppo layout}{
 		Nell'immagine che segue viene mostrata la struttura data ai vari blocchi \textit{div} che compongono il sito, in cui sono contenute le informazioni divise per area tematica le informazioni.
@@ -19,24 +19,26 @@
 			\label{Schema del sito}
 		\end{figure}
 		
-		Il foglio di stile standard viene utilizzato sui browser per computer desktop e portatili, fino a che la larghezza dello schermo rimane maggiore di 650 px: al di sotto si passa automaticamante ad usare il CSS destinato al mobile.
+		Il foglio di stile standard viene utilizzato sui browser per computer desktop e portatili, fino a che la larghezza dello schermo rimane maggiore di 650 px: al di sotto si passa automaticamante ad usare il CSS per al mobile.
 		\\
-		Analizzando il sito spostandosi dall'alto verso il basso, segue che:
+		Analizzando il sito spostandosi dall'alto verso il basso, gli elementi che si incontrano sono:
 		\begin{itemize}\itemsep1pt
-			\item Il div \textbf{header} che informa l'utente su ciò che sta visitando; comprende:
+			\item Il div \textbf{header}, informa l'utente su ciò che sta visitando; comprende:
 			\begin{itemize}\itemsep1pt
-				\item Titolo e logo; nella pagina relativa alle vendite è presente inoltre il pulsante d'accesso amministratore che mostra un menù a scomparsa da cui poter effettuare il login;
-				\item Il div \textbf{breadcrumbs} che aiuta l'utente ad identificare la posizione in cui si trova all'interno del sito, rispetto alla homepage; al suo interno è presente anche la barra di ricerca con cui trovare i prodotti all'interno del sito;
-				\item Il menù utente, identificato con il div \textbf{menu}, presenta 4 scelte: \textit{Home}, \textit{Realizzazioni}, \textit{Vendita} e \textit{Contattaci}. Viene evidenziata la posizione corrente. Situato centralmente alla pagine e si estende orizzontalmente.
+				\item Titolo e logo; nella pagina relativa alle vendite è presente inoltre il pulsante d'accesso all'area riservata del sito, che conduce alla pagina da cui effetuare il login.
+				\item Il div \textbf{breadcrumbs}: aiuta l'utente ad identificare la posizione in cui si trova all'interno del sito, a partire dalla homepage;
+				\item Il menù utente, identificato con il div \textbf{menu}, presenta scelte differenziate a seconda che si abbia effettuato l'accesso. Agli utenti non autenticati sono disponibili i collegamenti a \textit{Home, Foto, Chi Siamo, Prezzi, Contattaci}. 
+				Dopo aver effettuato l'accesso si hanno a disposizione le seguenti scelte \textit{Home, Prezzi, Immagini, Prodotti, Clienti, Appuntamenti, Utilità}.
+				Viene evidenziata la posizione corrente e si trova in posizione centrale rispetto alla pagina; si estende orizzontalmente.
+				Per agevolare lo sviluppo questa parte viene costruita da funzioni PHP;
 			\end{itemize}
 			\item Segue il contenuto vero e proprio della pagina, inserito nel div \textbf{content}: ha il compito di esporre le informazioni che si stanno trattando;
-			\item Alla fine della pagina, il \textbf{footer} esposto con un layout a 3 colonne. Al cui interno è presente:
+			\item Alla fine della pagina, il \textbf{footer}, costruito con un layout a 2 colonne; al suo interno sono presenti:
 			\begin{itemize}\itemsep1pt
-				\item un piccolo logo dell'azienda;
-				\item collegamenti alle pagine del sito;
 				\item i principali riferimenti all'azienda;
-				\item motto aziendale.
+				\item un piccolo logo dell'azienda ed i simboli di validità per l'XHTML ed il CSS;
 			\end{itemize}
+			Anche il footer è stato costruito con una funzione, in modo da ottenere un template valido per tutte le pagine del sito e potersi concentrare nello sviluppo del contenuto delle pagine.
 		\end{itemize}
 		}
 	\subsection{Layout per dispositivi mobili}{
