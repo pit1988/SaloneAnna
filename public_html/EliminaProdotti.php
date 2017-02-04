@@ -27,8 +27,8 @@ else {
         $n_err=0;
         foreach ($ids as $d) {
             $ris=eliminaProdotto($d);
-            if($ris) ++$n_el;
-            else ++$n_err;
+            if(!$ris) ++$n_err;
+            else ++$n_el;
             unset($ris);
         }
 

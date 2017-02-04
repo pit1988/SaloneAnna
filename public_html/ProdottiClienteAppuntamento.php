@@ -94,8 +94,10 @@ if (!$login) {
                       <input type="text" name="last_name" id="last_name" tabindex="101" />
                   </p>
               </li>
-              <li class="noPrint"><p><input type="submit" name="submit" value="Procedi"/></p></li>
-              <span id="logError"></span>
+              <li>
+                <p class="noPrint"><input type="submit" name="submit" value="Procedi"/></p>
+                <span id="logError"></span>
+              </li>
             </ul>
           </fieldset>
         </form>
