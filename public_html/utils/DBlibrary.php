@@ -14,7 +14,7 @@ function dbconnect() {
 	$db = "smarches";*/
 	$conn=new mysqli($host, $user, $pass, $db);
 	if($conn -> connect_errno)
-		header("404.php");
+		header("errore.php?codmsg=\"0\"");
 	return $conn;
 };
 

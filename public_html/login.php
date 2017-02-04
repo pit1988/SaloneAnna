@@ -4,7 +4,7 @@ include "utils/DBlibrary.php";
 
 if (authenticate())
   {
-    header('location:index.php');
+    header('location:errore.php?codmsg=2');
     exit;
   }
 

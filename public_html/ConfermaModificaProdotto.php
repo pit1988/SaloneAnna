@@ -1,5 +1,4 @@
 <?php
-
 require 'library.php';
 include 'utils/DBlibrary.php';
 $login=authenticate();
@@ -9,7 +8,6 @@ if (!$login) {
     header('location:index.php');
     exit;
 } else {
-    
     $title      = "Gestione Prodotti | Salone Anna";
     $title_meta = "Gestione Prodotti | Salone Anna";
     $descr      = "Modifica il prodotto e verrà segnalato il successo o il fallimento in questa pagina";

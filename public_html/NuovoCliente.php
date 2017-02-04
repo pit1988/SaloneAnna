@@ -1,4 +1,3 @@
-
 <?php
 require 'library.php';
 require 'utils/DBlibrary.php';

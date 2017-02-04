@@ -38,8 +38,8 @@ var dettagli_form_nomiAppuntamenti = {
 };
 
 var dettagli_form_orarioAppuntamenti = {
-    "date" : ["" , /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
-    "orario" : ["" , /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
+    "date": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/, "Inserisci una data nel formato gg/mm/AA"],
+    "orario": ["", /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
 };
 
 var dettagli_form_cliente = {
@@ -47,23 +47,23 @@ var dettagli_form_cliente = {
     "last_name": ["", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il cognome del cliente"],
     "email": ["", /(^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)?/, "Inserisci un indirizzo email valido"],
     "phone": ["", /(((\+)?[0-9]{0,4})?[0-9]{8,11}$)?/, "Inserisci un numero telefonico valido"],
-    "data" : ["" , /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/ , "Inserisci una data nel formato gg/mm/AA"]
+    "data": ["", /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/, "Inserisci una data nel formato gg/mm/AA"]
 };
 
 var dettagli_form_prodotto = {
-    "nome" : ["Nome prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il nome"],
-    "marca" : ["Marca prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la marca"],
-    "tipo" : ["Tipo prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il tipo"],
-    "quantita" : ["0", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la quantità"],
-    "pvendita" : ["0.00", /[0-9]+([\.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00 "],
-    "rivendita" : ["0.00", /[0-9]+([\.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00"]
+    "nome": ["Nome prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il nome"],
+    "marca": ["Marca prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la marca"],
+    "tipo": ["Tipo prodotto", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci il tipo"],
+    "quantita": ["0", /^[a-zA-ZÀ-ÿ0-9 -v]+$/, "Inserisci la quantità"],
+    "pvendita": ["0.00", /[0-9]+([\.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00 "],
+    "rivendita": ["0.00", /[0-9]+([\.][0-9]{1,2})?/, "Inserisci il prezzo nel formato 15.00"]
 };
 
 var dettagli_form_appuntamenti = {
-    "first_name" : ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
-    "last_name" : ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
-    "data": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/ , "Inserisci una data nel formato gg/mm/AA"],
-    "orario" : ["", /[0-9]{1,2}[:][0-9]{2}/, "Inserisci un orario nel formato hh:mm"]
+    "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
+    "last_name": ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
+    "data": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/, "Inserisci una data nel formato gg/mm/AA"],
+    "orario": ["", /[0-9]{1,2}[:][0-9]{2}/, "Inserisci un orario nel formato hh:mm"]
 };
 
 var dettagli_dynamic_data = {};
@@ -229,22 +229,21 @@ function validazioneFormStorico() {
 function validazioneFormRicercaAppuntamenti() {
     var selectedNome = document.getElementsByName('cli')[0].checked;
     var selectedOrario = document.getElementsByName('data')[0].checked;
-    var ris=((selectedOrario===false) && (selectedNome===false));
-    if(ris){
-        document.getElementById('logError').innerHTML = "Non hai selezionato alcuna casella di ricerca";  
+    var ris = ((selectedOrario === false) && (selectedNome === false));
+    if (ris) {
+        document.getElementById('logError').innerHTML = "Non hai selezionato alcuna casella di ricerca";
         return false;
-    }
-    else{
-        var rNome= true;
-        var rOrario=true;
-        if(selectedNome === true){
+    } else {
+        var rNome = true;
+        var rOrario = true;
+        if (selectedNome === true) {
             rNome = validazioneForm(dettagli_form_nomiAppuntamenti);
-            if(rNome===false)
+            if (rNome === false)
                 document.getElementById('logError').innerHTML = "Sono presenti errori nelle caselle del nome cliente, potresti ricontrollare?";
         }
-        if(selectedOrario ===true){
+        if (selectedOrario === true) {
             rOrario = validazioneForm(dettagli_form_orarioAppuntamenti);
-            if(rOrario===false)
+            if (rOrario === false)
                 document.getElementById('logError').innerHTML = "Sono presenti errori nelle caselle dell'orario, potresti ricontrollare?";
         }
         return (rOrario && rNome);
