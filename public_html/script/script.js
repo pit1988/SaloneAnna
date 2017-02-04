@@ -74,28 +74,32 @@ var dettagli_dynamic_price = {
 };
 
 function caricamentoContattaci() {
-    return caricamento(dettagli_form_contattaci, false);
+    return caricamento(dettagli_form_contattaci);
 }
 
 function caricamentoLogin() {
-    return caricamento(dettagli_form_login, false);
+    return caricamento(dettagli_form_login);
 }
 
 function caricamentoCambioPassword() {
-    return caricamento(dettagli_form_cambio_password, false);
+    return caricamento(dettagli_form_cambio_password);
 }
 
 function caricamentoImmagine() {
-    return caricamento(dettagli_form_immagine, true);
+    var img = document.getElementById("uploadedfile");
+    img.onchange = function() {
+        checkImage(this);
+    };
+    return caricamento(dettagli_form_immagine);
 }
 
 function caricamentoStorico() {
-    return caricamento(dettagli_form_storicoProdotti, false);
+    return caricamento(dettagli_form_storicoProdotti);
 }
 
 function caricamentoRicercaAppuntamento() {
-    caricamento(dettagli_form_orarioAppuntamenti, false);
-    caricamento(dettagli_form_nomiAppuntamenti, false);
+    caricamento(dettagli_form_orarioAppuntamenti);
+    caricamento(dettagli_form_nomiAppuntamenti);
 }
 
 function caricamentoCliente() {
@@ -111,15 +115,8 @@ function caricamentoAppuntamento() {
 }
 
 // Funzione che data la matrice dei campi dati, li inserisce all'interno della form e stabilisce i controlli
-function caricamento(matrix, checkImg) //carica i dati nei campi
+function caricamento(matrix) //carica i dati nei campi
 {
-    if (checkImg === true) {
-        var img = document.getElementById("uploadedfile");
-        img.onchange = function() {
-            checkImage(this);
-        };
-    }
-
     for (var key in matrix) {
         var input = document.getElementById(key);
         campoDefault(matrix, input);
@@ -127,26 +124,6 @@ function caricamento(matrix, checkImg) //carica i dati nei campi
         input.onfocus = function() {
             campoPerInput(matrix, this);
         }; //toglie l'aiuto
-        input.onblur = function() {
-            validazioneCampo(matrix, this);
-        }; //fa la validazione del campo
-    }
-}
-// togliere
-function controlloImmagine() {
-    return controllo(dettagli_form_immagine, true);
-}
-// togliere
-function controllo(matrix, checkImg) {
-    if (checkImg === true) {
-        var img = document.getElementById("uploadedfile");
-        img.onchange = function() {
-            checkImage(this);
-        };
-    }
-    for (var key in matrix) {
-        var input = document.getElementById(key);
-
         input.onblur = function() {
             validazioneCampo(matrix, this);
         }; //fa la validazione del campo
@@ -181,41 +158,6 @@ function validazioneCampo(matrix, input) {
     return true;
 }
 
-//togliere
-function validazioneCampoDinamico(matrix, input) {
-    var p = input.parentNode; //prende lo span
-    var errore = document.getElementById(input.id + "errore");
-    if (errore) {
-        p.removeChild(errore);
-    }
-    var regex1 = matrix[input.id][1];
-    var text = input.value;
-    var companion = document.getElementById(matrix[input.id][3]);
-    var c_p = companion.parentNode;
-    var c_errore = document.getElementById(matrix[input.id][3] + "errore");
-    var ris = true;
-    if (c_errore) {
-        c_p.removeChild(c_errore);
-    }
-    var text2 = companion.value; //prendo il valore del secondo valore
-    if (((text == matrix[input.id][0])) || text.search(regex1) !== 0) //occhio! controllo che l'input sia diverso dal placeholder (con il primo check)
-    {
-        mostraErrore(matrix, input);
-        ris = false;
-    }
-    if (text2 === "") {
-        var e = document.createElement("strong");
-        e.className = "errorSuggestion";
-        e.id = matrix[input.id][3] + "errore";
-        e.appendChild(document.createTextNode("Inserisci un formato"));
-        c_p.appendChild(e);
-        ris = false;
-    }
-    if (text === "" && text2 === "")
-        ris = true;
-    return ris;
-}
-
 // Funzioni per il controllo sul tipo dell'immagine inserita nella form
 function checkPictureType(Extension) {
     return (Extension == "gif" || Extension == "png" || Extension == "svg" || Extension == "bmp" || Extension == "jpeg" || Extension == "jpg");
@@ -247,14 +189,14 @@ function checkImage() {
 }
 
 function validazioneFormContattaci() {
-    var ris = validazioneForm(dettagli_form_contattaci, true);
+    var ris = validazioneForm(dettagli_form_contattaci);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;
 }
 
 function validazioneFormCambioPassword() {
-    var ris = validazioneForm(dettagli_form_cambio_password, true);
+    var ris = validazioneForm(dettagli_form_cambio_password);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     else {
@@ -270,7 +212,7 @@ function validazioneFormCambioPassword() {
 
 function validazioneFormImmagine() {
     var rImg = checkImage();
-    var rFrm = validazioneForm(dettagli_form_immagine, true);
+    var rFrm = validazioneForm(dettagli_form_immagine);
     var valRes = (rImg && rFrm);
     if (valRes !== true)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
@@ -278,7 +220,7 @@ function validazioneFormImmagine() {
 }
 
 function validazioneFormStorico() {
-    var ris = validazioneForm(dettagli_form_storicoProdotti, true);
+    var ris = validazioneForm(dettagli_form_storicoProdotti);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;
@@ -296,12 +238,12 @@ function validazioneFormRicercaAppuntamenti() {
         var rNome= true;
         var rOrario=true;
         if(selectedNome === true){
-            rNome = validazioneForm(dettagli_form_nomiAppuntamenti, true);
+            rNome = validazioneForm(dettagli_form_nomiAppuntamenti);
             if(rNome===false)
                 document.getElementById('logError').innerHTML = "Sono presenti errori nelle caselle del nome cliente, potresti ricontrollare?";
         }
         if(selectedOrario ===true){
-            rOrario = validazioneForm(dettagli_form_orarioAppuntamenti, true);
+            rOrario = validazioneForm(dettagli_form_orarioAppuntamenti);
             if(rOrario===false)
                 document.getElementById('logError').innerHTML = "Sono presenti errori nelle caselle dell'orario, potresti ricontrollare?";
         }
@@ -310,36 +252,32 @@ function validazioneFormRicercaAppuntamenti() {
 }
 
 function validazioneFormCliente() {
-    var ris = validazioneForm(dettagli_form_cliente, true);
+    var ris = validazioneForm(dettagli_form_cliente);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;
 }
 
 function validazioneFormProdotto() {
-    var ris = validazioneForm(dettagli_form_prodotto, true);
+    var ris = validazioneForm(dettagli_form_prodotto);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;
 }
 
 function validazioneFormAppuntamento() {
-    var ris = validazioneForm(dettagli_form_appuntamenti, true);
+    var ris = validazioneForm(dettagli_form_appuntamenti);
     if (ris === false)
         document.getElementById('logError').innerHTML = "Sono presenti errori, potresti ricontrollare?";
     return ris;
 }
 
-
-function validazioneForm(matrix, Mstatica) {
+function validazioneForm(matrix) {
     var corretto = true;
     var risultato = false;
     for (var key in matrix) {
         var input = document.getElementById(key);
-        if (Mstatica === true)
-            risultato = validazioneCampo(matrix, input);
-        else
-            risultato = validazioneCampoDinamico(matrix, input);
+        risultato = validazioneCampo(matrix, input);
         corretto = corretto && risultato;
     }
     return corretto;
@@ -362,59 +300,6 @@ function errImg(fuData) {
     e.appendChild(document.createTextNode("Inserisci un file immagine"));
     p.appendChild(e);
 }
-
-// Funzioni per aumentare dinamicamente il numero di campi dati della form. Togliere
-
-var counter_prezzo = 0;
-var counter_valore = 0;
-
-function addNInputData(divname, number) {
-    for (var i = 1; i < number; ++i) {
-        dettagli_dynamic_data['dataName' + i] = ["Nome del dato", /.*/, "", "dataContent" + i, /.*/, ""];
-        dettagli_dynamic_data['dataContent' + i] = ["valore", /.*/, ""];
-        counter_valore++;
-    }
-    caricamento(dettagli_dynamic_data, false);
-}
-
-function addNInputPrice(divName, number) {
-    var to_set = {};
-    for (var i = 1; i < number; ++i) {
-        to_set['price' + i] = ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto"];
-        to_set['format' + i] = ["", /.*/, ""];
-        dettagli_dynamic_price['price' + i] = ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto", "format" + i, "", /.*/, ""];
-        counter_prezzo++;
-    }
-    caricamento(to_set, false);
-}
-
-function addInputPrice(divName) {
-    var toInsert = '<li><div class="inputsL"><label for="price" class="inputL">Prezzo (es. 7.50): &euro; </label><input type="text" name="price\[\]" id="price' + (counter_prezzo + 1) + '" class="inputL"/></div><div class="inputsR"><label for="format' + (counter_prezzo + 1) + '" class="inputR">Formato (es. al pezzo):</label><input type="text" name="format\[\]" id="format' + (counter_prezzo + 1) + '" class="inputR"/></div></li>';
-    counter_prezzo = addInput(divName, counter_prezzo, toInsert);
-    var to_set = {};
-    to_set['price' + counter_prezzo] = ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto"];
-    to_set['format' + counter_prezzo] = ["", /.*/, ""];
-    dettagli_dynamic_price['price' + counter_prezzo] = ["", /^\d+[\.]?(\d{1,2})?$/, "Inserisci il prezzo separato da un punto", "format" + counter_prezzo, "", /.*/, ""];
-    // dettagli_dynamic_price['format'+counter_prezzo]=["", /.*/, ""];
-    caricamento(to_set, false);
-}
-
-function addInputData(divName) {
-    var toInsert = '<li><div class="inputsL"><label for="dataName" class="inputL">Dato (es. Altezza):</label><input type="text" name="dataName\[\]" id="dataName' + (counter_valore + 1) + '" class="inputL"/></div><div class="inputsR"><label for="dataContent' + (counter_valore + 1) + '" class="inputR">Formato (es. 10cm):</label><input type="text" name="dataContent\[\]" id="dataContent' + (counter_valore + 1) + '" class="inputR"/></div></li>';
-    counter_valore = addInput(divName, counter_valore, toInsert);
-    dettagli_dynamic_data['dataName' + counter_valore] = ["Nome del dato", /.*/, "", "dataContent" + counter_valore, /.*/, ""];
-    dettagli_dynamic_data['dataContent' + counter_valore] = ["valore", /.*/, ""];
-    caricamento(dettagli_dynamic_data, false);
-}
-
-function addInput(divName, counter, toInsert) {
-    var newspan = document.createElement('span');
-    newspan.innerHTML = toInsert;
-    document.getElementById(divName).appendChild(newspan);
-    counter++;
-    return counter;
-}
-
 
 //funzione che sostituisce l'immagine della mappa con la mappa in google maps
 function replaceMap() {
