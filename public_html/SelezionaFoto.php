@@ -31,8 +31,9 @@ else{
     if (!$num_rows)
         echo "<p class=\"info\">Non sono presenti fotografie da modificare</p>";
     else {
-        form_start("post", "ModificaFoto.php");
-        echo "<fieldset>
+        echo "
+            <form method=\"post\" action=\"ModificaFoto.php\">
+            <fieldset>
             <legend>Seleziona l'immagine che vuoi modificare</legend>
             ";
             $th = '<table id="TabellaFoto" summary="Seleziona le immagini da eliminare">
@@ -73,8 +74,8 @@ else{
             $tf       = "</tbody></table>";
             $to_print = $th . $tb . $tf;
             echo $to_print;
-            echo "<input type='submit' name='submit' value='Procedi'>";
-            echo "<input type='reset' value='Cancella'>";
+            echo "<input type='submit' name='submit' value='Procedi' />";
+            echo "<input type='reset' value='Cancella' />";
         echo"</fieldset>";
         echo "</form>";
     }

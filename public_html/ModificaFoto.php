@@ -35,28 +35,26 @@ if (!$login) {
             $descr    = $result->descrizione;
             $to_print = '
             <form enctype="multipart/form-data" onsubmit="return validazioneFormImmagine();" action="ModificaFoto.php" method="post">
-                <fieldset><legend>Inserisci una nuova foto</legend>
-                    <ul>
-                        <li>
-                            <p>
-                                <label for="uploadedfile">Inserisci un\'immagine</label>
-                                <input name="uploadedfile" id="uploadedfile" type="file" />
-                            </p>
-                            <p>
-                                <label for="img_desc">Descrizione</label>
-                                <input type="text" name="img_desc" id="img_desc" value="' . $descr . '" />
-                            </p>
-                            <p>
-                                <input type="hidden" name="img_old_file" id="img_old_file" value="' . $filename . '" />
-                                <input type="hidden" name="codImg_old" id="codImg_old" value="' . $codice . '" />
-                                <input class="btn btn-submit" type="submit" name="invia" value="Invia" tabindex="105"/>
-                                <span id="logError"></span>
-                            </p>
-                            <p>
-                                <label for="oldfile">Immagine da modificare</label>
-                                <img src="uploads/' . $filename . '" class="oldfile" alt="'.$descr.'" />
-                        </li>
-                    </ul>
+                <fieldset>
+                    <legend>Inserisci una nuova foto</legend>
+                    <p>
+                        <label for="uploadedfile">Inserisci un\'immagine</label>
+                        <input name="uploadedfile" id="uploadedfile" type="file" />
+                    </p>
+                    <p>
+                        <label for="img_desc">Descrizione</label>
+                        <input type="text" name="img_desc" id="img_desc" value="' . $descr . '" />
+                    </p>
+                    <p>
+                        <input type="hidden" name="img_old_file" id="img_old_file" value="' . $filename . '" />
+                        <input type="hidden" name="codImg_old" id="codImg_old" value="' . $codice . '" />
+                        <input class="btn btn-submit" type="submit" name="invia" value="Invia" tabindex="105"/>
+                        <span id="logError"></span>
+                    </p>
+                    <p>
+                        <label for="oldfile">Immagine da modificare</label>
+                        <img src="uploads/' . $filename . '" id="oldfile" class="oldfile" alt="'.$descr.'" />
+                    </p>
                 </fieldset>
             </form>
             
@@ -71,7 +69,7 @@ if (!$login) {
         $img_desc = $_POST["img_desc"];
         $codice   = $_POST['codImg_old'];
         $filename = $_POST['img_old_file'];
-        if (isset($_FILES["uploadedfile"])) {
+        if (empty($_FILES["uploadedfile"])) {
             $img_name = $_FILES["uploadedfile"]["name"];
             $ris=modificaImmagine($codice, $img_desc, $_FILES["uploadedfile"]);
 
