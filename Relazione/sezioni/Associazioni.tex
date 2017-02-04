@@ -1,0 +1,40 @@
+\section{Associazioni}{
+	Le Associazioni (o Relazioni) rappresentano legami logici fra due o più entità dell'applicazione.
+	
+	Le Associazioni create al fine di modellare il progetto sono: 	
+	\begin{itemize}\itemsep1pt
+		\item \textbf{Appuntamento - Clienti} 
+		\begin{trivlist}\itemsep1pt
+			\item Ogni cliente ha uno o più appuntamenti (o nessuno);
+			\item Ogni Appuntamento ha un cliente;
+			\item Molteplicità 1:N;
+			\item Totalità:
+			\begin{itemize}
+				\item Parziale verso Appuntamenti;
+				\item Totale verso Clienti;
+			\end{itemize}
+		\end{trivlist}
+		\item \textbf{Appuntamento - Prodotti} 
+		\begin{trivlist}\itemsep1pt
+			\item Durante un Appuntamento possono venir usati più prodotti (o nessuno);
+			\item Ogni prodotto può essere usato in più appuntamenti in diverse quantità (per cliente, o anche lo stesso cliente in appuntamenti diversi);
+			\item Molteplicità N:M;
+			\item Totalità:
+			\begin{itemize}
+				\item Parziale verso Prodotti;
+				\item Parziale verso Appuntamenti.
+			\end{itemize}
+		\end{trivlist}
+		\item \textbf{TipoAppuntamento - Appuntamento}
+		\begin{trivlist}\itemsep1pt
+			\item Ogni TipoAppuntamento può essere usato su più appuntamenti;
+			\item Un Appuntamento ha un e uno solo TipoAppuntamento;
+			\item Molteplicità 1:N;
+			\item Totalità:
+			\begin{itemize}
+				\item Parziale verso Appuntamento;
+				\item Totale verso TipoAppuntamento.
+			\end{itemize}
+		\end{trivlist}
+	\end{itemize}
+}

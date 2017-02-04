@@ -1,0 +1,41 @@
+\section{Classi}{
+	Una classe è la struttura di un insieme di oggetti omogenei. Per meglio chiarire, una classe definisce il tipo complesso dell'oggetto (interfaccia) e la sua implementazione. I tipi sono quindi sono astrazioni che descrivono il comportamento di uno o più oggetti, mentre le classi definiscono inoltre il funzionamento di essi.
+	
+	La progettazione è stata la seguente: 	
+	\begin{itemize}\itemsep1pt
+		\item \textbf{Cliente} 
+		\begin{itemize}\itemsep1pt
+			\item CodCliente: int(11);
+			\item Nome: VarChar(30);
+			\item Cognome: VarChar(30);
+			\item Telefono: VarChar(10);
+			\item Email: VarChar(50);
+			\item Compleanno: Date; Il compleanno contiene la data del prossimo anniversario, quindi il giorno e mese corrispondono a quelli della data di nascita. Mentre l’anno viene aggiornato ad ogni compleanno, in modo tale che consideri sempre il prossimo anniversario.
+		\end{itemize}
+		\item \textbf{Appuntamento}
+		\begin{itemize}\itemsep1pt
+			\item CodAppuntamento: int(11);
+			\item CodCliente: int(11);
+			\item DataOra: datetime;
+			\item CodTipoAppuntamento:	smallint(6);
+			\item Costo: Double.
+		\end{itemize}
+		\item \textbf{Prodotti}
+		\begin{itemize}\itemsep1pt
+			\item CodProdotto: int(11);
+			\item Nome:	varchar(20);
+			\item Marca: varchar(30);
+			\item Tipo: varchar(30);
+			\item Quantità: int(11);
+			\item Prezzo: double;
+			\item PRivendita: double.
+		\end{itemize}
+		\item \textbf{TipoAppuntamento}
+		\begin{itemize}\itemsep1pt
+			\item CodTipoAppuntamento: smallint(11);
+			\item NomeTipo:	varchar(30);
+			\item Costo: double;
+			\item Scont: double.
+		\end{itemize}
+	\end{itemize}
+}
