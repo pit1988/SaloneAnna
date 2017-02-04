@@ -99,7 +99,7 @@ if (!$login) {
         echo "<p class=\"info\">Ci sono stati problemi nel reperire i risultati</p>\n";
     echo "<div class=\"noPrint\">";
     //Inserisci collegamenti a settimana precenente, odierna e successiva con la data presa in precedenza
-    hyperlink("Precenente" , "AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.'-1 week')));
+    hyperlink("Precedente" , "AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.'-1 week')));
     hyperlink("Settimana odierna", "AppuntamentiSettimana.php");
     hyperlink("Successiva", "AppuntamentiSettimana.php?date=".date('d-m-Y',strtotime($date.' + 1 week')));
     echo "</div>";
