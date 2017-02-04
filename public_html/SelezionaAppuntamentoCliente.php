@@ -13,8 +13,8 @@ else {
     $descr      = "Pagina di selezione appuntamento del cliente visualizzato tra varie scelte";
     $keywords   = "Appuntamento, Nome, Cognome, Data, Ora, Tipo, Prezzo, Cliente, Seleziona";
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Appuntamenti.php">Appuntamenti</a> / <strong>Gestione Appuntamenti</strong>';
-    insert_header($rif, 6, true);
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a>  / <strong>Prodotti-Clienti-Appuntamento</strong>';
+    insert_header($rif, 4, true);
     content_begin();
     
     if (isset($_POST['submit']) && isset($_POST['CodCliente'])) {

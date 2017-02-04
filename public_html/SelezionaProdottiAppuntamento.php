@@ -15,7 +15,7 @@ else {
     $keywords = "Storico, Prodotti, Appuntamento, Cliente, Utilizzo, Quantità, Nome, Data, Marca";
     
     page_start($title, $title_meta, $descr, $keywords, '');
-    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a> / <strong>Inventario</strong>';
+    $rif = '<a href="index.php" xml:lang="en">Home</a> / <a href="Prodotti.php">Prodotti</a>  / <strong>Prodotti-Clienti-Appuntamento</strong>';
     insert_header($rif, 4, true);
     content_begin();
     //seleziona l'appuntamento, mostra i dati dell'appuntamento, se non c'è segnala errore. 
