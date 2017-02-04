@@ -7,8 +7,8 @@ require 'utils/DBlibrary.php';
       header('location:errore.php?codmsg=1');
       exit;
   } else {
-      $title = "Seleziona Appuntamento | Salone Anna";
-      $title_meta = "Seleziona Appuntamento | Salone Anna";
+      $title = "Modifica Appuntamento | Salone Anna";
+      $title_meta = "Modifica Appuntamento | Salone Anna";
       $descr = "Pagina di selezione appuntamento visualizzato tra varie scelte";
       $keywords = "Appuntamento, Ricerca, Nome, Cognome, Data, Ora, Tipo, Prezzo";
       page_start($title, $title_meta, $descr, $keywords, '');
@@ -18,7 +18,7 @@ require 'utils/DBlibrary.php';
       
       $result = listaAppuntamenti();
       
-      echo "<h2>Lista degli appuntamenti da oggi in poi</h2>";
+      echo "<h2>Lista degli appuntamenti modificabili, a partire dalla data corrente</h2>";
       
       if (!$result)
           echo "<p>Non ci sono appuntamenti da mostrare</p>";
