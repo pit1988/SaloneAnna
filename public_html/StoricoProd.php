@@ -7,6 +7,7 @@ $to_print  = "";
 $err       = "";
 $to_insert = true;
 $trovato   = false;
+$newClient=false;
 // Controllo accesso
 if (!$login) {
     header('location:errore.php?codmsg=1');
@@ -22,8 +23,8 @@ if (!$login) {
         else {
             $result = checkCliente($nome, $cognome);
             if (is_null($result) OR count($result) == 0) { //nessuno
-                $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti:</p>";
-                hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
+                $err = "<p class=\"errorSuggestion\">Non sono presenti clienti che si chiamano " . $nome . " " . $cognome . ", segui il link per aggiungerlo ai clienti, oppure prova a  fare una nuova ricerca:</p>";
+                $newClient=true;
             } else { //uno o più
                 $number_rows = count($result);
                 $to_insert=false;
@@ -184,6 +185,8 @@ insert_header($rif, 4, true);
 content_begin();
 echo "<h2>Storico prodotti</h2>";
 echo $err;
+if($newClient)
+    hyperlink("Inserisci un nuovo cliente", "NuovoCliente.php");
 if ($to_insert) {
     echo $form;
 }
