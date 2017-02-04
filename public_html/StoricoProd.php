@@ -9,7 +9,7 @@ $to_insert = true;
 $trovato   = false;
 // Controllo accesso
 if (!$login) {
-    header('location:index.php');
+    header('location:errore.php?codmsg=1');
     exit;
 } elseif (isset($_POST['submit'])) {
     if (isset($_POST['first_name']) && isset($_POST['last_name'])) {

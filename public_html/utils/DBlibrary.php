@@ -13,8 +13,8 @@ function dbconnect() {
 	$pass = "oqu9eim5ookooCei";
 	$db = "smarches";*/
 	$conn=new mysqli($host, $user, $pass, $db);
-	if($conn -> connect_errno)
-		header("errore.php?codmsg=\"0\"");
+	if($conn -> connect_errno) //invia alla pagina che mostra l'errore
+		header('location:errore.php?codmsg=0');
 	return $conn;
 };
 

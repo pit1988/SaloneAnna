@@ -4,7 +4,7 @@ include "utils/DBlibrary.php";
 $login=authenticate();
 // Controllo accesso
 if (!$login) {
-    header('location:index.php');
+    header('location:errore.php?codmsg=1');
     exit;
 }
 else {
