@@ -38,7 +38,7 @@ var dettagli_form_nomiAppuntamenti = {
 };
 
 var dettagli_form_orarioAppuntamenti = {
-    "date": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/, "Inserisci una data nel formato gg/mm/AA"],
+    "date": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/, "Inserisci una data nel formato gg/mm/aaaa"],
     "orario": ["", /([0-9]{1,2}[:][0-9]{2})?/, "Inserisci un orario nel formato hh:mm"]
 };
 
@@ -47,7 +47,7 @@ var dettagli_form_cliente = {
     "last_name": ["", /^[A-Z][a-z]+( ([A-Z][a-z]+))?/, "Inserisci il cognome del cliente"],
     "email": ["", /(^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$)?/, "Inserisci un indirizzo email valido"],
     "phone": ["", /(((\+)?[0-9]{0,4})?[0-9]{8,11}$)?/, "Inserisci un numero telefonico valido"],
-    "data": ["", /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/, "Inserisci una data nel formato gg/mm/AA"]
+    "data": ["", /([0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$)?/, "Inserisci una data nel formato gg/mm/aaaa"]
 };
 
 var dettagli_form_prodotto = {
@@ -62,7 +62,7 @@ var dettagli_form_prodotto = {
 var dettagli_form_appuntamenti = {
     "first_name": ["", /^[A-Za-z ]+/, "Inserisci il nome del cliente"],
     "last_name": ["", /^[A-Za-z ]+/, "Inserisci il cognome del cliente"],
-    "data": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/, "Inserisci una data nel formato gg/mm/AA"],
+    "data": ["", /[0-9]{2}[\/]{1}[0-9]{2}[\/]{1}[0-9]{4}$/, "Inserisci una data nel formato gg/mm/aaaa"],
     "orario": ["", /[0-9]{1,2}[:][0-9]{2}/, "Inserisci un orario nel formato hh:mm"]
 };
 
