@@ -4,17 +4,72 @@
 	
 	\subsection{Descrizione delle entità}{
 		Ogni entità ha un proprio codice identificativo, anche quando si potevano usare altri attributi come chiave primaria. In questo modo il sistema è solido anche in previsioni di modifiche future, ad esempio perché cambiano le necessità dell'azienda o si presentano dei casi particolari. Di seguito verranno descritte brevemente le entità utilizzate.
-		\begin{itemize}
-			\item Clienti contiene i dati dei clienti, ovvero il nome, il cognome, il telefono, l'email e la data di nascita; i primi quattro attributi sono delle stringhe, mentre la data è di tipo Date, un tipo che salva il valore nel formato yyyy-mm-gg, dove 'y' rappresenta le cifre degli anni, 'm' quella dei mesi e g quella dei giorni.
-			\item TipoAppuntamento contiene i possibili tipi di appuntamento, quindi possiede come attributi il nome, di tipo stringa, il costo del servizio e lo sconto che l'amministratore vuole applicare, entrambi di tipo numerico.
-			\item Appuntamenti contiene i dati relativi ai singoli appuntamenti, quindi il codice del tipo, il codice del cliente e l'orario prenotato; quest'ultimo è di tipo DateTime, ovvero contiene la data, nel formato descritto in Clienti, e l'ora, rappresentata nel formato hh:mm:ss, dove 'h' rappresenta le cifre dell'ora, 'm' quelle dei minuti e 's' quelle dei secondi.
-			\item Prodotti contiene i dati di ogni prodotto presente nel magazzino dell'azienda, è caratterizzato dagli attributi nome, marca, tipo, quantità, prezzo e prezzo di rivendita. ‘‘Nome’’ indica il nome che identifica l'oggetto, ‘‘marca’’ è il nome dell'azienda che vende il prodotto, ‘‘tipo’’ indica per quale uso è destinato l'oggetto descritto, ‘‘quantità’’ distingue i prodotti che differiscono fra loro solo per la dimensione del contenitore, ad esempio quando ho un flacone che contiene 250 ml di prodotto e un altro che ne contiene 400 ml, ‘‘prezzo’’ indica quando costa l'acquisto del prodotto, ‘‘prezzo di rivendita’’ infine rappresenta il prezzo che deve pagare il cliente per acquistare quel prodotto. Nome, marca e tipo sono stringhe, invece quantità, prezzo e prezzo di rivendita sono di tipo numerico. 
-			\item ProdApp contiene i prodotti usati durante gli appuntamenti, permette così di memorizzare quali e quanti prodotti sono stati usati per ogni appuntamento; i dati che lo caratterizzano sono il codice dell'appuntamento, il codice del prodotto, che insieme rappresentano la chiave primaria dell'entità, e la quantità utilizzata, ovvero quanto prodotto è stato usato durante l'appuntamento. Tutti i campi sono di tipo numerico.
-			\item Account contiene i dati relativi agli account degli amministratori, viene usato quando l'utente tenta di eseguire la login nel sito. I campi che contiene sono username e password, entrambi di tipo stringa.
-			\item Messaggi contiene i messaggi inviati agli amministratori. Essi sono caratterizzati dal codice del cliente, di tipo intero, dal contenuto, di tipo stringa, dall'orario in cui vengono ricevuti dal server, di tipo DateTime, e dal valore booleano ToRead, che indica se il messaggio è ancora da leggere.
-			\item Images contiene le informazioni relative alle immagini caricate nella pagina ‘‘Foto’’ del sito, gli attributi di cui è composta sono la descrizione e il nome, entrambi di tipo stringa. In particolare la descrizione è il messaggio che viene stampato sulla pagina per indicare all'utente cosa è rappresentato nella foto, mentre il nome serve per le operazioni di modifica o eliminazione del file.
-			\item Contatori è una View, ossia è una specie di entità i cui dati non vengono inseriti direttamente dall'utente, bensì sono ricavati dai valori di altre entità. In questo caso le informazioni riportate riguardano la statistica degli appuntamenti in base al tipo: i campi previsti sono quindi ‘‘Tipo’’, dove viene salvato il codice dei tipi di appuntamento, e ‘‘Parziali’’, dove viene salvato il numero di appuntamenti di quel tipo presenti nel database.
-		\end{itemize}
+			\begin{itemize}\itemsep1pt
+				\item \textbf{Clienti}: rappresenta il cliente del Salone, i dati che contiene sono:
+					\begin{itemize}\itemsep1pt
+						\item CodCliente: INT, chiave primaria;
+						\item Nome: VARCHAR(30);
+						\item Cognome: VARCHAR(30);
+						\item Telefono: VARCHAR(10);
+						\item Email: VARCHAR(50);
+						\item DataNascita: DATE, il formato salvato in questo caso è del tipo yyyy-m-gg, dove 'y' rappresenta le cifre degli anni, 'm' quelle dei mesi e 'g' quelle dei giorni.
+					\end{itemize}
+				\item \textbf{TipoAppuntamento}: rappresenta il tipo di lavoro che il cliente può chiedere al Salone di fare. I dati contenuti sono:
+					\begin{itemize}\itemsep1pt
+						\item CodTipoAppuntamento: SMALLINT, chiave primaria;
+						\item NomeTipo: VARCHAR(30), ovvero il nome dell'intervento;
+						\item Costo: DOUBLE, rappresenta il prezzo del lavoro;
+						\item Sconto: DOUBLE, è lo sconto che il responsabile può decidere di applicare al tipo di intervento, a seguito per esempio di una promozione o di un anniversario. 
+					\end{itemize}
+				\item \textbf{Appuntamenti}: rappresenta la prenotazione del cliente per fissare un orario in cui effettuare un determinato intervento. I dati che contiene sono:
+					\begin{itemize}\itemsep1pt
+						\item CodAppuntamento: INT, chiave primaria;
+						\item CodCliente: INT, chiave esterna;
+						\item DataOra: DATETIME, è un formato che contiene una data e un'ora, la prima è strutturata in modo uguale a DataNascita di Clienti, l'ora invece ha un formato del tipo hh:mm:ss, dove 'h' rappresenta le cifre dell'ora, 'm' quelle dei minuti e 's' quelle dei secondi;
+						\item CodTipoAppuntamento: INT, chiave esterna.
+					\end{itemize}
+				\item \textbf{Prodotti}: rappresenta il prodotto che il Salone usa e vende durante gli appuntamenti. I dati contenuti sono:
+					\begin{itemize}\itemsep1pt
+						\item CodProdotto: INT, chiave primaria;
+						\item Nome: VARCHAR(20), è il nome che identifica il prodotto;
+						\item Marca: VARCHAR(30), rappresenta il nome dell'azienda che crea il prodotto;
+						\item Tipo: VARCHAR(30), è il tipo di utilizzo a cui il prodotto è destinato;
+						\item Quantita: INT, è un valore che distingue i prodotti uguali ma con contenitori di dimensioni diverse, ad esempio per uno stesso tipo di shampoo possono esserci una confezione da 100 ml e un'altra da 250 ml;
+						\item Prezzo: DOUBLE, indica quanto il Salone spende per comprare il singolo prodotto;
+						\item PRivendita: DOUBLE, indica quanto il cliente deve spendere per acquistare il prodotto dal Salone.
+					\end{itemize}
+				\item \textbf{ProdApp}: collega i prodotti agli appuntamenti in cui essi vengono usati, i dati che contiene sono:
+					\begin{itemize}\itemsep1pt
+						\item CodAppuntamento: INT, chiave primaria e esterna;
+						\item CodProdotto: INT, chiave primaria e esterna;
+						\item Utilizzo: INT, rappresenta quanto prodotto viene usato durante l'appuntamento, come ad esempio 30 ml di shampoo.
+					\end{itemize}
+				\item \textbf{Account}: rappresenta l'account che un amministratore possiede e con cui può accedere al sito. I dati che contiene sono:
+					\begin{itemize}\itemsep1pt
+						\item CodAccount: SMALLINT, chiave primaria;
+						\item username: VARCHAR(20);
+						\item password: VARCHAR(32), contiene la versione cifrata della password dell'utente.
+					\end{itemize}
+				\item \textbf{Messaggi}: rappresenta il messaggio che il cliente può scrivere all'azienda, tramite l'apposito form presente nel sito. I dati contenuti sono:
+					\begin{itemize}\itemsep1pt
+						\item CodMessaggi: INT, chiave primaria;
+						\item CodCliente: INT, chiave esterna;
+						\item Contenuto: VARCHAR(512);
+						\item DataOra: DATETIME, rappresenta la data e l'ora in cui il server riceve il messaggio;
+						\item ToRead: BOOLEAN, è un flag che indica se il messaggio è già stato letto o no.
+					\end{itemize}
+				\item \textbf{Images}: contiene i dati relativi alle immagini presenti nella galleria fotografica di \href{http://tecnologie-web.studenti.math.unipd.it/tecweb/~pgabelli/public\_html/foto.php}{public\_html/foto.php}. I dati che contiene sono:
+					\begin{itemize}\itemsep1pt
+						\item Img\_title: INT, chiave primaria;
+						\item Img\_desc: VARCHAR(200), rappresenta la descrizione associata all'immagine;
+						\item Img\_filename: VARCHAR(160), è il nome dell'immagine, serve per poter eseguire tutte le operazioni di eliminazione e modifica dell'immagine.
+					\end{itemize}
+				\item \textbf{Contatori}: è una View, ossia è una specie di entità i cui dati non vengono inseriti direttamente dall'utente, bensì sono ricavati dai valori di altre entità. In questo caso le informazioni riportate riguardano la statistica degli appuntamenti in base al tipo, gli attributi previsti sono:
+					\begin{itemize}
+						\item Parziali BIGINT, è il numero di appuntamenti del tipo con CodTipoAppuntamento uguale all'attributo Tipo;
+						\item Tipo SMALLINT, è il codice del tipo di appuntamento di cui si vuole visualizzare la statistica.
+					\end{itemize}
+			\end{itemize}
 	}
 	\subsection{Rapporto tra le entità} {
 		Le entità ovviamente sono legate in maniera diversa tra loro:
