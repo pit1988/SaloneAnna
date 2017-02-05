@@ -91,7 +91,7 @@ CREATE TABLE ProdApp(
 	CodAppuntamento INT,
 	CodProdotto INT,
 	Utilizzo DOUBLE,
-	FOREIGN KEY(CodProdotto) REFERENCES Prodotti(CodProdotto) ON UPDATE CASCADE,
+	FOREIGN KEY(CodProdotto) REFERENCES Prodotti(CodProdotto) ON UPDATE CASCADE ON DELETE CASCADE,
 	FOREIGN KEY(CodAppuntamento) REFERENCES Appuntamenti(CodAppuntamento) ON UPDATE
 	CASCADE ON DELETE CASCADE
 )Engine=InnoDB;
