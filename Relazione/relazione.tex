@@ -8,6 +8,17 @@
 \usepackage[a4paper,top=2cm,bottom=2cm,left=1cm,right=1cm]{geometry}
 \usepackage{soulutf8,color}
 \usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{url}
+
+% PARTE DESTINATA ALLE NESTED BOXES:
+\usepackage[usestackEOL]{stackengine}[2013-11-09]
+\def\stackalignment{l}
+\setstackgap{L}{1.4\baselineskip}
+\fboxsep=4pt\relax
+
+
 
 \usepackage{emptypage}                     
 % pagine vuote senza testatina e piede di pagina
@@ -62,8 +73,9 @@
 
 \usepackage{xcolor} % Importa i colori per la prima pagina
 \usepackage{fix-cm} % Permette l'incremento del font oltre misura
-
-
+\newcommand{\docs}{./sezioni/}
+%posizione immagini per il documento corrente 
+\newcommand{\docsImg}{./sezioni/img/}
 \newcommand{\HRule}[1]{\hfill \rule{0.2\linewidth}{#1}} % Horizontal rule at the bottom of the page, adjust width here
 
 \definecolor{grey}{rgb}{0.9,0.9,0.9} % Colore del box del titolo
@@ -140,8 +152,6 @@
 \newpage
 \input{\docs Introduzione.tex}
 \newpage
-\input{\docs DescrizioneGenerale.tex}
-\newpage
 \input{\docs SuddivisioneLavori.tex}
 \newpage
 \input{\docs LinguaggiUtilizzati.tex}
@@ -149,6 +159,10 @@
 \input{\docs Architettura.tex}
 \newpage   
 \input{\docs Struttura.tex}
+\newpage
+\input{\docs Classi.tex}
+\newpage
+\input{\docs Associazioni.tex}
 \newpage
 \input{\docs Presentazione.tex}
 \newpage
