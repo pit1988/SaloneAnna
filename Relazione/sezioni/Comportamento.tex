@@ -1,21 +1,14 @@
 \section{Comportamento}{
-	Le funzioni offerte tramite Javascript riguardano: 
+	Le funzionalità offerte tramite Javascript sono: 
 	\begin{itemize}\itemsep1pt
-		\item Il controllo lato client dei dati inseriti nella form della pagina "Contattaci", tramite l'uso d'espressioni regolari; in particolare si desidera che nome e cognome siano composti da soli caratteri e che l'indirizzo e-mail sia valido. Non sono previsti controlli sul messaggio da inviare.
-		\item La sostituzione dell'immagine della mappa con l'iFrame della mappa di Google Maps;
-		\item Nella pagina relativa alle vendite, una funzione s'occupa di nascondere la form d'accesso amministratore e renderla visibile alla pressione del pulsante "Accedi come amministratore".
-		\item La generazione di nuove coppie prezzo-formato, dato-formato all'interno della form d'inserimento prodotti, altre due funzioni s'occupano di fare il controllo sugli stessi prima di procedere all'inserimento, in maniera analoga alla funzione nella pagina "Contattaci", usando espressioni regolari per verificare la correttezza del dato inserito e fornire un suggerimento all'utente;
+		\item Il pulsante per risalire ad inzio pagina, creato tramite una funzione jQuery;
+		\item L'inserimento della mappa nella pagina "contattaci" ottentuta aggiungendo all'immagine nella pagina, la cartina fornita da Google.
+		\item Il controllo lato client dei dati inseriti nella form nelle pagine Contattaci, nelle pagine da cui modificare e creare un appuntamento od un cliente, nella pagina da cui creare un prodotto ed in quelle da cui far iniziare una ricerca su di un cliente od un giorno particolare. Questo è stato fatto creando delle matrici per ogni form che si desiderava controllare, al cui interno erano riportati i nomi dei dati e le espressioni regolari che ne stabilivano la validità; fatto questo, sono state abbinate a delle funzioni che data la matrice dei dati, si occupavano d'invocare una funzione generica che s'occupa di reperire il dato all'interno della pagina, effettuare il controllo e segnalare gli errori trovati. Le funzioni invocate dalle form si occupano di impedire l'invio dei dati segnalando anche la presenza di errori vicino al pulsante d'invio della form.
 	\end{itemize}
-	L'obiettivo per le funzioni di inserimento e cotrollo era di:
+	Sapendo che Javascript più può non essere disponibile od essere stato disabilitato dall'utente:
 	\begin{itemize}\itemsep1pt
-		\item Rendere obbligatorio l'inserimento dei primi tre campi dato (nome, cognome, email) nella form di \textbf{Contattaci.html};
-		\item Per i campi di modifica/inserimento prodotto, erano obbligatori i campi nome, la coppia prezzo-formato se uno dei due era non nullo.
+		\item abbiamo sviluppato le pagine in modo da fornire messaggi d'errore qualora le invocazioni delle funzioni PHP che s'occupano della modifica dei dati non vadano a buon fine; questo per tutte le pagine che prevedevano un'interazione con l'utente.
+		\item inserito all'interno della pagina contattaci, un tag \textit{<noscript>} contenente degli aiuti alla compilazione della form.
 	\end{itemize}
-	Entrambe poi si occupavano dell'inserimento dei valori di defaut nelle form e del controllo sulla validità dei dati inseriti.\\
-	Sapendo che Javascript più essere disabilitato dall'utente o può non essere disponibile, abbiamo:
-	\begin{itemize}\itemsep1pt
-		\item inserito all'interno di tag \textit{<noscript>} degli aiuti alla compilazione della form della pagina contattaci, come pure all'interno della pagina d'inserimento/modifica prodotto per segnalare l'assenza delle funzioni per che aggiungono nuovi campi dati
-		\item fornito dei messaggi d'errore con PERL per notificare l'avvenuto o mancato successo dell'operazione, sia per quanto riguarda la modifica dei dati d'un prodotto che per l'invio dell'e-mail;
-	\end{itemize}
-	Riteniamo così di aver raggiunto l'obiettivo di garantire un degrado elegante della pagina in assenza del supporto a Javascript da parte del browser in uso.
+	Avendo utilizzato JS per un limitato numero di funzionalità la cui assenza non preclude l'uso del sito (la mappa è presente come immagine, mentre gli errori sugli inserimenti sono segnalati in ogni caso), riteniamo di aver raggiunto l'obiettivo di garantire un degrado elegante delle pagine, in assenza del supporto a Javascript da parte del browser in uso.
 }

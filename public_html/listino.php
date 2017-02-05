@@ -25,7 +25,7 @@ content_begin();
 <table id="listino" summary="Listino prezzi Salone Anna">
 <caption class="nascosto">Tabella Listino Prezzi</caption>
     <thead>
-    <tr><th id="c1" class="thprima"> Intervento </th> <th id="c2" class="thseconda"> Prezzo </th></tr>
+    <tr><th id="c1" class="thprima" scope="col"> Intervento </th> <th id="c2" class="thseconda" scope="col"> Prezzo </th></tr>
     </thead>
     <tbody class="corpo-tabella">
         <tr><th id="g1" class="rtipo" colspan="2" scope="colgroup">Colore</th></tr>
