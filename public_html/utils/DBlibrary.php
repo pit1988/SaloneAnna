@@ -688,8 +688,8 @@ function giorno($day)
 function appuntamentiSettimana($date) {
 	if(preg_match("/([0-9]{1,2})[-]([0-9]{2})[-]([0-9]{4})/", $date)){
 		$ts = strtotime($date);
-		$start = strtotime('last monday', $ts);
-		$end=strtotime('next sunday', $start);
+	    $start = strtotime('monday this week', $ts);
+	    $end=strtotime('sunday this week', $start);
 		$result= array();
 		//start date
 		$date = date('Y-m-d',$start);
