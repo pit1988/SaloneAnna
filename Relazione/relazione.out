@@ -1,0 +1,33 @@
+\BOOKMARK [1][-]{section.1}{Introduzione}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Descrizione generale}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Caratteristiche degli utenti}{section.1}% 3
+\BOOKMARK [2][-]{subsection.1.3}{Vincoli generali}{section.1}% 4
+\BOOKMARK [2][-]{subsection.1.4}{Requisiti}{section.1}% 5
+\BOOKMARK [2][-]{subsection.1.5}{Riferimenti}{section.1}% 6
+\BOOKMARK [1][-]{section.2}{Suddivisione dei lavori}{}% 7
+\BOOKMARK [1][-]{section.3}{Linguaggi Utilizzati}{}% 8
+\BOOKMARK [1][-]{section.4}{Architettura}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Progettazione layout}{section.4}% 10
+\BOOKMARK [2][-]{subsection.4.2}{Sviluppo layout}{section.4}% 11
+\BOOKMARK [2][-]{subsection.4.3}{Layout per dispositivi mobili}{section.4}% 12
+\BOOKMARK [2][-]{subsection.4.4}{Layout di stampa}{section.4}% 13
+\BOOKMARK [1][-]{section.5}{Struttura}{}% 14
+\BOOKMARK [1][-]{section.6}{Gestione Dati}{}% 15
+\BOOKMARK [2][-]{subsection.6.1}{Introduzione}{section.6}% 16
+\BOOKMARK [2][-]{subsection.6.2}{Classi}{section.6}% 17
+\BOOKMARK [2][-]{subsection.6.3}{Associazioni}{section.6}% 18
+\BOOKMARK [2][-]{subsection.6.4}{Codice PHP per l'interazione con il database}{section.6}% 19
+\BOOKMARK [1][-]{section.7}{Presentazione}{}% 20
+\BOOKMARK [1][-]{section.8}{Comportamento}{}% 21
+\BOOKMARK [1][-]{section.9}{Accessibilit\340}{}% 22
+\BOOKMARK [2][-]{subsection.9.1}{Implementazione}{section.9}% 23
+\BOOKMARK [2][-]{subsection.9.2}{Combinazione dei colori}{section.9}% 24
+\BOOKMARK [1][-]{section.10}{PHP}{}% 25
+\BOOKMARK [2][-]{subsection.10.1}{Descrizione generale}{section.10}% 26
+\BOOKMARK [2][-]{subsection.10.2}{Pagine XHTML}{section.10}% 27
+\BOOKMARK [2][-]{subsection.10.3}{Sessioni}{section.10}% 28
+\BOOKMARK [1][-]{section.11}{Verifica e Test}{}% 29
+\BOOKMARK [2][-]{subsection.11.1}{Ambiente di lavoro}{section.11}% 30
+\BOOKMARK [2][-]{subsection.11.2}{Dispositivi utilizzati}{section.11}% 31
+\BOOKMARK [2][-]{subsection.11.3}{Verifica del codice prodotto}{section.11}% 32
+\BOOKMARK [2][-]{subsection.11.4}{Conclusioni}{section.11}% 33
