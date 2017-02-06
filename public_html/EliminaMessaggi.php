@@ -69,7 +69,7 @@ else {
                     <td><strong><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></strong></td>
                     <td>" . $messaggio->data . "</td>
                     <td>" . $messaggio->ora . "</td>
-                    <td class=\"tdin\"><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"/></td>
+                    <td class=\"tdin\"><input type=\"checkbox\" name=\"codMsg[]\" id= \"cm" . $messaggio->codice . "\" value= \"" . $messaggio->codice . "\"/><label for= \"cm" . $messaggio->codice . "\">Seleziona</label></td>
 				</tr>";
             else
                 $str_to_print .= "
@@ -79,7 +79,7 @@ else {
                     <td><a href=\"MostraMessaggio.php?codmsg=" . $messaggio->codice . " \">" . (strlen($messaggio->contenuto) > 60 ? substr($messaggio->contenuto, 0, 60) . "..." : $messaggio->contenuto) . "</a></td>
                     <td>" . $messaggio->data . "</td>
                     <td>" . $messaggio->ora . "</td>
-                    <td class=\"tdin\"><input type=\"checkbox\" name=\"codMsg[]\" value= \"" . $messaggio->codice . "\"/></td>
+                    <td class=\"tdin\"><input type=\"checkbox\" name=\"codMsg[]\" id= \"cm" . $messaggio->codice . "\" value= \"" . $messaggio->codice . "\"/><label for= \"cm" . $messaggio->codice . "\">Seleziona</label></td>
                 </tr>";
         }
         $str_to_print .= "</tbody></table>
