@@ -2,7 +2,7 @@
 	\subsection{Introduzione}
 		Il database è stato scritto con SQL, un tipo di linguaggio che permette di modificare e interrogare la base di dati con facilità e sicurezza. Tale tecnologia infatti permette di inserire, modificare, cancellare ed eseguire altre operazioni attraverso dei comandi specifici, eseguiti tramite delle istruzioni apposite di PHP. I dati salvati riguardano vari aspetti del sito, di cui la maggior parte viene usata per fornire dei servizi aggiuntivi all'amministratore.
 	
-	\subsection{Descrizione delle entità}{
+	\subsection{Classi}{
 		Ogni entità ha un proprio codice identificativo, anche quando si potevano usare altri attributi come chiave primaria. In questo modo il sistema è solido anche in previsioni di modifiche future, ad esempio perché cambiano le necessità dell'azienda o si presentano dei casi particolari. Di seguito verranno descritte brevemente le entità utilizzate.
 			\begin{itemize}\itemsep1pt
 				\item \textbf{Clienti}: rappresenta il cliente del Salone, i dati che contiene sono:
@@ -71,15 +71,7 @@
 					\end{itemize}
 			\end{itemize}
 	}
-	\subsection{Rapporto tra le entità} {
-		Le entità ovviamente sono legate in maniera diversa tra loro:
-		\begin{itemize}
-			\item Clienti, TipoAppuntamento, Prodotti, Account e Images non contengono chiavi esterne, i primi tre sono collegati ad altre entità descritte nei punti successivi, gli altri due invece non possiedono alcun legame con le altre entità.
-			\item Appuntamenti contiene come chiavi esterne il codice di Clienti, perché un appuntamento è legato ad un unico cliente e ogni cliente può avere più appuntamenti, e il codice di TipoAppuntamento, perché un appuntamento è di un solo tipo ma possono esserci più appuntamenti dello stesso tipo.
-			\item ProdApp contiene come chiavi esterne il codice di Prodotti e quello di Appuntamenti, in quanto rappresenta un'entità intermedia che le collega tra loro, dato che possono esserci più prodotti associati ad un appuntamento e lo stesso prodotto può essere usato in più appuntamenti.
-			\item Messaggi contiene come chiave esterna il codice di Clienti, perché ogni messaggio è associato ad un unico cliente e ogni cliente può scrivere più messaggi.
-		\end{itemize}
-	}
+	\input{\docs Associazioni.tex}
 	\subsection{Codice PHP per l'interazione con il database}{
 	\label{sec:PHPDB}
 		Quasi tutte le funzioni PHP che gestiscono l'interazione tra il sito e il database sono contenute nel file ‘‘DBlibrary.php’’ dentro la cartella ‘‘utils’’. Tra di esse le più importanti sono ‘‘dbconnect’’, in cui sono contenute tutte le istruzioni per poter collegarsi al database SQL, in modo da poter eseguire facilmente le query, e ‘‘cleanString’’, che esegue delle pulizie di base sulla stringa passata come parametro, ovvero trasforma i caratteri speciali in entità HTML ed elimina gli spazi e le tabulazioni che possono essere presenti all'inizio o alla fine della stringa.\\
