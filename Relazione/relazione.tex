@@ -27,6 +27,11 @@
 	citecolor=blue
 }
 
+%rinomino table of contents
+\renewcommand{\contentsname}{Contenuti:}
+\renewcommand{\listfigurename}{Lista delle figure}
+\renewcommand{\listtablename}{Lista delle tabelle}
+
 \usepackage{emptypage}                     
 % pagine vuote senza testatina e piede di pagina
 
@@ -96,12 +101,14 @@
 	%----------------------------------------------------------------------------------------
 	
 	\colorbox{grey}{
-		\parbox[t]{1.0\linewidth}{
+		\parbox[t]{0.91\linewidth}{
 			\centering \fontsize{50pt}{80pt}\selectfont % Il primo Ã¨ la grandezza del font, il secondo lo spazio lasciato
 			\vspace*{0.7cm} % Spazio dall'inizio del box al titolo
 			
+			
+			%\noindent\makebox[\textwidth]{\includegraphics[width=\paperwidth]{../public_html/img/logo.png}}
 			\raggedleft
-			\includegraphics[width=\textwidth]{../public_html/img/logo.png}
+			\includegraphics[width=\linewidth]{../public_html/img/logo.png}
 			
 			\hfill Relazione Salone Anna \\
 			
