@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.19)  6 FEB 2017 13:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.19)  6 FEB 2017 13:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1308,10 +1308,10 @@ ocal/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfrm1728.pfb></usr/loc
 al/texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfsl1200.pfb></usr/local
 /texlive/2016/texmf-dist/fonts/type1/public/cm-super/sfti1200.pfb></usr/local/t
 exlive/2016/texmf-dist/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on relazione.pdf (26 pages, 584052 bytes).
+Output written on relazione.pdf (26 pages, 583901 bytes).
 PDF statistics:
- 415 PDF objects out of 1000 (max. 8388607)
- 361 compressed objects within 4 object streams
+ 413 PDF objects out of 1000 (max. 8388607)
+ 359 compressed objects within 4 object streams
  64 named destinations out of 1000 (max. 500000)
  300 words of extra memory for PDF output out of 10000 (max. 10000000)
 
