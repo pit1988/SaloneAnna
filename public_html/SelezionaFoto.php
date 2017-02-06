@@ -66,7 +66,7 @@ else{
                         <td>$foto->codice</td>
                         <td>$foto->descrizione</td>
                         <td><a href=\"uploads/$foto->nome\">$foto->nome</a></td>
-                        <td class=\"tdin\">".'<input type="radio" name="codImg" value= "' . $foto->codice . '" /></td>
+                        <td class=\"tdin\">".'<input type="radio" name="codImg" id="ci' . $foto->codice . '" value= "' . $foto->codice . '" /><label for="ci' . $foto->codice . '">Seleziona</label></td>
                     </tr>
                     ';
             }

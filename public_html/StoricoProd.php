@@ -57,7 +57,7 @@ if (!$login) {
                                   <td>" . $cliente->telefono . "</td>
                                   <td>" . $cliente->email . "</td>
                                   <td>" . $cliente->dataNascita . "</td>
-                                  <td class=\"tdin\"><input type='radio' name='CodCliente' value='$cliente->codice'/></td>
+                                  <td class=\"tdin\"><input type='radio' name='CodCliente' id='cc$cliente->codice' value='$cliente->codice'/><label for'cc$cliente->codice'>Seleziona</label></td>
                               </tr>
                               ";
                     }
