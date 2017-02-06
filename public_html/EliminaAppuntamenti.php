@@ -79,7 +79,7 @@ if (!$login) {
                 <td>" . $appuntamento->ora . "</td>
                 <td>" . $appuntamento->tipo . "</td>
                 <td>" . $appuntamento->prezzo . "</td>
-                <td class=\"tdin\"><input type=\"checkbox\" name=\"codApp[]\" value= \"" . $appuntamento->codice . "\" /></td>
+                <td class=\"tdin\"><input type=\"checkbox\" name=\"codApp[]\" id=\"ca" . $appuntamento->codice . "\" value= \"" . $appuntamento->codice . "\" /><label for=\"ca" . $appuntamento->codice . "\">Seleziona</label> </td>
             </tr>
             ";
         }
