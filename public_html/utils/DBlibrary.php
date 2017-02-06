@@ -3,15 +3,15 @@
 function dbconnect() {
 	$host = "localhost";
 
-	$user = "pgabelli";
+	/*$user = "pgabelli";
 	$pass = "bi9UJ9ohCoochei7";
 	$db = "pgabelli";
-/*	$user = "agrenden";
+	$user = "agrenden";
 	$pass = "EloTeeli0SaePohF";
 	$db = "agrenden";*/
-	/*$user = "smarches";
+	$user = "smarches";
 	$pass = "oqu9eim5ookooCei";
-	$db = "smarches";*/
+	$db = "smarches";
 	$conn=new mysqli($host, $user, $pass, $db);
 	if($conn -> connect_errno) //invia alla pagina che mostra l'errore
 		header('location:errore.php?codmsg=0');
