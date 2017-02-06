@@ -12,7 +12,7 @@
 						\item Cognome: VARCHAR(30);
 						\item Telefono: VARCHAR(10);
 						\item Email: VARCHAR(50);
-						\item DataNascita: DATE, il formato salvato in questo caso è del tipo yyyy-m-gg, dove 'y' rappresenta le cifre degli anni, 'm' quelle dei mesi e 'g' quelle dei giorni.
+						\item DataNascita: DATE, il formato salvato in questo caso è del tipo yyyy-m-gg, dove `y' rappresenta le cifre degli anni, `m' quelle dei mesi e `g' quelle dei giorni.
 					\end{itemize}
 				\item \textbf{TipoAppuntamento}: rappresenta il tipo di lavoro che il cliente può chiedere al Salone di fare. I dati contenuti sono:
 					\begin{itemize}\itemsep1pt
@@ -25,7 +25,7 @@
 					\begin{itemize}\itemsep1pt
 						\item CodAppuntamento: INT, chiave primaria;
 						\item CodCliente: INT, chiave esterna;
-						\item DataOra: DATETIME, è un formato che contiene una data e un'ora, la prima è strutturata in modo uguale a DataNascita di Clienti, l'ora invece ha un formato del tipo hh:mm:ss, dove 'h' rappresenta le cifre dell'ora, 'm' quelle dei minuti e 's' quelle dei secondi;
+						\item DataOra: DATETIME, è un formato che contiene una data e un'ora, la prima è strutturata in modo uguale a DataNascita di Clienti, l'ora invece ha un formato del tipo hh:mm:ss, dove `h' rappresenta le cifre dell'ora, `m' quelle dei minuti e `s' quelle dei secondi;
 						\item CodTipoAppuntamento: INT, chiave esterna.
 					\end{itemize}
 				\item \textbf{Prodotti}: rappresenta il prodotto che il Salone usa e vende durante gli appuntamenti. I dati contenuti sono:
