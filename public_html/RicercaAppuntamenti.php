@@ -34,7 +34,7 @@ if (!$login) {
 			</li>
 			<li>
 				<p>
-					<input type="checkbox" name="cli" value="cli" /> Per Cliente
+					<input type="checkbox" id="cli" name="cli" value="cli" /> <label for="cli">Per Cliente</label>
 				</p>
 			</li>
 		</ul>
@@ -56,7 +56,7 @@ if (!$login) {
 			</li>
 			<li>
 				<p>
-					<input type="checkbox" name="data" value="data" /> Per Data
+					<input type="checkbox" name="data" id="dataa" value="data" /> <label for="dataa">Per Data</label>
 				</p>
 			</li>
 		</ul>
