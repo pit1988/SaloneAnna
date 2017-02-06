@@ -221,8 +221,8 @@ function table_end() {
 /***************************************/
 
 function checkSessionLifetime() { 
-    if (isset($_SESSION['creazione']) && (time() - $_SESSION['creazione'] > 3600)) {
-        //la sessione è stata creata almeno un'ora fa
+    if (isset($_SESSION['ultima_attivita']) && (time() - $_SESSION['ultima_attivita'] > 1800)) {
+        //l'ultima attivita' registrata dalla sessione e' di almeno mezz'ora fa
 		$sname=session_name();
 		session_unset(); //questa funzione elimina le variabili contenute nella sessione
 		session_destroy();
@@ -231,6 +231,7 @@ function checkSessionLifetime() {
 		}
     	return false;
     }
+	$_SESSION['ultima_attivita'] = time(); //salvo l'ultima attività
     return true;
 };
 

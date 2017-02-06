@@ -26,7 +26,7 @@ if(isset($_REQUEST['username']) && isset($_REQUEST['password'])){
 	if ($result->num_rows > 0) { //se il risultato è stato trovato, ovvero se non è stato restituito un risultato vuoto
 		$_SESSION['username'] = $username; //salvo i dati
 		$_SESSION['password'] = $password;
-		$_SESSION['creazione'] = time(); //salvo l'ultima attività
+		$_SESSION['ultima_attivita'] = time(); //salvo l'ultima attività
 		$msg="<p class=\"inforesult\">Accesso eseguito con successo</p>";
 		
 		$is_logged=true;
